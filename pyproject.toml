@@ -124,7 +124,7 @@ ignore = [
   # Ignore complexity
   "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
   # Ignore string constants in Exception constructors
-  "EM101"
+  "EM101", "EM102",
 ]
 unfixable = [
   # Don't touch unused imports
