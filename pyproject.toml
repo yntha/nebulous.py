@@ -30,7 +30,7 @@ Issues = "https://github.com/yntha/nebulous.py/issues"
 Source = "https://github.com/yntha/nebulous.py"
 
 [tool.hatch.version]
-path = "src/nebulous.py/__about__.py"
+path = "src/nebulous/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
@@ -60,7 +60,7 @@ dependencies = [
   "ruff>=0.0.243",
 ]
 [tool.hatch.envs.lint.scripts]
-typing = "mypy --install-types --non-interactive {args:src/nebulous.py tests}"
+typing = "mypy --install-types --non-interactive {args:src/nebulous tests}"
 style = [
   "ruff {args:.}",
   "black --check --diff {args:.}",
@@ -126,7 +126,7 @@ unfixable = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["nebulous.py"]
+known-first-party = ["nebulous"]
 
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -136,15 +136,15 @@ ban-relative-imports = "all"
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
 
 [tool.coverage.run]
-source_pkgs = ["nebulous.py", "tests"]
+source_pkgs = ["nebulous", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/nebulous.py/__about__.py",
+  "src/nebulous/__about__.py",
 ]
 
 [tool.coverage.paths]
-nebulous_py = ["src/nebulous.py", "*/nebulous.py/src/nebulous.py"]
+nebulous_py = ["src/nebulous", "*/nebulous.py/src/nebulous"]
 tests = ["tests", "*/nebulous.py/tests"]
 
 [tool.coverage.report]
