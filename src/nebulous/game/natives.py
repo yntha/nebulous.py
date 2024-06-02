@@ -25,6 +25,10 @@ class MUTF8String:
     def encode(self) -> bytes:
         return self.length.to_bytes(2, byteorder="big") + self._value.encode("utf-8")
 
+    @classmethod
+    def from_py_string(cls, value: str) -> Self:
+        return cls(len(value), value)
+
 
 @dataclass
 class VariableLengthArray:
