@@ -85,7 +85,7 @@ class Client:
                 VariableLengthArray(2, list(self.account.secure_bytes)),
             )
 
-            self.socket.send(connect_request_3_packet.write())
+            self.socket.send(connect_request_3_packet.write(self))
 
             conn_result = ConnectResult2.read(self.socket.recv(0x80))
 
