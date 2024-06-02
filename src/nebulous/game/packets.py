@@ -119,9 +119,9 @@ class KeepAlive(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.CONNECT_REQUEST_3)
 class ConnectRequest3(Packet):
-    request_id: int  # should always be 0, 4 bytes
-    rng_seed: int  # 8 bytes
-    game_version: int  # 2 bytes
+    # request_id: int - should always be 0, 4 bytes omitted because it is always 0
+    # rng_seed: int - 8 bytes, omitted as it is generated below
+    # game_version: int - 2 bytes, omitted as it's set below
     # client_id: int - 4 bytes, omitted because it is generated below
     game_mode: GameMode  # 1 bytes
     game_difficulty: GameDifficulty  # 1 bytes
@@ -151,7 +151,7 @@ class ConnectRequest3(Packet):
     skin2: Skin  # 2 bytes
     skin_interpolation_rate: CompressedFloat  # 2 bytes, float encoded as a short
     custom_skin2: int  # 4 bytes
-    timestamp: int  # 8 bytes, millis
+    # timestamp: int - 8 bytes, millis, omitted as it is generated below
     sc_bits: VariableLengthArray  # length size is 2 bytes
 
     def write(self, client: Client) -> bytes:
