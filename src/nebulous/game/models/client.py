@@ -6,14 +6,15 @@ from socket import timeout as SocketTimeout  # noqa: N812
 from javarandom import Random as JavaRNG
 
 from nebulous.game.account import Account, ServerRegions
-from nebulous.game.models import ClientState, ServerData
+from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.packets import ConnectRequest3, KeepAlive, Packet
 
 
 class Client:
-    def __init__(self, ticket: str, region: ServerRegions):
+    def __init__(self, ticket: str, region: ServerRegions, config: ClientConfig):
         self.account = Account(ticket, region)
         self.server_data = ServerData()
+        self.config = config
         self.rng = JavaRNG()
         self.packet_queue = Queue()
         self.stop_event = Event()
@@ -50,11 +51,6 @@ class Client:
             self.socket.settimeout(10)
 
             connect_request_3_packet = ConnectRequest3(
-                self,
-                self.game_mode,
-                False,
-                self.mayhem,
-                self.account.secure_bytes
             )
 
             self.socket.send(connect_request_3_packet.write())
