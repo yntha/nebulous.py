@@ -33,6 +33,9 @@ Source = "https://github.com/yntha/nebulous.py"
 [tool.hatch.version]
 path = "src/nebulous/__about__.py"
 
+[tool.hatch.metadata]
+allow-direct-references = true
+
 [tool.hatch.envs.default]
 dependencies = [
   "coverage[toml]>=6.5",
