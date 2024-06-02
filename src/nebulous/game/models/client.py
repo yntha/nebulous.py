@@ -6,7 +6,9 @@ from socket import timeout as SocketTimeout  # noqa: N812
 from javarandom import Random as JavaRNG
 
 from nebulous.game.account import Account, ServerRegions
+from nebulous.game.enums import PacketType
 from nebulous.game.models import ClientConfig, ClientState, ServerData
+from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import ConnectRequest3, KeepAlive, Packet
 
 
@@ -51,6 +53,36 @@ class Client:
             self.socket.settimeout(10)
 
             connect_request_3_packet = ConnectRequest3(
+                PacketType.CONNECT_REQUEST_3,
+                self.config.game_mode,
+                self.config.game_difficulty,
+                self.config.game_id,
+                MUTF8String.from_py_string(""),
+                self.config.online_mode,
+                self.config.mayhem_mode,
+                self.config.skin,
+                self.config.eject_skin,
+                MUTF8String.from_py_string(self.config.alias),
+                self.config.custom_skin,
+                VariableLengthArray(1, self.config.alias_colors),
+                self.config.pet1,
+                self.config.blob_color,
+                MUTF8String.from_py_string(self.config.pet1_name),
+                self.config.hat_type,
+                self.config.custom_pet,
+                self.config.halo_type,
+                self.config.pet2,
+                MUTF8String.from_py_string(self.config.pet2_name),
+                self.config.custom_pet2,
+                self.config.custom_particle,
+                self.config.particle_type,
+                self.config.alias_font,
+                VariableLengthArray(1, self.config.level_colors),
+                self.config.alias_anim,
+                self.config.skin2,
+                CompressedFloat(self.config.skin_interpolation_rate, 60.0),
+                self.config.custom_skin2,
+                VariableLengthArray(2, list(self.account.secure_bytes)),
             )
 
             self.socket.send(connect_request_3_packet.write())
