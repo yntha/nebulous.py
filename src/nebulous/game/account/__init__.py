@@ -2,6 +2,7 @@ import base64
 from dataclasses import dataclass, field
 from enum import StrEnum
 from http import HTTPStatus
+from typing import ClassVar
 
 import requests
 
@@ -53,7 +54,7 @@ class Region:
 
 
 class Account:
-    API_URL = "https://simplicialsoftware.com/api/account/"
+    API_URL: ClassVar[str] = "https://simplicialsoftware.com/api/account/"
 
     def __init__(self, ticket: str, region: ServerRegions):
         self.ticket = Ticket(ticket)
