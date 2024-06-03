@@ -187,8 +187,8 @@ class ConnectRequest3(Packet):
             client.server_data.client_id = client.rng.nextInt()
 
         # the server is expecting the seed to be the first long of a new JavaRandom instance
-        server_rng = JavaRNG(client.server_data.client_id)
-        rng_seed = server_rng.nextLong()
+        rng_seed = client.rng.nextLong()
+        server_rng = JavaRNG(rng_seed)
 
         # public id is always 0 for the first packet (CONNECT_REQUEST_3)
         stream.write_int32(0)
