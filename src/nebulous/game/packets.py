@@ -189,7 +189,6 @@ class ConnectRequest3(Packet):
         while client.server_data.client_id == 0:
             client.server_data.client_id = client.rng.nextInt()
 
-        # the server is expecting the seed to be the first long of a new JavaRandom instance
         rng_seed = client.rng.nextLong()
         server_rng = JavaRNG(rng_seed)
 
@@ -250,7 +249,7 @@ class ConnectRequest3(Packet):
         if packet_bytes[1:5] != b"\x00\x00\x00\x00":
             raise ValueError("Packet header has been corrupted")
 
-        if packet_bytes[5:13] != rng_seed.to_bytes(8, byteorder="little", signed=True):
+        if packet_bytes[5:13] != rng_seed.to_bytes(8, byteorder="big", signed=True):
             raise ValueError("Packet header has been corrupted")
 
         return bytes(packet_bytes)
