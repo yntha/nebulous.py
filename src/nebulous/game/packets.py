@@ -119,6 +119,24 @@ class KeepAlive(Packet):
 
 
 @dataclass
+@PacketHandler.register_handler(PacketType.DISCONNECT)
+class Disconnect(Packet):
+    public_id: int
+    private_id: int
+    client_id: int
+
+    def write(self, client: Client) -> bytes:  # noqa: ARG002
+        stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
+
+        stream.write_int8(self.packet_type)
+        stream.write_int32(self.public_id)
+        stream.write_int32(self.private_id)
+        stream.write_int32(self.client_id)
+
+        return stream.bytes()
+
+
+@dataclass
 @PacketHandler.register_handler(PacketType.CONNECT_REQUEST_3)
 class ConnectRequest3(Packet):
     # request_id: int - should always be 0, 4 bytes omitted because it is always 0
