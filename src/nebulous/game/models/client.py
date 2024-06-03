@@ -1,14 +1,15 @@
 import time
 from multiprocessing import Event, Process, Queue
 from socket import AF_INET, SOCK_DGRAM, socket
+from typing import cast
 
 from javarandom import Random as JavaRNG
 
 from nebulous.game.account import Account, ServerRegions
-from nebulous.game.enums import PacketType
+from nebulous.game.enums import PacketType, ConnectionResult
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
-from nebulous.game.packets import ConnectRequest3, KeepAlive, Packet
+from nebulous.game.packets import ConnectRequest3, ConnectResult2, KeepAlive, Packet, PacketHandler
 
 
 class Client:
@@ -86,10 +87,16 @@ class Client:
 
             self.socket.send(connect_request_3_packet.write(self))
 
-            conn_result = ConnectResult2.read(self.socket.recv(0x80))
+            conn_result_handler = cast(ConnectResult2, PacketHandler.get_handler(PacketType.CONNECT_RESULT_2))
+            conn_result = conn_result_handler.read(PacketType.CONNECT_RESULT_2, self.socket.recv(0x80))
 
-            self.server_data.client_id = conn_result.token1
-            self.server_data.cr2_token2 = conn_result.token2
+            if conn_result.result != ConnectionResult.SUCCESS:
+                return False
+
+            self.game_id = conn_result.game_id
+            self.config.split_multiplier = conn_result.split_multiplier
+            self.server_data.public_id = conn_result.client_id
+            self.server_data.private_id = conn_result.private_id
 
             return True
         except TimeoutError:
