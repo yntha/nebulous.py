@@ -52,7 +52,4 @@ class ClientState(Enum):
     DISCONNECTED = 3
 
 
-from nebulous.game.models.client import Client
-
-
 __all__ = ["Client", "ServerData", "ClientState"]

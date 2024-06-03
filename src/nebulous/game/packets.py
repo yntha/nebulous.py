@@ -19,7 +19,7 @@ from nebulous.game.enums import (
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 
 if TYPE_CHECKING:
-    from nebulous.game.models import Client
+    from nebulous.game.models.client import Client
 
 
 @dataclass
