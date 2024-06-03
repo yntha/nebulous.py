@@ -34,9 +34,6 @@ class Packet:
 class PacketHandler:
     handlers: ClassVar[dict] = {}
 
-    def __init__(self, client: Client) -> None:
-        self.client = client
-
     @classmethod
     def register_handler(cls, packet_type: PacketType):
         def wrapper(handler):
@@ -45,8 +42,9 @@ class PacketHandler:
 
         return wrapper
 
-    def read(self, packet_type: PacketType, data: bytes) -> Packet:
-        return self.handlers[packet_type].read(packet_type, data)
+    @classmethod
+    def get_handler(cls, packet_type: PacketType) -> type[Packet]:
+        return cls.handlers[packet_type]
 
 
 @dataclass
