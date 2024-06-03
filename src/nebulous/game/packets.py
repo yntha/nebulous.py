@@ -26,6 +26,9 @@ if TYPE_CHECKING:
 class Packet:
     packet_type: PacketType
 
+    def write(self, client: Client) -> bytes:
+        raise NotImplementedError()
+
     @classmethod
     def read(cls, packet_type: PacketType, data: bytes) -> Self:
         raise NotImplementedError()
