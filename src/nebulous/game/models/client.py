@@ -50,6 +50,7 @@ class Client:
                     self.server_data.client_id,
                 )
                 self.socket.send(keep_alive_packet.write(self))
+                self.callback_queue.put(keep_alive_packet)
 
                 time.sleep(0.25)
 
@@ -112,9 +113,12 @@ class Client:
             )
 
             self.socket.send(connect_request_3_packet.write(self))
+            self.callback_queue.put(connect_request_3_packet)
 
             conn_result_handler = cast(ConnectResult2, PacketHandler.get_handler(PacketType.CONNECT_RESULT_2))
             conn_result = conn_result_handler.read(PacketType.CONNECT_RESULT_2, self.socket.recv(0x80))
+
+            self.callback_queue.put(conn_result)
 
             if conn_result.result != ConnectionResult.SUCCESS:
                 return False
