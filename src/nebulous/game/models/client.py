@@ -1,7 +1,6 @@
 import time
 from multiprocessing import Event, Process, Queue
 from socket import AF_INET, SOCK_DGRAM, socket
-from socket import timeout as SocketTimeout  # noqa: N812
 
 from javarandom import Random as JavaRNG
 
@@ -93,7 +92,7 @@ class Client:
             self.server_data.cr2_token2 = conn_result.token2
 
             return True
-        except SocketTimeout:
+        except TimeoutError:
             return False
 
     def start(self):
