@@ -32,6 +32,24 @@ class Client:
         self.server_data.client_id = self.rng.nextInt()
         self.server_data.client_id2 = self.rng.nextInt()
 
+    # override the next four functions which will get called by the client
+    # when the client processes a packet of the given type.
+    # ex: client.on_connect = my_on_connect_handler
+    def on_connect(self, packet: ConnectRequest3):
+        pass
+
+    # this one is called right before the client closes the socket.
+    def on_disconnect(self, packet: Disconnect):
+        pass
+
+    # try not to spend too much time in this function as it will block
+    # the main event loop.
+    def on_keep_alive(self, packet: KeepAlive):
+        pass
+
+    def on_connect_result(self, packet: ConnectResult2):
+        pass
+
     def callback(self, packet_type: PacketType):
         def wrapper(handler):
             self.callback_map[packet_type] = handler
@@ -50,7 +68,7 @@ class Client:
                     self.server_data.client_id,
                 )
                 self.socket.send(keep_alive_packet.write(self))
-                self.callback_queue.put(keep_alive_packet)
+                self.on_keep_alive(keep_alive_packet)
 
                 time.sleep(0.25)
 
@@ -113,12 +131,12 @@ class Client:
             )
 
             self.socket.send(connect_request_3_packet.write(self))
-            self.callback_queue.put(connect_request_3_packet)
+            self.on_connect(connect_request_3_packet)
 
             conn_result_handler = cast(ConnectResult2, PacketHandler.get_handler(PacketType.CONNECT_RESULT_2))
             conn_result = conn_result_handler.read(PacketType.CONNECT_RESULT_2, self.socket.recv(0x80))
 
-            self.callback_queue.put(conn_result)
+            self.on_connect_result(conn_result)
 
             if conn_result.result != ConnectionResult.SUCCESS:
                 return False
@@ -174,6 +192,7 @@ class Client:
         )
 
         self.socket.send(disconnect_packet.write(self))
+        self.on_disconnect(disconnect_packet)
         self.socket.close()
 
         self.state = ClientState.DISCONNECTED
