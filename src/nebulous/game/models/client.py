@@ -1,6 +1,6 @@
 import time
 from multiprocessing import Event, Process, Queue
-from socket import AF_INET, SOCK_DGRAM, socket
+from socket import AF_INET, SOCK_DGRAM, inet_aton, socket
 from typing import cast
 
 from javarandom import Random as JavaRNG
@@ -33,8 +33,14 @@ class Client:
     def net_event_loop(self):
         while not self.stop_event.is_set():
             if self.packet_queue.empty():
-                keep_alive_packet = KeepAlive(self.server_data)
-                self.socket.send(keep_alive_packet.write())
+                keep_alive_packet = KeepAlive(
+                    PacketType.KEEP_ALIVE,
+                    self.server_data.public_id,
+                    self.server_data.private_id,
+                    inet_aton(self.account.region.ip),
+                    self.server_data.client_id,
+                )
+                self.socket.send(keep_alive_packet.write(self))
 
                 time.sleep(0.25)
 
@@ -42,8 +48,16 @@ class Client:
 
             packet: Packet = self.packet_queue.get()
 
-            self.socket.send(packet.write())
-            self.parsers[packet.packet_type].read(self.socket.recv(0x1000))  # recv up to 4096 bytes
+            self.socket.send(packet.write(self))
+
+            # recv up to 4096 bytes
+            data = self.socket.recv(0x1000)
+            handler = PacketHandler.get_handler(PacketType(data[0]))
+
+            if handler is None:
+                continue
+
+            packet = handler.read(PacketType(data[0]), data)
 
     def connect(self) -> bool:
         self.state = ClientState.CONNECTING
