@@ -46,7 +46,10 @@ class PacketHandler:
         return wrapper
 
     @classmethod
-    def get_handler(cls, packet_type: PacketType) -> type[Packet]:
+    def get_handler(cls, packet_type: PacketType) -> type[Packet] | None:
+        if packet_type not in cls.handlers:
+            return None
+
         return cls.handlers[packet_type]
 
 
