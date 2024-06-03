@@ -225,6 +225,7 @@ class ConnectRequest3(Packet):
         stream.write_int8(self.alias_anim)
         stream.write_int16(self.skin2.value)
         stream.write_int16(self.skin_interpolation_rate.compress())
+        stream.write_int32(self.custom_skin2)
         stream.write_int64(int(time.time() * 1000))
         stream.write(self.sc_bits.encode())
 
