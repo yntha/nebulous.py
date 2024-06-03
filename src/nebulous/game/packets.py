@@ -70,7 +70,7 @@ class ConnectResult2(Packet):
         game_id = stream.read_int32()
         ban_length = stream.read_int32()
         ad_stuff = stream.read_float()
-        blobs_per_player = SplitMultiplier.from_net(stream.read_int8())
+        split_multiplier = SplitMultiplier.from_net(stream.read_int8())
 
         stream.close()
 
@@ -83,7 +83,7 @@ class ConnectResult2(Packet):
             game_id,
             ban_length,
             ad_stuff,
-            blobs_per_player,
+            split_multiplier,
         )
 
 
