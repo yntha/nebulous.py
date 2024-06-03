@@ -21,7 +21,7 @@ classifiers = [
 ]
 dependencies = [
   "java-random @ git+https://github.com/MostAwesomeDude/java-random",
-  "pydatastreams>=1.2.1",
+  "pydatastreams>=1.2.2",
   "requests>=2.32.3"
 ]
 
@@ -78,6 +78,9 @@ all = [
   "style",
   "typing",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
 
 [tool.black]
 target-version = ["py312"]
