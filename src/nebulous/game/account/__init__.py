@@ -42,6 +42,13 @@ class Ticket:
     signature: str = field(init=False)
 
     def __post_init__(self):
+        if not self.ticket_str:
+            self.account_id = ""
+            self.creation_date = ""
+            self.signature = ""
+
+            return
+
         self.account_id = self.ticket_str.split(",")[0]
         self.creation_date = self.ticket_str.split(",")[1]
         self.signature = self.ticket_str.split(",")[2]
