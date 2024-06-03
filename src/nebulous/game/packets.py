@@ -59,7 +59,7 @@ class ConnectResult2(Packet):
     game_id: int  # 4 bytes
     ban_length: int  # 4 bytes
     ad_stuff: float  # 4 bytes
-    blobs_per_player: SplitMultiplier  # 1 byte
+    split_multiplier: SplitMultiplier  # 1 byte
 
     @classmethod
     def read(cls, packet_type: PacketType, data: bytes) -> Self:
