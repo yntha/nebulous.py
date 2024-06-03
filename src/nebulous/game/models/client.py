@@ -22,6 +22,8 @@ class Client:
         self.stop_event = Event()
         self.event_loop = None
         self.state = ClientState.DISCONNECTED
+        self.callback_map = {}  # {packet_type: callback_func}
+        self.callback_queue = Queue()
 
         self.socket = socket(AF_INET, SOCK_DGRAM)
         self.port_seed = self.rng.nextInt(2)
@@ -29,6 +31,13 @@ class Client:
 
         self.server_data.client_id = self.rng.nextInt()
         self.server_data.client_id2 = self.rng.nextInt()
+
+    def callback(self, packet_type: PacketType):
+        def wrapper(handler):
+            self.callback_map[packet_type] = handler
+            return handler
+
+        return wrapper
 
     def net_event_loop(self):
         while not self.stop_event.is_set():
@@ -58,6 +67,9 @@ class Client:
                 continue
 
             packet = handler.read(PacketType(data[0]), data)
+
+            # handle callbacks on the main thread, err process.
+            self.callback_queue.put(packet)
 
     def connect(self) -> bool:
         self.state = ClientState.CONNECTING
@@ -122,6 +134,21 @@ class Client:
             self.event_loop = Process(target=self.net_event_loop).start()
         else:
             self.state = ClientState.DISCONNECTED
+
+        try:
+            while True:
+                if self.callback_queue.empty():
+                    time.sleep(0.25)
+
+                    continue
+
+                packet = cast(Packet, self.callback_queue.get())
+                callback = self.callback_map.get(packet.packet_type)
+
+                if callback is not None:
+                    callback(packet)
+        except KeyboardInterrupt:
+            self.stop()
 
     def stop(self):
         if self.event_loop is None:
