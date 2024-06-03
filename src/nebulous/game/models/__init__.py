@@ -2,7 +2,7 @@ import time
 from dataclasses import dataclass
 from enum import Enum
 
-from nebulous.game.enums import Font, GameDifficulty, GameMode, ProfileVisibility, Skin
+from nebulous.game.enums import Font, GameDifficulty, GameMode, ProfileVisibility, Skin, SplitMultiplier
 from nebulous.game.models.client import Client
 
 
@@ -43,6 +43,7 @@ class ClientConfig:
     particle_type: int = -1
     level_colors: list = [0x77] * 5
     skin_interpolation_rate: float = 0.0
+    split_multiplier: SplitMultiplier = SplitMultiplier.X8
 
 
 class ClientState(Enum):
