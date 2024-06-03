@@ -134,6 +134,9 @@ class Client:
             self.event_loop = Process(target=self.net_event_loop).start()
         else:
             self.state = ClientState.DISCONNECTED
+            self.stop()
+
+            return
 
         try:
             while True:
