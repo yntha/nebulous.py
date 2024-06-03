@@ -1,9 +1,8 @@
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 
 from nebulous.game.enums import Font, GameDifficulty, GameMode, ProfileVisibility, Skin, SplitMultiplier
-from nebulous.game.models.client import Client
 
 
 @dataclass
@@ -26,7 +25,7 @@ class ClientConfig:
     eject_skin: int = -1
     alias: str = "Blob " + hex(int(time.time() * 1000) & 0xFFFF)[2:].upper()
     alias_font: Font = Font.DEFAULT
-    alias_colors: list = [-1] * 6
+    alias_colors: list[int] = field(default_factory=([-1] * 6).copy)
     alias_anim: int = 0
     hat_type: int = -1
     halo_type: int = 0
@@ -41,7 +40,7 @@ class ClientConfig:
     custom_pet2: int = 0
     custom_particle: int = 0
     particle_type: int = -1
-    level_colors: list = [0x77] * 5
+    level_colors: list[int] = field(default_factory=([0x77] * 5).copy)
     skin_interpolation_rate: float = 0.0
     split_multiplier: SplitMultiplier = SplitMultiplier.X8
 
@@ -51,6 +50,9 @@ class ClientState(Enum):
     CONNECTED = 1
     DISCONNECTING = 2
     DISCONNECTED = 3
+
+
+from nebulous.game.models.client import Client
 
 
 __all__ = ["Client", "ServerData", "ClientState"]
