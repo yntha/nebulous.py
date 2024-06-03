@@ -78,8 +78,8 @@ class Client:
 
             self.socket.send(packet.write(self))
 
-            # recv up to 4096 bytes
-            data = self.socket.recv(0x1000)
+            # recv up to 8192 bytes
+            data = self.socket.recv(0x2000)
             handler = PacketHandler.get_handler(PacketType(data[0]))
 
             if handler is None:
