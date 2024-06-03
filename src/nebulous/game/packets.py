@@ -71,6 +71,9 @@ class ConnectResult2(Packet):
     def read(cls, packet_type: PacketType, data: bytes) -> Self:
         stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
 
+        # skip over the packet type byte
+        stream.read_int8()
+
         client_id = stream.read_int32()
         result = ConnectionResult(stream.read_int8())
         public_id = stream.read_int32()
