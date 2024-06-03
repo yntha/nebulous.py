@@ -92,7 +92,7 @@ class ConnectResult2(Packet):
 class KeepAlive(Packet):
     public_id: int  # 4 bytes
     private_id: int  # 4 bytes
-    server_ip: int  # 4 bytes, see socket.inet_aton
+    server_ip: bytes  # 4 bytes, see socket.inet_aton
     client_id: int  # 4 bytes
 
     def write(self, client: Client) -> bytes:  # noqa: ARG002
@@ -105,9 +105,7 @@ class KeepAlive(Packet):
         # by default, java.io.DataOutputStream writes integers in big endian format.
         # for some reason unknown to me, the server expects the region's server ip
         # to be in little endian format, so we must manually encode it as such.
-        stream.byteorder = ByteOrder.LITTLE_ENDIAN
-        stream.write_int32(self.server_ip)
-        stream.byteorder = ByteOrder.NETWORK_ENDIAN
+        stream.write(self.server_ip[::-1])
 
         stream.write_int32(self.client_id)
 
