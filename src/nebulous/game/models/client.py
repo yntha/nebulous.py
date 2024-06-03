@@ -6,7 +6,7 @@ from typing import cast
 from javarandom import Random as JavaRNG
 
 from nebulous.game.account import Account, ServerRegions
-from nebulous.game.enums import PacketType, ConnectionResult
+from nebulous.game.enums import ConnectionResult, PacketType
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import ConnectRequest3, ConnectResult2, KeepAlive, Packet, PacketHandler
