@@ -247,7 +247,7 @@ class ConnectRequest3(Packet):
         if packet_bytes[1:5] != b"\x00\x00\x00\x00":
             raise ValueError("Packet header has been corrupted")
 
-        if packet_bytes[5:13] != rng_seed.to_bytes(8, byteorder="big"):
+        if packet_bytes[5:13] != rng_seed.to_bytes(8, byteorder="little", signed=True):
             raise ValueError("Packet header has been corrupted")
 
         return bytes(packet_bytes)
