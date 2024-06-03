@@ -9,7 +9,7 @@ from nebulous.game.account import Account, ServerRegions
 from nebulous.game.enums import ConnectionResult, PacketType
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
-from nebulous.game.packets import ConnectRequest3, ConnectResult2, KeepAlive, Packet, PacketHandler
+from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, KeepAlive, Packet, PacketHandler
 
 
 class Client:
@@ -161,7 +161,18 @@ class Client:
 
         self.stop_event.set()
         self.event_loop.join()
+
+        disconnect_packet = Disconnect(
+            PacketType.DISCONNECT,
+            self.server_data.public_id,
+            self.server_data.private_id,
+            self.server_data.client_id,
+        )
+
+        self.socket.send(disconnect_packet.write(self))
         self.socket.close()
+
+        self.state = ClientState.DISCONNECTED
 
     def next_port(self) -> int:
         port = self.port_seed + 27900
