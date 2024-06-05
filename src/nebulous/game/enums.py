@@ -1,14 +1,14 @@
 import enum
 
 
-class ConnectResult(enum.Enum):
+class ConnectResult(enum.IntEnum):
     SUCCESS = 0
     GAME_NOT_FOUND = 1
     UNKNOWN = 2
     ACCOUNT_ALREADY_SIGNED_IN = 3
 
 
-class JoinResultCode(enum.Enum):
+class JoinResultCode(enum.IntEnum):
     SUCCESS = 0
     NAME_TAKEN = 1
     NAME_INVALID = 2
@@ -41,7 +41,7 @@ class JoinResultCode(enum.Enum):
     INCOMPATIBLE_VERSION = 29
 
 
-class Item(enum.Enum):
+class Item(enum.IntEnum):
     PUMPKIN = 0
     SNOWFLAKE = 1
     HEART = 2
@@ -61,7 +61,7 @@ class Item(enum.Enum):
     CAKE_XP = 16
 
 
-class ChallengeStatus(enum.Enum):
+class ChallengeStatus(enum.IntEnum):
     SENT = 0
     EXPIRED = 1
     NOT_FOUND = 2
@@ -71,20 +71,20 @@ class ChallengeStatus(enum.Enum):
     INCOMPATIBLE_VERSION = 6
 
 
-class SkinBundle(enum.Enum):
+class SkinBundle(enum.IntEnum):
     HALLOWEEN = 0
     XMAS = 1
     VDAY = 2
 
 
-class XPMultiplier(enum.Enum):
+class XPMultiplier(enum.IntEnum):
     XP = 0
     XP_DOUBLE = 1
     XP_TRIPLE = 2
     XP_QUADRUPLE = 3
 
 
-class SkinStatus(enum.Enum):
+class SkinStatus(enum.IntEnum):
     UNUSED = 0
     IN_REVIEW = 1
     REFUNDED = 2
@@ -92,7 +92,7 @@ class SkinStatus(enum.Enum):
     APPROVED = 4
 
 
-class ReportType(enum.Enum):
+class ReportType(enum.IntEnum):
     HARASSMENT = 0
     THREATS = 1
     SPAM = 2
@@ -102,7 +102,7 @@ class ReportType(enum.Enum):
     CHAT = 6
 
 
-class MissionObjective(enum.Enum):
+class MissionObjective(enum.IntEnum):
     UNKNOWN = 0
     WIN = 1
     KILL_ALL_BOTS = 2
@@ -110,7 +110,7 @@ class MissionObjective(enum.Enum):
     SCORE = 4
 
 
-class ClanRole(enum.Enum):
+class ClanRole(enum.IntEnum):
     INVALID = 0
     MEMBER = 1
     ADMIN = 2
@@ -120,14 +120,14 @@ class ClanRole(enum.Enum):
     INITIATE = 6
 
 
-class HoleType(enum.Enum):
+class HoleType(enum.IntEnum):
     NORMAL = 0
     SUPERMASSIVE = 1
     TELEPORT = 2
     NEBU = 3
 
 
-class SplitMultiplier(enum.Enum):
+class SplitMultiplier(enum.IntEnum):
     (
         X8,
         X16,
@@ -150,7 +150,7 @@ class SplitMultiplier(enum.Enum):
                 raise ValueError(f"Invalid SplitMultiplier value: {value}")
 
 
-class WorldSize(enum.Enum):
+class WorldSize(enum.IntEnum):
     (
         TINY,
         SMALL,
@@ -159,7 +159,7 @@ class WorldSize(enum.Enum):
     ) = range(4)
 
 
-class NameAnimation(enum.Enum):
+class NameAnimation(enum.IntEnum):
     NONE = 0
     COLOR_CYCLE_SLOW = 1
     COLOR_CYCLE_FAST = 2
@@ -169,7 +169,7 @@ class NameAnimation(enum.Enum):
     RAINBOW_VERTICAL_FAST = 6
 
 
-class Font(enum.Enum):
+class Font(enum.IntEnum):
     DEFAULT = 0
     xxraytid = 1
     xtrusion = 2
@@ -203,7 +203,7 @@ class Font(enum.Enum):
     kingthings = 30
 
 
-class GameDifficulty(enum.Enum):
+class GameDifficulty(enum.IntEnum):
     (
         EASY,
         MEDIUM,
@@ -212,7 +212,7 @@ class GameDifficulty(enum.Enum):
     ) = range(4)
 
 
-class ProfileVisibility(enum.Enum):
+class ProfileVisibility(enum.IntEnum):
     (
         ONLINE,
         APPEAR_OFFLINE,
@@ -346,7 +346,7 @@ class PacketType(enum.IntEnum):
     ) = range(120)
 
 
-class GameMode(enum.Enum):
+class GameMode(enum.IntEnum):
     (
         FFA,
         FFA_TIME,
@@ -394,7 +394,7 @@ class GameMode(enum.Enum):
     ) = range(43)
 
 
-class Skin(enum.Enum):
+class Skin(enum.IntEnum):
     MISC_NONE = 0x00
     MISC_8BALL = 0x01
     MISC_CIRCUIT = 0x02
@@ -1467,7 +1467,7 @@ class Skin(enum.Enum):
     ACHIEVE_VET_9 = 0x42D
 
 
-class ParitcleType(enum.Enum):
+class ParitcleType(enum.IntEnum):
     PARTICLE_1 = 0x00
     PARTICLE_2 = 0x01
     PARTICLE_3 = 0x02
@@ -1507,7 +1507,7 @@ class ParitcleType(enum.Enum):
     PARTICLE_37 = 0x24
 
 
-class PetType(enum.Enum):
+class PetType(enum.IntEnum):
     PET_0 = 0x00
     PET_1 = 0x01
     PET_2 = 0x02
@@ -1596,7 +1596,7 @@ class PetType(enum.Enum):
     PET_85 = 0x55
 
 
-class PetRopeType(enum.Enum):
+class PetRopeType(enum.IntEnum):
     ROPE0 = 0x00
     ROPE1 = 0x01
     ROPE2 = 0x02
@@ -1670,7 +1670,7 @@ class PetRopeType(enum.Enum):
     ROPE70 = 0x46
 
 
-class HatType(enum.Enum):
+class HatType(enum.IntEnum):
     HAT_1 = 0x00
     HAT_2 = 0x01
     HAT_3 = 0x02
@@ -1778,7 +1778,7 @@ class HatType(enum.Enum):
     HAT_105 = 0x68
 
 
-class HaloType(enum.Enum):
+class HaloType(enum.IntEnum):
     HALO_1 = 0x00
     HALO_2 = 0x01
     HALO_3 = 0x02
@@ -1834,7 +1834,7 @@ class HaloType(enum.Enum):
     HALO_53 = 0x34
 
 
-class EjectSkinType(enum.Enum):
+class EjectSkinType(enum.IntEnum):
     EJECT_0 = 0x00
     EJECT_1 = 0x01
     EJECT_2 = 0x02
@@ -1881,7 +1881,7 @@ class EjectSkinType(enum.Enum):
     EJECT_43 = 0x2B
 
 
-class EmoteType(enum.Enum):
+class EmoteType(enum.IntEnum):
     EMOTE_1 = 0x00
     EMOTE_2 = 0x01
     EMOTE_3 = 0x02
@@ -1976,7 +1976,7 @@ class EmoteType(enum.Enum):
     EMOTE_92 = 0x5B
 
 
-class PresentType(enum.Enum):
+class PresentType(enum.IntEnum):
     PRESENT1 = 0x00
     PRESENT2 = 0x01
     PRESENT3 = 0x02
