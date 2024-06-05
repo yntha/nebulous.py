@@ -60,6 +60,13 @@ class VariableLengthArray:
 
         return bytes(buf)
 
+    @classmethod
+    def from_stream(cls, size: int, stream: DeserializingStream) -> Self:
+        length = int.from_bytes(stream.read(size), signed=True)
+        values = [stream.read_int8() for _ in range(length)]
+
+        return cls(length, values)
+
 
 @dataclass
 class CompressedFloat:
