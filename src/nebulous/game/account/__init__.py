@@ -96,7 +96,7 @@ class Account:
 
         default_data.update(data)
 
-        response = requests.post(url, data=default_data)  # noqa: S113
+        response = requests.post(url, data=default_data, timeout=10)
 
         if response.status_code != HTTPStatus.OK:
             raise Exception(f"Request failed with status code: {response.status_code}. Response: {response.text}")
