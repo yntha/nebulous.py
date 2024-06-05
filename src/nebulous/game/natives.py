@@ -83,3 +83,13 @@ class CompressedFloat:
     @classmethod
     def from_stream(cls, max_range: float, stream: DeserializingStream) -> Self:
         return cls.decompress(stream.read_uint16(), max_range)
+
+    @classmethod
+    def from_3(cls, max_range, stream: DeserializingStream) -> Self:
+        b24_16 = stream.read_uint8() << 16
+        b15_8 = stream.read_uint8() << 8
+        b7_0 = stream.read_uint8()
+
+        a = b24_16 + b15_8 + b7_0
+
+        return cls((((max_range - 0.0) * a) / 1.6777215e7) + 0.0, max_range)
