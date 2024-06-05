@@ -65,6 +65,11 @@ if __name__ == "__main__":
     test_client()
 ```
 
+You can also dump packets as json, as shown in [`sample_packet.json`](sample_packet.json):
+```python
+print(packet.as_json(indent=4))
+```
+
 ## License
 
 `nebulous.py` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
