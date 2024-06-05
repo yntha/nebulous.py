@@ -14,11 +14,17 @@ from nebulous.game.constants import APP_VERSION
 from nebulous.game.enums import (
     ClanRole,
     ConnectResult,
+    EjectSkinType,
     Font,
     GameDifficulty,
     GameMode,
+    HaloType,
+    HatType,
+    Item,
     NameAnimation,
     PacketType,
+    ParitcleType,
+    PetType,
     ProfileVisibility,
     Skin,
     SplitMultiplier,
@@ -160,20 +166,20 @@ class GameData(Packet):
         for _ in range(player_count):
             player_id = stream.read_int8()
             skin_id = Skin(stream.read_int16())
-            eject_skin_id = stream.read_int8()
+            eject_skin_id = EjectSkinType(stream.read_int8())
             custom_skin_id = stream.read_int32()
             custom_pet_id = stream.read_int32()
-            pet_id = stream.read_int8()
+            pet_id = PetType(stream.read_int8())
             pet_level = stream.read_int16()
             pet_name = MUTF8String.from_stream(stream)
-            hat_id = stream.read_int8()
-            halo_id = stream.read_int8()
-            pet_id2 = stream.read_int8()
+            hat_id = HatType(stream.read_int8())
+            halo_id = HaloType(stream.read_int8())
+            pet_id2 = PetType(stream.read_int8())
             pet_level2 = stream.read_int16()
             pet_name2 = MUTF8String.from_stream(stream)
             custom_pet_id2 = stream.read_int32()
             custom_particle_id = stream.read_int32()
-            particle_id = stream.read_int8()
+            particle_id = ParitcleType(stream.read_int8())
             level_colors = VariableLengthArray.from_stream(1, stream)
             name_animation_id = NameAnimation(stream.read_int8())
             skin_id2 = Skin(stream.read_int16())
@@ -248,7 +254,7 @@ class GameData(Packet):
         item_objects = []
         for i in range(item_count):
             item_id = i + item_id_offset
-            item_type = stream.read_int8()
+            item_type = Item(stream.read_int8())
             xpos = CompressedFloat.from_3(map_size, stream)
             ypos = CompressedFloat.from_3(map_size, stream)
 
