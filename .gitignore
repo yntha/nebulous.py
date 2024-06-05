@@ -163,3 +163,4 @@ cython_debug/
 
 .vscode/
 .idea
+src/test_client.py
