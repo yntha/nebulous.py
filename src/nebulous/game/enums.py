@@ -1505,6 +1505,7 @@ class ParitcleType(enum.Enum):
     PARTICLE_35 = 0x22
     PARTICLE_36 = 0x23
     PARTICLE_37 = 0x24
+    PARTICLE_NONE = -0x01
 
 
 class PetType(enum.Enum):
@@ -1594,6 +1595,7 @@ class PetType(enum.Enum):
     PET_83 = 0x53
     PET_84 = 0x54
     PET_85 = 0x55
+    PET_NONE = -0x01
 
 
 class PetRopeType(enum.Enum):
@@ -1668,6 +1670,7 @@ class PetRopeType(enum.Enum):
     ROPE68 = 0x44
     ROPE69 = 0x45
     ROPE70 = 0x46
+    ROPE_NONE = -0x01
 
 
 class HatType(enum.Enum):
@@ -1776,6 +1779,7 @@ class HatType(enum.Enum):
     HAT_103 = 0x66
     HAT_104 = 0x67
     HAT_105 = 0x68
+    HAT_NONE = -0x01
 
 
 class HaloType(enum.Enum):
@@ -1832,6 +1836,7 @@ class HaloType(enum.Enum):
     HALO_51 = 0x32
     HALO_52 = 0x33
     HALO_53 = 0x34
+    HALO_NONE = -0x01
 
 
 class EjectSkinType(enum.Enum):
@@ -1879,6 +1884,7 @@ class EjectSkinType(enum.Enum):
     EJECT_41 = 0x29
     EJECT_42 = 0x2A
     EJECT_43 = 0x2B
+    EJECT_NONE = -0x01
 
 
 class EmoteType(enum.Enum):
