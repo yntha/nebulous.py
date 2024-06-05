@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, ClassVar, Self
 
 from datastream import ByteOrder, DeserializingStream, SerializingStream
@@ -19,6 +19,7 @@ from nebulous.game.enums import (
     Skin,
     SplitMultiplier,
 )
+from nebulous.game.models.netobjects import NetGameDot, NetGameItem, NetPlayer, NetPlayerEject
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 
 if TYPE_CHECKING:
@@ -100,6 +101,23 @@ class ConnectResult2(Packet):
                 split_multiplier,
             )
         )
+
+
+@dataclass
+@PacketHandler.register_handler(PacketType.GAME_DATA)
+class GameData(Packet):
+    public_id: int  # 4 bytes
+    map_size: float  # 4 bytes
+    player_count: int  # 1 byte
+    eject_count: int  # 1 byte
+    dot_id_offset: int  # 2 bytes
+    dot_count: int  # 2 bytes
+    item_id_offset: int  # 1 byte
+    item_count: int  # 1 byte
+    player_objects: list[NetPlayer] = field(default_factory=list)
+    eject_objects: list[NetPlayerEject] = field(default_factory=list)
+    dot_objects: list[NetGameDot] = field(default_factory=list)
+    item_objects: list[NetGameItem] = field(default_factory=list)
 
 
 @dataclass
