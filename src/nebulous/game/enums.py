@@ -8,7 +8,7 @@ class ConnectionResult(enum.Enum):
     UNK_3 = 3
 
 
-class ClanRank(enum.Enum):
+class ClanRole(enum.Enum):
     (INVALID, MEMBER, ADMIN, LEADER, ELDER, DIAMOND, INITIATE) = range(7)
 
 
@@ -53,7 +53,7 @@ class WorldSize(enum.Enum):
     ) = range(4)
 
 
-class ColorCycle(enum.Enum):
+class NameAnimation(enum.Enum):
     (
         NONE,
         COLOR_CYCLE_SLOW,
