@@ -78,7 +78,7 @@ class CompressedFloat:
 
     @classmethod
     def decompress(cls, value: int, max_range: float) -> Self:
-        return cls((value / 65535.0) * max_range, max_range)
+        return cls((((max_range - 0.0) * (value & 0xFFFF)) / 65535.0) + 0.0, max_range)
 
     @classmethod
     def from_stream(cls, max_range: float, stream: DeserializingStream) -> Self:
