@@ -16,11 +16,21 @@ from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, K
 
 
 class Client:
-    def __init__(self, ticket: str, region: ServerRegions, config: ClientConfig):
+    def __init__(
+        self,
+        ticket: str,
+        region: ServerRegions,
+        config: ClientConfig | None = None,
         callbacks: ClientCallbacks | None = None,
+    ):
         self.account = Account(ticket, region)
         self.server_data = ServerData()
-        self.config = config
+
+        if config is None:
+            self.config = ClientConfig()
+        else:
+            self.config = config
+
         self.rng = JavaRNG()
         self.packet_queue = Queue()
         self.stop_event = Event()
