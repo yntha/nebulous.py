@@ -99,7 +99,7 @@ class ConnectResult2(Packet):
                 ban_length,
                 ad_stuff,
                 split_multiplier,
-            )
+            ),
         )
 
 
@@ -118,6 +118,141 @@ class GameData(Packet):
     eject_objects: list[NetPlayerEject] = field(default_factory=list)
     dot_objects: list[NetGameDot] = field(default_factory=list)
     item_objects: list[NetGameItem] = field(default_factory=list)
+
+    @classmethod
+    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> GameData:
+        stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
+
+        # skip over the packet type byte
+        stream.read_int8()
+
+        public_id = stream.read_int32()
+        map_size = stream.read_float()
+        player_count = stream.read_int8()
+        eject_count = stream.read_int8()
+        dot_id_offset = stream.read_int16()
+        dot_count = stream.read_int16()
+        item_id_offset = stream.read_int8()
+        item_count = stream.read_int8()
+
+        player_objects = []
+        for _ in range(player_count):
+            player_id = stream.read_int8()
+            skin_id = stream.read_int16()
+            eject_skin_id = stream.read_int8()
+            custom_skin_id = stream.read_int32()
+            custom_pet_id = stream.read_int32()
+            pet_id = stream.read_int8()
+            pet_level = stream.read_int16()
+            pet_name = MUTF8String.from_stream(stream)
+            hat_id = stream.read_int8()
+            halo_id = stream.read_int8()
+            pet_id2 = stream.read_int8()
+            pet_level2 = stream.read_int16()
+            pet_name2 = MUTF8String.from_stream(stream)
+            custom_pet_id2 = stream.read_int32()
+            custom_particle_id = stream.read_int32()
+            particle_id = stream.read_int8()
+            level_colors = VariableLengthArray.from_stream(1, stream)
+            name_animation_id = stream.read_int8()
+            skin_id2 = stream.read_int16()
+            skin_interpolation_rate = CompressedFloat.from_stream(60.0, stream)
+            custom_skin_id2 = stream.read_int32()
+            blob_color = stream.read_int32()
+            team_id = stream.read_int8()
+            player_name = MUTF8String.from_stream(stream)
+            font_id = stream.read_int8()
+            alias_colors = VariableLengthArray.from_stream(1, stream)
+            account_id = stream.read_int32()
+            player_level = stream.read_int16()
+            clan_name = MUTF8String.from_stream(stream)
+            clan_colors = VariableLengthArray.from_stream(1, stream)
+            clan_role = stream.read_int8()
+            click_type = stream.read_int8()
+
+            player_objects.append(
+                NetPlayer(
+                    player_id,
+                    skin_id,
+                    eject_skin_id,
+                    custom_skin_id,
+                    custom_pet_id,
+                    pet_id,
+                    pet_level,
+                    pet_name,
+                    hat_id,
+                    halo_id,
+                    pet_id2,
+                    pet_level2,
+                    pet_name2,
+                    custom_pet_id2,
+                    custom_particle_id,
+                    particle_id,
+                    level_colors,
+                    name_animation_id,
+                    skin_id2,
+                    skin_interpolation_rate,
+                    custom_skin_id2,
+                    blob_color,
+                    team_id,
+                    player_name,
+                    font_id,
+                    alias_colors,
+                    account_id,
+                    player_level,
+                    clan_name,
+                    clan_colors,
+                    clan_role,
+                    click_type,
+                )
+            )
+
+        eject_objects = []
+        for _ in range(eject_count):
+            eject_id = stream.read_int8()
+            xpos = CompressedFloat.from_3(map_size, stream)
+            ypos = CompressedFloat.from_3(map_size, stream)
+            mass = CompressedFloat.from_3(500000.0, stream)
+
+            eject_objects.append(NetPlayerEject(eject_id, xpos, ypos, mass))
+
+        dot_objects = []
+        for i in range(dot_count):
+            dot_id = i + dot_id_offset
+            xpos = CompressedFloat.from_3(map_size, stream)
+            ypos = CompressedFloat.from_3(map_size, stream)
+
+            dot_objects.append(NetGameDot(dot_id, xpos, ypos))
+
+        item_objects = []
+        for i in range(item_count):
+            item_id = i + item_id_offset
+            item_type = stream.read_int8()
+            xpos = CompressedFloat.from_3(map_size, stream)
+            ypos = CompressedFloat.from_3(map_size, stream)
+
+            item_objects.append(NetGameItem(item_id, item_type, xpos, ypos))
+
+        stream.close()
+
+        return InternalCallbacks.on_game_data(
+            client,
+            cls(
+                packet_type,
+                public_id,
+                map_size,
+                player_count,
+                eject_count,
+                dot_id_offset,
+                dot_count,
+                item_id_offset,
+                item_count,
+                player_objects,
+                eject_objects,
+                dot_objects,
+                item_objects,
+            )
+        )
 
 
 @dataclass
