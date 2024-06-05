@@ -27,6 +27,9 @@ from nebulous.game.models.client import Client, ClientCallbacks
 from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, KeepAlive
 
 
+TEST_TICKET = ""
+
+
 class TestCallbacks(ClientCallbacks):
     def on_connect(self, client: Client, packet: ConnectRequest3) -> ConnectRequest3:
         print("Connected to server")
@@ -46,7 +49,7 @@ class TestCallbacks(ClientCallbacks):
 
 
 def test_client():
-    client = Client("", ServerRegions.US_EAST, callbacks=TestCallbacks())
+    client = Client(TEST_TICKET, ServerRegions.US_EAST, callbacks=TestCallbacks())
 
     client.start()
 
