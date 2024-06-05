@@ -2,7 +2,7 @@ import time
 
 from nebulous.game.account import ServerRegions
 from nebulous.game.models.client import Client, ClientCallbacks
-from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, KeepAlive
+from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, GameData, KeepAlive
 
 
 class TestCallbacks(ClientCallbacks):
@@ -20,6 +20,10 @@ class TestCallbacks(ClientCallbacks):
 
     def on_connect_result(self, client: Client, packet: ConnectResult2) -> ConnectResult2:
         print(f"Received connection result: {packet.result}")
+        return packet
+
+    def on_game_data(self, client: Client, packet: GameData) -> GameData:
+        print(f"Received game data: {packet}")
         return packet
 
 
