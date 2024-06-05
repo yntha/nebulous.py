@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, ClassVar, Self
 
 from datastream import ByteOrder, DeserializingStream, SerializingStream
@@ -36,6 +37,9 @@ class Packet:
     @classmethod
     def read(cls, client: Client, packet_type: PacketType, data: bytes) -> Self:
         raise NotImplementedError()
+
+    def as_json(self, indent: int = 2) -> str:
+        return json.dumps(asdict(self), indent=indent)
 
 
 class PacketHandler:
