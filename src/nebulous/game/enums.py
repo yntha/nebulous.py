@@ -1,24 +1,61 @@
 import enum
 
 
-class ConnectionResult(enum.Enum):
+class ConnectResult(enum.Enum):
     SUCCESS = 0
-    UNK_1 = 1
-    UNK_2 = 2
-    UNK_3 = 3
+    GAME_NOT_FOUND = 1
+    UNKNOWN = 2
+    ACCOUNT_ALREADY_SIGNED_IN = 3
+
+
+class JoinResultCode(enum.Enum):
+    SUCCESS = 0
+    NAME_TAKEN = 1
+    NAME_INVALID = 2
+    FULL = 3
+    GAME_NOT_FOUND = 4
+    FRIEND_NOT_FOUND = 5
+    UNKNOWN_ERROR = 6
+    DIED_THIS_ROUND = 7
+    CLAN_WAR_NOT_FOUND = 8
+    CLAN_NOT_FOUND = 9
+    ACCOUNT_NOT_FOUND = 10
+    LACK_PERMISSION = 11
+    REQUEST_TIMED_OUT = 12
+    YOU_ARE_SPECTATING = 13
+    PLEASE_WAIT = 14
+    IS_ARENA = 15
+    ACCOUNT_IN_USE = 16
+    UPDATE_AVAILABLE = 17
+    INVALID_TOKEN = 18
+    BANNED = 19
+    NOT_SIGNED_IN = 20
+    TOURNAMENTS_DISABLED = 21
+    MUTED = 22
+    FRIEND_ALREADY_TEAMED = 23
+    GROUP_NOT_FOUND = 24
+    COMP_BANNED = 25
+    QUEUE_POSITION_UPDATE = 26
+    CHAT_BANNED = 27
+    KICKED = 28
+    INCOMPATIBLE_VERSION = 29
 
 
 class ClanRole(enum.Enum):
-    (INVALID, MEMBER, ADMIN, LEADER, ELDER, DIAMOND, INITIATE) = range(7)
+    INVALID = 0
+    MEMBER = 1
+    ADMIN = 2
+    LEADER = 3
+    ELDER = 4
+    DIAMOND = 5
+    INITIATE = 6
 
 
 class HoleType(enum.Enum):
-    (
-        NORMAL,
-        SUPERMASSIVE,
-        TELEPORT,
-        NEBU,
-    ) = range(4)
+    NORMAL = 0
+    SUPERMASSIVE = 1
+    TELEPORT = 2
+    NEBU = 3
 
 
 class SplitMultiplier(enum.Enum):
@@ -54,42 +91,47 @@ class WorldSize(enum.Enum):
 
 
 class NameAnimation(enum.Enum):
-    (
-        NONE,
-        COLOR_CYCLE_SLOW,
-        COLOR_CYCLE_FAST,
-        RAINBOW_HORIZONTAL_SLOW,
-        RAINBOW_HORIZONTAL_FAST,
-        RAINBOW_VERTICAL_SLOW,
-        COLOR_CYCLE_RAINBOW_VERTICAL_FAST,
-    ) = range(7)
+    NONE = 0
+    COLOR_CYCLE_SLOW = 1
+    COLOR_CYCLE_FAST = 2
+    RAINBOW_HORIZONTAL_SLOW = 3
+    RAINBOW_HORIZONTAL_FAST = 4
+    RAINBOW_VERTICAL_SLOW = 5
+    RAINBOW_VERTICAL_FAST = 6
 
 
 class Font(enum.Enum):
-    (
-        DEFAULT,
-        XXRAYTID,
-        XTRUSION,
-        XXON,
-        XEFUS,
-        XENOPHOBIA,
-        XENOWORT,
-        CENOBYTE,
-        NM_HERO,
-        SKIN_xmas,
-        XLINES,
-        XEROX_MALFUNCTION,
-        KAUSHAN_SCRIPT,
-        BALL,
-        LARSON,
-        SUPERHET,
-        GETTHEME,
-        DEPHUN2,
-        CHRISTMAS,
-        FIRE,
-        BEYNO,
-        KINGTHINGS,
-    ) = range(22)
+    DEFAULT = 0
+    xxraytid = 1
+    xtrusion = 2
+    xxon = 3
+    xefus = 4
+    xenophobia = 5
+    xenowort = 6
+    cenobyte = 7
+    nm_hero = 8
+    xmas = 9
+    xlines = 10
+    xerox_malfunction = 11
+    kaushan_script = 12
+    great_vibes = 13
+    roteflora = 14
+    neverwinter = 15
+    mh = 16
+    kongtext = 17
+    sucaba = 18
+    ball = 19
+    stars = 20
+    gettheme = 21
+    dephun2 = 22
+    theinterzone = 23
+    alphaclown = 24
+    superhet = 25
+    larson = 26
+    christmas = 27
+    fire = 28
+    beyno = 29
+    kingthings = 30
 
 
 class GameDifficulty(enum.Enum):

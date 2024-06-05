@@ -9,7 +9,7 @@ from multiprocess import Event, Process, Queue  # type: ignore
 
 from nebulous.game import InternalCallbacks
 from nebulous.game.account import Account, ServerRegions
-from nebulous.game.enums import ConnectionResult, PacketType
+from nebulous.game.enums import ConnectResult, PacketType
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import (
@@ -134,7 +134,7 @@ class Client:
             conn_result_handler = cast(ConnectResult2, PacketHandler.get_handler(PacketType.CONNECT_RESULT_2))
             conn_result = conn_result_handler.read(self, PacketType.CONNECT_RESULT_2, self.socket.recv(0x80))
 
-            if conn_result.result != ConnectionResult.SUCCESS:
+            if conn_result.result != ConnectResult.SUCCESS:
                 return False
 
             self.game_id = conn_result.game_id

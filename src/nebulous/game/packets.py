@@ -12,7 +12,7 @@ from nebulous.game import InternalCallbacks
 from nebulous.game.constants import APP_VERSION
 from nebulous.game.enums import (
     ClanRole,
-    ConnectionResult,
+    ConnectResult,
     Font,
     GameDifficulty,
     GameMode,
@@ -67,7 +67,7 @@ class PacketHandler:
 @PacketHandler.register_handler(PacketType.CONNECT_RESULT_2)
 class ConnectResult2(Packet):
     client_id: int  # 4 bytes
-    result: ConnectionResult  # 1 byte
+    result: ConnectResult  # 1 byte
     public_id: int  # 4 bytes
     private_id: int  # 4 bytes
     game_id: int  # 4 bytes
@@ -83,7 +83,7 @@ class ConnectResult2(Packet):
         stream.read_int8()
 
         client_id = stream.read_int32()
-        result = ConnectionResult(stream.read_int8())
+        result = ConnectResult(stream.read_int8())
         public_id = stream.read_int32()
         private_id = stream.read_int32()
         game_id = stream.read_int32()
