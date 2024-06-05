@@ -23,7 +23,7 @@ class TestCallbacks(ClientCallbacks):
         return packet
 
     def on_game_data(self, client: Client, packet: GameData) -> GameData:
-        print(f"Received game data: {packet}")
+        print(f"Received game data: {packet.as_json()}")
         return packet
 
 
