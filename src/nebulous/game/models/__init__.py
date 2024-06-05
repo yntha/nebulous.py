@@ -52,4 +52,4 @@ class ClientState(Enum):
     DISCONNECTED = 3
 
 
-__all__ = ["Client", "ServerData", "ClientState"]
+__all__ = ["ServerData", "ClientState"]
