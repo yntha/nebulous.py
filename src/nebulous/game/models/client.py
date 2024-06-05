@@ -7,6 +7,7 @@ from typing import cast
 from javarandom import Random as JavaRNG
 from multiprocess import Event, Process, Queue  # type: ignore
 
+from nebulous.game import InternalCallbacks
 from nebulous.game.account import Account, ServerRegions
 from nebulous.game.enums import ConnectionResult, PacketType
 from nebulous.game.models import ClientConfig, ClientState, ServerData
@@ -16,6 +17,7 @@ from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, K
 
 class Client:
     def __init__(self, ticket: str, region: ServerRegions, config: ClientConfig):
+        callbacks: ClientCallbacks | None = None,
         self.account = Account(ticket, region)
         self.server_data = ServerData()
         self.config = config
@@ -24,8 +26,11 @@ class Client:
         self.stop_event = Event()
         self.event_loop = None
         self.state = ClientState.DISCONNECTED
-        self.callback_map = {}  # {packet_type: callback_func}
-        self.callback_queue = Queue()
+
+        if callbacks is None:
+            self.callbacks = ClientCallbacks()
+        else:
+            self.callbacks = callbacks
 
         self.socket = socket(AF_INET, SOCK_DGRAM)
         self.port_seed = self.rng.nextInt(2)
@@ -33,31 +38,6 @@ class Client:
 
         self.server_data.client_id = self.rng.nextInt()
         self.server_data.client_id2 = self.rng.nextInt()
-
-    # override the next four functions which will get called by the client
-    # when the client processes a packet of the given type.
-    # ex: client.on_connect = my_on_connect_handler
-    def on_connect(self, packet: ConnectRequest3):
-        pass
-
-    # this one is called right before the client closes the socket.
-    def on_disconnect(self, packet: Disconnect):
-        pass
-
-    # try not to spend too much time in this function as it will block
-    # the main event loop.
-    def on_keep_alive(self, packet: KeepAlive):
-        pass
-
-    def on_connect_result(self, packet: ConnectResult2):
-        pass
-
-    def callback(self, packet_type: PacketType):
-        def wrapper(handler):
-            self.callback_map[packet_type] = handler
-            return handler
-
-        return wrapper
 
     def net_event_loop(self):
         while not self.stop_event.is_set():
@@ -133,12 +113,10 @@ class Client:
             )
 
             self.socket.send(connect_request_3_packet.write(self))
-            self.on_connect(connect_request_3_packet)
+            InternalCallbacks.on_connect(self, connect_request_3_packet)
 
             conn_result_handler = cast(ConnectResult2, PacketHandler.get_handler(PacketType.CONNECT_RESULT_2))
-            conn_result = conn_result_handler.read(PacketType.CONNECT_RESULT_2, self.socket.recv(0x80))
-
-            self.on_connect_result(conn_result)
+            conn_result = conn_result_handler.read(self, PacketType.CONNECT_RESULT_2, self.socket.recv(0x80))
 
             if conn_result.result != ConnectionResult.SUCCESS:
                 return False
@@ -161,19 +139,6 @@ class Client:
 
             return
 
-        try:
-            while True:
-                if self.callback_queue.empty():
-                    time.sleep(0.25)
-
-                    continue
-
-                packet = cast(Packet, self.callback_queue.get())
-                callback = self.callback_map.get(packet.packet_type)
-
-                if callback is not None:
-                    callback(packet)
-        except KeyboardInterrupt:
             self.stop()
 
     def stop(self):
@@ -193,7 +158,7 @@ class Client:
         )
 
         self.socket.send(disconnect_packet.write(self))
-        self.on_disconnect(disconnect_packet)
+        InternalCallbacks.on_disconnect(self, disconnect_packet)
         self.socket.close()
 
         self.state = ClientState.DISCONNECTED
@@ -205,3 +170,17 @@ class Client:
         self.port_seed %= 2
 
         return port
+
+
+class ClientCallbacks:
+    def on_connect(self, client: Client, packet: ConnectRequest3) -> ConnectRequest3:
+        return packet
+
+    def on_disconnect(self, client: Client, packet: Disconnect) -> Disconnect:
+        return packet
+
+    def on_keep_alive(self, client: Client, packet: KeepAlive) -> KeepAlive:
+        return packet
+
+    def on_connect_result(self, client: Client, packet: ConnectResult2) -> ConnectResult2:
+        return packet
