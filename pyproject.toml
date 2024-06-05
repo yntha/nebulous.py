@@ -22,6 +22,7 @@ classifiers = [
 dependencies = [
   "java-random @ git+https://github.com/MostAwesomeDude/java-random",
   "pydatastreams>=1.2.6",
+  "multiprocess>=0.70.16",
   "requests>=2.32.3"
 ]
 
