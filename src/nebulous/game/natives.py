@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import ClassVar, Self
 
+from datastream import DeserializingStream
+
 
 @dataclass
 class MUTF8String:
@@ -28,6 +30,13 @@ class MUTF8String:
     @classmethod
     def from_py_string(cls, value: str) -> Self:
         return cls(len(value), value)
+
+    @classmethod
+    def from_stream(cls, stream: DeserializingStream) -> Self:
+        length = stream.read_uint16()
+        value = stream.read(length).decode("utf-8")
+
+        return cls(length, value)
 
 
 @dataclass
