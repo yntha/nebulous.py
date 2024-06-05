@@ -84,6 +84,7 @@ class Client:
         try:
             self.socket.connect((self.account.region.ip, self.port))
             self.socket.settimeout(10)
+            self.socket.setblocking(True)
 
             connect_request_3_packet = ConnectRequest3(
                 PacketType.CONNECT_REQUEST_3,
