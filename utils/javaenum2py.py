@@ -1,6 +1,5 @@
 import re
 import sys
-from enum import Enum
 from tkinter import *
 from tkinter.scrolledtext import ScrolledText
 
