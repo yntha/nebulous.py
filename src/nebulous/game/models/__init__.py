@@ -20,8 +20,8 @@ class ClientConfig:
     game_id: int = -1
     online_mode: ProfileVisibility = ProfileVisibility.ONLINE
     mayhem_mode: bool = False
-    skin: Skin = Skin.misc_none
-    skin2: Skin = Skin.misc_none
+    skin: Skin = Skin.MISC_NONE
+    skin2: Skin = Skin.MISC_NONE
     eject_skin: int = -1
     alias: str = "Blob " + hex(int(time.time() * 1000) & 0xFFFF)[2:].upper()
     alias_font: Font = Font.DEFAULT
