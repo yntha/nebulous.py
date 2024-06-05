@@ -124,7 +124,11 @@ class KeepAlive(Packet):
 
         stream.write_int32(self.client_id)
 
-        return stream.bytes()
+        data = stream.bytes()
+
+        stream.close()
+
+        return data
 
 
 @dataclass
@@ -142,7 +146,9 @@ class Disconnect(Packet):
         stream.write_int32(self.private_id)
         stream.write_int32(self.client_id)
 
-        return stream.bytes()
+        data = stream.bytes()
+
+        return data
 
 
 @dataclass
@@ -246,6 +252,8 @@ class ConnectRequest3(Packet):
             y = pair[1] + 13
             packet_bytes[x] = packet_bytes[y]
             packet_bytes[y] = a
+
+        stream.close()
 
         # check that the packet header hasnt been altered by the shuffling
         if packet_bytes[0] != PacketType.CONNECT_REQUEST_3:
