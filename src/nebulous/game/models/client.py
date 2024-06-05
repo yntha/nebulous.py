@@ -49,38 +49,34 @@ class Client:
         self.server_data.client_id = self.rng.nextInt()
         self.server_data.client_id2 = self.rng.nextInt()
 
-    def net_event_loop(self):
-        while not self.stop_event.is_set():
-            if self.packet_queue.empty():
-                keep_alive_packet = KeepAlive(
-                    PacketType.KEEP_ALIVE,
-                    self.server_data.public_id,
-                    self.server_data.private_id,
-                    inet_aton(self.account.region.ip),
-                    self.server_data.client_id,
-                )
-                self.socket.send(keep_alive_packet.write(self))
-                self.on_keep_alive(keep_alive_packet)
+    def net_send_loop(self):
+        try:
+            last_heartbeat = time.time()
+            heartbeat_interval = 0.5
 
-                time.sleep(0.25)
+            while not self.stop_event.is_set():
+                if self.packet_queue.empty():
+                    if time.time() - last_heartbeat < heartbeat_interval:
+                        continue
 
-                continue
+                    keep_alive_packet = KeepAlive(
+                        PacketType.KEEP_ALIVE,
+                        self.server_data.public_id,
+                        self.server_data.private_id,
+                        inet_aton(self.account.region.ip),
+                        self.server_data.client_id,
+                    )
 
-            packet: Packet = self.packet_queue.get()
+                    self.socket.send(keep_alive_packet.write(self))
+                    InternalCallbacks.on_keep_alive(self, keep_alive_packet)
 
-            self.socket.send(packet.write(self))
+                    last_heartbeat = time.time()
+                else:
+                    packet: Packet = self.packet_queue.get()
 
-            # recv up to 8192 bytes
-            data = self.socket.recv(0x2000)
-            handler = PacketHandler.get_handler(PacketType(data[0]))
-
-            if handler is None:
-                continue
-
-            packet = handler.read(PacketType(data[0]), data)
-
-            # handle callbacks on the main thread, err process.
-            self.callback_queue.put(packet)
+                    self.socket.send(packet.write(self))
+        except KeyboardInterrupt:
+            pass
 
     def connect(self) -> bool:
         self.state = ClientState.CONNECTING
@@ -143,22 +139,23 @@ class Client:
     def start(self):
         if self.connect():
             self.state = ClientState.CONNECTED
-            self.event_loop = Process(target=self.net_event_loop).start()
+            self.event_loop = Process(target=self.net_send_loop)
+            self.event_loop.start()
         else:
             self.stop()
 
             return
 
-            self.stop()
 
     def stop(self):
-        if self.event_loop is None:
             return
 
         self.state = ClientState.DISCONNECTING
 
         self.stop_event.set()
+        self.event_loop.terminate()
         self.event_loop.join()
+        self.event_loop = None
 
         disconnect_packet = Disconnect(
             PacketType.DISCONNECT,
