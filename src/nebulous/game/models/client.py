@@ -12,7 +12,15 @@ from nebulous.game.account import Account, ServerRegions
 from nebulous.game.enums import ConnectionResult, PacketType
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
-from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, KeepAlive, Packet, PacketHandler
+from nebulous.game.packets import (
+    ConnectRequest3,
+    ConnectResult2,
+    Disconnect,
+    GameData,
+    KeepAlive,
+    Packet,
+    PacketHandler,
+)
 
 
 class Client:
@@ -221,4 +229,7 @@ class ClientCallbacks:
         return packet
 
     def on_connect_result(self, client: Client, packet: ConnectResult2) -> ConnectResult2:
+        return packet
+
+    def on_game_data(self, client: Client, packet: GameData) -> GameData:
         return packet

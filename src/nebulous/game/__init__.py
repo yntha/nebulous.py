@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from nebulous.game.models.client import Client
-    from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, KeepAlive
+    from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, GameData, KeepAlive
 
 
 class InternalCallbacks:
@@ -23,3 +23,7 @@ class InternalCallbacks:
     @staticmethod
     def on_connect_result(client: Client, packet: ConnectResult2) -> ConnectResult2:
         return client.callbacks.on_connect_result(client, packet)
+
+    @staticmethod
+    def on_game_data(client: Client, packet: GameData) -> GameData:
+        return client.callbacks.on_game_data(client, packet)
