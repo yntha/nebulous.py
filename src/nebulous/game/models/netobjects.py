@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 
+from nebulous.game.enums import ClanRole, Font, NameAnimation, Skin
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 
 
 @dataclass
 class NetPlayer:
     player_id: int  # 1 byte
-    skin_id: int  # 2 bytes
+    skin_id: Skin  # 2 bytes
     eject_skin_id: int  # 1 byte
     custom_skin_id: int  # 4 bytes
     custom_pet_id: int  # 4 bytes
@@ -22,20 +23,20 @@ class NetPlayer:
     custom_particle_id: int  # 4 bytes
     particle_id: int  # 1 byte
     level_colors: VariableLengthArray  # length size 1
-    name_animation_id: int  # 1 byte
-    skin_id2: int  # 2 bytes
+    name_animation_id: NameAnimation  # 1 byte
+    skin_id2: Skin  # 2 bytes
     skin_interpolation_rate: CompressedFloat  # 2 bytes
     custom_skin_id2: int  # 4 bytes
     blob_color: int  # 4 bytes
     team_id: int  # 1 byte
     player_name: MUTF8String
-    font_id: int  # 1 byte
+    font_id: Font  # 1 byte
     alias_colors: VariableLengthArray
     account_id: int  # 4 bytes
     player_level: int  # 2 bytes
     clan_name: MUTF8String
     clan_colors: VariableLengthArray
-    clan_role: int  # 1 byte
+    clan_role: ClanRole  # 1 byte
     click_type: int  # 1 byte
 
 

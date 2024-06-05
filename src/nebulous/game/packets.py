@@ -11,10 +11,12 @@ from javarandom import Random as JavaRNG
 from nebulous.game import InternalCallbacks
 from nebulous.game.constants import APP_VERSION
 from nebulous.game.enums import (
+    ClanRole,
     ConnectionResult,
     Font,
     GameDifficulty,
     GameMode,
+    NameAnimation,
     PacketType,
     ProfileVisibility,
     Skin,
@@ -142,7 +144,7 @@ class GameData(Packet):
         player_objects = []
         for _ in range(player_count):
             player_id = stream.read_int8()
-            skin_id = stream.read_int16()
+            skin_id = Skin(stream.read_int16())
             eject_skin_id = stream.read_int8()
             custom_skin_id = stream.read_int32()
             custom_pet_id = stream.read_int32()
@@ -158,20 +160,20 @@ class GameData(Packet):
             custom_particle_id = stream.read_int32()
             particle_id = stream.read_int8()
             level_colors = VariableLengthArray.from_stream(1, stream)
-            name_animation_id = stream.read_int8()
-            skin_id2 = stream.read_int16()
+            name_animation_id = NameAnimation(stream.read_int8())
+            skin_id2 = Skin(stream.read_int16())
             skin_interpolation_rate = CompressedFloat.from_stream(60.0, stream)
             custom_skin_id2 = stream.read_int32()
             blob_color = stream.read_int32()
             team_id = stream.read_int8()
             player_name = MUTF8String.from_stream(stream)
-            font_id = stream.read_int8()
+            font_id = Font(stream.read_int8())
             alias_colors = VariableLengthArray.from_stream(1, stream)
             account_id = stream.read_int32()
             player_level = stream.read_int16()
             clan_name = MUTF8String.from_stream(stream)
             clan_colors = VariableLengthArray.from_stream(1, stream)
-            clan_role = stream.read_int8()
+            clan_role = ClanRole(stream.read_int8())
             click_type = stream.read_int8()
 
             player_objects.append(
@@ -339,7 +341,7 @@ class ConnectRequest3(Packet):
     particle_type: int  # 1 byte
     alias_font: Font  # 1 byte
     level_colors: VariableLengthArray  # variable length, length size is 1 byte
-    alias_anim: int  # 1 byte
+    alias_anim: NameAnimation  # 1 byte
     skin2: Skin  # 2 bytes
     skin_interpolation_rate: CompressedFloat  # 2 bytes, float encoded as a short
     custom_skin2: int  # 4 bytes
@@ -389,7 +391,7 @@ class ConnectRequest3(Packet):
         stream.write_int8(self.particle_type)
         stream.write_int8(self.alias_font.value)
         stream.write(self.level_colors.encode())
-        stream.write_int8(self.alias_anim)
+        stream.write_int8(self.alias_anim.value)
         stream.write_int16(self.skin2.value)
         stream.write_int16(self.skin_interpolation_rate.compress())
         stream.write_int32(self.custom_skin2)

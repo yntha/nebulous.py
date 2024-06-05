@@ -2,7 +2,7 @@ import time
 from dataclasses import dataclass, field
 from enum import Enum
 
-from nebulous.game.enums import Font, GameDifficulty, GameMode, ProfileVisibility, Skin, SplitMultiplier
+from nebulous.game.enums import Font, GameDifficulty, GameMode, NameAnimation, ProfileVisibility, Skin, SplitMultiplier
 
 
 @dataclass
@@ -26,7 +26,7 @@ class ClientConfig:
     alias: str = "Blob " + hex(int(time.time() * 1000) & 0xFFFF)[2:].upper()
     alias_font: Font = Font.DEFAULT
     alias_colors: list[int] = field(default_factory=([-1] * 6).copy)
-    alias_anim: int = 0
+    alias_anim: NameAnimation = NameAnimation.NONE
     hat_type: int = -1
     halo_type: int = 0
     blob_color: int = 0xFF1A69E1
