@@ -41,6 +41,75 @@ class JoinResultCode(enum.Enum):
     INCOMPATIBLE_VERSION = 29
 
 
+class Item(enum.Enum):
+    PUMPKIN = 0
+    SNOWFLAKE = 1
+    HEART = 2
+    LEAF = 3
+    BIGDOT = 4
+    COIN = 5
+    PRESENT = 6
+    BEAD = 7
+    EGG = 8
+    RAINDROP = 9
+    NEBULA = 10
+    CANDY = 11
+    SUN = 12
+    MOON = 13
+    NOTE = 14
+    CAKE_PLASMA = 15
+    CAKE_XP = 16
+
+
+class ChallengeStatus(enum.Enum):
+    SENT = 0
+    EXPIRED = 1
+    NOT_FOUND = 2
+    CHALLENGE_PENDING_FOR_CHALLENGER = 3
+    CHALLENGE_PENDING_FOR_CHALLENGEE = 4
+    DECLINED = 5
+    INCOMPATIBLE_VERSION = 6
+
+
+class SkinBundle(enum.Enum):
+    HALLOWEEN = 0
+    XMAS = 1
+    VDAY = 2
+
+
+class XPMultiplier(enum.Enum):
+    XP = 0
+    XP_DOUBLE = 1
+    XP_TRIPLE = 2
+    XP_QUADRUPLE = 3
+
+
+class SkinStatus(enum.Enum):
+    UNUSED = 0
+    IN_REVIEW = 1
+    REFUNDED = 2
+    REJECTED = 3
+    APPROVED = 4
+
+
+class ReportType(enum.Enum):
+    HARASSMENT = 0
+    THREATS = 1
+    SPAM = 2
+    OTHER = 3
+    INAPPROPRIATE_SKIN = 4
+    MAIL = 5
+    CHAT = 6
+
+
+class MissionObjective(enum.Enum):
+    UNKNOWN = 0
+    WIN = 1
+    KILL_ALL_BOTS = 2
+    SURVIVE = 3
+    SCORE = 4
+
+
 class ClanRole(enum.Enum):
     INVALID = 0
     MEMBER = 1
