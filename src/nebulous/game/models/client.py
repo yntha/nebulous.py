@@ -35,6 +35,7 @@ class Client:
         self.packet_queue = Queue()
         self.stop_event = Event()
         self.event_loop = None
+        self.recv_loop = None
         self.state = ClientState.DISCONNECTED
 
         if callbacks is None:
@@ -137,18 +138,43 @@ class Client:
         except TimeoutError:
             return False
 
+    def net_recv_loop(self):
+        try:
+            while not self.stop_event.is_set():
+                # recv up to 8192 bytes
+                data = self.socket.recv(0x2000)
+                handler = PacketHandler.get_handler(PacketType(data[0]))
+
+                if handler is None:
+                    continue
+
+                handler.read(self, PacketType(data[0]), data)
+        except KeyboardInterrupt:
+            pass
+
     def start(self):
         if self.connect():
             self.state = ClientState.CONNECTED
             self.event_loop = Process(target=self.net_send_loop)
+            self.recv_loop = Process(target=self.net_recv_loop)
+
             self.event_loop.start()
+            self.recv_loop.start()
         else:
             self.stop()
 
             return
 
+    def run_forever(self):
+        if self.event_loop is not None and self.recv_loop is not None:
+            try:
+                self.event_loop.join()
+                self.recv_loop.join()
+            except KeyboardInterrupt:
+                self.stop()
 
     def stop(self):
+        if self.event_loop is None or self.recv_loop is None:
             return
 
         self.state = ClientState.DISCONNECTING
@@ -156,7 +182,11 @@ class Client:
         self.stop_event.set()
         self.event_loop.terminate()
         self.event_loop.join()
+        self.recv_loop.terminate()
+        self.recv_loop.join()
+
         self.event_loop = None
+        self.recv_loop = None
 
         disconnect_packet = Disconnect(
             PacketType.DISCONNECT,
