@@ -44,7 +44,7 @@ def extract_enum_data():
                     enum_members.append((enum_member, None))
 
     # generate python enum class
-    python_enum_class = f"class {class_name}(Enum):\n"
+    python_enum_class = f"class {class_name}(enum.Enum):\n"
     for idx, item in enumerate(enum_members):
         member, args = item
 
