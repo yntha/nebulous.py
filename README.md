@@ -12,13 +12,13 @@
 - [Usage](#usage)
 
 ## Installation
-
-```console
-pip install nebulous.py
-```
+1. Install [git](https://git-scm.com/downloads)
+2. Install [`java-random`](https://github.com/MostAwesomeDude/java-random): `python -m pip install --user git+https://github.com/MostAwesomeDude/java-random`
+    - NOTE: This is a required step, as the `java-random` package on pypi is outdated and broken.
+3. Install `nebulous.py`: `python -m pip install --user nebulous.py`
 
 ## Usage
-
+From [`test_connect.py`](tests/test_connect.py):
 ```python
 import time
 
@@ -56,6 +56,10 @@ def test_client():
     time.sleep(3)
 
     client.stop()
+
+
+if __name__ == "__main__":
+    test_client()
 ```
 
 ## License
