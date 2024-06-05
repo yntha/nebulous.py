@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import enum
 import json
 import time
 from dataclasses import asdict, dataclass, field
-from typing import TYPE_CHECKING, ClassVar, Self
+from typing import TYPE_CHECKING, Any, ClassVar, Self
 
 from datastream import ByteOrder, DeserializingStream, SerializingStream
 from javarandom import Random as JavaRNG
@@ -29,6 +30,20 @@ if TYPE_CHECKING:
     from nebulous.game.models.client import Client
 
 
+class PacketEncoder(json.JSONEncoder):
+    def default(self, o: Any) -> Any:
+        if isinstance(o, enum.Enum):
+            return o.name
+
+        return super().default(o)
+
+    def encode(self, o: Any) -> str:
+        if isinstance(o, enum.Enum):
+            o = o.name
+
+        return super().encode(o)
+
+
 @dataclass
 class Packet:
     packet_type: PacketType
@@ -41,7 +56,7 @@ class Packet:
         raise NotImplementedError()
 
     def as_json(self, indent: int = 2) -> str:
-        return json.dumps(asdict(self), indent=indent)
+        return json.dumps(asdict(self), indent=indent, cls=PacketEncoder)
 
 
 class PacketHandler:
