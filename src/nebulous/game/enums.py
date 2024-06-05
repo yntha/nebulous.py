@@ -221,7 +221,7 @@ class ProfileVisibility(enum.Enum):
     ) = range(4)
 
 
-class PacketType(enum.IntEnum):
+class PacketType(enum.Enum):
     (
         INVALID,
         CONNECT_RESULT_2,
