@@ -287,7 +287,7 @@ class KeepAlive(Packet):
     def write(self, client: Client) -> bytes:  # noqa: ARG002
         stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
 
-        stream.write_int8(self.packet_type)
+        stream.write_int8(self.packet_type.value)
         stream.write_int32(self.public_id)
         stream.write_int32(self.private_id)
 
@@ -315,7 +315,7 @@ class Disconnect(Packet):
     def write(self, client: Client) -> bytes:  # noqa: ARG002
         stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
 
-        stream.write_int8(self.packet_type)
+        stream.write_int8(self.packet_type.value)
         stream.write_int32(self.public_id)
         stream.write_int32(self.private_id)
         stream.write_int32(self.client_id)
@@ -367,7 +367,7 @@ class ConnectRequest3(Packet):
         stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
 
         # write packet type
-        stream.write_int8(self.packet_type)
+        stream.write_int8(self.packet_type.value)
 
         # a new client id has to be generated for each new connection
         while client.server_data.client_id == 0:
@@ -430,7 +430,7 @@ class ConnectRequest3(Packet):
         stream.close()
 
         # check that the packet header hasnt been altered by the shuffling
-        if packet_bytes[0] != PacketType.CONNECT_REQUEST_3:
+        if packet_bytes[0] != PacketType.CONNECT_REQUEST_3.value:
             raise ValueError("Packet header has been corrupted")
 
         if packet_bytes[1:5] != b"\x00\x00\x00\x00":
