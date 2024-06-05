@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, ClassVar, Self
 from datastream import ByteOrder, DeserializingStream, SerializingStream
 from javarandom import Random as JavaRNG
 
+from nebulous.game import InternalCallbacks
 from nebulous.game.constants import APP_VERSION
 from nebulous.game.enums import (
     ConnectionResult,
@@ -32,7 +33,7 @@ class Packet:
         raise NotImplementedError()
 
     @classmethod
-    def read(cls, packet_type: PacketType, data: bytes) -> Self:
+    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> Self:
         raise NotImplementedError()
 
 
@@ -68,7 +69,7 @@ class ConnectResult2(Packet):
     split_multiplier: SplitMultiplier  # 1 byte
 
     @classmethod
-    def read(cls, packet_type: PacketType, data: bytes) -> Self:
+    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> ConnectResult2:
         stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
 
         # skip over the packet type byte
@@ -85,16 +86,19 @@ class ConnectResult2(Packet):
 
         stream.close()
 
-        return cls(
-            packet_type,
-            client_id,
-            result,
-            public_id,
-            private_id,
-            game_id,
-            ban_length,
-            ad_stuff,
-            split_multiplier,
+        return InternalCallbacks.on_connect_result(
+            client,
+            cls(
+                packet_type,
+                client_id,
+                result,
+                public_id,
+                private_id,
+                game_id,
+                ban_length,
+                ad_stuff,
+                split_multiplier,
+            )
         )
 
 
