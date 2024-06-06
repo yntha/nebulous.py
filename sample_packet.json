@@ -1,6 +1,6 @@
 {
   "packet_type": "GAME_DATA",
-  "public_id": 226386,
+  "public_id": 227489,
   "map_size": 703.4222412109375,
   "player_count": 7,
   "eject_count": 0,
@@ -11,24 +11,18 @@
   "player_objects": [
     {
       "player_id": 0,
-      "skin_id": "LEVEL_EYEFLOWER",
+      "skin_id": "XMAS11",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -40,30 +34,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -8805688,
+      "blob_color": "#FF7E72B8",
       "team_id": -1,
-      "player_name": {
-        "length": 6,
-        "_value": "Vector"
-      },
+      "player_name": "Vector",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -71,24 +56,18 @@
     },
     {
       "player_id": 1,
-      "skin_id": "LEVEL_CARDIO",
+      "skin_id": "MISC_WHIRLPOOL",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -100,30 +79,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -8072750,
+      "blob_color": "#FFAECA94",
       "team_id": -1,
-      "player_name": {
-        "length": 6,
-        "_value": "Matrix"
-      },
+      "player_name": "Matrix",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -131,24 +101,18 @@
     },
     {
       "player_id": 2,
-      "skin_id": "LEVEL_DRAGONS",
+      "skin_id": "MISC_BEACHBALL",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -160,30 +124,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -9334116,
+      "blob_color": "#FF72CB92",
       "team_id": -1,
-      "player_name": {
-        "length": 7,
-        "_value": "Cathode"
-      },
+      "player_name": "Cathode",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -191,24 +146,18 @@
     },
     {
       "player_id": 3,
-      "skin_id": "TUBER_STEN",
+      "skin_id": "LEVEL_TAPESTRY",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -220,30 +169,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -7224690,
+      "blob_color": "#FFD79BAA",
       "team_id": -1,
-      "player_name": {
-        "length": 7,
-        "_value": "Silicon"
-      },
+      "player_name": "Silicon",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -251,24 +191,18 @@
     },
     {
       "player_id": 4,
-      "skin_id": "PACK_CUPID",
+      "skin_id": "PLASMA_TESSELATION",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -280,30 +214,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -3501177,
+      "blob_color": "#FFB0B79C",
       "team_id": -1,
-      "player_name": {
-        "length": 7,
-        "_value": "Divisor"
-      },
+      "player_name": "Divisor",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -311,24 +236,18 @@
     },
     {
       "player_id": 5,
-      "skin_id": "MISC_LIGHTNING_BALL",
+      "skin_id": "XMAS2",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -340,30 +259,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -3944024,
+      "blob_color": "#FF979AA3",
       "team_id": -1,
-      "player_name": {
-        "length": 6,
-        "_value": "Tensor"
-      },
+      "player_name": "Tensor",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -371,24 +281,18 @@
     },
     {
       "player_id": 6,
-      "skin_id": "COUNTRY_INDONESIA",
+      "skin_id": "LEVEL_SKULLBONES",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -400,30 +304,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -9989519,
+      "blob_color": "#FFABDCC4",
       "team_id": -1,
-      "player_name": {
-        "length": 6,
-        "_value": "Enigma"
-      },
+      "player_name": "Enigma",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -436,7 +331,7 @@
 }
 {
   "packet_type": "GAME_DATA",
-  "public_id": 226386,
+  "public_id": 227489,
   "map_size": 703.4222412109375,
   "player_count": 3,
   "eject_count": 0,
@@ -447,24 +342,18 @@
   "player_objects": [
     {
       "player_id": 7,
-      "skin_id": "COUNTRY_SUDAN",
+      "skin_id": "PLASMA_DEADMAU5",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -476,30 +365,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -8470395,
+      "blob_color": "#FFA19CB0",
       "team_id": -1,
-      "player_name": {
-        "length": 8,
-        "_value": "Function"
-      },
+      "player_name": "Function",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -507,24 +387,18 @@
     },
     {
       "player_id": 8,
-      "skin_id": "SPECIAL_LEAF_WREATH",
+      "skin_id": "XMAS12",
       "eject_skin_id": "EJECT_NONE",
       "custom_skin_id": 0,
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -536,30 +410,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -6234424,
+      "blob_color": "#FF858D9D",
       "team_id": -1,
-      "player_name": {
-        "length": 3,
-        "_value": "Xan"
-      },
+      "player_name": "Xan",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -2,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -573,18 +438,12 @@
       "custom_pet_id": 0,
       "pet_id": "PET_NONE",
       "pet_level": 1,
-      "pet_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name": "",
       "hat_id": "HAT_NONE",
       "halo_id": "HALO_1",
       "pet_id2": "PET_NONE",
       "pet_level2": 1,
-      "pet_name2": {
-        "length": 0,
-        "_value": ""
-      },
+      "pet_name2": "",
       "custom_pet_id2": 0,
       "custom_particle_id": 0,
       "particle_id": "PARTICLE_NONE",
@@ -596,30 +455,21 @@
       },
       "name_animation_id": "NONE",
       "skin_id2": "MISC_NONE",
-      "skin_interpolation_rate": {
-        "value": 0.0,
-        "max_range": 60.0
-      },
+      "skin_interpolation_rate": 0.0,
       "custom_skin_id2": 0,
-      "blob_color": -8140587,
+      "blob_color": "#FF83676E",
       "team_id": -1,
-      "player_name": {
-        "length": 9,
-        "_value": "Blob B6EA"
-      },
+      "player_name": "Blob 50C0",
       "font_id": "DEFAULT",
       "alias_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "account_id": -1,
       "player_level": 1,
-      "clan_name": {
-        "length": 0,
-        "_value": ""
-      },
+      "clan_name": "",
       "clan_colors": {
-        "size": 0,
+        "size": 1,
         "values": []
       },
       "clan_role": "INVALID",
@@ -630,527 +480,245 @@
   "dot_objects": [
     {
       "dot_id": 0,
-      "xpos": {
-        "value": 264.7184593060128,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 438.2941108886761,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 568.5141920323678,
+      "ypos": 622.866186185964
     },
     {
       "dot_id": 1,
-      "xpos": {
-        "value": 499.47060113425806,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 90.7972434498953,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 588.254498744397,
+      "ypos": 455.9804861971653
     },
     {
       "dot_id": 2,
-      "xpos": {
-        "value": 324.90785665060804,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 314.667045570804,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 144.32276794099099,
+      "ypos": 584.0235375744364
     },
     {
       "dot_id": 3,
-      "xpos": {
-        "value": 304.11580524073855,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 622.6048537282547,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 576.0484323637412,
+      "ypos": 11.511290164275044
     },
     {
       "dot_id": 4,
-      "xpos": {
-        "value": 614.1950888690639,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 130.80203116984367,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 493.4752999750683,
+      "ypos": 442.62552971444774
     },
     {
       "dot_id": 5,
-      "xpos": {
-        "value": 249.4547654356461,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 400.44727604308054,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 7.5408648345529565,
+      "ypos": 524.9419416412958
     },
     {
       "dot_id": 6,
-      "xpos": {
-        "value": 330.0299812071579,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 166.9030578642185,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 274.5303547685592,
+      "ypos": 424.04480454948526
     },
     {
       "dot_id": 7,
-      "xpos": {
-        "value": 378.18345289199965,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 551.3766023068974,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 449.085175004735,
+      "ypos": 337.52623546333723
     },
     {
       "dot_id": 8,
-      "xpos": {
-        "value": 467.9351988021164,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 70.12933858378922,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 601.8945604272466,
+      "ypos": 272.553401769055
     },
     {
       "dot_id": 9,
-      "xpos": {
-        "value": 146.13456956059522,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 275.2177937187601,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 157.637264641631,
+      "ypos": 511.016774758314
     },
     {
       "dot_id": 10,
-      "xpos": {
-        "value": 102.086109630832,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 12.396290247273352,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 70.77853989538416,
+      "ypos": 98.2069598923875
     },
     {
       "dot_id": 11,
-      "xpos": {
-        "value": 33.99225446704476,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 164.3536723209784,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 622.087807062368,
+      "ypos": 403.8191062342311
     },
     {
       "dot_id": 12,
-      "xpos": {
-        "value": 656.0491192297515,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 579.356239666568,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 107.87584155527944,
+      "ypos": 34.47320178332643
     },
     {
       "dot_id": 13,
-      "xpos": {
-        "value": 395.72593392889286,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 309.36471775687653,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 23.24563322041815,
+      "ypos": 582.2145870068335
     },
     {
       "dot_id": 14,
-      "xpos": {
-        "value": 487.7212062006374,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 66.69998422578844,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 351.86887182833595,
+      "ypos": 337.8964110239205
     },
     {
       "dot_id": 15,
-      "xpos": {
-        "value": 661.7892093075876,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 132.64842275858157,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 143.6352451363195,
+      "ypos": 132.81726373518921
     },
     {
       "dot_id": 16,
-      "xpos": {
-        "value": 307.92577504091565,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 21.257443721849842,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 579.5209717741149,
+      "ypos": 419.20262814312395
     },
     {
       "dot_id": 17,
-      "xpos": {
-        "value": 188.59956359427179,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 323.82496001692977,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 74.43262423466555,
+      "ypos": 422.65097553872175
     },
     {
       "dot_id": 18,
-      "xpos": {
-        "value": 615.4885021512514,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 249.20274082417637,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 488.5266283910106,
+      "ypos": 472.63369057305823
     },
     {
       "dot_id": 19,
-      "xpos": {
-        "value": 60.46133739283888,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 615.8604386557179,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 452.50949809449816,
+      "ypos": 488.00299914917974
     },
     {
       "dot_id": 20,
-      "xpos": {
-        "value": 570.8178001221999,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 154.90331540854066,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 465.2099704339713,
+      "ypos": 432.4116359197151
     },
     {
       "dot_id": 21,
-      "xpos": {
-        "value": 103.26376181631885,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 267.79038398296564,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 307.3455440314115,
+      "ypos": 617.659662104728
     },
     {
       "dot_id": 22,
-      "xpos": {
-        "value": 356.32733017710774,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 569.0381986193164,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 529.5846282620353,
+      "ypos": 69.55514509617022
     },
     {
       "dot_id": 23,
-      "xpos": {
-        "value": 663.7381549139025,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 677.472343240031,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 594.2828804922491,
+      "ypos": 403.457777320299
     },
     {
       "dot_id": 24,
-      "xpos": {
-        "value": 427.84001596283207,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 547.4439534161928,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 253.8517584574482,
+      "ypos": 234.29266125644412
     },
     {
       "dot_id": 25,
-      "xpos": {
-        "value": 451.7567365116788,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 422.0992550492308,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 79.8890765656056,
+      "ypos": 674.2881374269085
     },
     {
       "dot_id": 26,
-      "xpos": {
-        "value": 336.57146846077717,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 402.52405778986633,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 601.5214499601914,
+      "ypos": 636.9658122950855
     },
     {
       "dot_id": 27,
-      "xpos": {
-        "value": 164.95964665296506,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 526.4508189857596,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 34.78203779864601,
+      "ypos": 383.62854294216976
     },
     {
       "dot_id": 28,
-      "xpos": {
-        "value": 357.507581851184,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 394.4216614927591,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 248.5060359549712,
+      "ypos": 142.83456072353673
     },
     {
       "dot_id": 29,
-      "xpos": {
-        "value": 582.1101462636675,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 631.3376679355364,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 486.19622879781315,
+      "ypos": 549.7976226249893
     },
     {
       "dot_id": 30,
-      "xpos": {
-        "value": 225.23922948071973,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 163.54514751519199,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 448.77646477112137,
+      "ypos": 232.8145585027004
     },
     {
       "dot_id": 31,
-      "xpos": {
-        "value": 411.34127152183424,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 161.84256634357956,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 104.81771093874477,
+      "ypos": 299.29413125244554
     },
     {
       "dot_id": 32,
-      "xpos": {
-        "value": 330.49876962519863,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 238.18744985366058,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 339.9792722198268,
+      "ypos": 675.7304343216945
     },
     {
       "dot_id": 33,
-      "xpos": {
-        "value": 615.4277915145174,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 42.451870809023426,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 636.0460126067769,
+      "ypos": 452.3172617205856
     },
     {
       "dot_id": 34,
-      "xpos": {
-        "value": 701.7427619459828,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 238.36585023991972,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 38.24988135866463,
+      "ypos": 675.6078390856377
     },
     {
       "dot_id": 35,
-      "xpos": {
-        "value": 298.82467199863976,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 57.69464298896867,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 293.4611723483898,
+      "ypos": 70.71107897376466
     },
     {
       "dot_id": 36,
-      "xpos": {
-        "value": 601.3777233975366,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 646.085992229429,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 381.4682421426393,
+      "ypos": 7.48816229976383
     },
     {
       "dot_id": 37,
-      "xpos": {
-        "value": 248.2878046951642,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 337.5520207130551,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 526.508636643257,
+      "ypos": 610.9179303752512
     },
     {
       "dot_id": 38,
-      "xpos": {
-        "value": 635.0256294809511,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 189.15774087800102,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 229.29963065742467,
+      "ypos": 572.2481896821567
     },
     {
       "dot_id": 39,
-      "xpos": {
-        "value": 629.5593661769477,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 660.1413431780594,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 102.66437006027641,
+      "ypos": 598.3282717187118
     },
     {
       "dot_id": 40,
-      "xpos": {
-        "value": 677.6746002231836,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 468.2052101975356,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 571.2764421492947,
+      "ypos": 494.4494792875785
     },
     {
       "dot_id": 41,
-      "xpos": {
-        "value": 131.20587430038375,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 590.1528801049236,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 186.11063712435381,
+      "ypos": 639.6262630846711
     },
     {
       "dot_id": 42,
-      "xpos": {
-        "value": 458.2572608563968,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 182.17241191135253,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 610.3571116756972,
+      "ypos": 46.36464619018939
     },
     {
       "dot_id": 43,
-      "xpos": {
-        "value": 184.21850292188884,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 632.7410563559514,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 315.3686139993056,
+      "ypos": 546.4369870056674
     },
     {
       "dot_id": 44,
-      "xpos": {
-        "value": 532.0583351455343,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 332.7350845023525,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 325.53009874989635,
+      "ypos": 645.4164981359423
     },
     {
       "dot_id": 45,
-      "xpos": {
-        "value": 674.3555564212927,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 248.1673896753437,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 176.6827112828088,
+      "ypos": 363.83155060799663
     },
     {
       "dot_id": 46,
-      "xpos": {
-        "value": 477.67405702074666,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 574.0950005432478,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 242.8034288255053,
+      "ypos": 643.3160694284396
     }
   ],
   "item_objects": []
 }
 {
   "packet_type": "GAME_DATA",
-  "public_id": 226386,
+  "public_id": 227489,
   "map_size": 703.4222412109375,
   "player_count": 0,
   "eject_count": 0,
@@ -1163,912 +731,420 @@
   "dot_objects": [
     {
       "dot_id": 47,
-      "xpos": {
-        "value": 345.2111203511922,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 565.8765077315572,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 499.01845782863677,
+      "ypos": 118.72661005442488
     },
     {
       "dot_id": 48,
-      "xpos": {
-        "value": 701.3122950210187,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 25.67929959419287,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 582.085870394421,
+      "ypos": 521.9295955657235
     },
     {
       "dot_id": 49,
-      "xpos": {
-        "value": 199.07365781136036,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 187.4921395279351,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 650.3915838782476,
+      "ypos": 20.35617587154988
     },
     {
       "dot_id": 50,
-      "xpos": {
-        "value": 247.54141605211248,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 19.775106317339457,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 288.08052445889666,
+      "ypos": 665.1625908064448
     },
     {
       "dot_id": 51,
-      "xpos": {
-        "value": 613.9646987110159,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 512.6199045277627,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 446.4219150903833,
+      "ypos": 393.2318504090313
     },
     {
       "dot_id": 52,
-      "xpos": {
-        "value": 332.3110324443913,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 240.46619509295175,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 273.009528162031,
+      "ypos": 524.4091303349312
     },
     {
       "dot_id": 53,
-      "xpos": {
-        "value": 215.8381370697754,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 38.816234453279996,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 38.57921979205253,
+      "ypos": 205.51489704534495
     },
     {
       "dot_id": 54,
-      "xpos": {
-        "value": 471.1524852039013,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 334.3879819001184,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 50.071223428083336,
+      "ypos": 446.1224288485387
     },
     {
       "dot_id": 55,
-      "xpos": {
-        "value": 234.24000064889032,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 34.85490733362094,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 492.8051769730519,
+      "ypos": 433.3202410361949
     },
     {
       "dot_id": 56,
-      "xpos": {
-        "value": 283.08950636717225,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 637.8617973137359,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 333.37942225465105,
+      "ypos": 453.7327671120062
     },
     {
       "dot_id": 57,
-      "xpos": {
-        "value": 115.40119331276638,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 111.6081621156559,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 278.32732712578917,
+      "ypos": 310.98118038715495
     },
     {
       "dot_id": 58,
-      "xpos": {
-        "value": 381.0979408003501,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 490.26287713257983,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 693.7602356146369,
+      "ypos": 342.82634113379305
     },
     {
       "dot_id": 59,
-      "xpos": {
-        "value": 558.6906407984042,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 424.57585491196664,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 611.6761424986613,
+      "ypos": 86.45395921652987
     },
     {
       "dot_id": 60,
-      "xpos": {
-        "value": 513.0108759970615,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 150.8670643193763,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 430.45191501392463,
+      "ypos": 350.8697877380495
     },
     {
       "dot_id": 61,
-      "xpos": {
-        "value": 668.5314022366529,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 175.63381763696987,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 306.3831462720244,
+      "ypos": 375.38917036729316
     },
     {
       "dot_id": 62,
-      "xpos": {
-        "value": 660.5783926789677,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 18.003890261518748,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 361.9268382349376,
+      "ypos": 259.5964605311689
     },
     {
       "dot_id": 63,
-      "xpos": {
-        "value": 298.5919758426496,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 557.1614706720485,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 548.3456824660813,
+      "ypos": 99.73726205409658
     },
     {
       "dot_id": 64,
-      "xpos": {
-        "value": 306.7331548324219,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 115.20602203238182,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 478.5451791888562,
+      "ypos": 566.8910210444392
     },
     {
       "dot_id": 65,
-      "xpos": {
-        "value": 112.43752475739313,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 505.54640258524984,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 131.91784068324304,
+      "ypos": 47.605105374175935
     },
     {
       "dot_id": 66,
-      "xpos": {
-        "value": 182.13849277798386,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 487.75135188282786,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 506.96023088725786,
+      "ypos": 99.25706942805054
     },
     {
       "dot_id": 67,
-      "xpos": {
-        "value": 492.2464965624989,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 587.0484198933675,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 193.903861988259,
+      "ypos": 601.3978065432517
     },
     {
       "dot_id": 68,
-      "xpos": {
-        "value": 460.64933541274047,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 127.29951378622076,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 681.711396366407,
+      "ypos": 9.11141714216304
     },
     {
       "dot_id": 69,
-      "xpos": {
-        "value": 599.204425155059,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 359.0980915228033,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 396.37308080595744,
+      "ypos": 374.3220383740928
     },
     {
       "dot_id": 70,
-      "xpos": {
-        "value": 406.7925857626677,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 652.1557561585356,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 138.10055658428433,
+      "ypos": 500.53852974492935
     },
     {
       "dot_id": 71,
-      "xpos": {
-        "value": 267.764095606424,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 74.01393886282449,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 49.541598591602636,
+      "ypos": 463.4022357561925
     },
     {
       "dot_id": 72,
-      "xpos": {
-        "value": 672.2922333170425,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 495.89219545471764,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 437.0090411263159,
+      "ypos": 649.8833419317768
     },
     {
       "dot_id": 73,
-      "xpos": {
-        "value": 546.7458649482223,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 320.27271693222497,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 165.76003757510063,
+      "ypos": 307.0149058537289
     },
     {
       "dot_id": 74,
-      "xpos": {
-        "value": 429.5289707829676,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 293.97809323257053,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 640.1781932103387,
+      "ypos": 673.8049679671552
     },
     {
       "dot_id": 75,
-      "xpos": {
-        "value": 83.71128911849432,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 101.02698573957653,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 371.8479960727111,
+      "ypos": 584.2440329049505
     },
     {
       "dot_id": 76,
-      "xpos": {
-        "value": 542.5081534933764,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 319.5932022294984,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 589.6850979405305,
+      "ypos": 400.266821222291
     },
     {
       "dot_id": 77,
-      "xpos": {
-        "value": 354.10745077619674,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 14.465567018938055,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 61.96036183700405,
+      "ypos": 473.36460806627923
     },
     {
       "dot_id": 78,
-      "xpos": {
-        "value": 383.0110805477072,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 237.3585903387471,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 45.774184935268735,
+      "ypos": 503.7108282232228
     },
     {
       "dot_id": 79,
-      "xpos": {
-        "value": 76.40395898463781,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 656.9504290072867,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 33.59323296856575,
+      "ypos": 390.0193856393075
     },
     {
       "dot_id": 80,
-      "xpos": {
-        "value": 445.16875195409676,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 549.4583474368321,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 532.9300442949383,
+      "ypos": 519.3965197170204
     },
     {
       "dot_id": 81,
-      "xpos": {
-        "value": 90.68366256943092,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 493.38184416755445,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 310.61004050015947,
+      "ypos": 538.4161811084804
     },
     {
       "dot_id": 82,
-      "xpos": {
-        "value": 98.13471926594227,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 403.3620574420782,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 239.94780675553508,
+      "ypos": 187.60928422340118
     },
     {
       "dot_id": 83,
-      "xpos": {
-        "value": 316.36488896482604,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 36.19997496971479,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 177.97059016993498,
+      "ypos": 32.81967547703084
     },
     {
       "dot_id": 84,
-      "xpos": {
-        "value": 409.7919343952928,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 637.4811818715596,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 572.0970000716161,
+      "ypos": 268.34294301716284
     },
     {
       "dot_id": 85,
-      "xpos": {
-        "value": 451.4470619516529,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 272.78374999986755,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 660.1014284500409,
+      "ypos": 154.67045154360923
     },
     {
       "dot_id": 86,
-      "xpos": {
-        "value": 666.0368994444382,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 226.07047884804606,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 535.6738464283274,
+      "ypos": 202.75193416541765
     },
     {
       "dot_id": 87,
-      "xpos": {
-        "value": 48.192925213271835,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 365.0070225772472,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 248.16575451316646,
+      "ypos": 231.8104431441763
     },
     {
       "dot_id": 88,
-      "xpos": {
-        "value": 580.8857032835708,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 371.9990599015458,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 6.595741096115024,
+      "ypos": 362.68882380952596
     },
     {
       "dot_id": 89,
-      "xpos": {
-        "value": 664.6238258326657,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 430.11637134971033,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 405.91949301449847,
+      "ypos": 120.93734931803749
     },
     {
       "dot_id": 90,
-      "xpos": {
-        "value": 501.72117127141854,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 402.37265854314916,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 607.4835447490128,
+      "ypos": 180.67036870624477
     },
     {
       "dot_id": 91,
-      "xpos": {
-        "value": 636.0859692620307,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 496.63460101041454,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 148.77623694876044,
+      "ypos": 377.4873350040889
     },
     {
       "dot_id": 92,
-      "xpos": {
-        "value": 338.01921589615387,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 416.0322583176549,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 353.7236488641366,
+      "ypos": 13.01492660432471
     },
     {
       "dot_id": 93,
-      "xpos": {
-        "value": 481.9910109503352,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 49.896889983649615,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 502.1790586082778,
+      "ypos": 422.50532032324253
     },
     {
       "dot_id": 94,
-      "xpos": {
-        "value": 402.7863965012232,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 240.93020380616676,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 498.53386284288285,
+      "ypos": 452.7574138369072
     },
     {
       "dot_id": 95,
-      "xpos": {
-        "value": 591.544151554333,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 671.6600125357496,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 285.6120165525764,
+      "ypos": 447.7633769842402
     },
     {
       "dot_id": 96,
-      "xpos": {
-        "value": 25.264555382471283,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 403.5865777871822,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 411.0926010891896,
+      "ypos": 20.8555292441342
     },
     {
       "dot_id": 97,
-      "xpos": {
-        "value": 377.84111701566457,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 465.56786131460774,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 13.952796931053399,
+      "ypos": 401.7010680878968
     },
     {
       "dot_id": 98,
-      "xpos": {
-        "value": 670.0433821965299,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 436.7911872116267,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 651.3818632491182,
+      "ypos": 75.45577455802199
     },
     {
       "dot_id": 99,
-      "xpos": {
-        "value": 137.77700410936973,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 356.8619443545907,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 269.82351947779006,
+      "ypos": 143.20125632358898
     },
     {
       "dot_id": 100,
-      "xpos": {
-        "value": 699.1122891296463,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 475.1906230186548,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 88.16840579573604,
+      "ypos": 122.53653792736672
     },
     {
       "dot_id": 101,
-      "xpos": {
-        "value": 207.76924063368367,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 41.74271355093013,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 134.51758083609474,
+      "ypos": 269.0843423192122
     },
     {
       "dot_id": 102,
-      "xpos": {
-        "value": 501.06593243793844,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 131.69684222590536,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 536.4895827185876,
+      "ypos": 14.222724472002001
     },
     {
       "dot_id": 103,
-      "xpos": {
-        "value": 686.755703974215,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 25.409959034538655,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 699.435170768796,
+      "ypos": 106.66087413036352
     },
     {
       "dot_id": 104,
-      "xpos": {
-        "value": 5.306604391929454,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 513.012133814121,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 241.7958335064502,
+      "ypos": 9.525071245766474
     },
     {
       "dot_id": 105,
-      "xpos": {
-        "value": 96.00741520060362,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 23.08220085716595,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 24.574139598563136,
+      "ypos": 41.000685340351005
     },
     {
       "dot_id": 106,
-      "xpos": {
-        "value": 221.6169679130413,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 262.6957217655461,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 615.9366204422826,
+      "ypos": 261.7493821372841
     },
     {
       "dot_id": 107,
-      "xpos": {
-        "value": 53.54560763681088,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 120.30324181115543,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 128.41980951379867,
+      "ypos": 273.9724290482419
     },
     {
       "dot_id": 108,
-      "xpos": {
-        "value": 444.4039153275071,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 334.2237529193952,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 602.1692257457856,
+      "ypos": 266.28154856573707
     },
     {
       "dot_id": 109,
-      "xpos": {
-        "value": 517.0207129279784,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 582.0869605025391,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 613.2412442656806,
+      "ypos": 193.22740797371026
     },
     {
       "dot_id": 110,
-      "xpos": {
-        "value": 451.0391099520522,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 597.848246801607,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 334.34731248186426,
+      "ypos": 14.693651179043739
     },
     {
       "dot_id": 111,
-      "xpos": {
-        "value": 229.0458870293071,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 378.0722199367128,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 183.46859239107076,
+      "ypos": 676.9513134867896
     },
     {
       "dot_id": 112,
-      "xpos": {
-        "value": 649.182947465864,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 61.936924512463776,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 478.45440672440236,
+      "ypos": 236.94736801479186
     },
     {
       "dot_id": 113,
-      "xpos": {
-        "value": 345.50863601297715,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 291.2154238432904,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 422.04118582832155,
+      "ypos": 506.74384442580464
     },
     {
       "dot_id": 114,
-      "xpos": {
-        "value": 225.0729879927015,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 167.71829102765506,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 151.732861728601,
+      "ypos": 515.8133343326541
     },
     {
       "dot_id": 115,
-      "xpos": {
-        "value": 73.36586958658302,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 113.03591025978805,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 246.8719219586258,
+      "ypos": 420.530337903798
     },
     {
       "dot_id": 116,
-      "xpos": {
-        "value": 561.3843818128288,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 345.6435159289808,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 91.90529642476167,
+      "ypos": 353.4215631337025
     },
     {
       "dot_id": 117,
-      "xpos": {
-        "value": 666.4561717975736,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 519.7264032044673,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 451.44123406594434,
+      "ypos": 602.4188605048425
     },
     {
       "dot_id": 118,
-      "xpos": {
-        "value": 192.3320518635895,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 89.76499491647583,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 125.37132216138613,
+      "ypos": 234.6900056655106
     },
     {
       "dot_id": 119,
-      "xpos": {
-        "value": 248.21451588783611,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 399.98922099728003,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 495.64591487448587,
+      "ypos": 348.4237947570926
     },
     {
       "dot_id": 120,
-      "xpos": {
-        "value": 192.91727221409596,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 35.83814292895889,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 226.14494161796293,
+      "ypos": 267.7819985359029
     },
     {
       "dot_id": 121,
-      "xpos": {
-        "value": 499.39777352651845,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 82.48500134004375,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 680.6053139716004,
+      "ypos": 170.38360537653713
     },
     {
       "dot_id": 122,
-      "xpos": {
-        "value": 430.34198180293254,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 511.3709341150075,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 109.62320101420674,
+      "ypos": 275.44252370004074
     },
     {
       "dot_id": 123,
-      "xpos": {
-        "value": 136.2679171287293,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 424.91919704194925,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 238.52978572999567,
+      "ypos": 623.0195140855056
     },
     {
       "dot_id": 124,
-      "xpos": {
-        "value": 411.46638239200985,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 457.6213085511609,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 202.1629822909683,
+      "ypos": 131.24239292234185
     },
     {
       "dot_id": 125,
-      "xpos": {
-        "value": 337.3716916739715,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 240.36712103590585,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 597.84329938784,
+      "ypos": 633.8066370414451
     },
     {
       "dot_id": 126,
-      "xpos": {
-        "value": 587.3694986613987,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 601.6354920402442,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 294.2460501934594,
+      "ypos": 488.3994211590693
     },
     {
       "dot_id": 127,
-      "xpos": {
-        "value": 109.2757919423987,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 463.26349853453996,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 131.33580680262043,
+      "ypos": 66.43932260384413
     },
     {
       "dot_id": 128,
-      "xpos": {
-        "value": 194.78504669284376,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 90.20091238203077,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 381.90625596995994,
+      "ypos": 247.88593214468386
     }
   ],
   "item_objects": []
 }
 {
   "packet_type": "GAME_DATA",
-  "public_id": 226386,
+  "public_id": 227489,
   "map_size": 703.4222412109375,
   "player_count": 0,
   "eject_count": 0,
@@ -2081,912 +1157,420 @@
   "dot_objects": [
     {
       "dot_id": 129,
-      "xpos": {
-        "value": 444.9332047461053,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 357.530180631018,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 315.5934697622921,
+      "ypos": 507.7702231462803
     },
     {
       "dot_id": 130,
-      "xpos": {
-        "value": 541.6298617680283,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 314.46495629659273,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 84.8330103720729,
+      "ypos": 455.9252261010221
     },
     {
       "dot_id": 131,
-      "xpos": {
-        "value": 573.3712945345006,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 69.97353697736409,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 121.9489696516827,
+      "ypos": 557.903960082216
     },
     {
       "dot_id": 132,
-      "xpos": {
-        "value": 274.04240560398017,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 110.56757006240902,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 236.39359309077057,
+      "ypos": 382.56988025050276
     },
     {
       "dot_id": 133,
-      "xpos": {
-        "value": 482.53250119440963,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 213.51956095693635,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 336.3898816046342,
+      "ypos": 300.22923438164355
     },
     {
       "dot_id": 134,
-      "xpos": {
-        "value": 443.9446024646472,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 85.20238931518523,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 347.02795323903405,
+      "ypos": 210.53417409367069
     },
     {
       "dot_id": 135,
-      "xpos": {
-        "value": 89.12204076294262,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 474.6813748185364,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 698.8719202895937,
+      "ypos": 563.598559109737
     },
     {
       "dot_id": 136,
-      "xpos": {
-        "value": 19.346484190729086,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 364.1673458356228,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 473.41068609788886,
+      "ypos": 378.3258377831245
     },
     {
       "dot_id": 137,
-      "xpos": {
-        "value": 199.64189763156483,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 117.84370633319226,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 96.68781037527182,
+      "ypos": 402.9895758835527
     },
     {
       "dot_id": 138,
-      "xpos": {
-        "value": 56.909010453663456,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 411.24768993261443,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 40.51885755212775,
+      "ypos": 356.5448906011497
     },
     {
       "dot_id": 139,
-      "xpos": {
-        "value": 671.2383922574365,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 25.06795857608607,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 84.8181262035366,
+      "ypos": 613.7159024966653
     },
     {
       "dot_id": 140,
-      "xpos": {
-        "value": 458.26648484816576,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 442.9085385528142,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 492.1631032914603,
+      "ypos": 542.841475014119
     },
     {
       "dot_id": 141,
-      "xpos": {
-        "value": 621.9751485810806,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 643.7708541498857,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 127.19666627799663,
+      "ypos": 628.42171257395
     },
     {
       "dot_id": 142,
-      "xpos": {
-        "value": 125.48938925602907,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 575.3615384675993,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 55.57002226669008,
+      "ypos": 53.83503134218028
     },
     {
       "dot_id": 143,
-      "xpos": {
-        "value": 369.9226974271131,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 563.9240402374761,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 340.98481310435153,
+      "ypos": 701.2107472570892
     },
     {
       "dot_id": 144,
-      "xpos": {
-        "value": 490.011774920287,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 559.5005072757206,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 636.4001719634704,
+      "ypos": 508.0659359369467
     },
     {
       "dot_id": 145,
-      "xpos": {
-        "value": 130.00730042447543,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 202.46930267216905,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 398.2995953413795,
+      "ypos": 305.6579728100413
     },
     {
       "dot_id": 146,
-      "xpos": {
-        "value": 489.3615254278092,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 24.70880987839024,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 491.67884372358884,
+      "ypos": 211.02312951189725
     },
     {
       "dot_id": 147,
-      "xpos": {
-        "value": 106.4357248767298,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 256.3548982601375,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 475.2664274601016,
+      "ypos": 120.16182124644286
     },
     {
       "dot_id": 148,
-      "xpos": {
-        "value": 140.63367436022278,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 339.7865327190904,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 131.29530509330755,
+      "ypos": 354.00506446756106
     },
     {
       "dot_id": 149,
-      "xpos": {
-        "value": 237.7789528000007,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 268.0420312493175,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 238.38123753527978,
+      "ypos": 137.77733952725222
     },
     {
       "dot_id": 150,
-      "xpos": {
-        "value": 226.03760789556023,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 290.71992777635495,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 149.71050153325217,
+      "ypos": 361.5791356724824
     },
     {
       "dot_id": 151,
-      "xpos": {
-        "value": 286.6093396989797,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 83.05198334318882,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 608.9164080158532,
+      "ypos": 596.3678799771563
     },
     {
       "dot_id": 152,
-      "xpos": {
-        "value": 322.6490687753261,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 176.99301475136437,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 538.5139554212316,
+      "ypos": 187.7084421349177
     },
     {
       "dot_id": 153,
-      "xpos": {
-        "value": 395.0610518312906,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 145.97650388346315,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 349.0918213973433,
+      "ypos": 303.37981455204454
     },
     {
       "dot_id": 154,
-      "xpos": {
-        "value": 638.9734979580745,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 342.32224998361835,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 112.72552293676188,
+      "ypos": 477.3868973860842
     },
     {
       "dot_id": 155,
-      "xpos": {
-        "value": 164.4422226419606,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 651.4034138480694,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 467.53374552398924,
+      "ypos": 150.5593603394102
     },
     {
       "dot_id": 156,
-      "xpos": {
-        "value": 664.1067372395438,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 471.66177533125494,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 412.0097174344381,
+      "ypos": 25.187828541847495
     },
     {
       "dot_id": 157,
-      "xpos": {
-        "value": 172.98812523421455,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 228.78518348012747,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 320.83823148213406,
+      "ypos": 207.06343755441543
     },
     {
       "dot_id": 158,
-      "xpos": {
-        "value": 89.44877970774108,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 553.088952524338,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 105.81335699573553,
+      "ypos": 670.1703378650593
     },
     {
       "dot_id": 159,
-      "xpos": {
-        "value": 438.72126556205046,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 365.14982674072513,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 81.14672591607071,
+      "ypos": 564.3694751854472
     },
     {
       "dot_id": 160,
-      "xpos": {
-        "value": 681.4231885508617,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 471.8173253742682,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 554.9651963046191,
+      "ypos": 403.14516785380124
     },
     {
       "dot_id": 161,
-      "xpos": {
-        "value": 516.0113147378047,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 75.39913086311338,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 215.62871052938425,
+      "ypos": 186.70638121092398
     },
     {
       "dot_id": 162,
-      "xpos": {
-        "value": 299.29245416303297,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 96.15076441814062,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 325.12244024094275,
+      "ypos": 357.01891992360464
     },
     {
       "dot_id": 163,
-      "xpos": {
-        "value": 428.96387550541164,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 524.1799560667074,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 334.9576053190882,
+      "ypos": 262.03553551829907
     },
     {
       "dot_id": 164,
-      "xpos": {
-        "value": 680.17400850193,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 195.27194767653998,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 445.32057047316715,
+      "ypos": 557.2345917704354
     },
     {
       "dot_id": 165,
-      "xpos": {
-        "value": 115.16463985112736,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 196.34205650344757,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 345.0287788048136,
+      "ypos": 498.40845848206004
     },
     {
       "dot_id": 166,
-      "xpos": {
-        "value": 426.5741908014808,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 346.7308987768376,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 572.1499960970524,
+      "ypos": 365.0652175798624
     },
     {
       "dot_id": 167,
-      "xpos": {
-        "value": 635.5774338249128,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 36.84812810042688,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 81.732323611695,
+      "ypos": 404.08014520129325
     },
     {
       "dot_id": 168,
-      "xpos": {
-        "value": 417.5968988850858,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 450.37728854262787,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 159.03222568774794,
+      "ypos": 670.2264784331442
     },
     {
       "dot_id": 169,
-      "xpos": {
-        "value": 148.3390616661461,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 165.90288366581387,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 515.00711552481,
+      "ypos": 643.8066180816081
     },
     {
       "dot_id": 170,
-      "xpos": {
-        "value": 613.3911341319266,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 581.1034733437893,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 652.8932981549362,
+      "ypos": 311.50464192004455
     },
     {
       "dot_id": 171,
-      "xpos": {
-        "value": 125.55173505494032,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 650.745198180882,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 518.3637261295418,
+      "ypos": 449.9838852936809
     },
     {
       "dot_id": 172,
-      "xpos": {
-        "value": 140.34576003532467,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 412.1494189825028,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 159.52218735962202,
+      "ypos": 454.0231132165525
     },
     {
       "dot_id": 173,
-      "xpos": {
-        "value": 340.51153847213226,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 32.87413895570314,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 689.4052956098544,
+      "ypos": 141.29499264282333
     },
     {
       "dot_id": 174,
-      "xpos": {
-        "value": 435.618230876495,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 596.5063237081616,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 617.2557770469526,
+      "ypos": 87.40193400696911
     },
     {
       "dot_id": 175,
-      "xpos": {
-        "value": 141.57368297595247,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 603.3686800936356,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 347.8963920640835,
+      "ypos": 223.16630503958274
     },
     {
       "dot_id": 176,
-      "xpos": {
-        "value": 487.81973520362425,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 442.10177469091093,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 585.7875840730186,
+      "ypos": 71.7636622163112
     },
     {
       "dot_id": 177,
-      "xpos": {
-        "value": 204.53019399677103,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 166.8553446704317,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 642.0416072566138,
+      "ypos": 690.243127553125
     },
     {
       "dot_id": 178,
-      "xpos": {
-        "value": 687.3630619049669,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 557.5641817672351,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 362.4858959906084,
+      "ypos": 198.64977346234042
     },
     {
       "dot_id": 179,
-      "xpos": {
-        "value": 156.17802914377836,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 48.66452275607859,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 669.8474562259097,
+      "ypos": 135.36182764636828
     },
     {
       "dot_id": 180,
-      "xpos": {
-        "value": 167.88142990026006,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 412.48970042430756,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 89.17889409402778,
+      "ypos": 644.8563502721533
     },
     {
       "dot_id": 181,
-      "xpos": {
-        "value": 643.7073343883857,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 131.16805593413093,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 46.57386309440398,
+      "ypos": 220.19299322008737
     },
     {
       "dot_id": 182,
-      "xpos": {
-        "value": 340.6435673361346,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 451.7544724409719,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 497.08892453227213,
+      "ypos": 158.06236488047503
     },
     {
       "dot_id": 183,
-      "xpos": {
-        "value": 553.0246780726022,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 232.42279041593065,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 535.8584101181775,
+      "ypos": 669.5243230233482
     },
     {
       "dot_id": 184,
-      "xpos": {
-        "value": 463.2304598731129,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 309.84285594839224,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 70.7604273297287,
+      "ypos": 475.67936880070476
     },
     {
       "dot_id": 185,
-      "xpos": {
-        "value": 144.97712630252948,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 282.8906454900801,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 673.0574053615147,
+      "ypos": 638.2637537186869
     },
     {
       "dot_id": 186,
-      "xpos": {
-        "value": 61.571780220118114,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 225.1450609102055,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 342.0005003798222,
+      "ypos": 250.43229892698142
     },
     {
       "dot_id": 187,
-      "xpos": {
-        "value": 634.3483788489315,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 222.82778454166117,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 624.8604551336527,
+      "ypos": 202.43123274250436
     },
     {
       "dot_id": 188,
-      "xpos": {
-        "value": 39.563126223155486,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 46.605350448124454,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 401.68643548277237,
+      "ypos": 167.70827041841514
     },
     {
       "dot_id": 189,
-      "xpos": {
-        "value": 71.68291036109733,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 47.59579752793633,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 506.3864147447567,
+      "ypos": 480.0170767117735
     },
     {
       "dot_id": 190,
-      "xpos": {
-        "value": 104.06658451810262,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 292.5988968269315,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 477.71732592759025,
+      "ypos": 174.24434905867898
     },
     {
       "dot_id": 191,
-      "xpos": {
-        "value": 594.2895049954286,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 116.87791246774475,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 490.0438073280665,
+      "ypos": 610.5091817581795
     },
     {
       "dot_id": 192,
-      "xpos": {
-        "value": 367.00062068917094,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 573.423745505878,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 291.5289137817298,
+      "ypos": 531.8160795798927
     },
     {
       "dot_id": 193,
-      "xpos": {
-        "value": 51.23277555520979,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 662.7459049629721,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 367.0357137851284,
+      "ypos": 452.1052776188403
     },
     {
       "dot_id": 194,
-      "xpos": {
-        "value": 687.8949508121545,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 673.8662655851837,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 51.272103301933896,
+      "ypos": 370.78748858269034
     },
     {
       "dot_id": 195,
-      "xpos": {
-        "value": 124.60464073644265,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 325.84924886510305,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 522.5081494858151,
+      "ypos": 256.11532603755586
     },
     {
       "dot_id": 196,
-      "xpos": {
-        "value": 395.6754535375753,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 510.65569740779375,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 347.3951100386748,
+      "ypos": 397.7051090718687
     },
     {
       "dot_id": 197,
-      "xpos": {
-        "value": 553.6801684694942,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 132.10630360597744,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 601.8180851500347,
+      "ypos": 167.35851342142954
     },
     {
       "dot_id": 198,
-      "xpos": {
-        "value": 670.3818607672162,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 406.7800075920737,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 449.27992701276645,
+      "ypos": 602.98483625434
     },
     {
       "dot_id": 199,
-      "xpos": {
-        "value": 343.66098660717984,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 290.74340702813055,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 89.15998491090137,
+      "ypos": 293.4753018266905
     },
     {
       "dot_id": 200,
-      "xpos": {
-        "value": 217.6588272632661,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 171.26751535141727,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 43.17880521488967,
+      "ypos": 72.3975600870167
     },
     {
       "dot_id": 201,
-      "xpos": {
-        "value": 143.81154916081294,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 429.86908451583105,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 77.94436561005745,
+      "ypos": 339.5688465133425
     },
     {
       "dot_id": 202,
-      "xpos": {
-        "value": 132.9394396988929,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 119.26944197002936,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 676.8774376981671,
+      "ypos": 418.27985162110815
     },
     {
       "dot_id": 203,
-      "xpos": {
-        "value": 160.82570510552014,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 513.4528309845016,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 274.006809381199,
+      "ypos": 271.91204085046365
     },
     {
       "dot_id": 204,
-      "xpos": {
-        "value": 234.8751144094199,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 13.383592784436711,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 195.7685338515936,
+      "ypos": 20.026208529632278
     },
     {
       "dot_id": 205,
-      "xpos": {
-        "value": 165.57618664825074,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 515.629986532628,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 51.13885854810745,
+      "ypos": 479.38724578289344
     },
     {
       "dot_id": 206,
-      "xpos": {
-        "value": 249.9277046499829,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 587.6924641550189,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 333.9602821726849,
+      "ypos": 359.5102781731708
     },
     {
       "dot_id": 207,
-      "xpos": {
-        "value": 320.2335149672068,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 513.5637704491412,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 359.1063092609248,
+      "ypos": 666.7839589232549
     },
     {
       "dot_id": 208,
-      "xpos": {
-        "value": 348.6251712683036,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 186.43104505661992,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 34.52238243034922,
+      "ypos": 358.3125847692041
     },
     {
       "dot_id": 209,
-      "xpos": {
-        "value": 398.63836740271296,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 168.84315682388217,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 53.15199475168731,
+      "ypos": 87.63240801948767
     },
     {
       "dot_id": 210,
-      "xpos": {
-        "value": 157.06617376942518,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 323.43247916715967,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 558.7296331272457,
+      "ypos": 106.89784686435569
     }
   ],
   "item_objects": []
 }
 {
   "packet_type": "GAME_DATA",
-  "public_id": 226386,
+  "public_id": 227489,
   "map_size": 703.4222412109375,
   "player_count": 0,
   "eject_count": 0,
@@ -2999,912 +1583,420 @@
   "dot_objects": [
     {
       "dot_id": 211,
-      "xpos": {
-        "value": 562.1859886247885,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 98.35139921804266,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 156.91460681376674,
+      "ypos": 560.5045387797741
     },
     {
       "dot_id": 212,
-      "xpos": {
-        "value": 668.6338304725239,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 399.1000701179857,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 182.30008034288227,
+      "ypos": 284.5726823163889
     },
     {
       "dot_id": 213,
-      "xpos": {
-        "value": 506.9913408958605,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 404.80896633274864,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 137.57126716568615,
+      "ypos": 658.1249785773604
     },
     {
       "dot_id": 214,
-      "xpos": {
-        "value": 63.57141585392702,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 470.11570852906794,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 63.63661270483958,
+      "ypos": 660.87020623675
     },
     {
       "dot_id": 215,
-      "xpos": {
-        "value": 671.4720946670743,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 276.830440970625,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 4.935338723228013,
+      "ypos": 233.52073892708646
     },
     {
       "dot_id": 216,
-      "xpos": {
-        "value": 140.18937144760517,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 600.7069295597552,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 94.90921512603593,
+      "ypos": 513.5980669276277
     },
     {
       "dot_id": 217,
-      "xpos": {
-        "value": 286.7949096424774,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 36.80024719769881,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 377.60477319020214,
+      "ypos": 135.8345991517638
     },
     {
       "dot_id": 218,
-      "xpos": {
-        "value": 301.83680843803546,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 317.47030052386765,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 683.5990862819287,
+      "ypos": 138.24667299935206
     },
     {
       "dot_id": 219,
-      "xpos": {
-        "value": 690.7518306991842,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 420.57054612246367,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 280.9350753805858,
+      "ypos": 455.18043069291224
     },
     {
       "dot_id": 220,
-      "xpos": {
-        "value": 537.7878595600715,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 308.65648289796013,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 281.62465261978764,
+      "ypos": 287.434299981009
     },
     {
       "dot_id": 221,
-      "xpos": {
-        "value": 256.0338194921063,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 108.07482821407751,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 671.3940680821557,
+      "ypos": 277.488740492283
     },
     {
       "dot_id": 222,
-      "xpos": {
-        "value": 487.5562225296786,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 595.4176830432455,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 181.72592878249858,
+      "ypos": 377.9019115068692
     },
     {
       "dot_id": 223,
-      "xpos": {
-        "value": 267.01271762236996,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 575.5567936024545,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 621.4053574531695,
+      "ypos": 100.88179172368574
     },
     {
       "dot_id": 224,
-      "xpos": {
-        "value": 688.5153061858538,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 454.8961221102511,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 407.76517184023606,
+      "ypos": 482.3999692035835
     },
     {
       "dot_id": 225,
-      "xpos": {
-        "value": 239.8849997570354,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 569.2070815231593,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 492.81549107293904,
+      "ypos": 544.6029220241118
     },
     {
       "dot_id": 226,
-      "xpos": {
-        "value": 285.1273796395871,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 293.5033930743506,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 352.14181813022714,
+      "ypos": 43.03646225100019
     },
     {
       "dot_id": 227,
-      "xpos": {
-        "value": 233.21760501576952,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 89.50533954817905,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 352.3149776120721,
+      "ypos": 512.5848533590406
     },
     {
       "dot_id": 228,
-      "xpos": {
-        "value": 21.21425866947689,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 419.65770635521716,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 590.4459514797653,
+      "ypos": 63.538335265264635
     },
     {
       "dot_id": 229,
-      "xpos": {
-        "value": 431.9789887785146,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 679.3457359683108,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 264.2341158836707,
+      "ypos": 111.39944833826507
     },
     {
       "dot_id": 230,
-      "xpos": {
-        "value": 266.42171131339023,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 166.19826103859782,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 91.92072564735706,
+      "ypos": 538.4362642541955
     },
     {
       "dot_id": 231,
-      "xpos": {
-        "value": 587.8257927633159,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 446.8487762731105,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 360.02422222364424,
+      "ypos": 16.040899031373883
     },
     {
       "dot_id": 232,
-      "xpos": {
-        "value": 283.07806023193166,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 48.486332005996026,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 331.4501405216983,
+      "ypos": 683.5888560365122
     },
     {
       "dot_id": 233,
-      "xpos": {
-        "value": 307.95784937593055,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 102.16157865439638,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 199.75346600473418,
+      "ypos": 501.6687203000413
     },
     {
       "dot_id": 234,
-      "xpos": {
-        "value": 119.14231859255868,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 144.13321491013846,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 464.18019560743534,
+      "ypos": 305.2239839973108
     },
     {
       "dot_id": 235,
-      "xpos": {
-        "value": 276.44328487973974,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 579.3008957159541,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 637.9701792170214,
+      "ypos": 571.2818507626502
     },
     {
       "dot_id": 236,
-      "xpos": {
-        "value": 494.5051586560749,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 204.18039507255014,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 175.63415305485236,
+      "ypos": 701.5257885032353
     },
     {
       "dot_id": 237,
-      "xpos": {
-        "value": 92.00382542774851,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 448.02668002200926,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 509.9120340350374,
+      "ypos": 457.2229998156822
     },
     {
       "dot_id": 238,
-      "xpos": {
-        "value": 418.2314675915563,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 246.97841713632218,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 267.2318293541186,
+      "ypos": 49.457073285210534
     },
     {
       "dot_id": 239,
-      "xpos": {
-        "value": 543.1399969295516,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 384.6278785958681,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 180.5103743762883,
+      "ypos": 609.1649107395566
     },
     {
       "dot_id": 240,
-      "xpos": {
-        "value": 487.87373748270807,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 481.3372814973264,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 463.4862160085255,
+      "ypos": 633.6676901836161
     },
     {
       "dot_id": 241,
-      "xpos": {
-        "value": 66.46343076414942,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 438.2923499447929,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 22.90325541684774,
+      "ypos": 483.8216378985952
     },
     {
       "dot_id": 242,
-      "xpos": {
-        "value": 364.39316592502155,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 441.9030395955248,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 488.9002839121249,
+      "ypos": 390.1813505493237
     },
     {
       "dot_id": 243,
-      "xpos": {
-        "value": 12.262165021505322,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 366.83173778532796,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 297.4683259362466,
+      "ypos": 211.6097753884044
     },
     {
       "dot_id": 244,
-      "xpos": {
-        "value": 290.7857535357972,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 175.67792508851971,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 131.195476346026,
+      "ypos": 683.802643009376
     },
     {
       "dot_id": 245,
-      "xpos": {
-        "value": 629.8210340525395,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 500.6461988852146,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 116.59335232167172,
+      "ypos": 171.22550426163312
     },
     {
       "dot_id": 246,
-      "xpos": {
-        "value": 607.9126280752116,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 307.2594254900775,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 183.13975708450664,
+      "ypos": 641.7151198752273
     },
     {
       "dot_id": 247,
-      "xpos": {
-        "value": 76.203672581545,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 373.44370472150933,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 10.420385428651915,
+      "ypos": 594.4714272694541
     },
     {
       "dot_id": 248,
-      "xpos": {
-        "value": 128.23704869506693,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 222.3855360635739,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 456.9700947322709,
+      "ypos": 386.27964395828053
     },
     {
       "dot_id": 249,
-      "xpos": {
-        "value": 498.07454998002294,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 304.0833954878412,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 390.4296017096152,
+      "ypos": 251.13571215383675
     },
     {
       "dot_id": 250,
-      "xpos": {
-        "value": 199.70453692112326,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 503.9831456165843,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 604.6280903879838,
+      "ypos": 600.8431092200535
     },
     {
       "dot_id": 251,
-      "xpos": {
-        "value": 8.419156559901097,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 151.58104320953066,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 645.2680337956971,
+      "ypos": 622.5771817529477
     },
     {
       "dot_id": 252,
-      "xpos": {
-        "value": 214.84190403149026,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 632.907759043558,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 635.8288295278527,
+      "ypos": 451.36283013590804
     },
     {
       "dot_id": 253,
-      "xpos": {
-        "value": 557.6703834542843,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 502.5666758987515,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 269.601934039158,
+      "ypos": 549.2060293347153
     },
     {
       "dot_id": 254,
-      "xpos": {
-        "value": 481.3249548901442,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 18.898952880992308,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 41.23430389551808,
+      "ypos": 650.3583355806439
     },
     {
       "dot_id": 255,
-      "xpos": {
-        "value": 444.2473590308463,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 92.82245469724548,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 176.04063760121718,
+      "ypos": 293.4744213547489
     },
     {
       "dot_id": 256,
-      "xpos": {
-        "value": 237.502191119696,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 485.84546554718,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 699.3714413711193,
+      "ypos": 397.68368425462353
     },
     {
       "dot_id": 257,
-      "xpos": {
-        "value": 336.2770554144055,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 496.4752355889878,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 663.0554118140567,
+      "ypos": 49.81412562114068
     },
     {
       "dot_id": 258,
-      "xpos": {
-        "value": 279.0219356332287,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 282.7802510794996,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 333.74456654699674,
+      "ypos": 434.98399758790697
     },
     {
       "dot_id": 259,
-      "xpos": {
-        "value": 18.654349390173085,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 502.0339065196223,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 45.3314333303577,
+      "ypos": 44.96821769083646
     },
     {
       "dot_id": 260,
-      "xpos": {
-        "value": 582.4561298094749,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 4.177252381523806,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 208.92177840521768,
+      "ypos": 22.015068863965602
     },
     {
       "dot_id": 261,
-      "xpos": {
-        "value": 692.4769687233953,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 80.43794600309523,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 608.3789427863688,
+      "ypos": 129.92663242373217
     },
     {
       "dot_id": 262,
-      "xpos": {
-        "value": 397.1329700187801,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 164.20801710549912,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 501.2951067061623,
+      "ypos": 192.7898553459781
     },
     {
       "dot_id": 263,
-      "xpos": {
-        "value": 452.2887512005724,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 604.6599550868222,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 503.79539545685026,
+      "ypos": 581.9032772846305
     },
     {
       "dot_id": 264,
-      "xpos": {
-        "value": 420.6805212606911,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 518.4863632928339,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 11.937857856355052,
+      "ypos": 511.1696833855025
     },
     {
       "dot_id": 265,
-      "xpos": {
-        "value": 568.5093704003067,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 617.1557805907298,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 621.9269741877052,
+      "ypos": 654.936244622824
     },
     {
       "dot_id": 266,
-      "xpos": {
-        "value": 692.6269424441118,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 377.1161112626227,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 599.6925001013439,
+      "ypos": 315.799248633211
     },
     {
       "dot_id": 267,
-      "xpos": {
-        "value": 515.8255770853657,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 93.56653734235496,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 271.267954661577,
+      "ypos": 377.83516334825003
     },
     {
       "dot_id": 268,
-      "xpos": {
-        "value": 480.7792299953031,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 277.6187568489903,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 629.8318932064858,
+      "ypos": 609.8305894546297
     },
     {
       "dot_id": 269,
-      "xpos": {
-        "value": 575.8551478089457,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 125.77591998216184,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 435.675461552698,
+      "ypos": 331.19283307857904
     },
     {
       "dot_id": 270,
-      "xpos": {
-        "value": 375.9689401772088,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 192.40026747544465,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 424.5525433691323,
+      "ypos": 512.6520207900129
     },
     {
       "dot_id": 271,
-      "xpos": {
-        "value": 15.882917208712444,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 700.7890011970703,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 184.51123887884802,
+      "ypos": 560.7995807346755
     },
     {
       "dot_id": 272,
-      "xpos": {
-        "value": 223.3773667421511,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 538.5436818310689,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 635.2473407012892,
+      "ypos": 331.04826797121797
     },
     {
       "dot_id": 273,
-      "xpos": {
-        "value": 119.73693064377538,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 424.0090406177628,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 189.17698547900991,
+      "ypos": 163.24264251240476
     },
     {
       "dot_id": 274,
-      "xpos": {
-        "value": 652.9440720369009,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 243.40701330507912,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 181.0415924477109,
+      "ypos": 420.71980708017986
     },
     {
       "dot_id": 275,
-      "xpos": {
-        "value": 478.79644911009024,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 73.37069121864408,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 165.7391997391498,
+      "ypos": 639.6746471142229
     },
     {
       "dot_id": 276,
-      "xpos": {
-        "value": 304.2574354416277,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 533.4253726529325,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 125.01045444704245,
+      "ypos": 333.33938174492664
     },
     {
       "dot_id": 277,
-      "xpos": {
-        "value": 88.68570402503455,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 658.9031899920151,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 319.1508698969405,
+      "ypos": 633.7492386563009
     },
     {
       "dot_id": 278,
-      "xpos": {
-        "value": 468.78745371433484,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 655.1143515184359,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 519.2125430084645,
+      "ypos": 67.3433995789101
     },
     {
       "dot_id": 279,
-      "xpos": {
-        "value": 165.25800085945625,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 195.17501190849507,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 265.8033684469861,
+      "ypos": 232.33948099936262
     },
     {
       "dot_id": 280,
-      "xpos": {
-        "value": 337.43785285129627,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 91.11375214927726,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 388.3692973663076,
+      "ypos": 627.4073250427741
     },
     {
       "dot_id": 281,
-      "xpos": {
-        "value": 270.7679304532276,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 72.44946600433487,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 342.05332869631724,
+      "ypos": 346.30047377910876
     },
     {
       "dot_id": 282,
-      "xpos": {
-        "value": 389.7422885411203,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 471.06074841303524,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 150.83381602177266,
+      "ypos": 325.2965221219646
     },
     {
       "dot_id": 283,
-      "xpos": {
-        "value": 266.38884036090445,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 630.0302509567541,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 288.80854897288106,
+      "ypos": 130.36024389134485
     },
     {
       "dot_id": 284,
-      "xpos": {
-        "value": 381.6939783775675,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 438.07525072033934,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 375.1785698643132,
+      "ypos": 219.18854244368077
     },
     {
       "dot_id": 285,
-      "xpos": {
-        "value": 61.887995428852875,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 482.01864099840685,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 122.03198557760352,
+      "ypos": 67.50507099827912
     },
     {
       "dot_id": 286,
-      "xpos": {
-        "value": 312.11937904421177,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 696.1852230507018,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 620.2260701055054,
+      "ypos": 629.5648167175385
     },
     {
       "dot_id": 287,
-      "xpos": {
-        "value": 698.739975280062,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 182.5307220643421,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 295.3515456069716,
+      "ypos": 612.4999707453372
     },
     {
       "dot_id": 288,
-      "xpos": {
-        "value": 52.48174596796498,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 94.57618709594044,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 446.2366386375328,
+      "ypos": 679.8172496566469
     },
     {
       "dot_id": 289,
-      "xpos": {
-        "value": 481.60310016921426,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 5.352137369479965,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 643.7300170226903,
+      "ypos": 490.3807345910462
     },
     {
       "dot_id": 290,
-      "xpos": {
-        "value": 305.34435708989605,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 436.696012387465,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 614.906090925511,
+      "ypos": 549.5395185643991
     },
     {
       "dot_id": 291,
-      "xpos": {
-        "value": 356.1620110882664,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 562.1845630987877,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 349.0456175840278,
+      "ypos": 658.2586426035399
     },
     {
       "dot_id": 292,
-      "xpos": {
-        "value": 605.4888146017356,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 676.5574071110188,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 481.09947021862797,
+      "ypos": 421.5917677929957
     }
   ],
   "item_objects": []
 }
 {
   "packet_type": "GAME_DATA",
-  "public_id": 226386,
+  "public_id": 227489,
   "map_size": 703.4222412109375,
   "player_count": 0,
   "eject_count": 0,
@@ -3917,796 +2009,382 @@
   "dot_objects": [
     {
       "dot_id": 293,
-      "xpos": {
-        "value": 67.42691863165469,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 519.5280873814343,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 192.57602644587902,
+      "ypos": 193.13043027843003
     },
     {
       "dot_id": 294,
-      "xpos": {
-        "value": 20.34783235172248,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 579.3515857434481,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 247.35165338508338,
+      "ypos": 387.0056559649699
     },
     {
       "dot_id": 295,
-      "xpos": {
-        "value": 374.5963682747493,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 277.04598888737195,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 446.3448109046417,
+      "ypos": 198.66134537928696
     },
     {
       "dot_id": 296,
-      "xpos": {
-        "value": 159.1357440317371,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 199.41725150475486,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 559.0498314233353,
+      "ypos": 667.1887663802072
     },
     {
       "dot_id": 297,
-      "xpos": {
-        "value": 18.786839453763886,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 23.205508856223084,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 208.19358618229205,
+      "ypos": 298.216014323593
     },
     {
       "dot_id": 298,
-      "xpos": {
-        "value": 328.79937492347,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 356.7382170831805,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 182.07493108924854,
+      "ypos": 257.53426946227216
     },
     {
       "dot_id": 299,
-      "xpos": {
-        "value": 223.6070022099634,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 298.21324712606236,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 135.1275801826715,
+      "ypos": 177.00324499678086
     },
     {
       "dot_id": 300,
-      "xpos": {
-        "value": 539.9051430161703,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 95.26345833720006,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 284.81954987791505,
+      "ypos": 410.13158692856786
     },
     {
       "dot_id": 301,
-      "xpos": {
-        "value": 163.12038269423047,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 297.7163255331262,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 697.2139077691196,
+      "ypos": 39.05568089415565
     },
     {
       "dot_id": 302,
-      "xpos": {
-        "value": 533.305502687171,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 480.8533992745728,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 340.69283183762803,
+      "ypos": 282.6120809386569
     },
     {
       "dot_id": 303,
-      "xpos": {
-        "value": 498.60815790385846,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 32.085571513925984,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 297.26980047703694,
+      "ypos": 208.07153600029432
     },
     {
       "dot_id": 304,
-      "xpos": {
-        "value": 350.6673630459557,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 84.59234804137316,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 692.3018805887259,
+      "ypos": 155.44254158190816
     },
     {
       "dot_id": 305,
-      "xpos": {
-        "value": 327.8125755131304,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 46.15773528391704,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 677.65808089247,
+      "ypos": 647.3565551683707
     },
     {
       "dot_id": 306,
-      "xpos": {
-        "value": 479.71234956551467,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 104.77557406725465,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 360.12786634933934,
+      "ypos": 261.3614713561632
     },
     {
       "dot_id": 307,
-      "xpos": {
-        "value": 410.2759423997524,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 579.9434725243694,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 116.0618407596019,
+      "ypos": 502.69627298310564
     },
     {
       "dot_id": 308,
-      "xpos": {
-        "value": 361.6943097878887,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 21.294423543396388,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 559.2385459094816,
+      "ypos": 225.3035458596907
     },
     {
       "dot_id": 309,
-      "xpos": {
-        "value": 217.57644024587498,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 330.27638756909556,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 568.2202401855844,
+      "ypos": 274.2795041196783
     },
     {
       "dot_id": 310,
-      "xpos": {
-        "value": 310.4209486688954,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 271.7112513205471,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 41.06902673391208,
+      "ypos": 228.95415023844106
     },
     {
       "dot_id": 311,
-      "xpos": {
-        "value": 318.6259409108149,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 698.026038317143,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 338.425071533989,
+      "ypos": 326.2020246230312
     },
     {
       "dot_id": 312,
-      "xpos": {
-        "value": 679.4209534284633,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 169.32343330439883,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 193.8630248610636,
+      "ypos": 37.22790499789697
     },
     {
       "dot_id": 313,
-      "xpos": {
-        "value": 462.18311753498057,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 346.62247494631674,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 149.6542771106967,
+      "ypos": 290.5561180679849
     },
     {
       "dot_id": 314,
-      "xpos": {
-        "value": 321.79157295869345,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 657.8929951843705,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 418.39640933527977,
+      "ypos": 321.245931918323
     },
     {
       "dot_id": 315,
-      "xpos": {
-        "value": 486.86396194741667,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 417.65094309140494,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 157.01464519722484,
+      "ypos": 69.83412891994655
     },
     {
       "dot_id": 316,
-      "xpos": {
-        "value": 356.96474993557956,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 455.3444081102235,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 375.5163356719991,
+      "ypos": 76.4899517442659
     },
     {
       "dot_id": 317,
-      "xpos": {
-        "value": 433.4886627404494,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 212.36987423740362,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 516.8006787970528,
+      "ypos": 415.7497945333476
     },
     {
       "dot_id": 318,
-      "xpos": {
-        "value": 162.84349523221982,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 281.46897679506844,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 87.53161494579392,
+      "ypos": 570.7469850217552
     },
     {
       "dot_id": 319,
-      "xpos": {
-        "value": 158.9215377865202,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 144.76870601578585,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 532.6741623778197,
+      "ypos": 536.2588152154219
     },
     {
       "dot_id": 320,
-      "xpos": {
-        "value": 672.4719753748317,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 198.27108667298847,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 494.77269634461067,
+      "ypos": 27.12964651815902
     },
     {
       "dot_id": 321,
-      "xpos": {
-        "value": 493.98517708371634,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 608.7746520332581,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 121.98444009275796,
+      "ypos": 81.45564578586091
     },
     {
       "dot_id": 322,
-      "xpos": {
-        "value": 69.77216046615314,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 187.77275851388868,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 687.545319596875,
+      "ypos": 243.5545552461475
     },
     {
       "dot_id": 323,
-      "xpos": {
-        "value": 517.4721853978346,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 202.48691211100075,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 582.5124800137363,
+      "ypos": 356.8105834913316
     },
     {
       "dot_id": 324,
-      "xpos": {
-        "value": 379.40416434815353,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 356.87628346906797,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 547.3553611679754,
+      "ypos": 640.6488264267332
     },
     {
       "dot_id": 325,
-      "xpos": {
-        "value": 552.1420678420168,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 632.0254842308551,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 12.869229461610141,
+      "ypos": 390.6394475223595
     },
     {
       "dot_id": 326,
-      "xpos": {
-        "value": 142.82931981912253,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 405.7348454701776,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 38.11609155077911,
+      "ypos": 504.5483666758462
     },
     {
       "dot_id": 327,
-      "xpos": {
-        "value": 354.9979433270211,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 595.8360749244393,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 249.85491896947858,
+      "ypos": 234.8931011933694
     },
     {
       "dot_id": 328,
-      "xpos": {
-        "value": 404.0027894521398,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 643.9900916633402,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 697.2108470809418,
+      "ypos": 118.3799556728525
     },
     {
       "dot_id": 329,
-      "xpos": {
-        "value": 659.870786728581,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 151.3124573401121,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 18.370334298159133,
+      "ypos": 540.2394288633252
     }
   ],
   "item_objects": [
     {
       "item_id": 0,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 245.09236238297768,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 459.52551779739616,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 123.31131130872572,
+      "ypos": 276.7183694706319
     },
     {
       "item_id": 1,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 388.2228874605927,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 372.0506304009815,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 374.5319261140724,
+      "ypos": 224.4668459517736
     },
     {
       "item_id": 2,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 63.34500878323387,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 674.6555457899611,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 318.8745274889889,
+      "ypos": 283.5542278433876
     },
     {
       "item_id": 3,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 592.4652929141715,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 214.7228306831998,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 159.62985649990722,
+      "ypos": 229.69244692507726
     },
     {
       "item_id": 4,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 141.11357349562164,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 476.7654519042668,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 182.23463192855783,
+      "ypos": 695.1838748897084
     },
     {
       "item_id": 5,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 478.9974482761834,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 247.70468070642343,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 605.3719214696814,
+      "ypos": 316.9314936228533
     },
     {
       "item_id": 6,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 395.0548885276996,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 455.3647428193506,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 218.07311027539922,
+      "ypos": 622.4435596540035
     },
     {
       "item_id": 7,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 573.9388215917048,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 296.9254520934068,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 149.14917970687443,
+      "ypos": 365.14886241431293
     },
     {
       "item_id": 8,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 273.561122869816,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 335.140240356114,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 208.4272047374591,
+      "ypos": 433.5994344961478
     },
     {
       "item_id": 9,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 511.81926204221526,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 276.3928464156575,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 638.0245588412231,
+      "ypos": 245.95782437431987
     },
     {
       "item_id": 10,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 310.99321350368996,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 639.4424121578212,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 209.8051852532741,
+      "ypos": 228.55521259443267
     },
     {
       "item_id": 11,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 285.7866434876573,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 500.3605905582587,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 470.5718768492793,
+      "ypos": 301.30529687596567
     },
     {
       "item_id": 12,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 120.90841952567115,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 181.81984578960092,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 93.61303464631769,
+      "ypos": 319.98845027679914
     },
     {
       "item_id": 13,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 62.77567885491125,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 9.746195484810112,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 297.0595353919395,
+      "ypos": 693.8391007442617
     },
     {
       "item_id": 14,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 652.341409956504,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 415.3528693966342,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 570.0781617640336,
+      "ypos": 537.5243049588906
     },
     {
       "item_id": 15,
       "item_type": "CANDY",
-      "xpos": {
-        "value": 539.3085184576586,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 625.7073014325158,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 182.69843100559626,
+      "ypos": 121.90276583836717
     },
     {
       "item_id": 16,
       "item_type": "COIN",
-      "xpos": {
-        "value": 134.39582414474418,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 271.8613088957343,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 233.96646736570474,
+      "ypos": 464.0341630468383
     },
     {
       "item_id": 17,
       "item_type": "COIN",
-      "xpos": {
-        "value": 435.0801367384809,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 244.47376795316163,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 209.38004308719474,
+      "ypos": 405.6865033678611
     },
     {
       "item_id": 18,
       "item_type": "COIN",
-      "xpos": {
-        "value": 289.74922842437576,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 206.36031781820728,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 389.6084148787641,
+      "ypos": 632.00942609973
     },
     {
       "item_id": 19,
       "item_type": "COIN",
-      "xpos": {
-        "value": 542.4660166218863,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 206.01408270898804,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 335.7753541166436,
+      "ypos": 551.7513060088946
     },
     {
       "item_id": 20,
       "item_type": "COIN",
-      "xpos": {
-        "value": 468.10680697625475,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 378.06794335871086,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 516.8173658367076,
+      "ypos": 653.3911421470492
     },
     {
       "item_id": 21,
       "item_type": "COIN",
-      "xpos": {
-        "value": 178.3027796553242,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 336.76035065586467,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 140.82721047843012,
+      "ypos": 370.3039837050545
     },
     {
       "item_id": 22,
       "item_type": "COIN",
-      "xpos": {
-        "value": 386.40014283257165,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 237.24387742292924,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 615.0373231720423,
+      "ypos": 651.9553439737368
     },
     {
       "item_id": 23,
       "item_type": "COIN",
-      "xpos": {
-        "value": 453.0763962431726,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 375.0361430459531,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 500.0992581005494,
+      "ypos": 517.2010838942972
     },
     {
       "item_id": 24,
       "item_type": "COIN",
-      "xpos": {
-        "value": 278.877160889691,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 145.5949660421099,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 105.3960132954245,
+      "ypos": 66.99926083145652
     },
     {
       "item_id": 25,
       "item_type": "COIN",
-      "xpos": {
-        "value": 68.23737209026551,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 576.021934351023,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 19.911831031696927,
+      "ypos": 599.6191693667805
     },
     {
       "item_id": 26,
       "item_type": "COIN",
-      "xpos": {
-        "value": 324.07891328122395,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 247.6321885165663,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 12.89736263650553,
+      "ypos": 249.86519114213039
     },
     {
       "item_id": 27,
       "item_type": "COIN",
-      "xpos": {
-        "value": 309.0603260285002,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 5.114409945252164,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 498.80907321548096,
+      "ypos": 87.44453207804769
     },
     {
       "item_id": 28,
       "item_type": "COIN",
-      "xpos": {
-        "value": 559.5951370458232,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 311.6673615202964,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 618.9399102350271,
+      "ypos": 354.99081569701787
     },
     {
       "item_id": 29,
       "item_type": "COIN",
-      "xpos": {
-        "value": 586.2445909379362,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 48.43769641303231,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 290.5331419430331,
+      "ypos": 353.3497417796104
     },
     {
       "item_id": 30,
       "item_type": "COIN",
-      "xpos": {
-        "value": 410.8820005862097,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 407.32179132679533,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 348.4788871442946,
+      "ypos": 448.76325769199764
     },
     {
       "item_id": 31,
       "item_type": "COIN",
-      "xpos": {
-        "value": 576.1072143476507,
-        "max_range": 703.4222412109375
-      },
-      "ypos": {
-        "value": 644.0135709151158,
-        "max_range": 703.4222412109375
-      }
+      "xpos": 523.9964824849753,
+      "ypos": 689.2854256440929
     }
   ]
 }
