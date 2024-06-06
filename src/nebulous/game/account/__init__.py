@@ -21,6 +21,7 @@ from nebulous.game.models.apiobjects import (
     ClanMember,
     PlayerTitles,
 )
+from nebulous.game.natives import xp2level
 
 
 class ServerRegions(StrEnum):
@@ -55,6 +56,7 @@ class Endpoints(StrEnum):
 class APIPlayer:
     account: Account | None
     account_name: str
+    level: int
     plasma: int
     clan_member: ClanMember | None
     ban_info: BanInfo
@@ -84,6 +86,7 @@ class APIPlayer:
         return cls(
             player_account,
             player_stats.account_name,
+            xp2level(player_stats.general_stats.xp),
             player_profile.plasma,
             player_stats.clan_member,
             BanInfo(
