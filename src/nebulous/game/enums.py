@@ -78,6 +78,16 @@ class Relationship(enum.Enum):
     MUTUAL = 3
 
 
+class CustomSkinType(enum.Enum):
+    ACCOUNT = 0
+    CLAN = 1
+    PET = 2
+    CLAN_PET = 3
+    PARTICLE = 4
+    CLAN_PARTICLE = 5
+    ALL = 6
+
+
 class SkinBundle(enum.Enum):
     HALLOWEEN = 0
     XMAS = 1
