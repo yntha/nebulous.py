@@ -34,7 +34,7 @@ class MUTF8String:
     @classmethod
     def from_stream(cls, stream: DeserializingStream) -> Self:
         length = stream.read_uint16()
-        value = stream.read(length).decode("utf-8")
+        value = stream.read(length).decode("utf-8", errors="backslashreplace")
 
         return cls(length, value)
 
