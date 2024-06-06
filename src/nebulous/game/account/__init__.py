@@ -16,6 +16,7 @@ from nebulous.game.models.apiobjects import (
     APIPlayerStats,
     APISkin,
     APISkinIDs,
+    BanInfo,
     Clan,
     ClanMember,
     PlayerTitles,
@@ -49,6 +50,45 @@ class Endpoints(StrEnum):
     GET_SKIN_IDS = "GetSkinIDs"
 
 
+@dataclass
+class APIPlayer:
+    account: Account | None
+    account_name: str
+    plasma: int
+    clan_member: ClanMember | None
+    ban_info: BanInfo
+    profile: APIPlayerProfile
+    stats: APIPlayerStats
+    skins: list[APISkin] = field(default_factory=[].copy)
+
+    @classmethod
+    def from_account_id(cls, account: Account, account_id: int) -> APIPlayer:
+        player_profile = account.get_player_profile(account_id)
+        player_stats = account.get_player_stats(account_id)
+        skins = account.get_skin_ids().skins
+
+        player_account = account
+
+        # is this our account? if not then set account to None
+        if player_account.ticket.account_id != account_id:
+            player_account = None
+
+        return cls(
+            player_account,
+            player_stats.account_name,
+            player_profile.plasma,
+            player_stats.clan_member,
+            BanInfo(
+                player_profile.banned,
+                player_stats.competition_banned,
+                player_profile.chat_banned,
+                player_profile.arena_banned
+            ),
+            player_profile,
+            player_stats,
+            skins
+        )
+    @classmethod
 @dataclass
 class Ticket:
     ticket_str: str
