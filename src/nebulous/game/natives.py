@@ -93,3 +93,10 @@ class CompressedFloat:
         a = b24_16 + b15_8 + b7_0
 
         return cls((((max_range - 0.0) * a) / 1.6777215e7) + 0.0, max_range)
+
+
+def xp2level(xp: int) -> int:
+    if xp < 0:
+        return 1
+
+    return int((xp / 500) ** 0.5) + 1
