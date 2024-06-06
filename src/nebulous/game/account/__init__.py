@@ -9,11 +9,13 @@ from typing import ClassVar
 import requests
 
 from nebulous.game import constants
-from nebulous.game.enums import ClanRole, Font, Item, ProfileVisibility, Relationship
+from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, ProfileVisibility, Relationship
 from nebulous.game.models.apiobjects import (
     APIPlayerGeneralStats,
     APIPlayerProfile,
     APIPlayerStats,
+    APISkin,
+    APISkinIDs,
     Clan,
     ClanMember,
     PlayerTitles,
@@ -44,6 +46,7 @@ class Endpoints(StrEnum):
     MAIL = "Mail"
     ADD_FRIEND = "AddFriend"
     GET_PLAYER_STATS = "GetPlayerStats"
+    GET_SKIN_IDS = "GetSkinIDs"
 
 
 @dataclass
@@ -98,6 +101,29 @@ class Account:
 
         return secure_bytes, region_ip
 
+    def get_skin_ids(self, skin_type: CustomSkinType = CustomSkinType.ALL) -> APISkinIDs:
+        response = self.request_endpoint(Endpoints.GET_SKIN_IDS, {
+            "Type": skin_type.name
+        })
+
+        skins = []
+        for skin in response["Skins"]:
+            skins.append(
+                APISkin(
+                    skin["ID"],
+                    CustomSkinStatus[skin["Status"]],
+                    skin["PurchaseCount"]
+                )
+            )
+
+        return APISkinIDs(
+            response["Coins"],
+            response["ClanCoins"],
+            response["purchasedSecondPet"],
+            response["unlockedMultiskin"],
+            response["skinMapPrice"],
+            skins
+        )
 
     def get_player_profile(self, account_id: int) -> APIPlayerProfile:
         response = self.request_endpoint(Endpoints.GET_PLAYER_PROFILE, {
