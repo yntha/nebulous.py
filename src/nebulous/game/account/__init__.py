@@ -11,7 +11,11 @@ import requests
 from nebulous.game import constants
 from nebulous.game.enums import ClanRole, Font, Item, ProfileVisibility, Relationship
 from nebulous.game.models.apiobjects import (
+    APIPlayerGeneralStats,
     APIPlayerProfile,
+    APIPlayerStats,
+    Clan,
+    ClanMember,
     PlayerTitles,
 )
 
@@ -39,6 +43,7 @@ class Endpoints(StrEnum):
     GET_PLAYER_PROFILE = "GetPlayerProfile"
     MAIL = "Mail"
     ADD_FRIEND = "AddFriend"
+    GET_PLAYER_STATS = "GetPlayerStats"
 
 
 @dataclass
@@ -129,6 +134,119 @@ class Account:
             response["views"],
             response["profileColors"],
             response["profileFonts"]
+        )
+
+    def get_player_stats(self, account_id: int) -> APIPlayerStats:
+        response = self.request_endpoint(Endpoints.GET_PLAYER_STATS, {
+            "AccountID": account_id,
+        })
+
+        special_objects = []
+        for entry in response["SpecialObjects"]:
+            special_objects.append({
+                "Type": Item[entry["Type"]],
+                "Count": entry["Count"]
+            })
+
+        return APIPlayerStats(
+            response["AccountID"],
+            response["AccountName"],
+            response["competitionBanned"],
+            response["competitionBannedUntilMS"],
+            response["chatBanned"],
+            response["chatBannedUntilMS"],
+            response["isSupporter"],
+            response["DQ"],
+            response["DQDone"],
+            response["XPMultiplier"],
+            response["XPMultiplierDurationRemainingS"],
+            response["MassBoost"],
+            response["MassBoostDurationS"],
+            response["PlasmaBoost"],
+            response["PlasmaBoostDurationRemainingS"],
+            response["ClickType"],
+            response["ClickDurationS"],
+            response["LengthBoost"],
+            response["LengthBoostDurationRemainingS"],
+            response["PurchasedAliasColors"],
+            response["PurchasedClanColors"],
+            response["PurchasedBlobColor"],
+            response["clickEnabled"],
+            response["xpBoostEnabled"],
+            response["massBoostEnabled"],
+            response["CurrentCoins"],
+            response["PurchasedSkinMap"],
+            response["purchasedSecondPet"],
+            response["unlockedMultiskin"],
+            response["isAppleGuest"],
+            ClanMember(
+                response["CanStartClanWar"],
+                response["CanJoinClanWar"],
+                response["CanUploadClanSkin"],
+                response["CanSetMOTD"],
+                ClanRole[response["ClanRole"]],
+                ClanRole[response["EffectiveClanRole"]],
+                response["CanSelfPromote"]
+            ),
+            Clan(
+                response["ClanName"],
+                response["ClanColors"],
+                response["clanID"]
+            ),
+            APIPlayerGeneralStats(
+                response["XP"],
+                response["DotsEaten"],
+                response["BlobsEaten"],
+                response["BlobsLost"],
+                response["BiggestBlob"],
+                response["MassGained"],
+                response["MassEjected"],
+                response["EjectCount"],
+                response["SplitCount"],
+                response["AverageScore"],
+                response["HighestScore"],
+                response["TimesRestarted"],
+                response["LongestLifeMS"],
+                response["GamesWon"],
+                response["SMBHCollidedCount"],
+                response["SMBHEatenCount"],
+                response["BHCollidedCount"],
+                response["ArenasWon"],
+                response["CWsWon"],
+                response["TBHCollidedCount"],
+                response["TimesTeleported"],
+                response["PowerupsUsed"],
+                response["TrickCount"],
+                response["MatchesWon"],
+                response["ChallengesWon"],
+                response["yearsPlayed"],
+                response["Accolades"],
+                response["MaxPlasmaChain"],
+                response["CoinsCollected"],
+                response["trianglesDestroyed"],
+                response["squaresDestroyed"],
+                response["pentagonsDestroyed"],
+                response["hexagonsDestroyed"],
+                response["playersKilled"],
+                response["shotsFired"],
+                response["damageDealt"],
+                response["damageTaken"],
+                response["damageHealed"],
+                response["AchievementsEarned"],
+                response["AchievementStats"],
+                special_objects
+            ),
+            response["AccountColors"],
+            response["PurchasedAvatars"],
+            response["PurchasedEjectSkins"],
+            response["PurchasedHats"],
+            response["PurchasedParticles"],
+            response["PurchasedHalos"],
+            response["PurchasedPets"],
+            response["ValidCustomSkinIDs"],
+            response["ValidCustomPetSkinIDs"],
+            response["ValidCustomParticleIDs"],
+            response["ClanColors"]
         )
 
     def request_endpoint(self, endpoint: Endpoints, data: dict) -> dict:
