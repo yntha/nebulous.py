@@ -54,4 +54,4 @@ def test_fetch_self():
         print(f"Current XP: {friend.player.stats.general_stats.xp}")
         print(f"Account bio: {friend.player.profile.bio}")
         print(f"BFF: {friend.bff}")
-        print(f"Last seen: {friend.last_played_utc}")
+        print(f"Last seen: {friend.last_played_utc}\n")
