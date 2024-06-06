@@ -136,6 +136,15 @@ class APIPlayerStats:
 
 
 @dataclass
+class APISkinIDs:
+    coins: int
+    clan_coins: int
+    purchased_second_pet: bool
+    unlocked_multiskin: bool
+    skin_map_price: int
+
+
+@dataclass
 class ClanMember:
     can_start_clan_war: bool
     can_join_clan_war: bool
