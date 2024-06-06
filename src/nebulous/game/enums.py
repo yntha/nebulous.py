@@ -71,6 +71,13 @@ class ChallengeStatus(enum.Enum):
     INCOMPATIBLE_VERSION = 6
 
 
+class Relationship(enum.Enum):
+    NONE = 0
+    REQUESTED = 1
+    PENDING = 2
+    MUTUAL = 3
+
+
 class SkinBundle(enum.Enum):
     HALLOWEEN = 0
     XMAS = 1
