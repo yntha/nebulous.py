@@ -80,7 +80,7 @@ class APIPlayer:
         player_account = account
 
         # is this our account? if not then set account to None
-        if player_account.ticket.account_id != account_id:
+        if player_account.account_id != account_id:
             player_account = None
 
         return cls(
