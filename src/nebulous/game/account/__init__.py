@@ -151,6 +151,11 @@ class Account:
 
         self.secure_bytes, self.region.ip = self.get_secure_ticket()
 
+        if ticket != "":
+            self.account_id = int(self.ticket.account_id)
+        else:
+            self.account_id = -1
+
     @classmethod
     def no_account(cls, region: ServerRegions) -> Account:
         return cls("", region)
