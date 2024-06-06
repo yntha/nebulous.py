@@ -3,11 +3,8 @@ from dataclasses import dataclass, field
 from nebulous.game.enums import (
     EjectSkinType,
     Font,
-    GameDifficulty,
-    GameMode,
     HaloType,
     HatType,
-    NameAnimation,
     ParitcleType,
     PetType,
     Skin,
