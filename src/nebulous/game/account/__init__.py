@@ -148,6 +148,10 @@ class Account:
 
         self.secure_bytes, self.region.ip = self.get_secure_ticket()
 
+    @classmethod
+    def no_account(cls, region: ServerRegions) -> Account:
+        return cls("", region)
+
     def refresh(self):
         self.secure_bytes, self.region.ip = self.get_secure_ticket()
 
@@ -188,6 +192,34 @@ class Account:
             response["skinMapPrice"],
             skins
         )
+
+    def get_friends(
+        self,
+        start_index: int = 0,
+        include_friend_requests: bool = True,
+        search: str = "",
+        count: int = 100,
+        include_friend_invites: bool = True,
+    ) -> list[APIFriend]:
+        response = self.request_endpoint(
+            Endpoints.GET_FRIENDS,
+            {
+                "StartIndex": start_index,
+                "IncludeFriendRequests": include_friend_requests,
+                "Search": search,
+                "Count": count,
+                "IncludeFriendInvites": include_friend_invites,
+            },
+        )
+        friends = []
+
+        for friend in response["FriendRequests"]:
+            if friend["Relationship"] != "MUTUAL":
+                continue
+
+            friends.append(APIFriend.from_account_id(self, friend["AccountID"], friend["BFF"], friend["LastPlayedUtc"]))
+
+        return friends
 
     def get_player_profile(self, account_id: int) -> APIPlayerProfile:
         response = self.request_endpoint(Endpoints.GET_PLAYER_PROFILE, {
