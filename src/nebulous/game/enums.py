@@ -88,6 +88,14 @@ class CustomSkinType(enum.Enum):
     ALL = 6
 
 
+class CustomSkinStatus(enum.Enum):
+    UNUSED = 0
+    IN_REVIEW = 1
+    REFUNDED = 2
+    REJECTED = 3
+    APPROVED = 4
+
+
 class SkinBundle(enum.Enum):
     HALLOWEEN = 0
     XMAS = 1
