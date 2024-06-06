@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import base64
 from dataclasses import dataclass, field
 from enum import StrEnum
@@ -7,6 +9,11 @@ from typing import ClassVar
 import requests
 
 from nebulous.game import constants
+from nebulous.game.enums import ClanRole, Font, Item, ProfileVisibility, Relationship
+from nebulous.game.models.apiobjects import (
+    APIPlayerProfile,
+    PlayerTitles,
+)
 
 
 class ServerRegions(StrEnum):
@@ -85,6 +92,44 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+
+    def get_player_profile(self, account_id: int) -> APIPlayerProfile:
+        response = self.request_endpoint(Endpoints.GET_PLAYER_PROFILE, {
+            "accountID": account_id,
+        })
+
+        return APIPlayerProfile(
+            response["profile"],
+            response["customSkinID"],
+            response["setNamePrice"],
+            response["banned"],
+            response["chatBanned"],
+            response["arenaBanned"],
+            Relationship[response["relationship"]],
+            Font[response["profileFont"]],
+            response["hasCommunitySkins"],
+            response["hasCommunityPets"],
+            response["hasCommunityParticles"],
+            ProfileVisibility[response["profileVisibility"]],
+            response["profileBGColorEnabled"],
+            response["profileBGColor"],
+            response["plasma"],
+            response["yearsPlayed"],
+            PlayerTitles(
+                response["legend"],
+                response["hero"],
+                response["champion"],
+                response["conqueror"],
+                response["tricky"],
+                response["supporter"],
+                response["masterTamer"],
+                response["tycoon"]
+            ),
+            response["views"],
+            response["profileColors"],
+            response["profileFonts"]
+        )
 
     def request_endpoint(self, endpoint: Endpoints, data: dict) -> dict:
         url = f"{self.API_URL}{endpoint!s}"
