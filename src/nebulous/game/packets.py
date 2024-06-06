@@ -3,7 +3,7 @@ from __future__ import annotations
 import enum
 import json
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, is_dataclass
 from typing import TYPE_CHECKING, Any, ClassVar, Self
 
 from datastream import ByteOrder, DeserializingStream, SerializingStream
@@ -50,6 +50,22 @@ class PacketEncoder(json.JSONEncoder):
         return super().encode(o)
 
 
+def custom_dict_factory(data: list[tuple[str, Any]]) -> Any:
+    match data:
+        case [("length", _), ("_value", value)]:
+            return value
+        case [("value", value), ("max_range", _)]:
+            return value
+
+    for idx, item in enumerate(data):
+        key, value = item
+
+        if key == "blob_color":
+            data[idx] = ("blob_color", f"#{value & 0xFFFFFFFF:08X}")
+
+    return dict(data)
+
+
 @dataclass
 class Packet:
     packet_type: PacketType
@@ -62,7 +78,7 @@ class Packet:
         raise NotImplementedError()
 
     def as_json(self, indent: int = 2) -> str:
-        return json.dumps(asdict(self), indent=indent, cls=PacketEncoder)
+        return json.dumps(asdict(self, dict_factory=custom_dict_factory), indent=indent, cls=PacketEncoder)
 
 
 class PacketHandler:
