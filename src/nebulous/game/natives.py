@@ -65,7 +65,7 @@ class VariableLengthArray:
         length = int.from_bytes(stream.read(size), signed=True)
         values = [stream.read_int8() for _ in range(length)]
 
-        return cls(length, values)
+        return cls(size, values)
 
 
 @dataclass
