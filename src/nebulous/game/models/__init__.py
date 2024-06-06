@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 from nebulous.game.enums import (
-    ClanRole,
     Font,
     GameDifficulty,
     GameMode,
@@ -28,13 +27,6 @@ class PlayerName:
     font: Font = Font.DEFAULT
     colors: list[int] = field(default_factory=([-1] * 6).copy)
     animation: NameAnimation = NameAnimation.NONE
-
-
-@dataclass
-class Clan:
-    name: str
-    colors: list[int] = field(default_factory=([-1] * 6).copy)
-    role: ClanRole = ClanRole.INVALID
 
 
 @dataclass

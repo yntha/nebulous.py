@@ -42,3 +42,25 @@ class APIPlayerProfile:
     bio_fonts: list[int] = field(default_factory=([0x00] * 23).copy)
 
 
+
+
+@dataclass
+class ClanMember:
+    can_start_clan_war: bool
+    can_join_clan_war: bool
+    can_upload_clan_skin: bool
+    can_set_clan_motd: bool
+    clan_role: ClanRole
+    effective_clan_role: ClanRole
+    can_self_promote: bool
+
+@dataclass
+class Clan:
+    name: str
+    colors: list[int] = field(default_factory=([-1] * 6).copy)
+    id: int = 0
+    coins: int = -1
+
+    @property
+    def members(self) -> list[ClanMember]:  # type: ignore
+        pass  # todo
