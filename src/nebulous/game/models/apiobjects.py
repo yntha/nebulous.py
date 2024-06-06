@@ -153,6 +153,14 @@ class APISkinIDs:
 
 
 @dataclass
+class BanInfo:
+    account_banned: bool
+    competition_banned: bool
+    chat_banned: bool
+    arena_banned: bool
+
+
+@dataclass
 class ClanMember:
     clan: Clan
     can_start_clan_war: bool
