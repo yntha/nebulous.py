@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from nebulous.game.enums import ClanRole, Font, ProfileVisibility, Relationship
+from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, ProfileVisibility, Relationship
 
 
 @dataclass
@@ -136,12 +136,20 @@ class APIPlayerStats:
 
 
 @dataclass
+class APISkin:
+    skin_id: int
+    status: CustomSkinStatus
+    purchase_count: int
+
+
+@dataclass
 class APISkinIDs:
     coins: int
     clan_coins: int
     purchased_second_pet: bool
     unlocked_multiskin: bool
     skin_map_price: int
+    skins: list[APISkin] = field(default_factory=[].copy)
 
 
 @dataclass
