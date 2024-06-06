@@ -3,7 +3,7 @@ from __future__ import annotations
 import enum
 import json
 import time
-from dataclasses import asdict, dataclass, field, is_dataclass
+from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Any, ClassVar, Self
 
 from datastream import ByteOrder, DeserializingStream, SerializingStream
