@@ -119,8 +119,8 @@ class APIPlayerStats:
     purchased_second_pet: bool
     unlocked_multiskin: bool
     is_apple_guest: bool
-    clan_member: ClanMember
     clan: Clan
+    clan_member: ClanMember
     general_stats: APIPlayerGeneralStats
     account_colors: list[int] = field(default_factory=[].copy)
     purchased_avatars: list[int] = field(default_factory=[].copy)
@@ -154,6 +154,7 @@ class APISkinIDs:
 
 @dataclass
 class ClanMember:
+    clan: Clan
     can_start_clan_war: bool
     can_join_clan_war: bool
     can_upload_clan_skin: bool

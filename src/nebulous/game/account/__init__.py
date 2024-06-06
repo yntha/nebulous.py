@@ -167,6 +167,12 @@ class Account:
             "AccountID": account_id,
         })
 
+        clan = Clan(
+                response["ClanName"],
+                response["ClanColors"],
+                response["clanID"]
+        )
+
         special_objects = []
         for entry in response["SpecialObjects"]:
             special_objects.append({
@@ -205,7 +211,9 @@ class Account:
             response["purchasedSecondPet"],
             response["unlockedMultiskin"],
             response["isAppleGuest"],
+            clan,
             ClanMember(
+                clan,
                 response["CanStartClanWar"],
                 response["CanJoinClanWar"],
                 response["CanUploadClanSkin"],
@@ -213,11 +221,6 @@ class Account:
                 ClanRole[response["ClanRole"]],
                 ClanRole[response["EffectiveClanRole"]],
                 response["CanSelfPromote"]
-            ),
-            Clan(
-                response["ClanName"],
-                response["ClanColors"],
-                response["clanID"]
             ),
             APIPlayerGeneralStats(
                 response["XP"],
