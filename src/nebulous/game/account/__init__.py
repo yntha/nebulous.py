@@ -46,6 +46,7 @@ class Endpoints(StrEnum):
     GET_PLAYER_PROFILE = "GetPlayerProfile"
     MAIL = "Mail"
     ADD_FRIEND = "AddFriend"
+    GET_FRIENDS = "GetFriends"
     GET_PLAYER_STATS = "GetPlayerStats"
     GET_SKIN_IDS = "GetSkinIDs"
 
@@ -60,6 +61,13 @@ class APIPlayer:
     profile: APIPlayerProfile
     stats: APIPlayerStats
     skins: list[APISkin] = field(default_factory=[].copy)
+
+    @property
+    def friends(self) -> list[APIFriend]:
+        if self.account is None:
+            return []
+
+        return self.account.get_friends(include_friend_requests=False, include_friend_invites=False)
 
     @classmethod
     def from_account_id(cls, account: Account, account_id: int) -> APIPlayer:
@@ -88,7 +96,23 @@ class APIPlayer:
             player_stats,
             skins
         )
+
+
+@dataclass
+class APIFriend:
+    player: APIPlayer
+    bff: bool
+    last_played_utc: str
+
     @classmethod
+    def from_account_id(cls, account: Account, account_id: int, bff: bool, last_played_utc: str) -> APIFriend:
+        return cls(
+            APIPlayer.from_account_id(account, account_id),
+            bff,
+            last_played_utc,
+        )
+
+
 @dataclass
 class Ticket:
     ticket_str: str
