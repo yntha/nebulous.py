@@ -9,7 +9,8 @@ from nebulous.game.enums import (
     PetType,
     Skin,
 )
-from nebulous.game.models import Clan, PlayerName
+from nebulous.game.models import PlayerName
+from nebulous.game.models.apiobjects import Clan
 
 
 @dataclass
