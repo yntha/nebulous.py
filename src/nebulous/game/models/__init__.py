@@ -2,7 +2,16 @@ import time
 from dataclasses import dataclass, field
 from enum import Enum
 
-from nebulous.game.enums import Font, GameDifficulty, GameMode, NameAnimation, ProfileVisibility, Skin, SplitMultiplier
+from nebulous.game.enums import (
+    ClanRole,
+    Font,
+    GameDifficulty,
+    GameMode,
+    NameAnimation,
+    ProfileVisibility,
+    Skin,
+    SplitMultiplier,
+)
 
 
 @dataclass
@@ -11,6 +20,21 @@ class ServerData:
     client_id2: int = 0
     public_id: int = 0
     private_id: int = 0
+
+
+@dataclass
+class PlayerName:
+    name: str
+    font: Font = Font.DEFAULT
+    colors: list[int] = field(default_factory=([-1] * 6).copy)
+    animation: NameAnimation = NameAnimation.NONE
+
+
+@dataclass
+class Clan:
+    name: str
+    colors: list[int] = field(default_factory=([-1] * 6).copy)
+    role: ClanRole = ClanRole.INVALID
 
 
 @dataclass
