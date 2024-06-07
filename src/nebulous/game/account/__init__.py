@@ -2,8 +2,6 @@ from __future__ import annotations
 
 import base64
 import logging
-import random
-import time
 from dataclasses import dataclass, field
 from enum import StrEnum
 from http import HTTPStatus
@@ -13,18 +11,17 @@ import requests
 
 from nebulous.game import constants
 from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, ProfileVisibility, Relationship
+from nebulous.game.exceptions import InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
     APIPlayerGeneralStats,
     APIPlayerProfile,
     APIPlayerStats,
     APISkin,
     APISkinIDs,
-    BanInfo,
     Clan,
     ClanMember,
     PlayerTitles,
 )
-from nebulous.game.natives import xp2level
 
 
 class ServerRegions(StrEnum):
@@ -57,64 +54,56 @@ class Endpoints(StrEnum):
 
 @dataclass
 class APIPlayer:
-    account: Account | None
-    account_name: str
-    level: int
-    plasma: int
-    clan_member: ClanMember | None
-    ban_info: BanInfo
-    profile: APIPlayerProfile
-    stats: APIPlayerStats
-    skins: list[APISkin] = field(default_factory=[].copy)
+    account: Account  # represents the current signed in account
+    account_id: int
 
-    @property
-    def friends(self) -> list[APIFriend | None]:
-        if self.account is None:
-            return []
+    def get_profile(self) -> APIPlayerProfile:
+        if self.account_id < 0:
+            raise InvalidUserIDError("Cannot fetch profile without a valid account ID.")
 
-        return self.account.get_friends(include_friend_requests=False, include_friend_invites=False)
+        return self.account.get_player_profile(self.account_id)
+
+    def get_stats(self) -> APIPlayerStats:
+        if self.account_id < 0:
+            raise InvalidUserIDError("Cannot fetch stats without a valid account ID.")
+
+        return self.account.get_player_stats(self.account_id)
 
     @classmethod
-    def from_account_id(cls, account: Account, account_id: int) -> APIPlayer | None:
+    def from_account_id(cls, account: Account, account_id: int) -> APIPlayer:
         if account_id == -1:
-            return None
+            raise InvalidUserIDError("Invalid account ID.")
 
-        player_profile = account.get_player_profile(account_id)
-        player_stats = account.get_player_stats(account_id)
-        skins = []
-
-        player_account = account
-
-        # is this our account? if not then set account to None
-        if player_account.account_id != account_id:
-            player_account = None
-        else:
-            skins = player_account.get_skin_ids().skins
-
-        return cls(
-            player_account,
-            player_stats.account_name,
-            xp2level(player_stats.general_stats.xp),
-            player_profile.plasma,
-            player_stats.clan_member,
-            BanInfo(
-                player_profile.banned,
-                player_stats.competition_banned,
-                player_profile.chat_banned,
-                player_profile.arena_banned,
-            ),
-            player_profile,
-            player_stats,
-            skins,
-        )
+        return cls(account, account_id)
 
 
 @dataclass
-class APIFriend:
-    player: APIPlayer | None
+class APIFriend(APIPlayer):
     relationship: Relationship
     bff: bool
     last_played_utc: str
+
+
+@dataclass
+class SignedInPlayer(APIPlayer):
+    def get_friends(self) -> list[APIFriend]:
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot fetch friends without an account.")
+
+        return self.account.get_friends(include_friend_requests=False, include_friend_invites=False)
+
+    def get_skins(self) -> list[APISkin]:
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot fetch skins without an account.")
+
+        return self.account.get_skin_ids().skins
+
+    @classmethod
+    def from_account(cls, account: Account) -> SignedInPlayer:
+        if account.account_id == -1:
+            raise NotSignedInError("Cannot create player without a signed in account.")
+
+        return cls(account, account.account_id)
 
 
 @dataclass
@@ -219,7 +208,7 @@ class Account:
         search: str = "",
         count: int = 100,
         include_friend_invites: bool = True,
-    ) -> list[APIFriend | None]:
+    ) -> list[APIFriend]:
         response = self.request_endpoint(
             Endpoints.GET_FRIENDS,
             {
@@ -232,12 +221,11 @@ class Account:
         )
         friends = []
 
-        self.logger.warning("Fetching friends may take a while...")
-
         for friend in response["FriendRequests"]:
             friends.append(
                 APIFriend(
-                    APIPlayer.from_account_id(self, friend["Id"]),
+                    self,
+                    friend["Id"],
                     Relationship[friend["Relationship"]],
                     friend["BFF"],
                     friend["LastPlayedUtc"],
@@ -440,13 +428,5 @@ class Account:
             raise Exception(f"Request failed with status code: {response.status_code}. Response: {response.text}")
 
         self.logger.info(f"Response[{response.status_code}]: {response.text}")
-
-        cooldown = random.uniform(1.5, 3.5)  # noqa: S311
-        self.logger.info(f"Cooldown: {cooldown:.2f}s")
-
-        # cooldown, to avoid rate limiting.
-        # strangely, the server will actually return a 500ISE if
-        # too many requests are sent in a short period of time.
-        time.sleep(cooldown)
 
         return response.json()
