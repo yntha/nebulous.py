@@ -10,3 +10,10 @@ class InvalidUserIDError(Exception):
     Raised when a user ID is invalid.
     """
     pass
+
+
+class InvalidMailIDError(Exception):
+    """
+    Raised when a mail ID is invalid.
+    """
+    pass

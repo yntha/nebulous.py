@@ -11,7 +11,7 @@ import requests
 
 from nebulous.game import constants
 from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, ProfileVisibility, Relationship
-from nebulous.game.exceptions import InvalidUserIDError, NotSignedInError
+from nebulous.game.exceptions import InvalidMailIDError, InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
     APIPlayerGeneralStats,
     APIPlayerProfile,
@@ -45,7 +45,9 @@ class Endpoints(StrEnum):
 
     SECURE_TICKET = "JDKaYIIScQ"
     GET_PLAYER_PROFILE = "GetPlayerProfile"
-    MAIL = "Mail"
+    GET_MAIL_LIST = "GetMailList"
+    READ_MAIL = "ReadMail"
+    DELETE_MAIL = "DeleteMail"
     ADD_FRIEND = "AddFriend"
     GET_FRIENDS = "GetFriends"
     GET_PLAYER_STATS = "GetPlayerStats"
@@ -53,8 +55,12 @@ class Endpoints(StrEnum):
 
 
 @dataclass
-class APIPlayer:
+class AccountObject:
     account: Account  # represents the current signed in account
+
+
+@dataclass
+class APIPlayer(AccountObject):
     account_id: int
 
     def get_profile(self) -> APIPlayerProfile:
@@ -85,6 +91,34 @@ class APIFriend(APIPlayer):
 
 
 @dataclass
+class APIMailEnvelope(AccountObject):
+    msg_id: int
+    from_aid: int
+    to_aid: int
+    to_name: str
+    from_name: str
+    subject: str
+    is_new: bool
+    time_sent: str
+    time_expires: str
+    to_colors: list[int] = field(default_factory=[].copy)
+    from_colors: list[int] = field(default_factory=[].copy)
+
+    # the mail envelope and mail objects are essentially the same,
+    # the mail object just has the message body.
+    def read_mail(self) -> str:
+        if self.msg_id < 0:
+            raise InvalidMailIDError("Invalid message ID.")
+
+        return self.account.read_mail(self.msg_id)
+
+
+@dataclass
+class APIMailList(AccountObject):
+    mails: list[APIMailEnvelope] = field(default_factory=[].copy)
+
+
+@dataclass
 class SignedInPlayer(APIPlayer):
     def get_friends(self) -> list[APIFriend]:
         if self.account is None or self.account.account_id < 0:
@@ -97,6 +131,15 @@ class SignedInPlayer(APIPlayer):
             raise NotSignedInError("Cannot fetch skins without an account.")
 
         return self.account.get_skin_ids().skins
+
+    def get_received_mail(self) -> APIMailList:
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot fetch mail without an account.")
+
+        return self.account.get_mail(True)
+
+    def get_sent_mail(self) -> APIMailList:
+        return self.account.get_mail(False)
 
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
@@ -186,6 +229,34 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+    def get_mail(self, received: bool) -> APIMailList:
+        response = self.request_endpoint(Endpoints.GET_MAIL_LIST, {"Received": received})
+
+        return APIMailList(
+            self,
+            [
+                APIMailEnvelope(
+                    self,
+                    response["MsgID"],
+                    response["FromAID"],
+                    response["ToAID"],
+                    response["ToName"],
+                    response["FromName"],
+                    response["Subject"],
+                    response["isNew"],
+                    response["TimeSent"],
+                    response["TimeExpires"],
+                    response["ToColors"],
+                    response["FromColors"],
+                ) for response in response["Mails"]
+            ]
+        )
+
+    def read_mail(self, msg_id: int) -> str:
+        response = self.request_endpoint(Endpoints.READ_MAIL, {"MsgID": msg_id})
+
+        return response["Message"]
 
     def get_skin_ids(self, skin_type: CustomSkinType = CustomSkinType.ALL) -> APISkinIDs:
         response = self.request_endpoint(Endpoints.GET_SKIN_IDS, {"Type": skin_type.name})
