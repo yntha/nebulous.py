@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, ProfileVisibility, Relationship
+from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, ProfileVisibility, Relationship, SaleType
 
 
 @dataclass
@@ -181,3 +181,12 @@ class Clan:
     @property
     def members(self) -> list[ClanMember]:  # type: ignore
         pass  # todo
+
+
+@dataclass
+class APISaleInfo:
+    expires_utc: str
+    new_taco: bool
+    new_discord: bool
+    announcement_url: str
+    sale_types: list[SaleType] = field(default_factory=[].copy)

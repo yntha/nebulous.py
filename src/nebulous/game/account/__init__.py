@@ -10,12 +10,13 @@ from typing import ClassVar
 import requests
 
 from nebulous.game import constants
-from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, ProfileVisibility, Relationship
+from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, ProfileVisibility, Relationship, SaleType
 from nebulous.game.exceptions import InvalidMailIDError, InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
     APIPlayerGeneralStats,
     APIPlayerProfile,
     APIPlayerStats,
+    APISaleInfo,
     APISkin,
     APISkinIDs,
     Clan,
@@ -52,6 +53,7 @@ class Endpoints(StrEnum):
     GET_FRIENDS = "GetFriends"
     GET_PLAYER_STATS = "GetPlayerStats"
     GET_SKIN_IDS = "GetSkinIDs"
+    SALE_INFO = "GetSaleInfo"
 
 
 @dataclass
@@ -203,6 +205,8 @@ class Account:
             self.account_id = -1
             self.player_obj = None
 
+        self.sale_info = self.get_sale_info()
+
         self.logger.info(f"Account ID: {self.account_id}")
         self.logger.info(f"Region: {self.region.region_name}")
         self.logger.info(f"Region IP: {self.region.ip}")
@@ -229,6 +233,17 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+    def get_sale_info(self) -> APISaleInfo:
+        response = self.request_endpoint(Endpoints.SALE_INFO, {})
+
+        return APISaleInfo(
+            response["ExpiresUtc"],
+            response["NewTaco"],
+            response["NewDiscord"],
+            response["AnnouncementURL"],
+            [SaleType[sale_type] for sale_type in response["SaleTypes"]],
+        )
 
     def get_mail(self, received: bool) -> APIMailList:
         response = self.request_endpoint(Endpoints.GET_MAIL_LIST, {"Received": received})
