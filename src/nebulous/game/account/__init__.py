@@ -453,7 +453,7 @@ class Account:
             response["NewTaco"],
             response["NewDiscord"],
             response["AnnouncementURL"],
-            [SaleType[sale_type] for sale_type in response["SaleTypes"]],
+            [SaleType(sale_type) for sale_type in response["SaleTypes"]],
         )
 
     def get_mail(self, received: bool) -> APIMailList:
