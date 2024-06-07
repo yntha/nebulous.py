@@ -32,7 +32,7 @@ def test_client():
 
     client.start()
 
-    # disconnect after 3 seconds
-    time.sleep(3)
+    # disconnect after 8 seconds
+    time.sleep(8)
 
     client.stop()
