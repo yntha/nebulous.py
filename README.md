@@ -123,6 +123,8 @@ def test_fetch_self():
         time.sleep(1.5)  # don't spam the API
 ```
 
+`Client` objects also contain an instance to an `Account` object, which can be accessed via `client.account`.
+
 ### Dumping Packets
 You can also dump packets as json, as shown in [`sample_packet.json`](sample_packet.json):
 ```python
