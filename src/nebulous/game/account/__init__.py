@@ -250,7 +250,7 @@ class Account:
             response["chatBanned"],
             response["arenaBanned"],
             Relationship[response["relationship"]],
-            Font[response["profileFont"]],
+            Font(response["profileFont"]),
             response["hasCommunitySkins"],
             response["hasCommunityPets"],
             response["hasCommunityParticles"],
@@ -271,7 +271,7 @@ class Account:
             ),
             response["views"],
             response["profileColors"],
-            response["profileFonts"]
+            [Font(font_id) for font_id in response["profileFonts"]]
         )
 
     def get_player_stats(self, account_id: int) -> APIPlayerStats:
