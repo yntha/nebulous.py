@@ -61,6 +61,20 @@ class Item(enum.Enum):
     CAKE_XP = 16
 
 
+class SpinType(enum.Enum):
+    SKIN = 0
+    EJECT_SKIN = 1
+    HAT = 2
+    PET = 3
+    PARTICLE = 4
+    XP_2X = 5
+    XP_3X = 6
+    XP_4X = 7
+    AUTO = 8
+    ULTRA = 9
+    PLASMA = 10
+
+
 class PurchasableType(enum.Enum):
     BUY_COMMUNITY_SKIN = 0x00
     BUY_COMMUNITY_PET = 0x01

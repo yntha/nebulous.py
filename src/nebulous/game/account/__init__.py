@@ -5,7 +5,7 @@ import logging
 from dataclasses import dataclass, field
 from enum import StrEnum
 from http import HTTPStatus
-from typing import ClassVar
+from typing import Any, ClassVar
 
 import requests
 
@@ -22,6 +22,7 @@ from nebulous.game.enums import (
     Relationship,
     SaleType,
     Skin,
+    SpinType,
 )
 from nebulous.game.exceptions import InvalidMailIDError, InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
@@ -76,6 +77,7 @@ class Endpoints(StrEnum):
     COIN_PURCHASE = "CoinPurchase"
     GET_SKIN_DATA = "GetSkinData"
     CHECKIN = "CheckIn"
+    GET_SPIN_INFO = "GetSpinInfo"
 
 
 @dataclass
@@ -165,6 +167,20 @@ class APIPurchasePrices:
 
 
 @dataclass
+class APIWheelOfNebulous(AccountObject):
+    spin_type: SpinType
+    spin_data: Any
+    next_spin_ms: int
+    spins_remaining: int
+
+    def spin(self) -> APIWheelOfNebulous:
+        if self.account.account_id < 0:
+            raise NotSignedInError("Cannot spin without an account.")
+
+        return self.account.get_spin_info(True)
+
+
+@dataclass
 class SignedInPlayer(APIPlayer):
     stats: APIPlayerStats
     profile: APIPlayerProfile
@@ -234,6 +250,12 @@ class SignedInPlayer(APIPlayer):
             response["RewardVideosRemaining"],
             response["Coins"],
         )
+
+    def spin_wheel(self) -> APIWheelOfNebulous:
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot spin without an account.")
+
+        return self.account.get_spin_info(True)
 
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
@@ -333,6 +355,17 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+    def get_spin_info(self, spin: bool) -> APIWheelOfNebulous:
+        response = self.request_endpoint(Endpoints.GET_SPIN_INFO, {"Spin": spin})
+
+        return APIWheelOfNebulous(
+            self,
+            SpinType[response["SpinType"]],
+            response["SpinData"],
+            response["NextSpinRemainingMs"],
+            response["SpinsRemaining"],
+        )
 
     def get_skin_data(self, skin_id: int) -> APISkinData:
         response = self.request_endpoint(Endpoints.GET_SKIN_DATA, {"SkinID": skin_id})
