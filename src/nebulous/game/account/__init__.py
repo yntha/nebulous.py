@@ -198,7 +198,7 @@ class SignedInPlayer(APIPlayer):
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot send mail without an account.")
 
-        return self.account.send_clan_mail(-1, subject, message, True, self.stats.clan_member.clan_role)
+        return self.account.send_mail(-1, subject, message, True, self.stats.clan_member.clan_role)
 
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
