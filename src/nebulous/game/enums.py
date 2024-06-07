@@ -135,6 +135,12 @@ class MissionObjective(enum.Enum):
     SCORE = 4
 
 
+class ProfileVisibility(enum.Enum):
+    PUBLIC = 0
+    CLAN_AND_FRIENDS = 1
+    FRIENDS = 2
+
+
 class ClanRole(enum.Enum):
     INVALID = 0
     MEMBER = 1
