@@ -310,6 +310,12 @@ class Account:
                 "Count": entry["Count"]
             })
 
+        effective_clan_role = response["EffectiveClanRole"]
+        if effective_clan_role is None:
+            effective_clan_role = ClanRole.INVALID
+        else:
+            effective_clan_role = ClanRole[effective_clan_role]
+
         return APIPlayerStats(
             response["AccountID"],
             response["AccountName"],
@@ -349,7 +355,7 @@ class Account:
                 response["CanUploadClanSkin"],
                 response["CanSetMOTD"],
                 ClanRole[response["ClanRole"]],
-                ClanRole[response["EffectiveClanRole"]],
+                effective_clan_role,
                 response["CanSelfPromote"]
             ),
             APIPlayerGeneralStats(
