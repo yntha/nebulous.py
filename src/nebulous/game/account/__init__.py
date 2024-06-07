@@ -161,6 +161,9 @@ class APIPurchasePrices:
 
 @dataclass
 class SignedInPlayer(APIPlayer):
+    stats: APIPlayerStats
+    profile: APIPlayerProfile
+
     def get_friends(self) -> list[APIFriend]:
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot fetch friends without an account.")
@@ -190,7 +193,10 @@ class SignedInPlayer(APIPlayer):
         if account.account_id < 0:
             raise NotSignedInError("Cannot create player without a signed in account.")
 
-        return cls(account, account.account_id)
+        profile = account.get_player_profile(account.account_id)
+        stats = account.get_player_stats(account.account_id)
+
+        return cls(account, account.account_id, stats, profile)
 
 
 @dataclass
