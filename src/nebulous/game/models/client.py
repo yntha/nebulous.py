@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import time
 from socket import AF_INET, SOCK_DGRAM, inet_aton, socket
 from typing import cast
@@ -30,7 +31,19 @@ class Client:
         region: ServerRegions,
         config: ClientConfig | None = None,
         callbacks: ClientCallbacks | None = None,
+        log_level: int = logging.INFO,
     ):
+        self.logger = logging.getLogger("Client")
+
+        logging.basicConfig(
+            format="[%(asctime)s] %(levelname)s: %(message)s",
+            datefmt="%m/%d/%Y %I:%M:%S %p",
+            filename="client.log",
+            filemode="w",
+            encoding="utf-8",
+            level=log_level,
+        )
+
         self.account = Account(ticket, region)
         self.server_data = ServerData()
 
@@ -38,6 +51,8 @@ class Client:
             self.config = ClientConfig()
         else:
             self.config = config
+
+        self.logger.info(f"Client configuration: {self.config}")
 
         self.rng = JavaRNG()
         self.packet_queue = Queue()
@@ -58,7 +73,13 @@ class Client:
         self.server_data.client_id = self.rng.nextInt()
         self.server_data.client_id2 = self.rng.nextInt()
 
+        self.logger.info(f"Client ID: {self.server_data.client_id}")
+        self.logger.info(f"Second client ID: {self.server_data.client_id2}")
+        self.logger.info(f"Client initialized to connect to {self.account.region.ip}:{self.port}")
+
     def net_send_loop(self):
+        self.logger.info("Starting send loop...")
+
         try:
             last_heartbeat = time.time()
             heartbeat_interval = 0.5
@@ -67,6 +88,8 @@ class Client:
                 if self.packet_queue.empty():
                     if time.time() - last_heartbeat < heartbeat_interval:
                         continue
+
+                    self.logger.info("Sending keep-alive packet...")
 
                     keep_alive_packet = KeepAlive(
                         PacketType.KEEP_ALIVE,
@@ -83,17 +106,22 @@ class Client:
                 else:
                     packet: Packet = self.packet_queue.get()
 
+                    self.logger.info(f"Sending packet: {packet.packet_type.name}")
                     self.socket.send(packet.write(self))
         except KeyboardInterrupt:
-            pass
+            self.logger.info("Send loop interrupted.")
 
     def connect(self) -> bool:
         self.state = ClientState.CONNECTING
+
+        self.logger.info("Connecting to server...")
 
         try:
             self.socket.connect((self.account.region.ip, self.port))
             self.socket.settimeout(10)
             self.socket.setblocking(True)
+
+            self.logger.info("Socket connected. Sending connect request...")
 
             connect_request_3_packet = ConnectRequest3(
                 PacketType.CONNECT_REQUEST_3,
@@ -131,8 +159,12 @@ class Client:
             self.socket.send(connect_request_3_packet.write(self))
             InternalCallbacks.on_connect(self, connect_request_3_packet)
 
+            self.logger.info("Connect request sent. Waiting for connect result...")
+
             conn_result_handler = cast(ConnectResult2, PacketHandler.get_handler(PacketType.CONNECT_RESULT_2))
             conn_result = conn_result_handler.read(self, PacketType.CONNECT_RESULT_2, self.socket.recv(0x80))
+
+            self.logger.info(f"Connect result received. Result: {conn_result.result.name}")
 
             if conn_result.result != ConnectResult.SUCCESS:
                 return False
@@ -142,33 +174,61 @@ class Client:
             self.server_data.public_id = conn_result.client_id
             self.server_data.private_id = conn_result.private_id
 
+            self.logger.info(f"Game ID: {self.game_id}")
+            self.logger.info(f"Split multiplier: {self.config.split_multiplier}")
+            self.logger.info(f"Public ID: {self.server_data.public_id}")
+            self.logger.info(f"Private ID: {self.server_data.private_id}")
+
             return True
         except TimeoutError:
+            self.logger.error("Connection timed out.")
+
             return False
 
     def net_recv_loop(self):
+        # cache value2member map outside of loop
+        value2member_map = PacketType._value2member_map_
+
         try:
             while not self.stop_event.is_set():
                 # recv up to 8192 bytes
                 data = self.socket.recv(0x2000)
+                if data[0] not in value2member_map:
+                    self.logger.error(f"Received unknown packet type: {data[0]}")
+
+                    continue
+
                 handler = PacketHandler.get_handler(PacketType(data[0]))
+                packet_name = PacketType(data[0]).name
 
                 if handler is None:
+                    self.logger.warn(f"Received unhandled packet type: {packet_name}")
+
                     continue
+
+                self.logger.info(f"Received packet: {packet_name}")
 
                 handler.read(self, PacketType(data[0]), data)
         except KeyboardInterrupt:
-            pass
+            self.logger.info("Receive loop interrupted.")
 
     def start(self):
+        self.logger.info("Starting client...")
+
         if self.connect():
             self.state = ClientState.CONNECTED
+
+            self.logger.info("Client connected successfully.")
+
             self.event_loop = Process(target=self.net_send_loop)
             self.recv_loop = Process(target=self.net_recv_loop)
 
             self.event_loop.start()
             self.recv_loop.start()
+
+            self.logger.info("Client started.")
         else:
+            self.logger.error("Client failed to connect.")
             self.stop()
 
             return
@@ -176,6 +236,7 @@ class Client:
     def run_forever(self):
         if self.event_loop is not None and self.recv_loop is not None:
             try:
+                self.logger.info("Running client...")
                 self.event_loop.join()
                 self.recv_loop.join()
             except KeyboardInterrupt:
@@ -183,7 +244,11 @@ class Client:
 
     def stop(self):
         if self.event_loop is None or self.recv_loop is None:
+            self.logger.warning("Client is already stopped.")
+
             return
+
+        self.logger.info("Stopping client...")
 
         self.state = ClientState.DISCONNECTING
 
@@ -196,6 +261,8 @@ class Client:
         self.event_loop = None
         self.recv_loop = None
 
+        self.logger.info("Client stopped. Sending disconnect...")
+
         disconnect_packet = Disconnect(
             PacketType.DISCONNECT,
             self.server_data.public_id,
@@ -205,6 +272,8 @@ class Client:
 
         self.socket.send(disconnect_packet.write(self))
         InternalCallbacks.on_disconnect(self, disconnect_packet)
+
+        self.logger.info("Disconnect packet sent. Closing socket...")
         self.socket.close()
 
         self.state = ClientState.DISCONNECTED
