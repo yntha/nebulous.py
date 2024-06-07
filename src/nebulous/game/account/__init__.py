@@ -10,7 +10,16 @@ from typing import ClassVar
 import requests
 
 from nebulous.game import constants
-from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, ProfileVisibility, Relationship, SaleType
+from nebulous.game.enums import (
+    ClanRole,
+    CustomSkinStatus,
+    CustomSkinType,
+    Font,
+    Item,
+    ProfileVisibility,
+    Relationship,
+    SaleType,
+)
 from nebulous.game.exceptions import InvalidMailIDError, InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
     APIPlayerGeneralStats,
