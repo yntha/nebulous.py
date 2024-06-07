@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import logging
 import random
 import time
 from dataclasses import dataclass, field
@@ -143,11 +144,13 @@ class Region:
 class Account:
     API_URL: ClassVar[str] = "https://simplicialsoftware.com/api/account/"
 
-    def __init__(self, ticket: str, region: ServerRegions):
+    def __init__(self, ticket: str, region: ServerRegions, log_level: int = logging.INFO):
         self.ticket = Ticket(ticket)
         self.region = Region(region, "")
 
         self.secure_bytes, self.region.ip = self.get_secure_ticket()
+        self.logger = logging.getLogger("AccountAPI")
+        self.logger.setLevel(log_level)
 
         if ticket != "":
             self.account_id = int(self.ticket.account_id)
