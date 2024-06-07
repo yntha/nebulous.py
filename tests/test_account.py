@@ -3,7 +3,7 @@ import time
 
 from dotenv import dotenv_values
 
-from nebulous.game.account import Account, APIPlayer, ServerRegions, SignedInPlayer
+from nebulous.game.account import Account, APIPlayer, ServerRegions
 from nebulous.game.natives import xp2level
 
 secrets = dotenv_values(".env.secrets")
@@ -33,7 +33,7 @@ def test_fetch_other_player():
 
 def test_fetch_self():
     account = Account(secrets.get("TICKET", ""), ServerRegions.US_EAST)  # type: ignore
-    player = SignedInPlayer.from_account(account)
+    player = account.player_obj
 
     player_profile = player.get_profile()
     player_stats = player.get_stats()

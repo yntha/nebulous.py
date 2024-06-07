@@ -158,6 +158,8 @@ class Account:
         else:
             self.account_id = -1
 
+        self.player_obj = SignedInPlayer.from_account(self)
+
         self.logger.info(f"Account ID: {self.account_id}")
         self.logger.info(f"Region: {self.region.region_name}")
         self.logger.info(f"Region IP: {self.region.ip}")
