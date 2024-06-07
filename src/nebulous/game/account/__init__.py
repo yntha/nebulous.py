@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import base64
+import random
+import time
 from dataclasses import dataclass, field
 from enum import StrEnum
 from http import HTTPStatus
@@ -396,5 +398,10 @@ class Account:
 
         if response.status_code != HTTPStatus.OK:
             raise Exception(f"Request failed with status code: {response.status_code}. Response: {response.text}")
+
+        # cooldown, to avoid rate limiting.
+        # strangely, the server will actually return a 500ISE if
+        # too many requests are sent in a short period of time.
+        time.sleep(random.uniform(1.5, 3.5))  # noqa: S311
 
         return response.json()
