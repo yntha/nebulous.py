@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, ProfileVisibility, Relationship, SaleType
+from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, GameMode, ProfileVisibility, Relationship, SaleType
 
 
 @dataclass
@@ -190,3 +190,22 @@ class APISaleInfo:
     new_discord: bool
     announcement_url: str
     sale_types: list[SaleType] = field(default_factory=[].copy)
+
+
+@dataclass
+class APISkinURLBase:
+    skin_url_base: str
+    upload_size_limit_bytes: int
+    upload_pet_size_limit_bytes: int
+    server_ip_overrides: dict[str, str]
+    mod_aids: list[int]
+    yt_aids: list[int]
+    friend_aids: list[int]
+    clan_allies: list[int]
+    clan_enemies: list[int]
+    free_tourneys: bool
+    free_arenas: bool
+    tutorial_h_ytid: str
+    tutorial_v_ytid: str
+    game_mode_ytids: list[str]
+    double_xp_game_mode: GameMode

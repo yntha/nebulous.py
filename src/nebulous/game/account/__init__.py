@@ -15,6 +15,7 @@ from nebulous.game.enums import (
     CustomSkinStatus,
     CustomSkinType,
     Font,
+    GameMode,
     Item,
     ProfileVisibility,
     Relationship,
@@ -28,6 +29,7 @@ from nebulous.game.models.apiobjects import (
     APISaleInfo,
     APISkin,
     APISkinIDs,
+    APISkinURLBase,
     Clan,
     ClanMember,
     PlayerTitles,
@@ -62,7 +64,8 @@ class Endpoints(StrEnum):
     GET_FRIENDS = "GetFriends"
     GET_PLAYER_STATS = "GetPlayerStats"
     GET_SKIN_IDS = "GetSkinIDs"
-    SALE_INFO = "GetSaleInfo"
+    GET_SALE_INFO = "GetSaleInfo"
+    GET_SKIN_URL_BASE = "GetSkinURLBase"
 
 
 @dataclass
@@ -215,6 +218,7 @@ class Account:
             self.player_obj = None
 
         self.sale_info = self.get_sale_info()
+        self.skin_url_base = self.get_skin_url_base()
 
         self.logger.info(f"Account ID: {self.account_id}")
         self.logger.info(f"Region: {self.region.region_name}")
@@ -243,8 +247,29 @@ class Account:
 
         return secure_bytes, region_ip
 
+    def get_skin_url_base(self) -> APISkinURLBase:
+        response = self.request_endpoint(Endpoints.GET_SKIN_URL_BASE, {})
+
+        return APISkinURLBase(
+            response["SkinURLBase"],
+            response["UploadSizeLimitBytes"],
+            response["UploadPetSizeLimitBytes"],
+            response["ServerAddressOverrides"],
+            response["ModAIDs"],
+            response["YTAIDs"],
+            response["FriendAIDs"],
+            response["clanAllies"],
+            response["clanEnemies"],
+            response["freeTourneys"],
+            response["freeArenas"],
+            response["TutorialVYTID"],
+            response["TutorialHYTID"],
+            response["GameModeYTIDs"],
+            GameMode[response["DoubleXPGameMode"]]
+        )
+
     def get_sale_info(self) -> APISaleInfo:
-        response = self.request_endpoint(Endpoints.SALE_INFO, {})
+        response = self.request_endpoint(Endpoints.GET_SALE_INFO, {})
 
         return APISaleInfo(
             response["ExpiresUtc"],
