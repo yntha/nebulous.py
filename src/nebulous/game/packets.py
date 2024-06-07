@@ -22,10 +22,10 @@ from nebulous.game.enums import (
     HatType,
     Item,
     NameAnimation,
+    OnlineStatus,
     PacketType,
     ParitcleType,
     PetType,
-    OnlineStatus,
     Skin,
     SplitMultiplier,
 )
