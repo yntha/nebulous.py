@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, OnlineStatus, Relationship
+from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, ProfileVisibility, Relationship
 
 
 @dataclass
@@ -31,7 +31,7 @@ class APIPlayerProfile:
     has_community_skins: bool
     has_community_pets: bool
     has_community_particles: bool
-    profile_visibility: OnlineStatus
+    profile_visibility: ProfileVisibility
     bg_color_enabled: bool
     bg_color: int
     plasma: int
