@@ -67,14 +67,17 @@ class APIPlayer:
     skins: list[APISkin] = field(default_factory=[].copy)
 
     @property
-    def friends(self) -> list[APIFriend]:
+    def friends(self) -> list[APIFriend | None]:
         if self.account is None:
             return []
 
         return self.account.get_friends(include_friend_requests=False, include_friend_invites=False)
 
     @classmethod
-    def from_account_id(cls, account: Account, account_id: int) -> APIPlayer:
+    def from_account_id(cls, account: Account, account_id: int) -> APIPlayer | None:
+        if account_id == -1:
+            return None
+
         player_profile = account.get_player_profile(account_id)
         player_stats = account.get_player_stats(account_id)
         skins = account.get_skin_ids().skins
@@ -105,12 +108,15 @@ class APIPlayer:
 
 @dataclass
 class APIFriend:
-    player: APIPlayer
+    player: APIPlayer | None
     bff: bool
     last_played_utc: str
 
     @classmethod
-    def from_account_id(cls, account: Account, account_id: int, bff: bool, last_played_utc: str) -> APIFriend:
+    def from_account_id(cls, account: Account, account_id: int, bff: bool, last_played_utc: str) -> APIFriend | None:
+        if account_id == -1:
+            return None
+
         return cls(
             APIPlayer.from_account_id(account, account_id),
             bff,
@@ -210,7 +216,7 @@ class Account:
         search: str = "",
         count: int = 100,
         include_friend_invites: bool = True,
-    ) -> list[APIFriend]:
+    ) -> list[APIFriend | None]:
         response = self.request_endpoint(
             Endpoints.GET_FRIENDS,
             {
