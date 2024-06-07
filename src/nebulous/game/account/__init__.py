@@ -296,6 +296,9 @@ class Account:
         if ticket != "":
             self.account_id = int(self.ticket.account_id)
             self.player_obj = SignedInPlayer.from_account(self)
+
+            self.logger.info("Checking in...")
+            self.player_obj.checkin()
         else:
             self.account_id = -1
             self.player_obj = None
