@@ -201,7 +201,17 @@ class SignedInPlayer(APIPlayer):
 
         return self.account.send_mail(-1, subject, message, True, self.stats.clan_member.clan_role)
 
-    def delete_sent_mail(self, )
+    def delete_sent_mail(self, msg_id: int):
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot delete mail without an account.")
+
+        return self.account.delete_mail(msg_id, False)
+
+    def delete_received_mail(self, msg_id: int):
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot delete mail without an account.")
+
+        return self.account.delete_mail(msg_id, True)
 
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
@@ -298,6 +308,9 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+    def delete_mail(self, msg_id: int, received: bool):
+        self.request_endpoint(Endpoints.DELETE_MAIL, {"MsgID": msg_id, "Received": received})
 
     def send_mail(
         self, to: int, subject: str, message: str, to_clan: bool = False, clan_role: ClanRole = ClanRole.INVALID
