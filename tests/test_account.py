@@ -2,12 +2,17 @@ from dotenv import dotenv_values
 
 from nebulous.game.account import Account, APIPlayer, ServerRegions
 
-secrets = dotenv_values("../.env.secrets")
+secrets = dotenv_values(".env.secrets")
 
 
 def test_fetch_other_player():
     account = Account.no_account(ServerRegions.US_EAST)
     player = APIPlayer.from_account_id(account, 4)
+
+    if player is None:
+        print("Player not found.")
+
+        return
 
     print(f"Player: {player.account_name}")
     print(f"Level: {player.level}")
@@ -25,6 +30,11 @@ def test_fetch_other_player():
 def test_fetch_self():
     account = Account(secrets.get("TICKET", ""), ServerRegions.US_EAST)  # type: ignore
     player = APIPlayer.from_account_id(account, account.account_id)
+
+    if player is None:
+        print("Player not found.")
+
+        return
 
     print(f"Player: {player.account_name}")
     print(f"Level: {player.level}")
@@ -49,6 +59,12 @@ def test_fetch_self():
         return
 
     for friend in friends:
+        if friend is None or friend.player is None:
+            # this shouldn't be reached.
+            print("Error fetching friend.")
+
+            continue
+
         print(f"Friend: {friend.player.account_name}")
         print(f"Level: {friend.player.level}")
         print(f"Current XP: {friend.player.stats.general_stats.xp}")
