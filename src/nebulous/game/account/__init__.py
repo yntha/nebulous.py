@@ -96,7 +96,7 @@ class APIPlayer(AccountObject):
 
     @classmethod
     def from_account_id(cls, account: Account, account_id: int) -> APIPlayer:
-        if account_id == -1:
+        if account_id < 0:
             raise InvalidUserIDError("Invalid account ID.")
 
         return cls(account, account_id)
@@ -180,11 +180,14 @@ class SignedInPlayer(APIPlayer):
         return self.account.get_mail(True)
 
     def get_sent_mail(self) -> APIMailList:
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot fetch mail without an account.")
+
         return self.account.get_mail(False)
 
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
-        if account.account_id == -1:
+        if account.account_id < 0:
             raise NotSignedInError("Cannot create player without a signed in account.")
 
         return cls(account, account.account_id)
