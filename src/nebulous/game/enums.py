@@ -173,6 +173,7 @@ class SaleType(enum.Enum):
     OFFERS = 1
     IAP = 2
     INGAME = 3
+    INGAME_2 = 4
 
 
 class ChallengeStatus(enum.Enum):
