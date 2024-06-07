@@ -81,13 +81,15 @@ class APIPlayer:
 
         player_profile = account.get_player_profile(account_id)
         player_stats = account.get_player_stats(account_id)
-        skins = account.get_skin_ids().skins
+        skins = []
 
         player_account = account
 
         # is this our account? if not then set account to None
         if player_account.account_id != account_id:
             player_account = None
+        else:
+            skins = player_account.get_skin_ids().skins
 
         return cls(
             player_account,
