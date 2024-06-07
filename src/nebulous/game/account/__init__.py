@@ -99,11 +99,11 @@ class APIPlayer:
                 player_profile.banned,
                 player_stats.competition_banned,
                 player_profile.chat_banned,
-                player_profile.arena_banned
+                player_profile.arena_banned,
             ),
             player_profile,
             player_stats,
-            skins
+            skins,
         )
 
 
@@ -147,15 +147,29 @@ class Account:
     def __init__(self, ticket: str, region: ServerRegions, log_level: int = logging.INFO):
         self.ticket = Ticket(ticket)
         self.region = Region(region, "")
+        self.logger = logging.getLogger("AccountAPI")
+
+        logging.basicConfig(
+            format="[%(asctime)s] %(levelname)s: %(message)s",
+            datefmt="%m/%d/%Y %I:%M:%S %p",
+            filename="account-api.log",
+            filemode="w",
+            encoding="utf-8",
+            level=log_level,
+        )
+
+        self.logger.info("Logger initialized.")
 
         self.secure_bytes, self.region.ip = self.get_secure_ticket()
-        self.logger = logging.getLogger("AccountAPI")
-        self.logger.setLevel(log_level)
 
         if ticket != "":
             self.account_id = int(self.ticket.account_id)
         else:
             self.account_id = -1
+
+        self.logger.info(f"Account ID: {self.account_id}")
+        self.logger.info(f"Region: {self.region.region_name}")
+        self.logger.info(f"Region IP: {self.region.ip}")
 
     @classmethod
     def no_account(cls, region: ServerRegions) -> Account:
@@ -163,6 +177,8 @@ class Account:
 
     def refresh(self):
         self.secure_bytes, self.region.ip = self.get_secure_ticket()
+
+        self.logger.info("Refreshed secure ticket.")
 
     def get_region_ip(self) -> str:
         return self.region.ip
@@ -179,19 +195,11 @@ class Account:
         return secure_bytes, region_ip
 
     def get_skin_ids(self, skin_type: CustomSkinType = CustomSkinType.ALL) -> APISkinIDs:
-        response = self.request_endpoint(Endpoints.GET_SKIN_IDS, {
-            "Type": skin_type.name
-        })
+        response = self.request_endpoint(Endpoints.GET_SKIN_IDS, {"Type": skin_type.name})
 
         skins = []
         for skin in response["Skins"]:
-            skins.append(
-                APISkin(
-                    skin["ID"],
-                    CustomSkinStatus[skin["Status"]],
-                    skin["PurchaseCount"]
-                )
-            )
+            skins.append(APISkin(skin["ID"], CustomSkinStatus[skin["Status"]], skin["PurchaseCount"]))
 
         return APISkinIDs(
             response["Coins"],
@@ -199,7 +207,7 @@ class Account:
             response["purchasedSecondPet"],
             response["unlockedMultiskin"],
             response["skinMapPrice"],
-            skins
+            skins,
         )
 
     def get_friends(
@@ -222,6 +230,8 @@ class Account:
         )
         friends = []
 
+        self.logger.warning("Fetching friends may take a while...")
+
         for friend in response["FriendRequests"]:
             friends.append(
                 APIFriend(
@@ -235,9 +245,12 @@ class Account:
         return friends
 
     def get_player_profile(self, account_id: int) -> APIPlayerProfile:
-        response = self.request_endpoint(Endpoints.GET_PLAYER_PROFILE, {
-            "accountID": account_id,
-        })
+        response = self.request_endpoint(
+            Endpoints.GET_PLAYER_PROFILE,
+            {
+                "accountID": account_id,
+            },
+        )
 
         return APIPlayerProfile(
             response["profile"],
@@ -264,23 +277,22 @@ class Account:
                 response["tricky"],
                 response["supporter"],
                 response["masterTamer"],
-                response["tycoon"]
+                response["tycoon"],
             ),
             response["views"],
             response["profileColors"],
-            [Font(font_id) for font_id in response["profileFonts"]]
+            [Font(font_id) for font_id in response["profileFonts"]],
         )
 
     def get_player_stats(self, account_id: int) -> APIPlayerStats:
-        response = self.request_endpoint(Endpoints.GET_PLAYER_STATS, {
-            "AccountID": account_id,
-        })
-
-        clan = Clan(
-                response["ClanName"],
-                response["ClanColors"],
-                response["clanID"]
+        response = self.request_endpoint(
+            Endpoints.GET_PLAYER_STATS,
+            {
+                "AccountID": account_id,
+            },
         )
+
+        clan = Clan(response["ClanName"], response["ClanColors"], response["clanID"])
 
         special_objects = []
         for entry in response["SpecialObjects"]:
@@ -302,10 +314,7 @@ class Account:
                 "Suns": Item.SUN,
             }
 
-            special_objects.append({
-                "Type": so2item_map[entry["Type"]],
-                "Count": entry["Count"]
-            })
+            special_objects.append({"Type": so2item_map[entry["Type"]], "Count": entry["Count"]})
 
         effective_clan_role = response["EffectiveClanRole"]
         if effective_clan_role is None:
@@ -353,7 +362,7 @@ class Account:
                 response["CanSetMOTD"],
                 ClanRole[response["ClanRole"]],
                 effective_clan_role,
-                response["CanSelfPromote"]
+                response["CanSelfPromote"],
             ),
             APIPlayerGeneralStats(
                 response["XP"],
@@ -396,7 +405,7 @@ class Account:
                 response["damageHealed"],
                 response["AchievementsEarned"],
                 response["AchievementStats"],
-                special_objects
+                special_objects,
             ),
             response["AccountColors"],
             response["PurchasedAvatars"],
@@ -408,7 +417,7 @@ class Account:
             response["ValidCustomSkinIDs"],
             response["ValidCustomPetSkinIDs"],
             response["ValidCustomParticleIDs"],
-            response["ClanColors"]
+            response["ClanColors"],
         )
 
     def request_endpoint(self, endpoint: Endpoints, data: dict) -> dict:
@@ -420,15 +429,22 @@ class Account:
         }
 
         default_data.update(data)
+        self.logger.info(f"Requesting endpoint: {endpoint!s}")
+        self.logger.info(f"Post Data: {default_data}")
 
         response = requests.post(url, data=default_data, timeout=10)
 
         if response.status_code != HTTPStatus.OK:
             raise Exception(f"Request failed with status code: {response.status_code}. Response: {response.text}")
 
+        self.logger.info(f"Response[{response.status_code}]: {response.text}")
+
+        cooldown = random.uniform(1.5, 3.5)  # noqa: S311
+        self.logger.info(f"Cooldown: {cooldown:.2f}s")
+
         # cooldown, to avoid rate limiting.
         # strangely, the server will actually return a 500ISE if
         # too many requests are sent in a short period of time.
-        time.sleep(random.uniform(1.5, 3.5))  # noqa: S311
+        time.sleep(cooldown)
 
         return response.json()
