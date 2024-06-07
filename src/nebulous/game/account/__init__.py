@@ -287,8 +287,26 @@ class Account:
 
         special_objects = []
         for entry in response["SpecialObjects"]:
+            # for some stupid reason, the api returns plural and inconsistent
+            # names for the item types. thus, we must create a mapping to
+            # convert the names to the correct enum.
+            so2item_map = {
+                "Beads": Item.BEAD,
+                "Candies": Item.CANDY,
+                "Drops": Item.RAINDROP,
+                "Eggs": Item.EGG,
+                "Leaves": Item.LEAF,
+                "Moons": Item.MOON,
+                "Nebulas": Item.NEBULA,
+                "Notes": Item.NOTE,
+                "Presents": Item.PRESENT,
+                "Pumpkins": Item.PUMPKIN,
+                "Snowflakes": Item.SNOWFLAKE,
+                "Suns": Item.SUN,
+            }
+
             special_objects.append({
-                "Type": Item[entry["Type"]],
+                "Type": so2item_map[entry["Type"]],
                 "Count": entry["Count"]
             })
 
