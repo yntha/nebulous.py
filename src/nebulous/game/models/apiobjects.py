@@ -233,3 +233,10 @@ class APICoinPurchaseResult:
 class APISkinData:
     skin_status: CustomSkinStatus
     skin_data: bytes
+
+
+@dataclass
+class APICheckinResult:
+    checkin_reward: int
+    reward_videos_remaining: int
+    coins: int

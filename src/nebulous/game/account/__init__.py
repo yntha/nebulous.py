@@ -25,6 +25,7 @@ from nebulous.game.enums import (
 )
 from nebulous.game.exceptions import InvalidMailIDError, InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
+    APICheckinResult,
     APICoinPurchaseResult,
     APIPlayerGeneralStats,
     APIPlayerProfile,
@@ -74,6 +75,7 @@ class Endpoints(StrEnum):
     GET_PURCHASE_PRICES = "GetPurchasePrices"
     COIN_PURCHASE = "CoinPurchase"
     GET_SKIN_DATA = "GetSkinData"
+    CHECKIN = "CheckIn"
 
 
 @dataclass
@@ -220,6 +222,18 @@ class SignedInPlayer(APIPlayer):
             raise NotSignedInError("Cannot fetch skin data without an account.")
 
         return self.account.get_skin_data(skin_id).skin_data
+
+    def checkin(self) -> APICheckinResult:
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot checkin without an account.")
+
+        response = self.account.request_endpoint(Endpoints.CHECKIN, {})
+
+        return APICheckinResult(
+            response["CheckinReward"],
+            response["RewardVideosRemaining"],
+            response["Coins"],
+        )
 
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
