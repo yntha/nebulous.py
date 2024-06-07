@@ -11,7 +11,7 @@ from typing import ClassVar
 import requests
 
 from nebulous.game import constants
-from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, ProfileVisibility, Relationship
+from nebulous.game.enums import ClanRole, CustomSkinStatus, CustomSkinType, Font, Item, OnlineStatus, Relationship
 from nebulous.game.models.apiobjects import (
     APIPlayerGeneralStats,
     APIPlayerProfile,
@@ -254,7 +254,7 @@ class Account:
             response["hasCommunitySkins"],
             response["hasCommunityPets"],
             response["hasCommunityParticles"],
-            ProfileVisibility[response["profileVisibility"]],
+            OnlineStatus[response["profileVisibility"]],
             response["profileBGColorEnabled"],
             response["profileBGColor"],
             response["plasma"],

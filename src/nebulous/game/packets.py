@@ -25,7 +25,7 @@ from nebulous.game.enums import (
     PacketType,
     ParitcleType,
     PetType,
-    ProfileVisibility,
+    OnlineStatus,
     Skin,
     SplitMultiplier,
 )
@@ -358,7 +358,7 @@ class ConnectRequest3(Packet):
     game_difficulty: GameDifficulty  # 1 bytes
     game_id: int  # 4 bytes
     ticket: MUTF8String  # MUST BE BLANK
-    online_mode: ProfileVisibility  # 1 byte
+    online_mode: OnlineStatus  # 1 byte
     mayhem: bool  # 1 byte
     skin1: Skin  # 2 bytes
     eject_skin: int  # 1 byte

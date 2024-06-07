@@ -237,7 +237,7 @@ class GameDifficulty(enum.Enum):
     ) = range(4)
 
 
-class ProfileVisibility(enum.Enum):
+class OnlineStatus(enum.Enum):
     (
         ONLINE,
         APPEAR_OFFLINE,

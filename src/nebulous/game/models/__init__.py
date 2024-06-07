@@ -7,7 +7,7 @@ from nebulous.game.enums import (
     GameDifficulty,
     GameMode,
     NameAnimation,
-    ProfileVisibility,
+    OnlineStatus,
     Skin,
     SplitMultiplier,
 )
@@ -34,7 +34,7 @@ class ClientConfig:
     game_mode: GameMode = GameMode.FFA
     game_difficulty: GameDifficulty = GameDifficulty.EASY
     game_id: int = -1
-    online_mode: ProfileVisibility = ProfileVisibility.ONLINE
+    online_mode: OnlineStatus = OnlineStatus.ONLINE
     mayhem_mode: bool = False
     skin: Skin = Skin.MISC_NONE
     skin2: Skin = Skin.MISC_NONE
