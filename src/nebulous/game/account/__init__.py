@@ -18,11 +18,14 @@ from nebulous.game.enums import (
     GameMode,
     Item,
     ProfileVisibility,
+    PurchasableType,
     Relationship,
     SaleType,
+    Skin,
 )
 from nebulous.game.exceptions import InvalidMailIDError, InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
+    APICoinPurchaseResult,
     APIPlayerGeneralStats,
     APIPlayerProfile,
     APIPlayerStats,
@@ -66,6 +69,8 @@ class Endpoints(StrEnum):
     GET_SKIN_IDS = "GetSkinIDs"
     GET_SALE_INFO = "GetSaleInfo"
     GET_SKIN_URL_BASE = "GetSkinURLBase"
+    GET_PURCHASE_PRICES = "GetPurchasePrices"
+    COIN_PURCHASE = "CoinPurchase"
 
 
 @dataclass
@@ -130,6 +135,28 @@ class APIMailEnvelope(AccountObject):
 @dataclass
 class APIMailList(AccountObject):
     mails: list[APIMailEnvelope] = field(default_factory=[].copy)
+
+
+@dataclass
+class PurchasableItem(AccountObject):
+    item_type: PurchasableType
+    item_id: int
+    price: int
+
+    def purchase(self) -> APICoinPurchaseResult:
+        if self.account.account_id < 0:
+            raise NotSignedInError("Cannot purchase items without an account.")
+
+        return self.account.coin_purchase(self.item_type, self.item_id, self.price)
+
+
+@dataclass
+class APIPurchasePrices:
+    current_coins: int
+    coins: int
+    clan_coins: int
+    daily_free_skins: list[Skin]
+    items: list[PurchasableItem]
 
 
 @dataclass
@@ -247,6 +274,42 @@ class Account:
 
         return secure_bytes, region_ip
 
+    def get_purchase_prices(self, for_mail: bool) -> APIPurchasePrices:
+        response = self.request_endpoint(Endpoints.GET_PURCHASE_PRICES, {"ForMail": for_mail})
+
+        free_skins = [Skin(skin_id) for skin_id in response["DailyFreeSkins"]]
+
+        items = []
+        for item in response["Items"]:
+            items.append(PurchasableItem(self, PurchasableType[item["ItemType"]], item["ItemID"], item["Price"]))
+
+        return APIPurchasePrices(
+            response["CurrentCoins"],
+            response["Coins"],
+            response["ClanCoins"],
+            free_skins,
+            items,
+        )
+
+    def coin_purchase(self, item_type: PurchasableType, item_id: int, price: int) -> APICoinPurchaseResult:
+        data_map = {
+            "ItemType": item_type.name,
+            "ItemID": item_id,
+        }
+
+        if price > -1:
+            data_map["ExpectedPrice"] = price
+
+        response = self.request_endpoint(Endpoints.COIN_PURCHASE, data_map)
+
+        return APICoinPurchaseResult(
+            PurchasableType[response["ItemType"]],
+            response["ItemID"],
+            response["CoinsSpent"],
+            response["Coins"],
+            response["ClanCoins"],
+        )
+
     def get_skin_url_base(self) -> APISkinURLBase:
         response = self.request_endpoint(Endpoints.GET_SKIN_URL_BASE, {})
 
@@ -265,7 +328,7 @@ class Account:
             response["TutorialVYTID"],
             response["TutorialHYTID"],
             response["GameModeYTIDs"],
-            GameMode[response["DoubleXPGameMode"]]
+            GameMode[response["DoubleXPGameMode"]],
         )
 
     def get_sale_info(self) -> APISaleInfo:

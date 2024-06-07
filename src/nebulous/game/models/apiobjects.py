@@ -3,7 +3,16 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from nebulous.game.enums import ClanRole, CustomSkinStatus, Font, GameMode, ProfileVisibility, Relationship, SaleType
+from nebulous.game.enums import (
+    ClanRole,
+    CustomSkinStatus,
+    Font,
+    GameMode,
+    ProfileVisibility,
+    PurchasableType,
+    Relationship,
+    SaleType,
+)
 
 
 @dataclass
@@ -209,3 +218,12 @@ class APISkinURLBase:
     tutorial_v_ytid: str
     game_mode_ytids: list[str]
     double_xp_game_mode: GameMode
+
+
+@dataclass
+class APICoinPurchaseResult:
+    item_type: PurchasableType
+    item_id: int
+    coins_spent: int
+    coins: int
+    clan_coins: int
