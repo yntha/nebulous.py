@@ -10,6 +10,9 @@
 - [Installation](#installation)
 - [License](#license)
 - [Usage](#usage)
+    - [Utilizing the client](#utilizing-the-client)
+    - [Interacting with the API](#interacting-with-the-api)
+    - [Dumping Packets](#dumping-packets)
 
 ## Installation
 1. Install [git](https://git-scm.com/downloads)
@@ -18,6 +21,7 @@
 3. Install `nebulous.py`: `python -m pip install --user nebulous.py`
 
 ## Usage
+### Utilizing the client
 From [`test_connect.py`](tests/test_connect.py):
 ```python
 import time
@@ -65,6 +69,61 @@ if __name__ == "__main__":
     test_client()
 ```
 
+### Interacting with the API
+From [`test_account.py`](tests/test_account.py):
+```python
+def test_fetch_self():
+    account = Account(secrets.get("TICKET", ""), ServerRegions.US_EAST)  # type: ignore
+    player = account.player_obj
+
+    if player is None:
+        logger.error("Failed to fetch player object")
+
+        return
+
+    player_profile = player.get_profile()
+    player_stats = player.get_stats()
+
+    player_xp = player_stats.general_stats.xp
+
+    logger.info(f"Player: {player_stats.account_name}")
+    logger.info(f"Level: {xp2level(player_xp)}")
+    logger.info(f"Current XP: {player_xp}")
+
+    clan_member = player_stats.clan_member
+
+    logger.info(f"Clan: {clan_member.clan.name}")
+    logger.info(f"Role: {clan_member.clan_role}")
+
+    logger.info(f"Account bio: {player_profile.bio}")
+
+    # fetch friends
+    logger.info("Fetching friends...")
+
+    friends = player.get_friends()
+
+    if len(friends) == 0:
+        logger.info("No friends :(")
+
+        return
+
+    for friend in friends:
+        friend_profile = friend.get_profile()
+        friend_stats = friend.get_stats()
+        friend_xp = friend_stats.general_stats.xp
+
+        logger.info(f"Friend: {friend_stats.account_name}")
+        logger.info(f"Level: {xp2level(friend_xp)}")
+        logger.info(f"Current XP: {friend_xp}")
+        logger.info(f"Account bio: {friend_profile.bio}")
+        logger.info(f"BFF: {friend.bff}")
+        logger.info(f"Last seen: {friend.last_played_utc}\n")
+
+        logger.info("Cooldown for 1.5 seconds...")
+        time.sleep(1.5)  # don't spam the API
+```
+
+### Dumping Packets
 You can also dump packets as json, as shown in [`sample_packet.json`](sample_packet.json):
 ```python
 print(packet.as_json(indent=4))
