@@ -109,19 +109,9 @@ class APIPlayer:
 @dataclass
 class APIFriend:
     player: APIPlayer | None
+    relationship: Relationship
     bff: bool
     last_played_utc: str
-
-    @classmethod
-    def from_account_id(cls, account: Account, account_id: int, bff: bool, last_played_utc: str) -> APIFriend | None:
-        if account_id == -1:
-            return None
-
-        return cls(
-            APIPlayer.from_account_id(account, account_id),
-            bff,
-            last_played_utc,
-        )
 
 
 @dataclass
@@ -230,10 +220,14 @@ class Account:
         friends = []
 
         for friend in response["FriendRequests"]:
-            if friend["Relationship"] != "MUTUAL":
-                continue
-
-            friends.append(APIFriend.from_account_id(self, friend["AccountID"], friend["BFF"], friend["LastPlayedUtc"]))
+            friends.append(
+                APIFriend(
+                    APIPlayer.from_account_id(self, friend["Id"]),
+                    Relationship[friend["Relationship"]],
+                    friend["BFF"],
+                    friend["LastPlayedUtc"],
+                )
+            )
 
         return friends
 
