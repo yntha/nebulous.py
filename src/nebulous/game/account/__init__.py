@@ -249,8 +249,9 @@ class Account:
                     response["TimeExpires"],
                     response["ToColors"],
                     response["FromColors"],
-                ) for response in response["Mails"]
-            ]
+                )
+                for response in response["Mails"]
+            ],
         )
 
     def read_mail(self, msg_id: int) -> str:
