@@ -61,6 +61,13 @@ class Item(enum.Enum):
     CAKE_XP = 16
 
 
+class SaleType(enum.Enum):
+    NONE = 0
+    OFFERS = 1
+    IAP = 2
+    INGAME = 3
+
+
 class ChallengeStatus(enum.Enum):
     SENT = 0
     EXPIRED = 1
