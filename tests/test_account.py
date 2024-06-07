@@ -35,6 +35,11 @@ def test_fetch_self():
     account = Account(secrets.get("TICKET", ""), ServerRegions.US_EAST)  # type: ignore
     player = account.player_obj
 
+    if player is None:
+        logger.error("Failed to fetch player object")
+
+        return
+
     player_profile = player.get_profile()
     player_stats = player.get_stats()
 
