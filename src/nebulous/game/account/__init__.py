@@ -188,6 +188,18 @@ class SignedInPlayer(APIPlayer):
 
         return self.account.get_mail(False)
 
+    def send_mail(self, to: int, subject: str, message: str):
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot send mail without an account.")
+
+        return self.account.send_mail(to, subject, message)
+
+    def send_clan_mail(self, subject: str, message: str):
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot send mail without an account.")
+
+        return self.account.send_clan_mail(-1, subject, message, True, self.stats.clan_member.clan_role)
+
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
         if account.account_id < 0:
@@ -283,6 +295,19 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+    def send_mail(
+        self, to: int, subject: str, message: str, to_clan: bool = False, clan_role: ClanRole = ClanRole.INVALID
+    ):
+        data_map = {
+            "ToAID": to,
+            "Message": message,
+            "Subject": subject,
+            "ToAllClan": to_clan,
+            "ClanRole": clan_role.name,
+        }
+
+        self.request_endpoint(Endpoints.ADD_FRIEND, data_map)
 
     def get_purchase_prices(self, for_mail: bool) -> APIPurchasePrices:
         response = self.request_endpoint(Endpoints.GET_PURCHASE_PRICES, {"ForMail": for_mail})
