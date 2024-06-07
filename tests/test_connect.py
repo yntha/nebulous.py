@@ -1,8 +1,12 @@
+import logging
 import time
 
 from nebulous.game.account import ServerRegions
 from nebulous.game.models.client import Client, ClientCallbacks
 from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, GameData, KeepAlive
+
+logger = logging.getLogger("Client Tests")
+logger.setLevel(logging.INFO)
 
 
 class TestCallbacks(ClientCallbacks):

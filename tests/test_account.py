@@ -1,8 +1,12 @@
+import logging
+
 from dotenv import dotenv_values
 
 from nebulous.game.account import Account, APIPlayer, ServerRegions
 
 secrets = dotenv_values(".env.secrets")
+logger = logging.getLogger("Account API Tests")
+logger.setLevel(logging.INFO)
 
 
 def test_fetch_other_player():
@@ -10,21 +14,21 @@ def test_fetch_other_player():
     player = APIPlayer.from_account_id(account, 4)
 
     if player is None:
-        print("Player not found.")
+        logger.error("Player not found.")
 
         return
 
-    print(f"Player: {player.account_name}")
-    print(f"Level: {player.level}")
-    print(f"Current XP: {player.stats.general_stats.xp}")
+    logger.info(f"Player: {player.account_name}")
+    logger.info(f"Level: {player.level}")
+    logger.info(f"Current XP: {player.stats.general_stats.xp}")
 
     clan_member = player.clan_member
 
     if clan_member is not None:
-        print(f"Clan: {clan_member.clan.name}")
-        print(f"Role: {clan_member.clan_role}")
+        logger.info(f"Clan: {clan_member.clan.name}")
+        logger.info(f"Role: {clan_member.clan_role}")
 
-    print(f"Account bio: {player.profile.bio}")
+    logger.info(f"Account bio: {player.profile.bio}")
 
 
 def test_fetch_self():
@@ -32,42 +36,42 @@ def test_fetch_self():
     player = APIPlayer.from_account_id(account, account.account_id)
 
     if player is None:
-        print("Player not found.")
+        logger.error("Player not found.")
 
         return
 
-    print(f"Player: {player.account_name}")
-    print(f"Level: {player.level}")
-    print(f"Current XP: {player.stats.general_stats.xp}")
+    logger.info(f"Player: {player.account_name}")
+    logger.info(f"Level: {player.level}")
+    logger.info(f"Current XP: {player.stats.general_stats.xp}")
 
     clan_member = player.clan_member
 
     if clan_member is not None:
-        print(f"Clan: {clan_member.clan.name}")
-        print(f"Role: {clan_member.clan_role}")
+        logger.info(f"Clan: {clan_member.clan.name}")
+        logger.info(f"Role: {clan_member.clan_role}")
 
-    print(f"Account bio: {player.profile.bio}")
+    logger.info(f"Account bio: {player.profile.bio}")
 
     # fetch friends
-    print("Fetching friends...")
+    logger.info("Fetching friends...")
 
     friends = player.friends
 
     if len(friends) == 0:
-        print("No friends :(")
+        logger.info("No friends :(")
 
         return
 
     for friend in friends:
         if friend is None or friend.player is None:
             # this shouldn't be reached.
-            print("Error fetching friend.")
+            logger.fatal("Error fetching friend.")
 
             continue
 
-        print(f"Friend: {friend.player.account_name}")
-        print(f"Level: {friend.player.level}")
-        print(f"Current XP: {friend.player.stats.general_stats.xp}")
-        print(f"Account bio: {friend.player.profile.bio}")
-        print(f"BFF: {friend.bff}")
-        print(f"Last seen: {friend.last_played_utc}\n")
+        logger.info(f"Friend: {friend.player.account_name}")
+        logger.info(f"Level: {friend.player.level}")
+        logger.info(f"Current XP: {friend.player.stats.general_stats.xp}")
+        logger.info(f"Account bio: {friend.player.profile.bio}")
+        logger.info(f"BFF: {friend.bff}")
+        logger.info(f"Last seen: {friend.last_played_utc}\n")
