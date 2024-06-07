@@ -39,7 +39,7 @@ class APIPlayerProfile:
     titles: PlayerTitles
     views: int
     bio_colors: list[int] = field(default_factory=([0x00] * 23).copy)
-    bio_fonts: list[int] = field(default_factory=([0x00] * 23).copy)
+    bio_fonts: list[Font] = field(default_factory=([Font.DEFAULT] * 23).copy)
 
 
 @dataclass
