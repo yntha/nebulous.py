@@ -227,3 +227,9 @@ class APICoinPurchaseResult:
     coins_spent: int
     coins: int
     clan_coins: int
+
+
+@dataclass
+class APISkinData:
+    skin_status: CustomSkinStatus
+    skin_data: bytes

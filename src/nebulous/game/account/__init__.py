@@ -31,6 +31,7 @@ from nebulous.game.models.apiobjects import (
     APIPlayerStats,
     APISaleInfo,
     APISkin,
+    APISkinData,
     APISkinIDs,
     APISkinURLBase,
     Clan,
@@ -72,6 +73,7 @@ class Endpoints(StrEnum):
     GET_SKIN_URL_BASE = "GetSkinURLBase"
     GET_PURCHASE_PRICES = "GetPurchasePrices"
     COIN_PURCHASE = "CoinPurchase"
+    GET_SKIN_DATA = "GetSkinData"
 
 
 @dataclass
@@ -213,6 +215,12 @@ class SignedInPlayer(APIPlayer):
 
         return self.account.delete_mail(msg_id, True)
 
+    def get_skin_data(self, skin_id: int) -> bytes:
+        if self.account is None or self.account.account_id < 0:
+            raise NotSignedInError("Cannot fetch skin data without an account.")
+
+        return self.account.get_skin_data(skin_id).skin_data
+
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
         if account.account_id < 0:
@@ -308,6 +316,11 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+    def get_skin_data(self, skin_id: int) -> APISkinData:
+        response = self.request_endpoint(Endpoints.GET_SKIN_DATA, {"SkinID": skin_id})
+
+        return APISkinData(CustomSkinStatus[response["SkinStatus"]], base64.b64decode(response["Data"]))
 
     def delete_mail(self, msg_id: int, received: bool):
         self.request_endpoint(Endpoints.DELETE_MAIL, {"MsgID": msg_id, "Received": received})
