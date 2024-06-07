@@ -62,6 +62,7 @@ class Endpoints(StrEnum):
     GET_PLAYER_PROFILE = "GetPlayerProfile"
     GET_MAIL_LIST = "GetMailList"
     READ_MAIL = "ReadMail"
+    SEND_MAIL = "SendMail"
     DELETE_MAIL = "DeleteMail"
     ADD_FRIEND = "AddFriend"
     GET_FRIENDS = "GetFriends"
@@ -200,6 +201,8 @@ class SignedInPlayer(APIPlayer):
 
         return self.account.send_mail(-1, subject, message, True, self.stats.clan_member.clan_role)
 
+    def delete_sent_mail(self, )
+
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
         if account.account_id < 0:
@@ -307,7 +310,7 @@ class Account:
             "ClanRole": clan_role.name,
         }
 
-        self.request_endpoint(Endpoints.ADD_FRIEND, data_map)
+        self.request_endpoint(Endpoints.SEND_MAIL, data_map)
 
     def get_purchase_prices(self, for_mail: bool) -> APIPurchasePrices:
         response = self.request_endpoint(Endpoints.GET_PURCHASE_PRICES, {"ForMail": for_mail})
