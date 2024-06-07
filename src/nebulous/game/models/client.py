@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import logging.handlers
 import time
 from socket import AF_INET, SOCK_DGRAM, inet_aton, socket
 from typing import cast
@@ -35,6 +36,7 @@ class Client:
         log_level: int = logging.INFO,
     ):
         self.logger = logging.getLogger("Client")
+        self.log_level = log_level
 
         logging.basicConfig(
             format="[%(asctime)s] %(levelname)s: %(message)s",
@@ -44,6 +46,8 @@ class Client:
             encoding="utf-8",
             level=log_level,
         )
+
+        self.logger.info("Logger initialized.")
 
         self.account = Account(ticket, region)
         self.server_data = ServerData()
@@ -79,7 +83,15 @@ class Client:
         self.logger.info(f"Client initialized to connect to {self.account.region.ip}:{self.port}")
 
     def net_send_loop(self):
-        self.logger.info("Starting send loop...")
+        logger = logging.getLogger("SendLoop")
+        log_handler = logging.FileHandler("send.log", mode="w", encoding="utf-8")
+
+        logger.addHandler(log_handler)
+        logger.setLevel(self.log_level)
+        log_handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s", "%m/%d/%Y %I:%M:%S %p"))
+        log_handler.setLevel(self.log_level)
+
+        logger.info("Starting send loop...")
 
         try:
             last_heartbeat = time.time()
@@ -90,7 +102,7 @@ class Client:
                     if time.time() - last_heartbeat < heartbeat_interval:
                         continue
 
-                    self.logger.info("Sending keep-alive packet...")
+                    logger.info("Sending keep-alive packet...")
 
                     keep_alive_packet = KeepAlive(
                         PacketType.KEEP_ALIVE,
@@ -107,10 +119,11 @@ class Client:
                 else:
                     packet: Packet = self.packet_queue.get()
 
-                    self.logger.info(f"Sending packet: {packet.packet_type.name}")
+                    logger.info(f"Sending packet: {packet.packet_type.name}")
                     self.socket.send(packet.write(self))
         except KeyboardInterrupt:
-            self.logger.info("Send loop interrupted.")
+            logger.info("Send loop interrupted.")
+            log_handler.close()
 
     def connect(self) -> bool:
         self.state = ClientState.CONNECTING
@@ -189,29 +202,38 @@ class Client:
     def net_recv_loop(self):
         # cache value2member map outside of loop
         value2member_map = PacketType._value2member_map_
+        logger = logging.getLogger("RecvLoop")
+        log_handler = logging.FileHandler("recv.log", mode="w", encoding="utf-8")
+
+        logger.addHandler(log_handler)
+        logger.setLevel(self.log_level)
+        log_handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s", "%m/%d/%Y %I:%M:%S %p"))
+        log_handler.setLevel(self.log_level)
+
+        logger.info("Starting receive loop...")
 
         try:
             while not self.stop_event.is_set():
                 # recv up to 8192 bytes
                 data = self.socket.recv(0x2000)
                 if data[0] not in value2member_map:
-                    self.logger.error(f"Received unknown packet type: {data[0]}")
+                    logger.error(f"Received unknown packet type: {data[0]}")
 
                     continue
 
-                handler = PacketHandler.get_handler(PacketType(data[0]))
+                packet_handler = PacketHandler.get_handler(PacketType(data[0]))
                 packet_name = PacketType(data[0]).name
 
-                if handler is None:
-                    self.logger.warn(f"Received unhandled packet type: {packet_name}")
+                if packet_handler is None:
+                    logger.warn(f"Received unhandled packet type: {packet_name}")
 
                     continue
 
-                self.logger.info(f"Received packet: {packet_name}")
-
-                handler.read(self, PacketType(data[0]), data)
+                logger.info(f"Received packet: {packet_name}")
+                packet_handler.read(self, PacketType(data[0]), data)
         except KeyboardInterrupt:
-            self.logger.info("Receive loop interrupted.")
+            logger.info("Receive loop interrupted.")
+            log_handler.close()
 
     def start(self):
         self.logger.info("Starting client...")
