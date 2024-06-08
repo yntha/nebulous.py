@@ -111,6 +111,7 @@ class Client:
         self.rng = JavaRNG()
         self.packet_queue = Queue()
         self.stop_event = Event()
+        self.game_updates_done = Event()
         self.event_loop = None
         self.recv_loop = None
         self.state = ClientState.DISCONNECTED
@@ -148,7 +149,7 @@ class Client:
             last_heartbeat = time.time()
             heartbeat_interval = 0.5
 
-            while not self.stop_event.is_set():
+            while not self.stop_event.is_set() and self.game_updates_done.wait(0.5):
                 if self.packet_queue.empty():
                     if time.time() - last_heartbeat < heartbeat_interval:
                         continue
@@ -255,6 +256,8 @@ class Client:
         value2member_map = PacketType._value2member_map_
         logger = logging.getLogger("RecvLoop")
         log_handler = logging.FileHandler("recv.log", mode="w", encoding="utf-8")
+        gamedata_remaining = 4  # change this number to expect more game data packets
+        last_packet_name = ""
 
         logger.addHandler(log_handler)
         logger.setLevel(self.log_level)
@@ -279,6 +282,12 @@ class Client:
                     logger.warn(f"Received unhandled packet type: {packet_name}")
 
                     continue
+
+                if packet_name == "GAME_DATA" and not self.game_updates_done.is_set():
+                    gamedata_remaining -= 1
+                elif gamedata_remaining <= 0 and not self.game_updates_done.is_set():
+                    if last_packet_name == "GAME_DATA":
+                        self.game_updates_done.set()
 
                 logger.info(f"Received packet: {packet_name}")
                 packet_handler.read(self, PacketType(data[0]), data)
