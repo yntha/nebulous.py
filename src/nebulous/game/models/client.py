@@ -11,7 +11,7 @@ from multiprocess import Event, Process, Queue  # type: ignore
 
 from nebulous.game import InternalCallbacks
 from nebulous.game.account import Account, ServerRegions
-from nebulous.game.enums import ConnectResult, PacketType
+from nebulous.game.enums import ConnectResult, Font, PacketType
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import (
@@ -24,6 +24,39 @@ from nebulous.game.packets import (
     Packet,
     PacketHandler,
 )
+
+
+class LobbyChat:
+    def __init__(self, client: Client):
+        self.client = client
+        self.alias = self.client.config.alias
+        self.alias_colors = self.client.config.alias_colors
+        self.alias_font = self.client.config.alias_font
+        self.show_broadcast_bubble = False
+
+    def set_name(self, alias: str):
+        self.alias = alias
+
+    def set_colors(self, colors: list[int]):
+        self.alias_colors = colors
+
+    def set_font(self, font: Font):
+        self.alias_font = font
+
+    def show_bubble(self, show: bool):
+        self.show_broadcast_bubble = show
+
+    def send_message(self, message: str):
+        chat_message = GameChatMessage(
+            PacketType.GAME_CHAT_MESSAGE,
+            MUTF8String.from_py_string(self.alias),
+            MUTF8String.from_py_string(message),
+            VariableLengthArray(1, self.alias_colors),
+            self.show_broadcast_bubble,
+            self.alias_font,
+        )
+
+        self.client.packet_queue.put(chat_message)
 
 
 class Client:
@@ -77,6 +110,8 @@ class Client:
 
         self.server_data.client_id = self.rng.nextInt()
         self.server_data.client_id2 = self.rng.nextInt()
+
+        self.chat = LobbyChat(self)
 
         self.logger.info(f"Client ID: {self.server_data.client_id}")
         self.logger.info(f"Second client ID: {self.server_data.client_id2}")
