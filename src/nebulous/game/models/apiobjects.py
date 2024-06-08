@@ -176,9 +176,9 @@ class ClanMember:
     can_join_clan_war: bool
     can_upload_clan_skin: bool
     can_set_clan_motd: bool
-    clan_role: ClanRole
-    effective_clan_role: ClanRole
-    can_self_promote: bool
+    clan_role: ClanRole = ClanRole.INVALID
+    effective_clan_role: ClanRole = ClanRole.INVALID
+    can_self_promote: bool = False
 
 @dataclass
 class Clan:

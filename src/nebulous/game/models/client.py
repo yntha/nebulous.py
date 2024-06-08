@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import logging.handlers
+import random
 import time
 from socket import AF_INET, SOCK_DGRAM, inet_aton, socket
 from typing import cast
@@ -128,7 +129,17 @@ class Client:
         self.server_data.client_id = self.rng.nextInt()
         self.server_data.client_id2 = self.rng.nextInt()
 
+        # generate a random alias to connect with.
+        # the reason for this is because we need to send our player index in the
+        # control packets, and the only times we see our player index is in the
+        # packets `GAME_DATA` and `GAME_UPDATE`. upon receiving the `GAME_DATA`
+        # with our random alias, we can then grab our player ID, and then be able
+        # to send control messages.
+        self.random_alias = "".join(map(chr, random.choices(range(0x21, 0x7f), k=16)))  # noqa: S311
+
         self.chat = LobbyChat(self)
+        self.api_player = self.account.player_obj
+        self.game_player = None
 
         self.logger.info(f"Client ID: {self.server_data.client_id}")
         self.logger.info(f"Second client ID: {self.server_data.client_id2}")
@@ -199,7 +210,7 @@ class Client:
                 self.config.mayhem_mode,
                 self.config.skin,
                 self.config.eject_skin,
-                MUTF8String.from_py_string(self.config.alias),
+                MUTF8String.from_py_string(self.random_alias),
                 self.config.custom_skin,
                 VariableLengthArray(1, self.config.alias_colors),
                 self.config.pet1,

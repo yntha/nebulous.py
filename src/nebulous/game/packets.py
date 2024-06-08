@@ -14,6 +14,7 @@ from nebulous.game.constants import APP_VERSION
 from nebulous.game.enums import (
     ClanRole,
     ConnectResult,
+    ControlFlags,
     EjectSkinType,
     Font,
     GameDifficulty,
@@ -424,6 +425,14 @@ class ClanChatMessage(Packet):
                 account_id
             )
         )
+
+
+@dataclass
+@PacketHandler.register_handler(PacketType.CONTROL)
+class Control(Packet):
+    angle: float  # compressed to 2 bytes
+    speed: float  # compressed to 1 byte, clamped to 0.0 - 1.0
+    flags: ControlFlags  # 1 byte
 
 
 @dataclass
