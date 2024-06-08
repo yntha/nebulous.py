@@ -12,6 +12,7 @@ from multiprocess import Event, Process, Queue  # type: ignore
 from nebulous.game import InternalCallbacks
 from nebulous.game.account import Account, ServerRegions
 from nebulous.game.enums import ConnectResult, Font, PacketType
+from nebulous.game.exceptions import NotSignedInError
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import (
@@ -47,6 +48,9 @@ class LobbyChat:
         self.show_broadcast_bubble = show
 
     def send_game_message(self, message: str):
+        if self.client.account.account_id < 0:
+            raise NotSignedInError("Cannot send game message without being signed in.")
+
         chat_message = GameChatMessage(
             PacketType.GAME_CHAT_MESSAGE,
             MUTF8String.from_py_string(self.alias),
