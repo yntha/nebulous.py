@@ -46,7 +46,7 @@ class LobbyChat:
     def show_bubble(self, show: bool):
         self.show_broadcast_bubble = show
 
-    def send_message(self, message: str):
+    def send_game_message(self, message: str):
         chat_message = GameChatMessage(
             PacketType.GAME_CHAT_MESSAGE,
             MUTF8String.from_py_string(self.alias),
