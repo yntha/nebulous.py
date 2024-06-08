@@ -240,3 +240,27 @@ class APICheckinResult:
     checkin_reward: int
     reward_videos_remaining: int
     coins: int
+
+
+@dataclass
+class APIAlerts:
+    has_friend_requests: bool
+    has_clan_invites: bool
+    coins: int
+    motd: str
+    server_message: str
+    new_mail: bool
+    brand_new_mail: bool
+    server_mail: bool
+    birthday: int
+    birthday_plasma: int
+    mass_boost: int
+    mass_boost_s: int
+    ban_reason: str
+    ban_until_utc: str
+    competition_ban_reason: str
+    competition_ban_until_utc: str
+    chat_ban_reason: str
+    chat_ban_until_utc: str
+    mass_boost_enabled: bool
+    clan_member: ClanMember

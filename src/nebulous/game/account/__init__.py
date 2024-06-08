@@ -26,6 +26,7 @@ from nebulous.game.enums import (
 )
 from nebulous.game.exceptions import InvalidMailIDError, InvalidUserIDError, NotSignedInError
 from nebulous.game.models.apiobjects import (
+    APIAlerts,
     APICheckinResult,
     APICoinPurchaseResult,
     APIPlayerGeneralStats,
@@ -78,6 +79,7 @@ class Endpoints(StrEnum):
     GET_SKIN_DATA = "GetSkinData"
     CHECKIN = "CheckIn"
     GET_SPIN_INFO = "GetSpinInfo"
+    GET_ALERTS = "GetAlerts"
 
 
 @dataclass
@@ -328,6 +330,7 @@ class Account:
         self.sale_info = self.get_sale_info()
         self.skin_url_base = self.get_skin_url_base()
         self.purchase_prices = self.get_purchase_prices(False)
+        self.alerts = self.get_alerts()
 
         self.logger.info(f"Account ID: {self.account_id}")
         self.logger.info(f"Region: {self.region.region_name}")
@@ -355,6 +358,43 @@ class Account:
         secure_bytes = base64.b64decode(secure_ticket)
 
         return secure_bytes, region_ip
+
+    def get_alerts(self) -> APIAlerts:
+        response = self.request_endpoint(Endpoints.GET_ALERTS, {})
+
+        return APIAlerts(
+            response["HasFriendRequests"],
+            response["HasClanInvites"],
+            response["Coins"],
+            response["MOTD"],
+            response["ServerMessage"],
+            response["NewMail"],
+            response["BrandNewMail"],
+            response["ServerMail"],
+            response["birthday"],
+            response["birthdayPlasma"],
+            response["MassBoost"],
+            response["MassBoostDurationS"],
+            response["banReason"],
+            response["BanUntilUtc"],
+            response["competitionBanReason"],
+            response["competitionBanUntilUtc"],
+            response["chatBanReason"],
+            response["chatBanUntilUtc"],
+            response["massBoostEnabled"],
+            ClanMember(
+                Clan(
+                    response["ClanName"],
+                    response["ClanColors"],
+                    response["clanID"],
+                    response["ClanCoins"],
+                ),
+                False, False, False, False,
+                response["ClanRole"],
+                response["EffectiveClanRole"],
+                response["CanSelfPromote"],
+            )
+        )
 
     def get_spin_info(self, spin: bool) -> APIWheelOfNebulous:
         response = self.request_endpoint(Endpoints.GET_SPIN_INFO, {"Spin": spin})
