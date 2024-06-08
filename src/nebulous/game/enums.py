@@ -41,6 +41,15 @@ class JoinResultCode(enum.Enum):
     INCOMPATIBLE_VERSION = 29
 
 
+class ControlFlags(enum.IntFlag):
+    SPLIT = 0x01
+    SHOOT = 0x02
+    DASH = 0x04
+    GHOST = 0x08
+    DISPOSE = 0x10
+    CHARGEUP = 0x20
+
+
 class Item(enum.Enum):
     PUMPKIN = 0
     SNOWFLAKE = 1
