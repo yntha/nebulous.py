@@ -70,6 +70,8 @@ if __name__ == "__main__":
 ```
 
 ### Interacting with the API
+Note: Upon signing in, the api client will perform a series of requests to fetch the player's data, among other things(e.g. sale info, purchase prices, etc.). This also includes an automatic account check-in, which grants 50 plasma each day.
+
 From [`test_account.py`](tests/test_account.py):
 ```python
 def test_fetch_self():
