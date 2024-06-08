@@ -256,7 +256,8 @@ class Client:
         value2member_map = PacketType._value2member_map_
         logger = logging.getLogger("RecvLoop")
         log_handler = logging.FileHandler("recv.log", mode="w", encoding="utf-8")
-        gamedata_remaining = 4  # change this number to expect more game data packets
+        expected_gamedata = 4  # change this number to expect more game data packets
+        gamedata_remaining = expected_gamedata
         last_packet_name = ""
 
         logger.addHandler(log_handler)
@@ -287,6 +288,11 @@ class Client:
                     gamedata_remaining -= 1
                 elif gamedata_remaining <= 0 and not self.game_updates_done.is_set():
                     if last_packet_name == "GAME_DATA":
+                        total_gamedata = expected_gamedata + abs(gamedata_remaining) + 1
+                        logger.info(
+                            f"Received all initial game data packets ({total_gamedata}). Packet sending enabled."
+                        )
+
                         self.game_updates_done.set()
 
                 logger.info(f"Received packet: {packet_name}")
