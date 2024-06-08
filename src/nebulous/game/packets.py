@@ -314,10 +314,20 @@ class GameChatMessage(Packet):
         stream.write_int32(client.server_data.public_id)
         stream.write(self.alias.encode())
         stream.write(self.message.encode())
+
+        # hardcoded account id, unknown bool, and message id
+        stream.write_int32(-1)
+        stream.write_bool(False)
+        stream.write_int64(0)
+
         stream.write(self.alias_colors.encode())
         stream.write_bool(self.show_broadcast_bubble)
         stream.write_int8(self.alias_font.value)
         stream.write_int32(client.server_data.client_id)
+
+        # hardcoded pair of bools
+        stream.write_bool(False)
+        stream.write_bool(False)
 
         data = stream.bytes()
 
