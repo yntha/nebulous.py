@@ -175,6 +175,7 @@ class Client:
                     self.socket.send(packet.write(self))
         except KeyboardInterrupt:
             logger.info("Send loop interrupted.")
+        finally:
             log_handler.close()
 
     def connect(self) -> bool:
@@ -299,6 +300,7 @@ class Client:
                 packet_handler.read(self, PacketType(data[0]), data)
         except KeyboardInterrupt:
             logger.info("Receive loop interrupted.")
+        finally:
             log_handler.close()
 
     def start(self):
