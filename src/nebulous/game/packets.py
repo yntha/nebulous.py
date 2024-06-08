@@ -299,6 +299,66 @@ class GameData(Packet):
 
 
 @dataclass
+@PacketHandler.register_handler(PacketType.GAME_CHAT_MESSAGE)
+class GameChatMessage(Packet):
+    alias: MUTF8String
+    message: MUTF8String
+    alias_colors: VariableLengthArray  # length 1
+    show_broadcast_bubble: bool  # 1 byte
+    alias_font: Font  # 1 byte
+
+    def write(self, client: Client) -> bytes:
+        stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
+
+        stream.write_int8(self.packet_type.value)
+        stream.write_int32(client.server_data.public_id)
+        stream.write(self.alias.encode())
+        stream.write(self.message.encode())
+        stream.write(self.alias_colors.encode())
+        stream.write_bool(self.show_broadcast_bubble)
+        stream.write_int8(self.alias_font.value)
+        stream.write_int32(client.server_data.client_id)
+
+        data = stream.bytes()
+
+        stream.close()
+
+        return data
+
+    @classmethod
+    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> GameChatMessage:
+        stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
+
+        # skip over the packet type byte
+        stream.read_int8()
+
+        alias = MUTF8String.from_stream(stream)
+        message = MUTF8String.from_stream(stream)
+
+        stream.read_int32()  # account id for some reason
+        stream.read_bool()  # unknown bool
+        stream.read_int64()  # message id, unused, only used in single player games
+
+        alias_colors = VariableLengthArray.from_stream(1, stream)
+        show_broadcast_bubble = stream.read_bool()
+        alias_font = Font(stream.read_int8())
+
+        stream.close()
+
+        return InternalCallbacks.on_game_chat_message(
+            client,
+            cls(
+                packet_type,
+                alias,
+                message,
+                alias_colors,
+                show_broadcast_bubble,
+                alias_font
+            )
+        )
+
+
+@dataclass
 @PacketHandler.register_handler(PacketType.KEEP_ALIVE)
 class KeepAlive(Packet):
     public_id: int  # 4 bytes

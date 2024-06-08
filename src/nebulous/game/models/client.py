@@ -18,6 +18,7 @@ from nebulous.game.packets import (
     ConnectRequest3,
     ConnectResult2,
     Disconnect,
+    GameChatMessage,
     GameData,
     KeepAlive,
     Packet,
@@ -324,4 +325,7 @@ class ClientCallbacks:
         return packet
 
     def on_game_data(self, client: Client, packet: GameData) -> GameData:
+        return packet
+
+    def on_game_chat_message(self, client: Client, packet: GameChatMessage) -> GameChatMessage:
         return packet
