@@ -26,7 +26,6 @@ from nebulous.game.packets import (
 )
 
 
-# todo: setup loggers for each process spawned
 class Client:
     def __init__(
         self,
