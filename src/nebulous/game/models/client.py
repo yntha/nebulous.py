@@ -184,9 +184,8 @@ class Client:
         self.logger.info("Connecting to server...")
 
         try:
+            self.socket.settimeout(5.0)
             self.socket.connect((self.account.region.ip, self.port))
-            self.socket.settimeout(10)
-            self.socket.setblocking(True)
 
             self.logger.info("Socket connected. Sending connect request...")
 
@@ -272,6 +271,7 @@ class Client:
             while not self.stop_event.is_set():
                 # recv up to 8192 bytes
                 data = self.socket.recv(0x2000)
+
                 if data[0] not in value2member_map:
                     logger.error(f"Received unknown packet type: {data[0]}")
 
