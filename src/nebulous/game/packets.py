@@ -368,6 +368,64 @@ class GameChatMessage(Packet):
         )
 
 
+# clan chat messages are the same as game chat messages, only difference is
+# the packet type and the redaction of other fields.
+@dataclass
+@PacketHandler.register_handler(PacketType.GAME_CHAT_MESSAGE)
+class ClanChatMessage(Packet):
+    message: MUTF8String
+    clan_role: ClanRole = ClanRole.INVALID
+    account_id: int = -1
+
+    def write(self, client: Client) -> bytes:
+        stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
+
+        stream.write_int8(self.packet_type.value)
+        stream.write_int32(client.server_data.public_id)
+        stream.write(MUTF8String.from_py_string("").encode())
+        stream.write(self.message.encode())
+
+        # hardcoded values
+        stream.write_int8(0)
+        stream.write_int32(-1)
+        stream.write_int64(0)
+        stream.write_int8(0)
+
+        stream.write_int32(client.server_data.client_id)
+        stream.write_bool(False)
+
+        data = stream.bytes()
+
+        stream.close()
+
+        return data
+
+    @classmethod
+    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> ClanChatMessage:
+        stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
+
+        # skip over the packet type byte
+        stream.read_int8()
+
+        MUTF8String.from_stream(stream)
+
+        message = MUTF8String.from_stream(stream)
+        role = ClanRole(stream.read_int8())
+        account_id = stream.read_int32()
+
+        stream.close()
+
+        return InternalCallbacks.on_clan_chat_message(
+            client,
+            cls(
+                packet_type,
+                message,
+                role,
+                account_id
+            )
+        )
+
+
 @dataclass
 @PacketHandler.register_handler(PacketType.KEEP_ALIVE)
 class KeepAlive(Packet):

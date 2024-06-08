@@ -16,6 +16,7 @@ from nebulous.game.exceptions import NotSignedInError
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import (
+    ClanChatMessage,
     ConnectRequest3,
     ConnectResult2,
     Disconnect,
@@ -58,6 +59,17 @@ class LobbyChat:
             VariableLengthArray(1, self.alias_colors),
             self.show_broadcast_bubble,
             self.alias_font,
+        )
+
+        self.client.packet_queue.put(chat_message)
+
+    def send_clan_message(self, message: str):
+        if self.client.account.account_id < 0:
+            raise NotSignedInError("Cannot send clan message without being signed in.")
+
+        chat_message = ClanChatMessage(
+            PacketType.CLAN_CHAT_MESSAGE,
+            MUTF8String.from_py_string(message),
         )
 
         self.client.packet_queue.put(chat_message)
@@ -366,4 +378,7 @@ class ClientCallbacks:
         return packet
 
     def on_game_chat_message(self, client: Client, packet: GameChatMessage) -> GameChatMessage:
+        return packet
+
+    def on_clan_chat_message(self, client: Client, packet: ClanChatMessage) -> ClanChatMessage:
         return packet
