@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 import time
 from dataclasses import dataclass, field
@@ -40,6 +42,10 @@ class ScreenDimensions:
 
         return max(self.width, self.height) / smallest
 
+    @classmethod
+    def default(cls) -> ScreenDimensions:
+        return cls(1920, 1080)
+
 
 @dataclass
 class ClientConfig:
@@ -75,7 +81,7 @@ class ClientConfig:
     chat_log_encoding: str = "utf-8"
     chat_log_size: int = 1000
     log_level: int = logging.INFO
-    screen: ScreenDimensions = field(default=ScreenDimensions(1920, 1080))
+    screen: ScreenDimensions = field(default_factory=ScreenDimensions.default)
 
 
 class ClientState(Enum):
