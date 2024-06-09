@@ -1,3 +1,4 @@
+import logging
 import time
 from dataclasses import dataclass, field
 from enum import Enum
@@ -59,6 +60,10 @@ class ClientConfig:
     level_colors: list[int] = field(default_factory=([0x77] * 5).copy)
     skin_interpolation_rate: float = 0.0
     split_multiplier: SplitMultiplier = SplitMultiplier.X8
+    log_chat: bool = True
+    chat_log_encoding: str = "utf-8"
+    chat_log_size: int = 1000
+    log_level: int = logging.INFO
 
 
 class ClientState(Enum):

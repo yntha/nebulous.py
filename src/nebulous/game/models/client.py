@@ -70,7 +70,7 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
 
 
 class LobbyChat:
-    def __init__(self, client: Client, log_chat: bool = True):
+    def __init__(self, client: Client, log_chat: bool = True, log_encoding: str = "utf-8", log_size: int = 1000):
         self.client = client
         self.alias = self.client.config.alias
         self.alias_colors = self.client.config.alias_colors
@@ -81,7 +81,7 @@ class LobbyChat:
             self.logger = logging.getLogger("LobbyChat")
             self.logger.setLevel(self.client.log_level)
 
-            log_handler = LobbyChatHandler()
+            log_handler = LobbyChatHandler(encoding=log_encoding, chat_size=log_size)
             log_handler.setFormatter(
                 logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s", "%m/%d/%Y %I:%M:%S %p")
             )
@@ -163,10 +163,14 @@ class Client:
         region: ServerRegions,
         config: ClientConfig | None = None,
         callbacks: ClientCallbacks | None = None,
-        log_level: int = logging.INFO,
     ):
+        if config is None:
+            self.config = ClientConfig()
+        else:
+            self.config = config
+
         self.logger = logging.getLogger("Client")
-        self.log_level = log_level
+        self.log_level = self.config.log_level
 
         logging.basicConfig(
             format="[%(asctime)s] %(levelname)s: %(message)s",
@@ -174,18 +178,13 @@ class Client:
             filename="client.log",
             filemode="w",
             encoding="utf-8",
-            level=log_level,
+            level=self.log_level,
         )
 
         self.logger.info("Logger initialized.")
 
         self.account = Account(ticket, region)
         self.server_data = ServerData()
-
-        if config is None:
-            self.config = ClientConfig()
-        else:
-            self.config = config
 
         self.logger.info(f"Client configuration: {self.config}")
 
@@ -217,7 +216,7 @@ class Client:
         # to send control messages.
         self.random_alias = "".join(map(chr, random.choices(range(0x21, 0x7F), k=16)))  # noqa: S311
 
-        self.chat = LobbyChat(self)
+        self.chat = LobbyChat(self, self.config.log_chat, self.config.chat_log_encoding, self.config.chat_log_size)
         self.api_player = self.account.player_obj
         self.game_player = None
         self.game_world = GameWorld(
