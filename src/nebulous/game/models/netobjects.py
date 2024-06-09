@@ -72,3 +72,22 @@ class NetGameItem:
     item_type: Item  # 1 byte
     xpos: CompressedFloat  # 3 bytes, relative to GameData.map_size
     ypos: CompressedFloat  # 3 bytes, relative to GameData.map_size
+
+
+@dataclass
+class NetChatMessage:
+    player_id: int
+    alias: MUTF8String
+    message: MUTF8String
+    alias_colors: VariableLengthArray
+
+
+@dataclass
+class NetGameMessage(NetChatMessage):
+    alias_font: Font  # 1 byte
+    show_bauble: bool  # 1 byte
+
+
+@dataclass
+class NetClanMessage(NetChatMessage):
+    clan_role: ClanRole  # 1 byte
