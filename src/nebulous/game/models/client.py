@@ -35,7 +35,7 @@ from nebulous.game.packets import (
 
 class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
     def __init__(self, encoding: str = "utf-8", chat_size: int = 1000):
-        self.start_filename = self.get_file_name()
+        self.current_filename = self.get_file_name()
 
         if not os.path.exists("chat"):
             os.makedirs("chat", mode=0o755, exist_ok=True)
@@ -43,7 +43,7 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
         self.size = chat_size
         self.remaining = chat_size
 
-        super().__init__(self.start_filename, mode="w", encoding=encoding)
+        super().__init__(self.current_filename, mode="w", encoding=encoding)
 
     def get_file_name(self) -> str:
         local_offset_sec = -time.timezone if time.localtime().tm_isdst == 0 else -time.altzone
@@ -58,8 +58,11 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
 
     def emit(self, record: logging.LogRecord) -> None:
         if self.remaining == 0:
-            self.rotate(self.start_filename, self.get_file_name())
+            new_filename = self.get_file_name()
+
+            self.rotate(self.current_filename, new_filename)
             self.remaining = self.size
+            self.current_filename = new_filename
         else:
             self.remaining -= 1
 
