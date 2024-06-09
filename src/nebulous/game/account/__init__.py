@@ -320,17 +320,18 @@ class Account:
         if ticket != "":
             self.account_id = int(self.ticket.account_id)
             self.player_obj = SignedInPlayer.from_account(self)
+            self.alerts = self.get_alerts()
 
             self.logger.info("Checking in...")
             self.player_obj.checkin()
         else:
             self.account_id = -1
             self.player_obj = None
+            self.alerts = None
 
         self.sale_info = self.get_sale_info()
         self.skin_url_base = self.get_skin_url_base()
         self.purchase_prices = self.get_purchase_prices(False)
-        self.alerts = self.get_alerts()
 
         self.logger.info(f"Account ID: {self.account_id}")
         self.logger.info(f"Region: {self.region.region_name}")
