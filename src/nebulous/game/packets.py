@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import enum
 import json
+import math
 import time
 from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Any, ClassVar, Self
@@ -439,9 +440,35 @@ class ClanChatMessage(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.CONTROL)
 class Control(Packet):
-    angle: float  # compressed to 2 bytes
+    angle: float  # compressed to 2 bytes, clamped to 0.0 - 2pi
     speed: float  # compressed to 1 byte, clamped to 0.0 - 1.0
     flags: ControlFlags  # 1 byte
+    aspect_ratio: float  # compressed to 1 byte, clamped to 1.0 - 3.0
+
+    def write(self, client: Client) -> bytes:
+        stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
+
+        angle = CompressedFloat(self.angle, math.pi * 2)
+        speed = CompressedFloat(self.speed, 1.0)
+        aspect_ratio = CompressedFloat(self.aspect_ratio, 3.0)
+
+        client.control_ticks = (client.control_ticks + 1) % 0xff
+
+        stream.write_int8(self.packet_type.value)
+        stream.write_int32(client.server_data.public_id)
+        stream.write_int16(angle.compress())
+        stream.write_int8(speed.compress_1_clamp(0.0))
+        stream.write_int8(client.control_ticks)
+        stream.write_int8(self.flags.value)
+        stream.write_int8(client.game_player.index) # type: ignore
+        stream.write_int32(client.server_data.client_id)
+        stream.write_int8(aspect_ratio.compress_1_clamp(1.0))
+
+        data = stream.bytes()
+
+        stream.close()
+
+        return data
 
 
 @dataclass

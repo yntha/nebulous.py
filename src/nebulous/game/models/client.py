@@ -17,7 +17,7 @@ from nebulous.game.account import Account, ServerRegions
 from nebulous.game.enums import ConnectResult, Font, PacketType
 from nebulous.game.exceptions import NotSignedInError
 from nebulous.game.models import ClientConfig, ClientState, ServerData
-from nebulous.game.models.gameobjects import GameWorld
+from nebulous.game.models.gameobjects import GamePlayer, GameWorld
 from nebulous.game.models.netobjects import NetClanMessage, NetGameMessage
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import (
@@ -216,9 +216,11 @@ class Client:
         # to send control messages.
         self.random_alias = "".join(map(chr, random.choices(range(0x21, 0x7F), k=16)))  # noqa: S311
 
+        self.control_ticks = 0
+
         self.chat = LobbyChat(self, self.config.log_chat, self.config.chat_log_encoding, self.config.chat_log_size)
         self.api_player = self.account.player_obj
-        self.game_player = None
+        self.game_player: GamePlayer | None = None
         self.game_world = GameWorld(
             [],
             [],
