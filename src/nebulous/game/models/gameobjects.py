@@ -4,6 +4,7 @@ from nebulous.game.enums import (
     EjectSkinType,
     HaloType,
     HatType,
+    Item,
     ParitcleType,
     PetType,
     Skin,
@@ -49,3 +50,28 @@ class GamePlayer(GameObject):
     clan_member: ClanMember
     click_type: int
     level_colors: list[int] = field(default_factory=([0x77] * 5).copy)
+
+
+@dataclass
+class GamePlayerMass(GameObject):
+    eject_id: int
+    mass: float
+
+
+@dataclass
+class GameDot(GameObject):
+    dot_id: int
+
+
+@dataclass
+class GameItem(GameObject):
+    item_id: int
+    item_type: Item
+
+
+@dataclass
+class GameWorld:
+    players: list[GamePlayer]
+    ejects: list[GamePlayerMass]
+    dots: list[GameDot]
+    items: list[GameItem]

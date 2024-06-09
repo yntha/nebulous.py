@@ -15,6 +15,7 @@ from nebulous.game.account import Account, ServerRegions
 from nebulous.game.enums import ConnectResult, Font, PacketType
 from nebulous.game.exceptions import NotSignedInError
 from nebulous.game.models import ClientConfig, ClientState, ServerData
+from nebulous.game.models.gameobjects import GameWorld
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import (
     ClanChatMessage,
@@ -140,6 +141,9 @@ class Client:
         self.chat = LobbyChat(self)
         self.api_player = self.account.player_obj
         self.game_player = None
+        self.game_world = GameWorld(
+            [], [], [], [],
+        )
 
         self.logger.info(f"Client ID: {self.server_data.client_id}")
         self.logger.info(f"Second client ID: {self.server_data.client_id2}")
