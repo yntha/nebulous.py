@@ -307,6 +307,7 @@ class GameChatMessage(Packet):
     alias_colors: VariableLengthArray  # length 1
     show_broadcast_bubble: bool  # 1 byte
     alias_font: Font  # 1 byte
+    account_id: int = -1  # 4 bytes
 
     def write(self, client: Client) -> bytes:
         stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
@@ -345,8 +346,8 @@ class GameChatMessage(Packet):
 
         alias = MUTF8String.from_stream(stream)
         message = MUTF8String.from_stream(stream)
+        account_id = stream.read_int32()
 
-        stream.read_int32()  # account id for some reason
         stream.read_bool()  # unknown bool
         stream.read_int64()  # message id, unused, only used in single player games
 
@@ -364,7 +365,8 @@ class GameChatMessage(Packet):
                 message,
                 alias_colors,
                 show_broadcast_bubble,
-                alias_font
+                alias_font,
+                account_id,
             )
         )
 
@@ -377,6 +379,8 @@ class ClanChatMessage(Packet):
     message: MUTF8String
     clan_role: ClanRole = ClanRole.INVALID
     account_id: int = -1
+    alias: MUTF8String | None = None
+    alias_colors: VariableLengthArray | None = None
 
     def write(self, client: Client) -> bytes:
         stream = SerializingStream(byteorder=ByteOrder.NETWORK_ENDIAN)
@@ -408,11 +412,14 @@ class ClanChatMessage(Packet):
         # skip over the packet type byte
         stream.read_int8()
 
-        MUTF8String.from_stream(stream)
-
+        alias = MUTF8String.from_stream(stream)
         message = MUTF8String.from_stream(stream)
         role = ClanRole(stream.read_int8())
         account_id = stream.read_int32()
+
+        stream.read_int64()  # message id, unused, only used in single player games
+
+        alias_colors = VariableLengthArray.from_stream(1, stream)
 
         stream.close()
 
@@ -422,7 +429,9 @@ class ClanChatMessage(Packet):
                 packet_type,
                 message,
                 role,
-                account_id
+                account_id,
+                alias,
+                alias_colors,
             )
         )
 
