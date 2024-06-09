@@ -76,6 +76,9 @@ class CompressedFloat:
     def compress(self) -> int:
         return int(((self.value - 0.0) * 65535.0) / (self.max_range - 0.0))
 
+    def compress_1_clamp(self, min_v: float) -> int:
+        return int(((self.value - min_v) * 255.0) / (self.max_range - min_v))
+
     @classmethod
     def decompress(cls, value: int, max_range: float) -> Self:
         return cls((((max_range - 0.0) * (value & 0xFFFF)) / 65535.0) + 0.0, max_range)
@@ -93,6 +96,12 @@ class CompressedFloat:
         a = b24_16 + b15_8 + b7_0
 
         return cls((((max_range - 0.0) * a) / 1.6777215e7) + 0.0, max_range)
+
+    @classmethod
+    def from_1_clamped(cls, min_v: float, max_v: float, stream: DeserializingStream) -> Self:
+        value = stream.read_uint8()
+
+        return cls((((max_v - min_v) * (value & 0xFF)) / 255.0) + min_v, max_v)
 
 
 def xp2level(xp: int) -> int:
