@@ -42,6 +42,7 @@ class JoinResultCode(enum.Enum):
 
 
 class ControlFlags(enum.IntFlag):
+    NONE = 0x00
     SPLIT = 0x01
     SHOOT = 0x02
     DASH = 0x04
