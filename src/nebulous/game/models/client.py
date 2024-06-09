@@ -14,7 +14,7 @@ from multiprocess import Event, Process, Queue  # type: ignore
 
 from nebulous.game import InternalCallbacks
 from nebulous.game.account import Account, ServerRegions
-from nebulous.game.enums import ConnectResult, Font, PacketType
+from nebulous.game.enums import ConnectResult, ControlFlags, Font, PacketType
 from nebulous.game.exceptions import NotSignedInError
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.models.gameobjects import GamePlayer, GameWorld
@@ -24,6 +24,7 @@ from nebulous.game.packets import (
     ClanChatMessage,
     ConnectRequest3,
     ConnectResult2,
+    Control,
     Disconnect,
     GameChatMessage,
     GameData,
@@ -265,6 +266,20 @@ class Client:
                     self.socket.send(keep_alive_packet.write(self))
                     InternalCallbacks.on_keep_alive(self, keep_alive_packet)
 
+                    # send control packet alongside keep-alive. perhaps the server needs it
+                    # to keep track of the client's connection state?
+                    logger.info("Sending heartbeat control packet...")
+                    control_packet = Control(
+                        PacketType.CONTROL,
+                        0.0,
+                        0.0,
+                        ControlFlags.NONE,
+                        self.config.screen.as_aspect_ratio(),
+                    )
+
+                    self.socket.send(control_packet.write(self))
+                    InternalCallbacks.on_control(self, control_packet)
+
                     last_heartbeat = time.time()
                 else:
                     packet: Packet = self.packet_queue.get()
@@ -496,4 +511,7 @@ class ClientCallbacks:
         return packet
 
     def on_clan_chat_message(self, client: Client, packet: ClanChatMessage) -> ClanChatMessage:
+        return packet
+
+    def on_control(self, client: Client, packet: Control) -> Control:
         return packet

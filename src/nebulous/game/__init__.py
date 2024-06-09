@@ -12,6 +12,7 @@ if TYPE_CHECKING:
         ClanChatMessage,
         ConnectRequest3,
         ConnectResult2,
+        Control,
         Disconnect,
         GameChatMessage,
         GameData,
@@ -142,3 +143,7 @@ class InternalCallbacks:
         client.logger.info(f"Received clan chat message: {packet.as_json()}")
 
         return client.callbacks.on_clan_chat_message(client, packet)
+
+    @staticmethod
+    def on_control(client: Client, packet: Control) -> Control:
+        return client.callbacks.on_control(client, packet)
