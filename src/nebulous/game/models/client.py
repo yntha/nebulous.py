@@ -212,13 +212,16 @@ class Client:
         # packets `GAME_DATA` and `GAME_UPDATE`. upon receiving the `GAME_DATA`
         # with our random alias, we can then grab our player ID, and then be able
         # to send control messages.
-        self.random_alias = "".join(map(chr, random.choices(range(0x21, 0x7f), k=16)))  # noqa: S311
+        self.random_alias = "".join(map(chr, random.choices(range(0x21, 0x7F), k=16)))  # noqa: S311
 
         self.chat = LobbyChat(self)
         self.api_player = self.account.player_obj
         self.game_player = None
         self.game_world = GameWorld(
-            [], [], [], [],
+            [],
+            [],
+            [],
+            [],
         )
 
         self.logger.info(f"Client ID: {self.server_data.client_id}")
