@@ -408,6 +408,8 @@ class Client:
                         )
 
                         self.game_updates_done.set()
+                else:
+                    last_packet_name = packet_name
 
                 logger.info(f"Received packet: {packet_name}")
                 packet_handler.read(self, PacketType(data[0]), data)
