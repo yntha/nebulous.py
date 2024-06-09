@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import logging
 import logging.handlers
+import os.path
 import random
 import time
+from datetime import datetime, timedelta, timezone
 from socket import AF_INET, SOCK_DGRAM, inet_aton, socket
 from typing import cast
 
@@ -16,6 +18,7 @@ from nebulous.game.enums import ConnectResult, Font, PacketType
 from nebulous.game.exceptions import NotSignedInError
 from nebulous.game.models import ClientConfig, ClientState, ServerData
 from nebulous.game.models.gameobjects import GameWorld
+from nebulous.game.models.netobjects import NetClanMessage, NetGameMessage
 from nebulous.game.natives import CompressedFloat, MUTF8String, VariableLengthArray
 from nebulous.game.packets import (
     ClanChatMessage,
@@ -30,13 +33,62 @@ from nebulous.game.packets import (
 )
 
 
+class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
+    def __init__(self, encoding: str = "utf-8", chat_size: int = 1000):
+        self.start_filename = self.get_file_name()
+
+        if not os.path.exists("chat"):
+            os.makedirs("chat", mode=0o755, exist_ok=True)
+
+        self.size = chat_size
+        self.remaining = chat_size
+
+        super().__init__(self.start_filename, mode="w", encoding=encoding)
+
+    def get_file_name(self) -> str:
+        local_offset_sec = -time.timezone if time.localtime().tm_isdst == 0 else -time.altzone
+        offset_hours = local_offset_sec // 3600
+        offset_minutes = (local_offset_sec % 3600) // 60
+
+        # get local timezone
+        local_timezone = timezone(timedelta(hours=offset_hours, minutes=offset_minutes))
+        filename = f"lobby_chat_{datetime.now(local_timezone).strftime('%m-%d-%Y_%I-%M-%S-%p')}.log"
+
+        return os.path.join("chat", filename)
+
+    def emit(self, record: logging.LogRecord) -> None:
+        if self.remaining == 0:
+            self.rotate(self.start_filename, self.get_file_name())
+            self.remaining = self.size
+        else:
+            self.remaining -= 1
+
+        return super().emit(record)
+
+
 class LobbyChat:
-    def __init__(self, client: Client):
+    def __init__(self, client: Client, log_chat: bool = True):
         self.client = client
         self.alias = self.client.config.alias
         self.alias_colors = self.client.config.alias_colors
         self.alias_font = self.client.config.alias_font
         self.show_broadcast_bubble = False
+
+        if log_chat:
+            self.logger = logging.getLogger("LobbyChat")
+            self.logger.setLevel(self.client.log_level)
+
+            log_handler = LobbyChatHandler()
+            log_handler.setFormatter(
+                logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s", "%m/%d/%Y %I:%M:%S %p")
+            )
+
+            self.logger.addHandler(log_handler)
+        else:
+            self.logger = None
+
+        self.game_messages = []
+        self.clan_messages = []
 
     def set_name(self, alias: str):
         self.alias = alias
@@ -54,6 +106,9 @@ class LobbyChat:
         if self.client.account.account_id < 0:
             raise NotSignedInError("Cannot send game message without being signed in.")
 
+        if self.logger is not None:
+            self.logger.info(f"GAME: {self.alias}[{self.client.account.account_id}]: {message}")
+
         chat_message = GameChatMessage(
             PacketType.GAME_CHAT_MESSAGE,
             MUTF8String.from_py_string(self.alias),
@@ -69,12 +124,33 @@ class LobbyChat:
         if self.client.account.account_id < 0:
             raise NotSignedInError("Cannot send clan message without being signed in.")
 
+        api_player = self.client.account.player_obj
+
+        if self.logger is not None:
+            self.logger.info(
+                f"CLAN: <{api_player.stats.clan_member.clan_role}> {self.alias}[{api_player.account_id}]: {message}"  # type: ignore
+            )
+
         chat_message = ClanChatMessage(
             PacketType.CLAN_CHAT_MESSAGE,
             MUTF8String.from_py_string(message),
         )
 
         self.client.packet_queue.put(chat_message)
+
+    def add_game_message(self, message: NetGameMessage):
+        if self.logger is not None:
+            self.logger.info(f"GAME: {message.alias}[{message.player_id}]: {message.message}")
+
+        self.game_messages.append(message)
+
+    def add_clan_message(self, message: NetClanMessage):
+        if self.logger is not None:
+            self.logger.info(
+                f"CLAN: <{message.clan_role.name}> {message.alias}[{message.player_id}]: {message.message}"
+            )
+
+        self.clan_messages.append(message)
 
 
 class Client:
