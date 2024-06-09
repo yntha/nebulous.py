@@ -31,6 +31,17 @@ class PlayerName:
 
 
 @dataclass
+class ScreenDimensions:
+    width: int
+    height: int
+
+    def as_aspect_ratio(self) -> float:
+        smallest = min(self.width, self.height)
+
+        return max(self.width, self.height) / smallest
+
+
+@dataclass
 class ClientConfig:
     game_mode: GameMode = GameMode.FFA
     game_difficulty: GameDifficulty = GameDifficulty.EASY
@@ -64,6 +75,7 @@ class ClientConfig:
     chat_log_encoding: str = "utf-8"
     chat_log_size: int = 1000
     log_level: int = logging.INFO
+    screen: ScreenDimensions = field(default=ScreenDimensions(1920, 1080))
 
 
 class ClientState(Enum):
