@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import logging
 import logging.handlers
 import os.path
@@ -10,7 +11,6 @@ from socket import AF_INET, SOCK_DGRAM, inet_aton, socket
 from typing import cast
 
 from javarandom import Random as JavaRNG
-from multiprocess import Event, Process, Queue  # type: ignore
 
 from nebulous.game import InternalCallbacks
 from nebulous.game.account import Account, ServerRegions
