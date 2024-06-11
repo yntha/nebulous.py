@@ -22,23 +22,23 @@ if TYPE_CHECKING:
 
 class InternalCallbacks:
     @staticmethod
-    def on_connect(client: Client, packet: ConnectRequest3) -> ConnectRequest3:
-        return client.callbacks.on_connect(client, packet)
+    async def on_connect(client: Client, packet: ConnectRequest3) -> ConnectRequest3:
+        return await client.callbacks.on_connect(client, packet)
 
     @staticmethod
-    def on_disconnect(client: Client, packet: Disconnect) -> Disconnect:
-        return client.callbacks.on_disconnect(client, packet)
+    async def on_disconnect(client: Client, packet: Disconnect) -> Disconnect:
+        return await client.callbacks.on_disconnect(client, packet)
 
     @staticmethod
-    def on_keep_alive(client: Client, packet: KeepAlive) -> KeepAlive:
-        return client.callbacks.on_keep_alive(client, packet)
+    async def on_keep_alive(client: Client, packet: KeepAlive) -> KeepAlive:
+        return await client.callbacks.on_keep_alive(client, packet)
 
     @staticmethod
-    def on_connect_result(client: Client, packet: ConnectResult2) -> ConnectResult2:
-        return client.callbacks.on_connect_result(client, packet)
+    async def on_connect_result(client: Client, packet: ConnectResult2) -> ConnectResult2:
+        return await client.callbacks.on_connect_result(client, packet)
 
     @staticmethod
-    def on_game_data(client: Client, packet: GameData) -> GameData:
+    async def on_game_data(client: Client, packet: GameData) -> GameData:
         for player in packet.player_objects:
             game_player = GamePlayer(
                 0.0,
@@ -130,20 +130,24 @@ class InternalCallbacks:
 
             client.game_world.items.append(game_item)
 
-        return client.callbacks.on_game_data(client, packet)
+        return await client.callbacks.on_game_data(client, packet)
 
     @staticmethod
-    def on_game_chat_message(client: Client, packet: GameChatMessage) -> GameChatMessage:
+    async def on_game_chat_message(client: Client, packet: GameChatMessage) -> GameChatMessage:
         client.logger.info(f"Received game chat message: {packet.as_json()}")
 
-        return client.callbacks.on_game_chat_message(client, packet)
+        return await client.callbacks.on_game_chat_message(client, packet)
 
     @staticmethod
-    def on_clan_chat_message(client: Client, packet: ClanChatMessage) -> ClanChatMessage:
+    async def on_clan_chat_message(client: Client, packet: ClanChatMessage) -> ClanChatMessage:
         client.logger.info(f"Received clan chat message: {packet.as_json()}")
 
-        return client.callbacks.on_clan_chat_message(client, packet)
+        return await client.callbacks.on_clan_chat_message(client, packet)
 
     @staticmethod
-    def on_control(client: Client, packet: Control) -> Control:
-        return client.callbacks.on_control(client, packet)
+    async def on_control(client: Client, packet: Control) -> Control:
+        return await client.callbacks.on_control(client, packet)
+
+    @staticmethod
+    async def on_player_ready(client: Client, player: GamePlayer) -> GamePlayer:
+        return await client.callbacks.on_player_ready(client, player)
