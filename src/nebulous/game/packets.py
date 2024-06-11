@@ -376,7 +376,7 @@ class GameChatMessage(Packet):
 # clan chat messages are the same as game chat messages, only difference is
 # the packet type and the redaction of other fields.
 @dataclass
-@PacketHandler.register_handler(PacketType.GAME_CHAT_MESSAGE)
+@PacketHandler.register_handler(PacketType.CLAN_CHAT_MESSAGE)
 class ClanChatMessage(Packet):
     message: MUTF8String
     clan_role: ClanRole = ClanRole.INVALID
