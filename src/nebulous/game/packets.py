@@ -39,6 +39,13 @@ if TYPE_CHECKING:
 
 
 class PacketEncoder(json.JSONEncoder):
+    """
+    Custom JSON encoder for encoding packets.
+
+    This class extends the `json.JSONEncoder` class and provides custom encoding
+    logic for handling enum objects. It converts enum objects to their corresponding
+    names before encoding.
+    """
     def default(self, o: Any) -> Any:
         if isinstance(o, enum.Enum):
             return o.name
@@ -70,6 +77,13 @@ def custom_dict_factory(data: list[tuple[str, Any]]) -> Any:
 
 @dataclass
 class Packet:
+    """
+    Represents a packet in the Nebulous.io UDP protocol.
+
+    Attributes:
+        packet_type (PacketType): The type of the packet.
+    """
+
     packet_type: PacketType
 
     def write(self, client: Client) -> bytes:
@@ -80,6 +94,15 @@ class Packet:
         raise NotImplementedError()
 
     def as_json(self, indent: int = 2) -> str:
+        """
+        Serialize the packet object to a JSON formatted string.
+
+        Args:
+            indent (int): The number of spaces to use for indentation (default is 2).
+
+        Returns:
+            str: The JSON string representation of the packet object.
+        """
         return json.dumps(asdict(self, dict_factory=custom_dict_factory), indent=indent, cls=PacketEncoder)
 
 
@@ -105,6 +128,20 @@ class PacketHandler:
 @dataclass
 @PacketHandler.register_handler(PacketType.CONNECT_RESULT_2)
 class ConnectResult2(Packet):
+    """
+    Represents a packet containing the result of a connection attempt.
+
+    Attributes:
+        client_id (int): The client ID.
+        result (ConnectResult): The connection result status.
+        public_id (int): The public ID.
+        private_id (int): The private ID.
+        game_id (int): The game ID.
+        ban_length (int): The ban length.
+        ad_stuff (float): Misc ad stuff.
+        split_multiplier (SplitMultiplier): The split multiplier.
+    """
+
     client_id: int  # 4 bytes
     result: ConnectResult  # 1 byte
     public_id: int  # 4 bytes
@@ -151,6 +188,24 @@ class ConnectResult2(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.GAME_DATA)
 class GameData(Packet):
+    """
+    Represents a packet containing game(lobby) data.
+
+    Attributes:
+        public_id (int): The public ID of the game.
+        map_size (float): The size of the game map.
+        player_count (int): The number of players in the game.
+        eject_count (int): The number of ejects in the game.
+        dot_id_offset (int): The offset for dot IDs.
+        dot_count (int): The number of dots in the game.
+        item_id_offset (int): The offset for item IDs.
+        item_count (int): The number of items in the game.
+        player_objects (list[NetPlayer]): List of player objects in the game.
+        eject_objects (list[NetPlayerEject]): List of eject objects in the game.
+        dot_objects (list[NetGameDot]): List of dot objects in the game.
+        item_objects (list[NetGameItem]): List of item objects in the game.
+    """
+
     public_id: int  # 4 bytes
     map_size: float  # 4 bytes
     player_count: int  # 1 byte
@@ -303,6 +358,17 @@ class GameData(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.GAME_CHAT_MESSAGE)
 class GameChatMessage(Packet):
+    """
+    Represents a game chat packet in the game.
+
+    Attributes:
+        alias (MUTF8String): The alias(username) of the sender.
+        message (MUTF8String): The chat message.
+        alias_colors (VariableLengthArray): The colors associated with the alias.
+        show_broadcast_bubble (bool): Indicates whether to show an in-game bubble over your player.
+        alias_font (Font): The font style of the alias.
+        account_id (int): The account ID of the sender. Do not supply, only read from.
+    """
     alias: MUTF8String
     message: MUTF8String
     alias_colors: VariableLengthArray  # length 1
@@ -378,6 +444,17 @@ class GameChatMessage(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.CLAN_CHAT_MESSAGE)
 class ClanChatMessage(Packet):
+    """
+    Represents a clan chat packet.
+
+    Attributes:
+        message (MUTF8String): The message content.
+        clan_role (ClanRole): The role of the sender in the clan. Do not supply, only read from.
+        account_id (int): The account ID of the sender. Do not supply, only read from.
+        alias (MUTF8String | None): The alias of the sender, if available. Do not supply, only read from.
+        alias_colors (VariableLengthArray | None): The colors associated with the sender's alias, if available.
+            Do not supply, only read from.
+    """
     message: MUTF8String
     clan_role: ClanRole = ClanRole.INVALID
     account_id: int = -1
@@ -442,6 +519,16 @@ class ClanChatMessage(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.CONTROL)
 class Control(Packet):
+    """
+    Represents a control packet that contains information about the player's control inputs.
+
+    Attributes:
+        angle (float): The angle of the player, compressed to 2 bytes and clamped to the range 0.0 - 2pi.
+        speed (float): The speed of the player, compressed to 1 byte and clamped to the range 0.0 - 1.0.
+        flags (ControlFlags): The control flags, represented as a ControlFlags enum.
+        aspect_ratio (float): The aspect ratio of the screen, compressed to 1 byte and clamped to the range 1.0 - 3.0.
+    """
+
     angle: float  # compressed to 2 bytes, clamped to 0.0 - 2pi
     speed: float  # compressed to 1 byte, clamped to 0.0 - 1.0
     flags: ControlFlags  # 1 byte
@@ -476,6 +563,16 @@ class Control(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.KEEP_ALIVE)
 class KeepAlive(Packet):
+    """
+    Represents a KeepAlive packet.
+
+    Attributes:
+        public_id (int): The public ID of the client.
+        private_id (int): The private ID of the client.
+        server_ip (bytes): The server IP address.
+        client_id (int): The client ID.
+    """
+
     public_id: int  # 4 bytes
     private_id: int  # 4 bytes
     server_ip: bytes  # 4 bytes, see socket.inet_aton
@@ -505,6 +602,14 @@ class KeepAlive(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.DISCONNECT)
 class Disconnect(Packet):
+    """
+    Represents a packet used to disconnect a client from the server.
+
+    Attributes:
+        public_id (int): The public ID of the client.
+        private_id (int): The private ID of the client.
+        client_id (int): The ID of the client.
+    """
     public_id: int
     private_id: int
     client_id: int
@@ -525,6 +630,43 @@ class Disconnect(Packet):
 @dataclass
 @PacketHandler.register_handler(PacketType.CONNECT_REQUEST_3)
 class ConnectRequest3(Packet):
+    """
+    Represents a packet used to request a connection to the Nebulous.io game server.
+
+    Attributes:
+        game_mode (GameMode): The game mode to be played.
+        game_difficulty (GameDifficulty): The game difficulty level.
+        game_id (int): The ID of the game.
+        ticket (MUTF8String): The ticket for authentication (MUST BE BLANK).
+        online_mode (OnlineStatus): The online status of the player.
+        mayhem (bool): Indicates whether the game is in mayhem mode.
+        skin1 (Skin): The first skin chosen by the player.
+        eject_skin (int): The skin ID for the eject action.
+        alias (MUTF8String): The alias or username of the player (max is 16 bytes).
+        custom_skin (int): The ID of the custom skin chosen by the player.
+        alias_colors (VariableLengthArray): The colors chosen for the alias.
+        pet_id (int): The ID of the pet chosen by the player.
+        blob_color (int): The color of the player's blob.
+        pet_name (MUTF8String): The name of the pet.
+        hat_type (int): The type of hat chosen by the player.
+        custom_pet (int): The ID of the custom pet chosen by the player.
+        halo_type (int): The type of halo chosen by the player.
+        pet_id2 (int): The ID of the second pet chosen by the player.
+        pet_name2 (MUTF8String): The name of the second pet.
+        custom_pet2 (int): The ID of the second custom pet chosen by the player.
+        custom_particle (int): The ID of the custom particle chosen by the player.
+        particle_type (int): The type of particle chosen by the player.
+        alias_font (Font): The font chosen for the alias.
+        level_colors (VariableLengthArray): The colors chosen for the level.
+        alias_anim (NameAnimation): The animation chosen for the alias.
+        skin2 (Skin): The second skin chosen by the player.
+        skin_interpolation_rate (CompressedFloat): The interpolation rate for skin animations.
+        custom_skin2 (int): The ID of the second custom skin chosen by the player.
+        sc_bits (VariableLengthArray): The bits used for server-client communication.
+
+    Raises:
+        ValueError: If the packet header has been corrupted.
+    """
     # request_id: int - should always be 0, 4 bytes omitted because it is always 0
     # rng_seed: int - 8 bytes, omitted as it is generated below
     # game_version: int - 2 bytes, omitted as it's set below
