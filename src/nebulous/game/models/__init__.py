@@ -178,4 +178,4 @@ class ClientState(Enum):
     DISCONNECTED = 3
 
 
-__all__ = ["ServerData", "ClientState"]
+__all__ = ["ServerData", "ClientState", "ClientConfig", "ScreenDimensions", "PlayerName"]
