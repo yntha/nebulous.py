@@ -38,8 +38,8 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
     def __init__(self, encoding: str = "utf-8", chat_size: int = 1000):
         self.current_filename = self.get_file_name()
 
-        if not os.path.exists("chat"):
-            os.makedirs("chat", mode=0o755, exist_ok=True)
+        if not os.path.exists(os.path.dirname(self.current_filename)):
+            os.makedirs(os.path.dirname(self.current_filename), mode=0o755, exist_ok=True)
 
         self.size = chat_size
         self.remaining = chat_size
