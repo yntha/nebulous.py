@@ -51,7 +51,6 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
         get_file_name(): Returns the file name for the log file based on the current timestamp and local timezone.
         emit(record: logging.LogRecord) -> None: Writes the log record to the log file, rotating the file if necessary.
         shouldRollover(record: logging.LogRecord) -> bool: Determines whether the log file should be rotated. Unused.
-
     """
 
     def __init__(self, encoding: str = "utf-8", chat_size: int = 1000):
@@ -71,7 +70,6 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
 
         Returns:
             str: The file name for the log file.
-
         """
         local_offset_sec = -time.timezone if time.localtime().tm_isdst == 0 else -time.altzone
         offset_hours = local_offset_sec // 3600
@@ -89,10 +87,6 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
 
         Args:
             record (logging.LogRecord): The log record to be written to the log file.
-
-        Returns:
-            None
-
         """
         if self.remaining == 0:
             new_filename = self.get_file_name()
@@ -115,7 +109,7 @@ class LobbyChat:
     Represents the lobby chat functionality for a client.
 
     Args:
-        client (Client): The client object associated with the lobby chat.
+        client (Client): The client instance.
         log_chat (bool, optional): Whether to log chat messages. Defaults to True.
         log_encoding (str, optional): The encoding to use for logging. Defaults to "utf-8".
         log_size (int, optional): The maximum number of chat messages to log. Defaults to 1000.
@@ -229,13 +223,15 @@ class LobbyChat:
 
 class Client:
     """
-    Represents a client that connects to a Nebulous.io game server.
+    Represents a client that connects to a Nebulous.io game server. Contains methods for connecting to the server,
+    sending and receiving packets, and handling callbacks for various events. Logs client activity to a log file
+    located in the `logs` directory of the current working directory.
 
     Args:
         ticket (str): The ticket used for sign-in authentication.
         region (ServerRegions): The server region to connect to.
-        config (ClientConfig | None, optional): The client configuration. Defaults to None.
-        callbacks (ClientCallbacks | None, optional): The client callbacks. Defaults to None.
+        config (ClientConfig | None, optional): The client configuration. If None, a default configuration is used.
+        callbacks (ClientCallbacks | None, optional): The client callbacks. If None, a default callback handler is used.
     """
 
     def __init__(
