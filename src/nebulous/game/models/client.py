@@ -55,7 +55,7 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
         local_timezone = timezone(timedelta(hours=offset_hours, minutes=offset_minutes))
         filename = f"lobby_chat_{datetime.now(local_timezone).strftime('%m-%d-%Y_%I-%M-%S-%p')}.log"
 
-        return os.path.join("chat", filename)
+        return os.path.join("logs", "chat", filename)
 
     def emit(self, record: logging.LogRecord) -> None:
         if self.remaining == 0:
@@ -177,10 +177,14 @@ class Client:
         self.logger = logging.getLogger("Client")
         self.log_level = self.config.log_level
 
+        log_fn = self.get_file_name()
+
+        os.makedirs(os.path.dirname(log_fn), mode=0o755, exist_ok=True)
+
         logging.basicConfig(
             format="[%(asctime)s %(name)s] %(levelname)s: %(message)s",
             datefmt="%m/%d/%Y %I:%M:%S %p",
-            filename="client.log",
+            filename=log_fn,
             filemode="w",
             encoding="utf-8",
             level=self.log_level,
@@ -236,6 +240,17 @@ class Client:
         self.logger.info(f"Client ID: {self.server_data.client_id}")
         self.logger.info(f"Second client ID: {self.server_data.client_id2}")
         self.logger.info(f"Client initialized to connect to {self.account.region.ip}:{self.port}")
+
+    def get_file_name(self) -> str:
+        local_offset_sec = -time.timezone if time.localtime().tm_isdst == 0 else -time.altzone
+        offset_hours = local_offset_sec // 3600
+        offset_minutes = (local_offset_sec % 3600) // 60
+
+        # get local timezone
+        local_timezone = timezone(timedelta(hours=offset_hours, minutes=offset_minutes))
+        filename = f"client_{datetime.now(local_timezone).strftime('%m-%d-%Y_%I-%M-%S-%p')}.log"
+
+        return os.path.join("logs", filename)
 
     async def net_send_loop(self):
         logger = logging.getLogger("SendLoop")
