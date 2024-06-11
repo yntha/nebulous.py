@@ -454,7 +454,6 @@ class Control(Packet):
         speed = CompressedFloat(self.speed, 1.0)
         aspect_ratio = CompressedFloat(self.aspect_ratio, 3.0)
 
-        client.control_ticks = (client.control_ticks + 1) % 0xff
 
         stream.write_int8(self.packet_type.value)
         stream.write_int32(client.server_data.public_id)
@@ -462,9 +461,11 @@ class Control(Packet):
         stream.write_int8(speed.compress_1_clamp(0.0))
         stream.write_int8(client.control_ticks)
         stream.write_int8(self.flags.value)
-        stream.write_int8(client.game_player.index) # type: ignore
+        stream.write_int8(client.game_player.index)  # type: ignore
         stream.write_int32(client.server_data.client_id)
         stream.write_int8(aspect_ratio.compress_1_clamp(1.0))
+
+        client.control_ticks = (client.control_ticks + 1) % 0xff
 
         data = stream.bytes()
 
