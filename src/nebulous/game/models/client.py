@@ -239,13 +239,7 @@ class Client:
 
     async def net_send_loop(self):
         logger = logging.getLogger("SendLoop")
-        log_handler = logging.FileHandler("send.log", mode="w", encoding="utf-8")
         loop = asyncio.get_event_loop()
-
-        logger.addHandler(log_handler)
-        logger.setLevel(self.log_level)
-        log_handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s", "%m/%d/%Y %I:%M:%S %p"))
-        log_handler.setLevel(self.log_level)
 
         logger.info("Starting send loop...")
 
@@ -268,11 +262,7 @@ class Client:
                         self.server_data.client_id,
                     )
 
-                    logger.info(f"Keep-alive packet: {keep_alive_packet}")
-
                     packet_data = keep_alive_packet.write(self)
-
-                    logger.info(f"Keep-alive data: {packet_data.hex()}")
 
                     await asyncio.wait_for(loop.sock_sendall(self.socket, packet_data), timeout=5.0)
                     await InternalCallbacks.on_keep_alive(self, keep_alive_packet)
@@ -288,11 +278,7 @@ class Client:
                         self.config.screen.as_aspect_ratio(),
                     )
 
-                    logger.info(f"Control packet: {control_packet}")
-
                     packet_data = control_packet.write(self)
-
-                    logger.info(f"Control data: {packet_data.hex()}")
 
                     await asyncio.wait_for(loop.sock_sendall(self.socket, packet_data), timeout=5.0)
                     await InternalCallbacks.on_control(self, control_packet)
@@ -306,9 +292,10 @@ class Client:
         except KeyboardInterrupt:
             logger.info("Send loop interrupted.")
         except TimeoutError:
-            logger.fatal("[SEND] Socket timed out.")
+            logger.fatal("Socket timed out.")
         finally:
-            log_handler.close()
+             if self.state != ClientState.DISCONNECTING and not self.stop_event.is_set():
+                await self.stop()
 
     async def connect(self) -> bool:
         self.state = ClientState.CONNECTING
@@ -390,14 +377,8 @@ class Client:
         # cache value2member map outside of loop
         value2member_map = PacketType._value2member_map_
         logger = logging.getLogger("RecvLoop")
-        log_handler = logging.FileHandler("recv.log", mode="w", encoding="utf-8")
         gamedata_received = 0
         loop = asyncio.get_event_loop()
-
-        logger.addHandler(log_handler)
-        logger.setLevel(self.log_level)
-        log_handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s", "%m/%d/%Y %I:%M:%S %p"))
-        log_handler.setLevel(self.log_level)
 
         logger.info("Starting receive loop...")
 
@@ -436,9 +417,10 @@ class Client:
         except KeyboardInterrupt:
             logger.info("Receive loop interrupted.")
         except TimeoutError:
-            logger.fatal("[RECV] Socket timed out.")
+            logger.fatal("Socket timed out.")
         finally:
-            log_handler.close()
+            if self.state != ClientState.DISCONNECTING and not self.stop_event.is_set():
+                await self.stop()
 
     async def start(self):
         self.logger.info("Starting client...")
@@ -452,8 +434,6 @@ class Client:
             self.recv_loop = asyncio.create_task(self.net_recv_loop())
 
             await asyncio.gather(self.event_loop, self.recv_loop)
-
-            self.logger.info("Client started.")
         else:
             self.logger.error("Client failed to connect.")
             await self.stop()
