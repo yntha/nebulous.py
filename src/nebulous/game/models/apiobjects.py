@@ -528,3 +528,22 @@ class APIAlerts:
     chat_ban_until_utc: str
     mass_boost_enabled: bool
     clan_member: ClanMember
+
+
+__all__ = [
+    "PlayerTitles",
+    "APIPlayerProfile",
+    "APIPlayerGeneralStats",
+    "APIPlayerStats",
+    "APISkin",
+    "APISkinIDs",
+    "BanInfo",
+    "ClanMember",
+    "Clan",
+    "APISaleInfo",
+    "APISkinURLBase",
+    "APICoinPurchaseResult",
+    "APISkinData",
+    "APICheckinResult",
+    "APIAlerts",
+]
