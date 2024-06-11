@@ -530,3 +530,6 @@ class ClientCallbacks:
 
     async def on_control(self, client: Client, packet: Control) -> Control:
         return packet
+
+    async def on_player_ready(self, client: Client, player: GamePlayer) -> GamePlayer:
+        return player
