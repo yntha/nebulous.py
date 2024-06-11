@@ -30,6 +30,10 @@ def test_fetch_other_player():
 
     logger.info(f"Account bio: {player_profile.bio}")
 
+    # cooldown before next test
+    logger.info("Cooldown for 1.5 seconds...")
+    time.sleep(1.5)
+
 
 def test_fetch_self():
     account = Account(secrets.get("TICKET", ""), ServerRegions.US_EAST)  # type: ignore
