@@ -605,7 +605,8 @@ class Account:
         purchase_prices (APIPurchasePrices): The current purchase prices for items in-game.
 
     Methods:
-        __init__(self, ticket: str, region: ServerRegions, log_level: int = logging.INFO): Initializes an Account object.
+        __init__(self, ticket: str, region: ServerRegions, log_level: int = logging.INFO): Initializes an Account
+            object.
         no_account(cls, region: ServerRegions) -> Account: Creates an Account object without a ticket.
         refresh(self): Refreshes the secure ticket.
         get_region_ip(self) -> str: Returns the server IP address of the region.
