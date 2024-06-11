@@ -178,7 +178,7 @@ class Client:
         self.log_level = self.config.log_level
 
         logging.basicConfig(
-            format="[%(asctime)s] %(levelname)s: %(message)s",
+            format="[%(asctime)s %(name)s] %(levelname)s: %(message)s",
             datefmt="%m/%d/%Y %I:%M:%S %p",
             filename="client.log",
             filemode="w",
