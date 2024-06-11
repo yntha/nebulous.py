@@ -44,6 +44,10 @@ from nebulous.game.models.apiobjects import (
 
 
 class ServerRegions(StrEnum):
+    """
+    Enum class representing the server regions available in the game.
+    """
+
     US_WEST = "US_WEST"
     US_EAST = "US_EAST"
     EU = "EU"
@@ -84,20 +88,51 @@ class Endpoints(StrEnum):
 
 @dataclass
 class AccountObject:
+    """
+    Represents an account object.
+
+    Attributes:
+        account (Account): Represents the current signed-in account.
+    """
     account: Account  # represents the current signed in account
 
 
 @dataclass
 class APIPlayer(AccountObject):
+    """
+    Represents a player in the game with an associated account ID.
+
+    Attributes:
+        account_id (int): The ID of the player's account.
+    """
+
     account_id: int
 
     def get_profile(self) -> APIPlayerProfile:
+        """
+        Retrieves the player's profile.
+
+        Returns:
+            APIPlayerProfile: The player's profile.
+
+        Raises:
+            InvalidUserIDError: If the account ID is not valid.
+        """
         if self.account_id < 0:
             raise InvalidUserIDError("Cannot fetch profile without a valid account ID.")
 
         return self.account.get_player_profile(self.account_id)
 
     def get_stats(self) -> APIPlayerStats:
+        """
+        Retrieves the player's stats.
+
+        Returns:
+            APIPlayerStats: The player's stats.
+
+        Raises:
+            InvalidUserIDError: If the account ID is not valid.
+        """
         if self.account_id < 0:
             raise InvalidUserIDError("Cannot fetch stats without a valid account ID.")
 
@@ -105,6 +140,19 @@ class APIPlayer(AccountObject):
 
     @classmethod
     def from_account_id(cls, account: Account, account_id: int) -> APIPlayer:
+        """
+        Creates an APIPlayer instance from an account ID.
+
+        Args:
+            account (Account): The account associated with the player.
+            account_id (int): The ID of the player's account.
+
+        Returns:
+            APIPlayer: An instance of APIPlayer.
+
+        Raises:
+            InvalidUserIDError: If the account ID is not valid.
+        """
         if account_id < 0:
             raise InvalidUserIDError("Invalid account ID.")
 
@@ -113,6 +161,14 @@ class APIPlayer(AccountObject):
 
 @dataclass
 class APIFriend(APIPlayer):
+    """
+    Represents a friend in the game's account system.
+
+    Attributes:
+        relationship (Relationship): The relationship status with the friend.
+        bff (bool): Indicates whether the friend is the user's best friend.
+        last_played_utc (str): The last time the friend played the game in UTC format.
+    """
     relationship: Relationship
     bff: bool
     last_played_utc: str
@@ -120,6 +176,23 @@ class APIFriend(APIPlayer):
 
 @dataclass
 class APIMailEnvelope(AccountObject):
+    """
+    Represents a mail envelope in the game account.
+
+    Attributes:
+        msg_id (int): The ID of the mail message.
+        from_aid (int): The ID of the sender account.
+        to_aid (int): The ID of the recipient account.
+        to_name (str): The name of the recipient.
+        from_name (str): The name of the sender.
+        subject (str): The subject of the mail.
+        is_new (bool): Indicates whether the mail is new or not.
+        time_sent (str): The time the mail was sent.
+        time_expires (str): The time the mail expires.
+        to_colors (list[int]): The colors associated with the recipient.
+        from_colors (list[int]): The colors associated with the sender.
+    """
+
     msg_id: int
     from_aid: int
     to_aid: int
@@ -132,9 +205,16 @@ class APIMailEnvelope(AccountObject):
     to_colors: list[int] = field(default_factory=[].copy)
     from_colors: list[int] = field(default_factory=[].copy)
 
-    # the mail envelope and mail objects are essentially the same,
-    # the mail object just has the message body.
     def read_mail(self) -> str:
+        """
+        Reads the content of the mail message.
+
+        Returns:
+            str: The message body of the mail.
+
+        Raises:
+            InvalidMailIDError: If the message ID is invalid.
+        """
         if self.msg_id < 0:
             raise InvalidMailIDError("Invalid message ID.")
 
@@ -143,16 +223,41 @@ class APIMailEnvelope(AccountObject):
 
 @dataclass
 class APIMailList(AccountObject):
+    """A class representing a list of API mails for an account."""
+
     mails: list[APIMailEnvelope] = field(default_factory=[].copy)
 
 
 @dataclass
 class PurchasableItem(AccountObject):
+    """
+    Represents a purchasable item in the game.
+
+    Attributes:
+        item_type (PurchasableType): The type of the item.
+        item_id (int): The ID of the item.
+        price (int): The price of the item, in plasma.
+
+    Methods:
+        purchase() -> APICoinPurchaseResult:
+            Purchase the item using the account's coins(plasma).
+    """
+
     item_type: PurchasableType
     item_id: int
     price: int
 
     def purchase(self) -> APICoinPurchaseResult:
+        """
+        Purchase the item using the account's coins(plasma).
+
+        Returns:
+            APICoinPurchaseResult: The result of the purchase.
+
+        Raises:
+            NotSignedInError: If the account is not signed in.
+
+        """
         if self.account.account_id < 0:
             raise NotSignedInError("Cannot purchase items without an account.")
 
@@ -161,6 +266,16 @@ class PurchasableItem(AccountObject):
 
 @dataclass
 class APIPurchasePrices:
+    """
+    Represents the purchase prices for various items in the game.
+
+    Attributes:
+        current_coins (int): The current number of coins(plasma).
+        coins (int): The number of coins(plasma). (?)
+        clan_coins (int): The number of clan coins(plasma).
+        daily_free_skins (list[Skin]): A list of daily free skins.
+        items (list[PurchasableItem]): A list of purchasable items.
+    """
     current_coins: int
     coins: int
     clan_coins: int
@@ -170,12 +285,34 @@ class APIPurchasePrices:
 
 @dataclass
 class APIWheelOfNebulous(AccountObject):
+    """
+    Represents the API for the Wheel of Nebulous game.
+
+    Attributes:
+        spin_type (SpinType): The type of spin.
+        spin_data (Any): Additional data related to the spin.
+        next_spin_ms (int): The time in milliseconds until the next spin.
+        spins_remaining (int): The number of spins remaining.
+
+    Methods:
+        spin() -> APIWheelOfNebulous: Spins the wheel and returns the updated APIWheelOfNebulous object.
+    """
+
     spin_type: SpinType
     spin_data: Any
     next_spin_ms: int
     spins_remaining: int
 
     def spin(self) -> APIWheelOfNebulous:
+        """
+        Spins the wheel and returns the updated APIWheelOfNebulous object.
+
+        Raises:
+            NotSignedInError: If the account is not signed in.
+
+        Returns:
+            APIWheelOfNebulous: The updated APIWheelOfNebulous object.
+        """
         if self.account.account_id < 0:
             raise NotSignedInError("Cannot spin without an account.")
 
@@ -184,64 +321,182 @@ class APIWheelOfNebulous(AccountObject):
 
 @dataclass
 class SignedInPlayer(APIPlayer):
+    """
+    Represents a signed-in player in the game.
+
+    Attributes:
+        stats (APIPlayerStats): The player's statistics.
+        profile (APIPlayerProfile): The player's profile.
+
+    Methods:
+        get_friends(): Get the list of friends for the player.
+        get_skins(): Get the list of skins owned by the player.
+        get_received_mail(): Get the list of received mails for the player.
+        get_sent_mail(): Get the list of sent mails by the player.
+        send_mail(to, subject, message): Send a mail to another player.
+        send_clan_mail(subject, message): Send a mail to the player's clan members.
+        delete_sent_mail(msg_id): Delete a sent mail.
+        delete_received_mail(msg_id): Delete a received mail.
+        get_skin_data(skin_id): Get the data of a specific skin.
+        checkin(): Perform a check-in action.
+        spin_wheel(): Spin the wheel of Nebulous.
+        from_account(account): Create a SignedInPlayer instance from an Account object.
+    """
+
     stats: APIPlayerStats
     profile: APIPlayerProfile
 
     def get_friends(self) -> list[APIFriend]:
+        """
+        Get the list of friends for the player.
+
+        Returns:
+            list[APIFriend]: The list of friends.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot fetch friends without an account.")
 
         return self.account.get_friends(include_friend_requests=False, include_friend_invites=False)
 
     def get_skins(self) -> list[APISkin]:
+        """
+        Get the list of skins owned by the player.
+
+        Returns:
+            list[APISkin]: The list of skins.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot fetch skins without an account.")
 
         return self.account.get_skin_ids().skins
 
     def get_received_mail(self) -> APIMailList:
+        """
+        Get the list of received mails for the player.
+
+        Returns:
+            APIMailList: The list of received mails.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot fetch mail without an account.")
 
         return self.account.get_mail(True)
 
     def get_sent_mail(self) -> APIMailList:
+        """
+        Get the list of sent mails by the player.
+
+        Returns:
+            APIMailList: The list of sent mails.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot fetch mail without an account.")
 
         return self.account.get_mail(False)
 
     def send_mail(self, to: int, subject: str, message: str):
+        """
+        Send a mail to another player.
+
+        Args:
+            to (int): The recipient's account ID.
+            subject (str): The subject of the mail.
+            message (str): The content of the mail.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot send mail without an account.")
 
         return self.account.send_mail(to, subject, message)
 
     def send_clan_mail(self, subject: str, message: str):
+        """
+        Send a mail to the player's clan members.
+
+        Args:
+            subject (str): The subject of the mail.
+            message (str): The content of the mail.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot send mail without an account.")
 
         return self.account.send_mail(-1, subject, message, True, self.stats.clan_member.clan_role)
 
     def delete_sent_mail(self, msg_id: int):
+        """
+        Delete a sent mail.
+
+        Args:
+            msg_id (int): The ID of the mail to delete.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot delete mail without an account.")
 
         return self.account.delete_mail(msg_id, False)
 
     def delete_received_mail(self, msg_id: int):
+        """
+        Delete a received mail.
+
+        Args:
+            msg_id (int): The ID of the mail to delete.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot delete mail without an account.")
 
         return self.account.delete_mail(msg_id, True)
 
     def get_skin_data(self, skin_id: int) -> bytes:
+        """
+        Get the data of a specific skin.
+
+        Args:
+            skin_id (int): The ID of the skin.
+
+        Returns:
+            bytes: The skin data.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot fetch skin data without an account.")
 
         return self.account.get_skin_data(skin_id).skin_data
 
     def checkin(self) -> APICheckinResult:
+        """
+        Perform a check-in action.
+
+        Returns:
+            APICheckinResult: The result of the check-in action.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot checkin without an account.")
 
@@ -254,6 +509,15 @@ class SignedInPlayer(APIPlayer):
         )
 
     def spin_wheel(self) -> APIWheelOfNebulous:
+        """
+        Spin the wheel of Nebulous.
+
+        Returns:
+            APIWheelOfNebulous: The result of spinning the wheel.
+
+        Raises:
+            NotSignedInError: If the player is not signed in.
+        """
         if self.account is None or self.account.account_id < 0:
             raise NotSignedInError("Cannot spin without an account.")
 
@@ -261,6 +525,18 @@ class SignedInPlayer(APIPlayer):
 
     @classmethod
     def from_account(cls, account: Account) -> SignedInPlayer:
+        """
+        Create a SignedInPlayer instance from an Account object.
+
+        Args:
+            account (Account): The Account object.
+
+        Returns:
+            SignedInPlayer: The created SignedInPlayer instance.
+
+        Raises:
+            NotSignedInError: If the account is not signed in.
+        """
         if account.account_id < 0:
             raise NotSignedInError("Cannot create player without a signed in account.")
 
@@ -272,6 +548,15 @@ class SignedInPlayer(APIPlayer):
 
 @dataclass
 class Ticket:
+    """
+    Represents a ticket object.
+
+    Attributes:
+        ticket_str (str): The string representation of the ticket.
+        account_id (str): The account ID extracted from the ticket string.
+        creation_date (str): The creation date extracted from the ticket string.
+        signature (str): The signature extracted from the ticket string.
+    """
     ticket_str: str
     account_id: str = field(init=False)
     creation_date: str = field(init=False)
@@ -292,11 +577,57 @@ class Ticket:
 
 @dataclass
 class Region:
+    """
+    Represents a game server region.
+
+    Attributes:
+        region_name (ServerRegions): The name of the region.
+        ip (str): The IP address of the server in the region.
+    """
     region_name: ServerRegions
     ip: str
 
 
 class Account:
+    """
+    Represents a user account in the game.
+
+    Attributes:
+        API_URL (ClassVar[str]): The base URL for account operations.
+        ticket (Ticket): The login ticket for the account.
+        region (Region): The region to report to the account API.
+        secure_bytes (bytes): The secure ticket in bytes.
+        account_id (int): The ID of the account.
+        player_obj (SignedInPlayer): The signed-in player object associated with the account.
+        alerts (APIAlerts): Current pending alerts for the account.
+        sale_info (APISaleInfo): Current sale information.
+        skin_url_base (APISkinURLBase): The base URL for skin operations, among other things.
+        purchase_prices (APIPurchasePrices): The current purchase prices for items in-game.
+
+    Methods:
+        __init__(self, ticket: str, region: ServerRegions, log_level: int = logging.INFO): Initializes an Account object.
+        no_account(cls, region: ServerRegions) -> Account: Creates an Account object without a ticket.
+        refresh(self): Refreshes the secure ticket.
+        get_region_ip(self) -> str: Returns the server IP address of the region.
+        get_region(self) -> ServerRegions: Returns the name of the region.
+        get_secure_ticket(self) -> tuple[bytes, str]: Retrieves the secure ticket.
+        get_alerts(self) -> APIAlerts: Retrieves the alerts for the account.
+        get_spin_info(self, spin: bool) -> APIWheelOfNebulous: Retrieves spin information.
+        get_skin_data(self, skin_id: int) -> APISkinData: Retrieves skin data.
+        delete_mail(self, msg_id: int, received: bool): Deletes a mail.
+        send_mail(self, to: int, subject: str, message: str, to_clan: bool = False,
+            clan_role: ClanRole = ClanRole.INVALID): Sends a mail.
+        get_purchase_prices(self, for_mail: bool) -> APIPurchasePrices: Retrieves purchase prices, in plasma.
+        coin_purchase(self, item_type: PurchasableType, item_id: int, price: int) -> APICoinPurchaseResult: Performs a
+            coin(plasma) purchase.
+        get_skin_url_base(self) -> APISkinURLBase: Retrieves the skin URL base.
+        get_sale_info(self) -> APISaleInfo: Retrieves sale information.
+        get_mail(self, received: bool) -> APIMailList: Retrieves the list of mails.
+        read_mail(self, msg_id: int) -> str: Reads a mail.
+        get_skin_ids(self, skin_type: CustomSkinType = CustomSkinType.ALL) -> APISkinIDs: Retrieves skin IDs.
+        get_friends(self, start_index: int = 0, include_friend_requests: bool = True, search: str = "",
+            count: int = 100, include_friend_invites: bool = True) -> list[APIFriend]: Retrieves the list of friends.
+    """
     API_URL: ClassVar[str] = "https://simplicialsoftware.com/api/account/"
 
     def __init__(self, ticket: str, region: ServerRegions, log_level: int = logging.INFO):
@@ -339,20 +670,54 @@ class Account:
 
     @classmethod
     def no_account(cls, region: ServerRegions) -> Account:
+        """
+        Creates a new Account object with no account information.
+
+        Args:
+            cls (Account): The Account class.
+            region (ServerRegions): The server region for the account.
+
+        Returns:
+            Account: A new Account object with no account information.
+        """
         return cls("", region)
 
     def refresh(self):
+        """
+        Refreshes the secure ticket for the account.
+
+        This method retrieves a new secure ticket and updates the `secure_bytes` and `region.ip` attributes of the
+        account object.
+        """
         self.secure_bytes, self.region.ip = self.get_secure_ticket()
 
         self.logger.info("Refreshed secure ticket.")
 
     def get_region_ip(self) -> str:
+        """
+        Returns the server IP address of the region associated with the account.
+
+        Returns:
+            str: The server IP address of the region.
+        """
         return self.region.ip
 
     def get_region(self) -> ServerRegions:
+        """
+        Returns the region name of the server.
+
+        Returns:
+            ServerRegions: The region name of the server.
+        """
         return self.region.region_name
 
     def get_secure_ticket(self) -> tuple[bytes, str]:
+        """
+        Retrieves a secure ticket and the corresponding region IP.
+
+        Returns:
+            A tuple containing the secure ticket as bytes and the region IP as a string.
+        """
         response = self.request_endpoint(Endpoints.SECURE_TICKET, {"region": str(self.region.region_name)})
         secure_ticket = response["RezPlEVBeW"]
         region_ip = response["IP"]
@@ -361,6 +726,12 @@ class Account:
         return secure_bytes, region_ip
 
     def get_alerts(self) -> APIAlerts:
+        """
+        Retrieves the pending alerts for the account.
+
+        Returns:
+            An instance of APIAlerts containing the account alerts.
+        """
         response = self.request_endpoint(Endpoints.GET_ALERTS, {})
 
         return APIAlerts(
@@ -398,6 +769,15 @@ class Account:
         )
 
     def get_spin_info(self, spin: bool) -> APIWheelOfNebulous:
+        """
+        Retrieves spin information from the API.
+
+        Args:
+            spin (bool): Indicates whether to perform a spin or not.
+
+        Returns:
+            APIWheelOfNebulous: An instance of the APIWheelOfNebulous class containing the spin information.
+        """
         response = self.request_endpoint(Endpoints.GET_SPIN_INFO, {"Spin": spin})
 
         return APIWheelOfNebulous(
@@ -409,16 +789,43 @@ class Account:
         )
 
     def get_skin_data(self, skin_id: int) -> APISkinData:
+        """
+        Retrieves the skin data for a given skin ID.
+
+        Args:
+            skin_id (int): The ID of the skin to retrieve data for.
+
+        Returns:
+            APISkinData: An instance of the APISkinData class containing the skin status and skin data.
+        """
         response = self.request_endpoint(Endpoints.GET_SKIN_DATA, {"SkinID": skin_id})
 
         return APISkinData(CustomSkinStatus[response["SkinStatus"]], base64.b64decode(response["Data"]))
 
     def delete_mail(self, msg_id: int, received: bool):
+        """
+        Deletes a mail message.
+
+        Args:
+            msg_id (int): The ID of the mail message to delete.
+            received (bool): Indicates if this is a received mail.
+        """
         self.request_endpoint(Endpoints.DELETE_MAIL, {"MsgID": msg_id, "Received": received})
 
     def send_mail(
         self, to: int, subject: str, message: str, to_clan: bool = False, clan_role: ClanRole = ClanRole.INVALID
     ):
+        """
+        Sends a mail to the specified recipient.
+
+        Args:
+            to (int): The account ID of the recipient, or -1 for clan mail.
+            subject (str): The subject of the mail.
+            message (str): The content of the mail.
+            to_clan (bool, optional): Indicates whether the mail should be sent to the entire clan. Defaults to False.
+            clan_role (ClanRole, optional): The role of the player within the clan. Defaults to ClanRole.INVALID.
+                Required if sending a clan mail.
+        """
         data_map = {
             "ToAID": to,
             "Message": message,
@@ -430,6 +837,15 @@ class Account:
         self.request_endpoint(Endpoints.SEND_MAIL, data_map)
 
     def get_purchase_prices(self, for_mail: bool) -> APIPurchasePrices:
+        """
+        Retrieves the purchase prices for items in the game, in plasma.
+
+        Args:
+            for_mail (bool): A boolean indicating whether the purchase prices are for mail.
+
+        Returns:
+            APIPurchasePrices: An instance of the APIPurchasePrices class containing the purchase prices in plasma.
+        """
         response = self.request_endpoint(Endpoints.GET_PURCHASE_PRICES, {"ForMail": for_mail})
 
         free_skins = [Skin(skin_id) for skin_id in response["DailyFreeSkins"]]
@@ -447,6 +863,17 @@ class Account:
         )
 
     def coin_purchase(self, item_type: PurchasableType, item_id: int, price: int) -> APICoinPurchaseResult:
+        """
+        Purchase an item using coins(plasma).
+
+        Args:
+            item_type (PurchasableType): The type of the item to purchase.
+            item_id (int): The ID of the item to purchase.
+            price (int): The expected price of the item, in plasma.
+
+        Returns:
+            APICoinPurchaseResult: The result of the coin purchase operation.
+        """
         data_map = {
             "ItemType": item_type.name,
             "ItemID": item_id,
@@ -466,6 +893,13 @@ class Account:
         )
 
     def get_skin_url_base(self) -> APISkinURLBase:
+        """
+        Retrieves the skin URL base from the API.
+
+        Returns:
+            APISkinURLBase: An instance of the APISkinURLBase class containing the skin URL base and other related
+            information.
+        """
         response = self.request_endpoint(Endpoints.GET_SKIN_URL_BASE, {})
 
         return APISkinURLBase(
@@ -487,6 +921,13 @@ class Account:
         )
 
     def get_sale_info(self) -> APISaleInfo:
+        """
+        Retrieves the sale information from the API.
+
+        Returns:
+            APISaleInfo: An object containing the sale information, including the expiration date,
+            new Taco YouTube URL, new Discord invite URL, announcement URL, and sale types.
+        """
         response = self.request_endpoint(Endpoints.GET_SALE_INFO, {})
 
         return APISaleInfo(
@@ -498,6 +939,15 @@ class Account:
         )
 
     def get_mail(self, received: bool) -> APIMailList:
+        """
+        Retrieves the list of mails based on the received flag.
+
+        Args:
+            received (bool): Flag indicating whether to retrieve received mails (True) or sent mails (False).
+
+        Returns:
+            APIMailList: An instance of APIMailList containing the retrieved mails.
+        """
         response = self.request_endpoint(Endpoints.GET_MAIL_LIST, {"Received": received})
 
         return APIMailList(
@@ -522,11 +972,29 @@ class Account:
         )
 
     def read_mail(self, msg_id: int) -> str:
+        """
+        Reads a mail message with the given message ID.
+
+        Args:
+            msg_id (int): The ID of the mail message to read.
+
+        Returns:
+            str: The content of the mail message.
+        """
         response = self.request_endpoint(Endpoints.READ_MAIL, {"MsgID": msg_id})
 
         return response["Message"]
 
     def get_skin_ids(self, skin_type: CustomSkinType = CustomSkinType.ALL) -> APISkinIDs:
+        """
+        Retrieves the skin IDs for the specified skin type.
+
+        Args:
+            skin_type (CustomSkinType, optional): The type of skin to retrieve IDs for. Defaults to CustomSkinType.ALL.
+
+        Returns:
+            APISkinIDs: An object containing the skin IDs and other related information.
+        """
         response = self.request_endpoint(Endpoints.GET_SKIN_IDS, {"Type": skin_type.name})
 
         skins = []
@@ -550,6 +1018,19 @@ class Account:
         count: int = 100,
         include_friend_invites: bool = True,
     ) -> list[APIFriend]:
+        """
+        Retrieves a list of friends for the account.
+
+        Args:
+            start_index (int, optional): The starting index for the list of friends. Defaults to 0.
+            include_friend_requests (bool, optional): Whether to include friend requests in the list. Defaults to True.
+            search (str, optional): A search string to filter the friends. Defaults to an empty string.
+            count (int, optional): The maximum number of friends to retrieve. Defaults to 100.
+            include_friend_invites (bool, optional): Whether to include friend invites in the list. Defaults to True.
+
+        Returns:
+            list[APIFriend]: A list of APIFriend objects representing the friends.
+        """
         response = self.request_endpoint(
             Endpoints.GET_FRIENDS,
             {
@@ -576,6 +1057,15 @@ class Account:
         return friends
 
     def get_player_profile(self, account_id: int) -> APIPlayerProfile:
+        """
+        Retrieves the player profile for the specified account ID.
+
+        Args:
+            account_id (int): The ID of the account.
+
+        Returns:
+            APIPlayerProfile: An instance of the APIPlayerProfile class representing the player profile.
+        """
         response = self.request_endpoint(
             Endpoints.GET_PLAYER_PROFILE,
             {
@@ -616,6 +1106,15 @@ class Account:
         )
 
     def get_player_stats(self, account_id: int) -> APIPlayerStats:
+        """
+        Retrieves the player statistics for the given account ID.
+
+        Args:
+            account_id (int): The ID of the account.
+
+        Returns:
+            APIPlayerStats: The player statistics for the account.
+        """
         response = self.request_endpoint(
             Endpoints.GET_PLAYER_STATS,
             {
@@ -752,6 +1251,19 @@ class Account:
         )
 
     def request_endpoint(self, endpoint: Endpoints, data: dict) -> dict:
+        """
+        Sends a request to the specified endpoint with the provided data.
+
+        Args:
+            endpoint (Endpoints): The endpoint to send the request to.
+            data (dict): Additional POST data to include in the request.
+
+        Returns:
+            dict: The JSON response from the server.
+
+        Raises:
+            Exception: If the request fails with a non-OK status code.
+        """
         url = f"{self.API_URL}{endpoint!s}"
         default_data = {
             "Game": constants.APP_NAME,
