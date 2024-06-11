@@ -22,51 +22,59 @@
 
 ## Usage
 ### Utilizing the client
-From [`test_connect.py`](tests/test_connect.py):
 ```python
-import time
+import asyncio
+import logging
+
+from dotenv import dotenv_values
 
 from nebulous.game.account import ServerRegions
 from nebulous.game.models.client import Client, ClientCallbacks
-from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, KeepAlive
+from nebulous.game.models.gameobjects import GamePlayer
+from nebulous.game.packets import ConnectRequest3, ConnectResult2, Disconnect, GameData, KeepAlive
 
-
-TEST_TICKET = ""
+secrets = dotenv_values("../.env.secrets")
+logger = logging.getLogger("Client Tests")
+logger.setLevel(logging.INFO)
 
 
 class TestCallbacks(ClientCallbacks):
-    def on_connect(self, client: Client, packet: ConnectRequest3) -> ConnectRequest3:
+    async def on_connect(self, client: Client, packet: ConnectRequest3) -> ConnectRequest3:
         print("Connected to server")
         return packet
 
-    def on_disconnect(self, client: Client, packet: Disconnect) -> Disconnect:
+    async def on_disconnect(self, client: Client, packet: Disconnect) -> Disconnect:
         print("Disconnected from server")
         return packet
 
-    def on_keep_alive(self, client: Client, packet: KeepAlive) -> KeepAlive:
+    async def on_keep_alive(self, client: Client, packet: KeepAlive) -> KeepAlive:
         print("Sending keep alive packet")
         return packet
 
-    def on_connect_result(self, client: Client, packet: ConnectResult2) -> ConnectResult2:
+    async def on_connect_result(self, client: Client, packet: ConnectResult2) -> ConnectResult2:
         print(f"Received connection result: {packet.result}")
         return packet
 
+    async def on_game_data(self, client: Client, packet: GameData) -> GameData:
+        print(f"Received game data")
+        return packet
 
-def test_client():
-    client = Client(TEST_TICKET, ServerRegions.US_EAST, callbacks=TestCallbacks())
+    async def on_player_ready(self, client: Client, player: GamePlayer) -> GamePlayer:
+        print(f"Player ready: {player.name}, index: {player.index}")
 
-    client.start()
+        await client.chat.send_game_message("Hello, world! :)")
 
-    # disconnect after 3 seconds.
-    # can also use client.run_forever() to keep the client running indefinitely
-    # until ctrl+c is pressed.
-    time.sleep(3)
+        return player
 
-    client.stop()
+
+async def test_client():
+    client = Client(secrets.get("TICKET", ""), ServerRegions.US_EAST, callbacks=TestCallbacks())  # type: ignore
+
+    await client.start()
 
 
 if __name__ == "__main__":
-    test_client()
+    asyncio.run(test_client())
 ```
 
 ### Interacting with the API
