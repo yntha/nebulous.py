@@ -111,6 +111,16 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
 
 
 class LobbyChat:
+    """
+    Represents the lobby chat functionality for a client.
+
+    Args:
+        client (Client): The client object associated with the lobby chat.
+        log_chat (bool, optional): Whether to log chat messages. Defaults to True.
+        log_encoding (str, optional): The encoding to use for logging. Defaults to "utf-8".
+        log_size (int, optional): The maximum number of chat messages to log. Defaults to 1000.
+    """
+
     def __init__(self, client: Client, log_chat: bool = True, log_encoding: str = "utf-8", log_size: int = 1000):
         self.client = client
         self.alias = self.client.config.alias
@@ -147,6 +157,16 @@ class LobbyChat:
         self.show_broadcast_bubble = show
 
     async def send_game_message(self, message: str):
+        """
+        Sends a game message to the server.
+
+        Args:
+            message (str): The message to be sent.
+
+        Raises:
+            NotSignedInError: If the client is not signed in.
+
+        """
         if self.client.account.account_id < 0:
             raise NotSignedInError("Cannot send game message without being signed in.")
 
@@ -165,6 +185,16 @@ class LobbyChat:
         await self.client.packet_queue.put(chat_message)
 
     async def send_clan_message(self, message: str):
+        """
+        Sends a clan message to the server.
+
+        Args:
+            message (str): The message to be sent.
+
+        Raises:
+            NotSignedInError: If the client is not signed in.
+
+        """
         if self.client.account.account_id < 0:
             raise NotSignedInError("Cannot send clan message without being signed in.")
 
@@ -198,6 +228,16 @@ class LobbyChat:
 
 
 class Client:
+    """
+    Represents a client that connects to a Nebulous.io game server.
+
+    Args:
+        ticket (str): The ticket used for sign-in authentication.
+        region (ServerRegions): The server region to connect to.
+        config (ClientConfig | None, optional): The client configuration. Defaults to None.
+        callbacks (ClientCallbacks | None, optional): The client callbacks. Defaults to None.
+    """
+
     def __init__(
         self,
         ticket: str,
@@ -278,6 +318,12 @@ class Client:
         self.logger.info(f"Client initialized to connect to {self.account.region.ip}:{self.port}")
 
     def get_file_name(self) -> str:
+        """
+        Get the filename for the log file.
+
+        Returns:
+            str: The filename for the log file.
+        """
         local_offset_sec = -time.timezone if time.localtime().tm_isdst == 0 else -time.altzone
         offset_hours = local_offset_sec // 3600
         offset_minutes = (local_offset_sec % 3600) // 60
@@ -289,6 +335,18 @@ class Client:
         return os.path.join("logs", filename)
 
     async def net_send_loop(self):
+        """
+        Asynchronous method that handles the sending of packets to the server.
+
+        This method continuously sends packets to the server after the lobby data is ready and the client is not
+        in the process of stopping. It sends keep-alive packets to maintain the connection with the server and
+        also sends control packets to update the server about the client's connection state (assuming).
+
+        If there are packets in the packet queue, it sends those packets instead of the heartbeat.
+
+        Raises:
+            TimeoutError: If the socket times out while sending packets.
+        """
         logger = logging.getLogger("SendLoop")
         loop = asyncio.get_event_loop()
 
@@ -345,10 +403,16 @@ class Client:
         except TimeoutError:
             logger.fatal("Socket timed out.")
         finally:
-             if self.state != ClientState.DISCONNECTING and not self.stop_event.is_set():
+            if self.state != ClientState.DISCONNECTING and not self.stop_event.is_set():
                 await self.stop()
 
     async def connect(self) -> bool:
+        """
+        Connects the client to the server.
+
+        Returns:
+            bool: True if the connection is successful, False otherwise.
+        """
         self.state = ClientState.CONNECTING
         loop = asyncio.get_event_loop()
 
@@ -425,6 +489,16 @@ class Client:
             return False
 
     async def net_recv_loop(self):
+        """
+        Asynchronous method that handles the receiving of game server packets.
+
+        This method continuously receives packets from the game server socket and processes them accordingly.
+        It checks the packet type, handles initial game data packets, and delegates the packet handling to the
+        appropriate handler.
+
+        Raises:
+            TimeoutError: If the socket times out.
+        """
         # cache value2member map outside of loop
         value2member_map = PacketType._value2member_map_
         logger = logging.getLogger("RecvLoop")
@@ -474,6 +548,9 @@ class Client:
                 await self.stop()
 
     async def start(self):
+        """
+        Starts the client and establishes a connection to the server.
+        """
         self.logger.info("Starting client...")
 
         if await self.connect():
@@ -492,6 +569,9 @@ class Client:
             return
 
     async def stop(self):
+        """
+        Stops the client and disconnects from the server. Sends a disconnect packet to the server.
+        """
         if self.event_loop is None or self.recv_loop is None:
             self.logger.warning("Client is already stopped.")
 
@@ -529,6 +609,12 @@ class Client:
         self.state = ClientState.DISCONNECTED
 
     def next_port(self) -> int:
+        """
+        Generates the next available port number for the client.
+
+        Returns:
+            int: The next available port number.
+        """
         port = self.port_seed + 27900
 
         self.port_seed += 1
