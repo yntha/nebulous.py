@@ -454,7 +454,6 @@ class Control(Packet):
         speed = CompressedFloat(self.speed, 1.0)
         aspect_ratio = CompressedFloat(self.aspect_ratio, 3.0)
 
-
         stream.write_int8(self.packet_type.value)
         stream.write_int32(client.server_data.public_id)
         stream.write_int16(angle.compress())
