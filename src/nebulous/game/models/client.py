@@ -35,6 +35,25 @@ from nebulous.game.packets import (
 
 
 class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
+    """
+    A custom logging handler for handling chat logs.
+
+    Args:
+        encoding (str): The encoding to use for the log file. Defaults to "utf-8".
+        chat_size (int): The maximum number of chat messages to store in the log file. Defaults to 1000.
+
+    Attributes:
+        current_filename (str): The current log file name.
+        size (int): The maximum number of chat messages to store in the log file.
+        remaining (int): The number of remaining chat messages that can be stored in the log file.
+
+    Methods:
+        get_file_name(): Returns the file name for the log file based on the current timestamp and local timezone.
+        emit(record: logging.LogRecord) -> None: Writes the log record to the log file, rotating the file if necessary.
+        shouldRollover(record: logging.LogRecord) -> bool: Determines whether the log file should be rotated. Unused.
+
+    """
+
     def __init__(self, encoding: str = "utf-8", chat_size: int = 1000):
         self.current_filename = self.get_file_name()
 
@@ -47,6 +66,13 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
         super().__init__(self.current_filename, mode="w", encoding=encoding)
 
     def get_file_name(self) -> str:
+        """
+        Returns the file name for the log file based on the current timestamp and local timezone.
+
+        Returns:
+            str: The file name for the log file.
+
+        """
         local_offset_sec = -time.timezone if time.localtime().tm_isdst == 0 else -time.altzone
         offset_hours = local_offset_sec // 3600
         offset_minutes = (local_offset_sec % 3600) // 60
@@ -58,6 +84,16 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
         return os.path.join("logs", "chat", filename)
 
     def emit(self, record: logging.LogRecord) -> None:
+        """
+        Writes the log record to the log file, rotating the file if necessary.
+
+        Args:
+            record (logging.LogRecord): The log record to be written to the log file.
+
+        Returns:
+            None
+
+        """
         if self.remaining == 0:
             new_filename = self.get_file_name()
 
