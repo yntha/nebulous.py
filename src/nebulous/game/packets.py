@@ -76,7 +76,7 @@ class Packet:
         raise NotImplementedError()
 
     @classmethod
-    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> Self:
+    async def read(cls, client: Client, packet_type: PacketType, data: bytes) -> Self:
         raise NotImplementedError()
 
     def as_json(self, indent: int = 2) -> str:
@@ -115,7 +115,7 @@ class ConnectResult2(Packet):
     split_multiplier: SplitMultiplier  # 1 byte
 
     @classmethod
-    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> ConnectResult2:
+    async def read(cls, client: Client, packet_type: PacketType, data: bytes) -> ConnectResult2:
         stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
 
         # skip over the packet type byte
@@ -132,7 +132,7 @@ class ConnectResult2(Packet):
 
         stream.close()
 
-        return InternalCallbacks.on_connect_result(
+        return await InternalCallbacks.on_connect_result(
             client,
             cls(
                 packet_type,
@@ -165,7 +165,7 @@ class GameData(Packet):
     item_objects: list[NetGameItem] = field(default_factory=list)
 
     @classmethod
-    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> GameData:
+    async def read(cls, client: Client, packet_type: PacketType, data: bytes) -> GameData:
         stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
 
         # skip over the packet type byte
@@ -280,7 +280,7 @@ class GameData(Packet):
 
         stream.close()
 
-        return InternalCallbacks.on_game_data(
+        return await InternalCallbacks.on_game_data(
             client,
             cls(
                 packet_type,
@@ -339,7 +339,7 @@ class GameChatMessage(Packet):
         return data
 
     @classmethod
-    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> GameChatMessage:
+    async def read(cls, client: Client, packet_type: PacketType, data: bytes) -> GameChatMessage:
         stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
 
         # skip over the packet type byte
@@ -358,7 +358,7 @@ class GameChatMessage(Packet):
 
         stream.close()
 
-        return InternalCallbacks.on_game_chat_message(
+        return await InternalCallbacks.on_game_chat_message(
             client,
             cls(
                 packet_type,
@@ -407,7 +407,7 @@ class ClanChatMessage(Packet):
         return data
 
     @classmethod
-    def read(cls, client: Client, packet_type: PacketType, data: bytes) -> ClanChatMessage:
+    async def read(cls, client: Client, packet_type: PacketType, data: bytes) -> ClanChatMessage:
         stream = DeserializingStream(data, byteorder=ByteOrder.NETWORK_ENDIAN)
 
         # skip over the packet type byte
@@ -424,7 +424,7 @@ class ClanChatMessage(Packet):
 
         stream.close()
 
-        return InternalCallbacks.on_clan_chat_message(
+        return await InternalCallbacks.on_clan_chat_message(
             client,
             cls(
                 packet_type,
