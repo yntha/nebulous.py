@@ -372,7 +372,7 @@ class Client:
 
             self.game_id = conn_result.game_id
             self.config.split_multiplier = conn_result.split_multiplier
-            self.server_data.public_id = conn_result.client_id
+            self.server_data.public_id = conn_result.public_id
             self.server_data.private_id = conn_result.private_id
 
             self.logger.info(f"Game ID: {self.game_id}")
