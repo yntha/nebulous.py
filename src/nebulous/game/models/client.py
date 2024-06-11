@@ -625,28 +625,118 @@ class Client:
 
 class ClientCallbacks:
     async def on_connect(self, client: Client, packet: ConnectRequest3) -> ConnectRequest3:
+        """
+        Called when the client sends a connect request.
+
+        Args:
+            client (Client): The client instance.
+            packet (ConnectRequest3): The connect request packet.
+
+        Returns:
+            ConnectRequest3: The connect request packet.
+        """
         return packet
 
     async def on_disconnect(self, client: Client, packet: Disconnect) -> Disconnect:
+        """
+        Called when the client disconnects from the server.
+
+        Args:
+            client (Client): The client instance.
+            packet (Disconnect): The disconnect packet containing information about the disconnection.
+
+        Returns:
+            Disconnect: The disconnect packet.
+        """
         return packet
 
     async def on_keep_alive(self, client: Client, packet: KeepAlive) -> KeepAlive:
+        """
+        Called when the client sends a keep-alive packet to the server.
+
+        Parameters:
+        - client (Client): The client instance.
+        - packet (KeepAlive): The KeepAlive packet received from the server.
+
+        Returns:
+        - KeepAlive: The KeepAlive packet.
+        """
         return packet
 
     async def on_connect_result(self, client: Client, packet: ConnectResult2) -> ConnectResult2:
+        """
+        Called when the client receives a connect result packet from the server.
+
+        Args:
+            client (Client): The client instance.
+            packet (ConnectResult2): The connect result packet.
+
+        Returns:
+            ConnectResult2: The connect result packet.
+        """
         return packet
 
     async def on_game_data(self, client: Client, packet: GameData) -> GameData:
+        """
+        Called when the client receives game data from the server.
+
+        Args:
+            client (Client): The client instance.
+            packet (GameData): The game data packet received from the server.
+
+        Returns:
+            GameData: The game data packet.
+        """
         return packet
 
     async def on_game_chat_message(self, client: Client, packet: GameChatMessage) -> GameChatMessage:
+        """
+        Called when a game chat message is received.
+
+        Args:
+            client (Client): The client instance.
+            packet (GameChatMessage): The game chat message packet.
+
+        Returns:
+            GameChatMessage: The game chat message packet.
+        """
         return packet
 
     async def on_clan_chat_message(self, client: Client, packet: ClanChatMessage) -> ClanChatMessage:
+        """
+        Called when a clan chat message is received.
+
+        Args:
+            client (Client): The client instance.
+            packet (ClanChatMessage): The received clan chat message packet.
+
+        Returns:
+            ClanChatMessage: The clan chat message packet.
+        """
         return packet
 
     async def on_control(self, client: Client, packet: Control) -> Control:
+        """
+        Called when a control packet is received.
+
+        Args:
+            client (Client): The client instance.
+            packet (Control): The control packet received from/sent by the client.
+
+        Returns:
+            Control: The control packet.
+        """
         return packet
 
     async def on_player_ready(self, client: Client, player: GamePlayer) -> GamePlayer:
+        """
+        Called when a player is ready to interact with the lobby.
+
+        Args:
+            client (Client): The client instance.
+            player (GamePlayer): The player object representing the player.
+
+        Returns:
+            GamePlayer: The player object.
+        """
         return player
