@@ -97,7 +97,7 @@ class InternalCallbacks:
             if player.player_name.value == client.random_alias:
                 client.logger.info(f"Found self in game data: {player}")
 
-                client.game_player = game_player  # type: ignore
+                client.game_player = await InternalCallbacks.on_player_ready(client, game_player)  # type: ignore
 
             client.game_world.players.append(game_player)
 
