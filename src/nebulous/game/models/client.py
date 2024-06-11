@@ -414,23 +414,22 @@ class Client:
                 packet_handler = PacketHandler.get_handler(PacketType(data[0]))
                 packet_name = PacketType(data[0]).name
 
+                if not self.game_data_done.is_set():
+                    if packet_name == "GAME_DATA":
+                        gamedata_received += 1
+                    else:
+                        logger.info(
+                            f"Received all initial game data packets ({gamedata_received}). Packet sending enabled."
+                        )
+
+                        self.game_data_done.set()
+
+                logger.info(f"Received packet: {data.hex()}")
+
                 if packet_handler is None:
                     logger.warn(f"Received unhandled packet type: {packet_name}")
 
                     continue
-
-                if packet_name == "GAME_DATA" and not self.game_updates_done.is_set():
-                    gamedata_remaining -= 1
-                elif gamedata_remaining <= 0 and not self.game_updates_done.is_set():
-                    if last_packet_name == "GAME_DATA":
-                        total_gamedata = expected_gamedata + abs(gamedata_remaining) + 1
-                        logger.info(
-                            f"Received all initial game data packets ({total_gamedata}). Packet sending enabled."
-                        )
-
-                        self.game_updates_done.set()
-                else:
-                    last_packet_name = packet_name
 
                 logger.info(f"Received packet: {packet_name}")
                 await packet_handler.read(self, PacketType(data[0]), data)
