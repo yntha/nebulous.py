@@ -344,6 +344,7 @@ class GameChatMessage(Packet):
 
         # skip over the packet type byte
         stream.read_int8()
+        stream.read_int32()  # public id, unused
 
         alias = MUTF8String.from_stream(stream)
         message = MUTF8String.from_stream(stream)
@@ -412,6 +413,7 @@ class ClanChatMessage(Packet):
 
         # skip over the packet type byte
         stream.read_int8()
+        stream.read_int32()  # public id, unused
 
         alias = MUTF8String.from_stream(stream)
         message = MUTF8String.from_stream(stream)
