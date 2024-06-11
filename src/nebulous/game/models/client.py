@@ -69,6 +69,10 @@ class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
 
         return super().emit(record)
 
+    # logic is handled in emit()
+    def shouldRollover(self, record: logging.LogRecord) -> bool:
+        return False
+
 
 class LobbyChat:
     def __init__(self, client: Client, log_chat: bool = True, log_encoding: str = "utf-8", log_size: int = 1000):
