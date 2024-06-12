@@ -151,3 +151,8 @@ class InternalCallbacks:
     @staticmethod
     async def on_player_ready(client: Client, player: GamePlayer) -> GamePlayer:
         return await client.callbacks.on_player_ready(client, player)
+
+
+__all__ = [
+    "InternalCallbacks",
+]
