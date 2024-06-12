@@ -1,7 +1,18 @@
 import enum
 
 
+import enum
+
 class ConnectResult(enum.Enum):
+    """
+    Represents the result of a connection attempt to the game servers.
+
+    Attributes:
+        SUCCESS (int): The connection attempt was successful.
+        GAME_NOT_FOUND (int): The game was not found.
+        UNKNOWN (int): An unknown error occurred during the connection attempt.
+        ACCOUNT_ALREADY_SIGNED_IN (int): The account is already signed in.
+    """
     SUCCESS = 0
     GAME_NOT_FOUND = 1
     UNKNOWN = 2
@@ -9,6 +20,41 @@ class ConnectResult(enum.Enum):
 
 
 class JoinResultCode(enum.Enum):
+    """
+    Enum class representing the result codes for joining a game.
+
+    Attributes:
+        SUCCESS (int): Joining the game was successful.
+        NAME_TAKEN (int): The name is already taken.
+        NAME_INVALID (int): The name is invalid.
+        FULL (int): The game is already full.
+        GAME_NOT_FOUND (int): The game was not found.
+        FRIEND_NOT_FOUND (int): The friend was not found.
+        UNKNOWN_ERROR (int): An unknown error occurred.
+        DIED_THIS_ROUND (int): The player died in this round.
+        CLAN_WAR_NOT_FOUND (int): The clan war was not found.
+        CLAN_NOT_FOUND (int): The clan was not found.
+        ACCOUNT_NOT_FOUND (int): The account was not found.
+        LACK_PERMISSION (int): The player lacks permission.
+        REQUEST_TIMED_OUT (int): The request timed out.
+        YOU_ARE_SPECTATING (int): The player is spectating.
+        PLEASE_WAIT (int): Server has requested the client to wait.
+        IS_ARENA (int): The game is an arena.
+        ACCOUNT_IN_USE (int): The account is already in use.
+        UPDATE_AVAILABLE (int): An update is available.
+        INVALID_TOKEN (int): The token is invalid.
+        BANNED (int): The player is banned.
+        NOT_SIGNED_IN (int): The player is not signed in.
+        TOURNAMENTS_DISABLED (int): Tournaments are disabled.
+        MUTED (int): The player is muted.
+        FRIEND_ALREADY_TEAMED (int): The friend is already teamed.
+        GROUP_NOT_FOUND (int): The group was not found.
+        COMP_BANNED (int): The player is banned from competitive play.
+        QUEUE_POSITION_UPDATE (int): The queue position was updated.
+        CHAT_BANNED (int): The player is banned from chat.
+        KICKED (int): The player was kicked.
+        INCOMPATIBLE_VERSION (int): The game version is incompatible.
+    """
     SUCCESS = 0
     NAME_TAKEN = 1
     NAME_INVALID = 2
@@ -42,6 +88,18 @@ class JoinResultCode(enum.Enum):
 
 
 class ControlFlags(enum.IntFlag):
+    """
+    Enum class representing control flags for game actions.
+
+    Attributes:
+        NONE (int): No control flag.
+        SPLIT (int): Split the primary blob.
+        SHOOT (int): Shoot mass out of the primary blob.
+        DASH (int): Use the dash ability. Only works in Dash mode.
+        GHOST (int): Use the ghost ability. Only works in Ghost mode.
+        DISPOSE (int): Dispose of the item held by the primary blob.
+        CHARGEUP (int): Charge up the primary blob. Only works in Charge mode.
+    """
     NONE = 0x00
     SPLIT = 0x01
     SHOOT = 0x02
@@ -52,6 +110,10 @@ class ControlFlags(enum.IntFlag):
 
 
 class Item(enum.Enum):
+    """
+    Enum representing the different items in the game.
+    """
+
     PUMPKIN = 0
     SNOWFLAKE = 1
     HEART = 2
@@ -72,6 +134,9 @@ class Item(enum.Enum):
 
 
 class SpinType(enum.Enum):
+    """
+    Enum representing the different types of spin rewards.
+    """
     SKIN = 0
     EJECT_SKIN = 1
     HAT = 2
@@ -86,6 +151,9 @@ class SpinType(enum.Enum):
 
 
 class PurchasableType(enum.Enum):
+    """
+    Enum representing the types of purchasable items in the game.
+    """
     BUY_COMMUNITY_SKIN = 0x00
     BUY_COMMUNITY_PET = 0x01
     BUY_COMMUNITY_PARTICLE = 0x02
@@ -179,6 +247,16 @@ class PurchasableType(enum.Enum):
 
 
 class SaleType(enum.Enum):
+    """
+    Enumeration representing the type of sale.
+
+    Attributes:
+        NONE (int): No sale.
+        OFFERS (int): Sale through offers.
+        IAP (int): Sale through in-app purchases.
+        INGAME (int): Sale within the game.
+        INGAME_2 (int): Another type of sale within the game.
+    """
     NONE = 0
     OFFERS = 1
     IAP = 2
@@ -187,6 +265,18 @@ class SaleType(enum.Enum):
 
 
 class ChallengeStatus(enum.Enum):
+    """
+    Enumeration representing the status of a challenge.
+
+    Attributes:
+        SENT (int): The challenge has been sent.
+        EXPIRED (int): The challenge has expired.
+        NOT_FOUND (int): The challenge was not found.
+        CHALLENGE_PENDING_FOR_CHALLENGER (int): The challenge is pending for the challenger.
+        CHALLENGE_PENDING_FOR_CHALLENGEE (int): The challenge is pending for the challengee.
+        DECLINED (int): The challenge has been declined.
+        INCOMPATIBLE_VERSION (int): The challenger has an incompatible game version.
+    """
     SENT = 0
     EXPIRED = 1
     NOT_FOUND = 2
@@ -197,6 +287,15 @@ class ChallengeStatus(enum.Enum):
 
 
 class Relationship(enum.Enum):
+    """
+    Enumeration representing the relationship status between entities.
+
+    Attributes:
+        NONE (int): No relationship exists.
+        REQUESTED (int): A relationship has been requested.
+        PENDING (int): A relationship is pending.
+        MUTUAL (int): A mutual relationship exists.
+    """
     NONE = 0
     REQUESTED = 1
     PENDING = 2
@@ -204,6 +303,18 @@ class Relationship(enum.Enum):
 
 
 class CustomSkinType(enum.Enum):
+    """
+    Enum representing the types of custom skins available in the game.
+
+    Attributes:
+        ACCOUNT (int): Represents a custom skin for an account.
+        CLAN (int): Represents a custom skin for a clan.
+        PET (int): Represents a custom skin for a pet.
+        CLAN_PET (int): Represents a custom skin for a clan pet.
+        PARTICLE (int): Represents a custom skin for a particle effect.
+        CLAN_PARTICLE (int): Represents a custom skin for a clan particle effect.
+        ALL (int): Represents a custom skin that applies to all entities.
+    """
     ACCOUNT = 0
     CLAN = 1
     PET = 2
@@ -214,6 +325,16 @@ class CustomSkinType(enum.Enum):
 
 
 class CustomSkinStatus(enum.Enum):
+    """
+    Enum representing the status of a custom skin.
+
+    Attributes:
+        UNUSED (int): The custom skin is unused.
+        IN_REVIEW (int): The custom skin is in review.
+        REFUNDED (int): The custom skin has been refunded.
+        REJECTED (int): The custom skin has been rejected.
+        APPROVED (int): The custom skin has been approved.
+    """
     UNUSED = 0
     IN_REVIEW = 1
     REFUNDED = 2
@@ -228,21 +349,34 @@ class SkinBundle(enum.Enum):
 
 
 class XPMultiplier(enum.Enum):
+    """
+    Enumeration representing different XP multipliers.
+
+    Attributes:
+        XP (int): Represents no XP multiplier.
+        XP_DOUBLE (int): Represents a 2x XP multiplier.
+        XP_TRIPLE (int): Represents a 3x XP multiplier.
+        XP_QUADRUPLE (int): Represents a 4x XP multiplier.
+    """
     XP = 0
     XP_DOUBLE = 1
     XP_TRIPLE = 2
     XP_QUADRUPLE = 3
 
 
-class SkinStatus(enum.Enum):
-    UNUSED = 0
-    IN_REVIEW = 1
-    REFUNDED = 2
-    REJECTED = 3
-    APPROVED = 4
-
-
 class ReportType(enum.Enum):
+    """
+    Enum representing different types of reports.
+
+    Attributes:
+        HARASSMENT (int): Report type for harassment.
+        THREATS (int): Report type for threats.
+        SPAM (int): Report type for spam.
+        OTHER (int): Report type for other reasons.
+        INAPPROPRIATE_SKIN (int): Report type for inappropriate skin.
+        MAIL (int): Report type for reporting mail.
+        CHAT (int): Report type for reporting chat.
+    """
     HARASSMENT = 0
     THREATS = 1
     SPAM = 2
@@ -253,6 +387,16 @@ class ReportType(enum.Enum):
 
 
 class MissionObjective(enum.Enum):
+    """
+    Enum representing mission objectives.
+
+    Attributes:
+        UNKNOWN (int): Unknown mission objective.
+        WIN (int): Win the game as the objective.
+        KILL_ALL_BOTS (int): Kill all bots as the objective.
+        SURVIVE (int): Survive as the objective.
+        SCORE (int): Achieve a certain score as the objective.
+    """
     UNKNOWN = 0
     WIN = 1
     KILL_ALL_BOTS = 2
@@ -261,12 +405,32 @@ class MissionObjective(enum.Enum):
 
 
 class ProfileVisibility(enum.Enum):
+    """
+    Enum representing the visibility options for a user's profile.
+
+    Attributes:
+        PUBLIC (int): The profile is visible to everyone.
+        CLAN_AND_FRIENDS (int): The profile is visible to the user's clan members and friends.
+        FRIENDS (int): The profile is visible to the user's friends only.
+    """
     PUBLIC = 0
     CLAN_AND_FRIENDS = 1
     FRIENDS = 2
 
 
 class ClanRole(enum.Enum):
+    """
+    Enum representing the roles in a clan.
+
+    Attributes:
+        INVALID (int): Invalid role.
+        MEMBER (int): Member role.
+        ADMIN (int): Admin role.
+        LEADER (int): Leader role.
+        ELDER (int): Elder role.
+        DIAMOND (int): Diamond role.
+        INITIATE (int): Initiate role.
+    """
     INVALID = 0
     MEMBER = 1
     ADMIN = 2
@@ -277,6 +441,15 @@ class ClanRole(enum.Enum):
 
 
 class HoleType(enum.Enum):
+    """
+    Enumeration representing different types of blackholes in the game.
+
+    Attributes:
+        NORMAL (int): Represents a normal hole.
+        SUPERMASSIVE (int): Represents a supermassive hole.
+        TELEPORT (int): Represents a teleport hole.
+        NEBU (int): Represents a nebula hole.
+    """
     NORMAL = 0
     SUPERMASSIVE = 1
     TELEPORT = 2
@@ -284,6 +457,15 @@ class HoleType(enum.Enum):
 
 
 class SplitMultiplier(enum.Enum):
+    """
+    Enum class representing split multipliers.
+
+    Attributes:
+        X8 (SplitMultiplier): Split multiplier of 8.
+        X16 (SplitMultiplier): Split multiplier of 16.
+        X32 (SplitMultiplier): Split multiplier of 32.
+        X64 (SplitMultiplier): Split multiplier of 64.
+    """
     (
         X8,
         X16,
@@ -293,6 +475,18 @@ class SplitMultiplier(enum.Enum):
 
     @classmethod
     def from_net(cls, value: int) -> "SplitMultiplier":
+        """
+        Convert a network value to the corresponding SplitMultiplier enum value.
+
+        Args:
+            value (int): The network value to convert.
+
+        Returns:
+            SplitMultiplier: The corresponding SplitMultiplier enum value.
+
+        Raises:
+            ValueError: If the provided value is not a valid SplitMultiplier value.
+        """
         match value:
             case 0x08:
                 return cls.X8
@@ -368,7 +562,18 @@ class GameDifficulty(enum.Enum):
     ) = range(4)
 
 
+import enum
+
 class OnlineStatus(enum.Enum):
+    """
+    Enumeration representing the online status options for a user.
+
+    Attributes:
+        ONLINE(int): The user is online and available.
+        APPEAR_OFFLINE(int): The user appears offline to others.
+        HIDDEN(int): The user is hidden from others.
+        DND(int): The user is in "do not disturb" mode.
+    """
     (
         ONLINE,
         APPEAR_OFFLINE,
@@ -378,128 +583,609 @@ class OnlineStatus(enum.Enum):
 
 
 class PacketType(enum.Enum):
-    (
-        INVALID,
-        CONNECT_RESULT_2,
-        CONTROL,
-        KEEP_ALIVE,
-        INVALIDATE_CLIENT,
-        START_GAME_INTERNAL,
-        CONNECT_REQUEST,
-        DISCONNECT,
-        GAME_CHAT_MESSAGE,
-        CLAN_CHAT_MESSAGE,
-        JOIN_REQUEST,
-        JOIN_RESULT,
-        TTL_REFRESH_RESPONSE_INTERNAL,
-        SHUTDOWN_NODE_INTERNAL,
-        SET_GS_ADDR,
-        CLIENT_PREFERENCES,
-        SPECTATE_CHANGE,
-        CLAN_WAR_LIST_REQUEST,
-        CLAN_WAR_LIST_RESULT,
-        CLAN_WAR_NOTIFICATION,
-        TOP_SCORES,
-        SERVER_SHUTDOWN_WARNING,
-        GAME_UPDATE,
-        GROUP_LOBBY_LIST_REQUEST,
-        GROUP_LOBBY_LIST_RESULT,
-        PUBLIC_CHAT_MESSAGE,
-        ADMIN_INTERNAL,
-        GROUP_LOBBY_CREATE_REQUEST,
-        GROUP_LOBBY_CREATE_RESULT,
-        GROUP_LOBBY_JOIN_REQUEST,
-        GROUP_LOBBY_JOIN_RESULT,
-        GROUP_LOBBY_UPDATE,
-        GROUP_LOBBY_LEAVE,
-        ARENA_LIST_REQUEST,
-        CLIENT_PREFERENCES_INTERNAL,
-        GAME_CRASH_INTERNAL,
-        PRIVATE_CHAT_MESSAGE,
-        ARENA_LEAVE_QUEUE_REQUEST,
-        REMOVE_GAME_INTERNAL,
-        GROUP_LOBBY_WARN,
-        ENTER_GAME_REQUEST,
-        ENTER_GAME_RESULT,
-        PLAYER_SESSION_STATS_UPDATE_INTERNAL,
-        PLAYER_WS_ACCOUNT_UPDATE_INTERNAL,
-        ACCOUNT_STATUS_REQUEST,
-        ACCOUNT_STATUS_RESULT,
-        FRIEND_CHAT_MESSAGE,
-        CLIENT_STATUS_CHANGE_REQUEST,
-        CLIENT_STATUS_CHANGE_RESULT,
-        CLAN_WAR_CONTROL,
-        CLAN_WAR_UPDATE,
-        ARENA_LIST_RESULT,
-        ADMIN_INTERNAL2,
-        NODE_RESET_REQUEST_INTERNAL,
-        CLAN_WAR_RESULT_INTERNAL,
-        CLAN_WAR_FORFEIT_INTERNAL,
-        SPECTATE_GAME_REQUEST,
-        GET_PLAYER_STATS_INTERNAL,
-        ARENA_QUEUE_REQUEST,
-        ARENA_STATUS,
-        ADMIN_INTERNAL3,
-        ARENA_RESULT_INTERNAL,
-        ADMIN_INTERNAL4,
-        TEAM_ARENA_RESULT_INTERNAL,
-        TEAM_ARENA_STATUS_RESULT,
-        TEAM_ARENA_STATUS_REQUEST,
-        TEAM_ARENA_LIST_REQUEST,
-        TEAM_ARENA_LIST_RESULT,
-        TEAM_ARENA_QUEUE_REQUEST,
-        TEAM_ARENA_LEAVE_QUEUE_REQEUST,
-        TEAM_ARENA_UPDATE,
-        CLAN_HOUSE_UPDATE_INTERNAL,
-        ADMIN_INTERNAL5,
-        CLAN_HOUSE_UPDATE_INTERNAL2,
-        NODE_CONNECT_REQUEST_INTERNAL,
-        GAME_DATA,
-        CHALLENGE,
-        CHALLENGE_RESULT,
-        FWD_TO_CLIENT_INTERNAL,
-        TTL_REFRESH_REQUEST_INTERNAL,
-        CONNECT_REQUEST_2,
-        CONNECT_RESULT,
-        ADMIN_INTERNAL6,
-        CLAN_HOUSE_UPDATE_INTERNAL3,
-        TOURNEY_LIST_REQUEST,
-        TOURNEY_LIST_RESULT,
-        TOURNEY_ACTION,
-        TOURNEY_MATCH_RESULT_INTERNAL,
-        TOURNEY_START_INTERNAL,
-        TOURNEY_STATUS_UPDATE,
-        ADMIN_INTERNAL7,
-        MUTE_INTERNAL,
-        JOINED_GAME_INTERNAL,
-        CLAN_HOUSE_UPDATE_INTERNAL4,
-        CLAN_HOUSE_CONFIG,
-        INVITE,
-        DESIRED_DUO_PARTNER,
-        EMOTE_REQUEST,
-        UDP_KEEPALIVE,
-        GROUP_CHAT_CREATE_REQUEST,
-        GROUP_CHAT_JOIN_REQUEST,
-        GROUP_CHAT_LEAVE_REQUEST,
-        GROUP_CHAT_RESULT,
-        GROUP_CHAT_STATUS,
-        GROUP_CHAT_MESSAGE,
-        SESSION_STATS,
-        ACCOLADE,
-        VOICE_CONTROL,
-        VOICE_DATA,
-        MINIMAP_UPDATE,
-        GAME_STOP_INTERNAL,
-        BATTLE_ROYALE_ACTION,
-        BATTLE_ROYALE_LIST_REQUEST,
-        BATTLE_ROYALE_LIST_RESULT,
-        BATTLE_ROYALE_STATUS_UPDATE,
-        BATTLE_ROYALE_RESULT_INTERNAL,
-        ADMIN_INTERNAL8,
-        PING_MESSAGE,
-        CONNECT_REQUEST_3,
-        ARENA_CD_INTERNAL,
-    ) = range(120)
+    """
+    Enumeration representing the different types of packets used in the game.
+    """
+
+    INVALID = 0
+    """
+    Invalid packet type.
+    """
+
+    CONNECT_RESULT_2 = 1
+    """
+    Result of a connection attempt.
+    """
+
+    CONTROL = 2
+    """
+    Control packet.
+    """
+
+    KEEP_ALIVE = 3
+    """
+    Keep-alive packet.
+    """
+
+    INVALIDATE_CLIENT = 4
+    """
+    Invalidate client packet.
+    """
+
+    START_GAME_INTERNAL = 5
+    """
+    Internal packet to start a game.
+    """
+
+    CONNECT_REQUEST = 6
+    """
+    Request to connect to the game server.
+    """
+
+    DISCONNECT = 7
+    """
+    Disconnect packet.
+    """
+
+    GAME_CHAT_MESSAGE = 8
+    """
+    Chat message in the game.
+    """
+
+    CLAN_CHAT_MESSAGE = 9
+    """
+    Chat message in the clan.
+    """
+
+    JOIN_REQUEST = 10
+    """
+    Request to join a game.
+    """
+
+    JOIN_RESULT = 11
+    """
+    Result of a join request.
+    """
+
+    TTL_REFRESH_RESPONSE_INTERNAL = 12
+    """
+    Internal packet for refreshing time-to-live (TTL) response.
+    """
+
+    SHUTDOWN_NODE_INTERNAL = 13
+    """
+    Internal packet to shutdown a node.
+    """
+
+    SET_GS_ADDR = 14
+    """
+    Set game server address packet.
+    """
+
+    CLIENT_PREFERENCES = 15
+    """
+    Client preferences packet.
+    """
+
+    SPECTATE_CHANGE = 16
+    """
+    Spectate change packet.
+    """
+
+    CLAN_WAR_LIST_REQUEST = 17
+    """
+    Request to list clan wars.
+    """
+
+    CLAN_WAR_LIST_RESULT = 18
+    """
+    Result of a clan war list request.
+    """
+
+    CLAN_WAR_NOTIFICATION = 19
+    """
+    Clan war notification packet.
+    """
+
+    TOP_SCORES = 20
+    """
+    Top scores packet.
+    """
+
+    SERVER_SHUTDOWN_WARNING = 21
+    """
+    Server shutdown warning packet.
+    """
+
+    GAME_UPDATE = 22
+    """
+    Game update packet.
+    """
+
+    GROUP_LOBBY_LIST_REQUEST = 23
+    """
+    Request to list group lobbies.
+    """
+
+    GROUP_LOBBY_LIST_RESULT = 24
+    """
+    Result of a group lobby list request.
+    """
+
+    PUBLIC_CHAT_MESSAGE = 25
+    """
+    Public chat message packet.
+    """
+
+    ADMIN_INTERNAL = 26
+    """
+    Internal packet for administrative purposes.
+    """
+
+    GROUP_LOBBY_CREATE_REQUEST = 27
+    """
+    Request to create a group lobby.
+    """
+
+    GROUP_LOBBY_CREATE_RESULT = 28
+    """
+    Result of a group lobby create request.
+    """
+
+    GROUP_LOBBY_JOIN_REQUEST = 29
+    """
+    Request to join a group lobby.
+    """
+
+    GROUP_LOBBY_JOIN_RESULT = 30
+    """
+    Result of a group lobby join request.
+    """
+
+    GROUP_LOBBY_UPDATE = 31
+    """
+    Group lobby update packet.
+    """
+
+    GROUP_LOBBY_LEAVE = 32
+    """
+    Leave group lobby packet.
+    """
+
+    ARENA_LIST_REQUEST = 33
+    """
+    Request to list arenas.
+    """
+
+    CLIENT_PREFERENCES_INTERNAL = 34
+    """
+    Internal packet for client preferences.
+    """
+
+    GAME_CRASH_INTERNAL = 35
+    """
+    Internal packet for game crash.
+    """
+
+    PRIVATE_CHAT_MESSAGE = 36
+    """
+    Private chat message packet.
+    """
+
+    ARENA_LEAVE_QUEUE_REQUEST = 37
+    """
+    Request to leave an arena queue.
+    """
+
+    REMOVE_GAME_INTERNAL = 38
+    """
+    Internal packet to remove a game.
+    """
+
+    GROUP_LOBBY_WARN = 39
+    """
+    Group lobby warning packet.
+    """
+
+    ENTER_GAME_REQUEST = 40
+    """
+    Request to enter a game.
+    """
+
+    ENTER_GAME_RESULT = 41
+    """
+    Result of an enter game request.
+    """
+
+    PLAYER_SESSION_STATS_UPDATE_INTERNAL = 42
+    """
+    Internal packet for updating player session stats.
+    """
+
+    PLAYER_WS_ACCOUNT_UPDATE_INTERNAL = 43
+    """
+    Internal packet for updating player WS account.
+    """
+
+    ACCOUNT_STATUS_REQUEST = 44
+    """
+    Request for account status.
+    """
+
+    ACCOUNT_STATUS_RESULT = 45
+    """
+    Result of an account status request.
+    """
+
+    FRIEND_CHAT_MESSAGE = 46
+    """
+    Chat message from a friend.
+    """
+
+    CLIENT_STATUS_CHANGE_REQUEST = 47
+    """
+    Request to change client status.
+    """
+
+    CLIENT_STATUS_CHANGE_RESULT = 48
+    """
+    Result of a client status change request.
+    """
+
+    CLAN_WAR_CONTROL = 49
+    """
+    Clan war control packet.
+    """
+
+    CLAN_WAR_UPDATE = 50
+    """
+    Clan war update packet.
+    """
+
+    ARENA_LIST_RESULT = 51
+    """
+    Result of an arena list request.
+    """
+
+    ADMIN_INTERNAL2 = 52
+    """
+    Internal packet for administrative purposes.
+    """
+
+    NODE_RESET_REQUEST_INTERNAL = 53
+    """
+    Internal packet for resetting a node.
+    """
+
+    CLAN_WAR_RESULT_INTERNAL = 54
+    """
+    Internal packet for clan war result.
+    """
+
+    CLAN_WAR_FORFEIT_INTERNAL = 55
+    """
+    Internal packet for clan war forfeit.
+    """
+
+    SPECTATE_GAME_REQUEST = 56
+    """
+    Request to spectate a game.
+    """
+
+    GET_PLAYER_STATS_INTERNAL = 57
+    """
+    Internal packet for getting player stats.
+    """
+
+    ARENA_QUEUE_REQUEST = 58
+    """
+    Request to join an arena queue.
+    """
+
+    ARENA_STATUS = 59
+    """
+    Arena status packet.
+    """
+
+    ADMIN_INTERNAL3 = 60
+    """
+    Internal packet for administrative purposes.
+    """
+
+    ARENA_RESULT_INTERNAL = 61
+    """
+    Internal packet for arena result.
+    """
+
+    ADMIN_INTERNAL4 = 62
+    """
+    Internal packet for administrative purposes.
+    """
+
+    TEAM_ARENA_RESULT_INTERNAL = 63
+    """
+    Internal packet for team arena result.
+    """
+
+    TEAM_ARENA_STATUS_RESULT = 64
+    """
+    Result of a team arena status request.
+    """
+
+    TEAM_ARENA_STATUS_REQUEST = 65
+    """
+    Request for team arena status.
+    """
+
+    TEAM_ARENA_LIST_REQUEST = 66
+    """
+    Request to list team arenas.
+    """
+
+    TEAM_ARENA_LIST_RESULT = 67
+    """
+    Result of a team arena list request.
+    """
+
+    TEAM_ARENA_QUEUE_REQUEST = 68
+    """
+    Request to join a team arena queue.
+    """
+
+    TEAM_ARENA_LEAVE_QUEUE_REQEUST = 69
+    """
+    Request to leave a team arena queue.
+    """
+
+    TEAM_ARENA_UPDATE = 70
+    """
+    Team arena update packet.
+    """
+
+    CLAN_HOUSE_UPDATE_INTERNAL = 71
+    """
+    Internal packet for updating clan house.
+    """
+
+    ADMIN_INTERNAL5 = 72
+    """
+    Internal packet for administrative purposes.
+    """
+
+    CLAN_HOUSE_UPDATE_INTERNAL2 = 73
+    """
+    Internal packet for updating clan house.
+    """
+
+    NODE_CONNECT_REQUEST_INTERNAL = 74
+    """
+    Internal packet for connecting a node.
+    """
+
+    GAME_DATA = 75
+    """
+    Game data packet.
+    """
+
+    CHALLENGE = 76
+    """
+    Challenge packet.
+    """
+
+    CHALLENGE_RESULT = 77
+    """
+    Result of a challenge.
+    """
+
+    FWD_TO_CLIENT_INTERNAL = 78
+    """
+    Internal packet for forwarding to client.
+    """
+
+    TTL_REFRESH_REQUEST_INTERNAL = 79
+    """
+    Internal packet for refreshing time-to-live (TTL) request.
+    """
+
+    CONNECT_REQUEST_2 = 80
+    """
+    Second connect request packet.
+    """
+
+    CONNECT_RESULT = 81
+    """
+    Result of a connect request.
+    """
+
+    ADMIN_INTERNAL6 = 82
+    """
+    Internal packet for administrative purposes.
+    """
+
+    CLAN_HOUSE_UPDATE_INTERNAL3 = 83
+    """
+    Internal packet for updating clan house.
+    """
+
+    TOURNEY_LIST_REQUEST = 84
+    """
+    Request to list tournaments.
+    """
+
+    TOURNEY_LIST_RESULT = 85
+    """
+    Result of a tournament list request.
+    """
+
+    TOURNEY_ACTION = 86
+    """
+    Tournament action packet.
+    """
+
+    TOURNEY_MATCH_RESULT_INTERNAL = 87
+    """
+    Internal packet for tournament match result.
+    """
+
+    TOURNEY_START_INTERNAL = 88
+    """
+    Internal packet for starting a tournament.
+    """
+
+    TOURNEY_STATUS_UPDATE = 89
+    """
+    Tournament status update packet.
+    """
+
+    ADMIN_INTERNAL7 = 90
+    """
+    Internal packet for administrative purposes.
+    """
+
+    MUTE_INTERNAL = 91
+    """
+    Internal packet for muting a player.
+    """
+
+    JOINED_GAME_INTERNAL = 92
+    """
+    Internal packet for joining a game.
+    """
+
+    CLAN_HOUSE_UPDATE_INTERNAL4 = 93
+    """
+    Internal packet for updating clan house.
+    """
+
+    CLAN_HOUSE_CONFIG = 94
+    """
+    Clan house configuration packet.
+    """
+
+    INVITE = 95
+    """
+    Invite packet.
+    """
+
+    DESIRED_DUO_PARTNER = 96
+    """
+    Desired duo partner packet.
+    """
+
+    EMOTE_REQUEST = 97
+    """
+    Request to perform an emote.
+    """
+
+    UDP_KEEPALIVE = 98
+    """
+    UDP keep-alive packet.
+    """
+
+    GROUP_CHAT_CREATE_REQUEST = 99
+    """
+    Request to create a group chat.
+    """
+
+    GROUP_CHAT_JOIN_REQUEST = 100
+    """
+    Request to join a group chat.
+    """
+
+    GROUP_CHAT_LEAVE_REQUEST = 101
+    """
+    Request to leave a group chat.
+    """
+
+    GROUP_CHAT_RESULT = 102
+    """
+    Result of a group chat request.
+    """
+
+    GROUP_CHAT_STATUS = 103
+    """
+    Group chat status packet.
+    """
+
+    GROUP_CHAT_MESSAGE = 104
+    """
+    Group chat message packet.
+    """
+
+    SESSION_STATS = 105
+    """
+    Session stats packet.
+    """
+
+    ACCOLADE = 106
+    """
+    Accolade packet.
+    """
+
+    VOICE_CONTROL = 107
+    """
+    Voice control packet.
+    """
+
+    VOICE_DATA = 108
+    """
+    Voice data packet.
+    """
+
+    MINIMAP_UPDATE = 109
+    """
+    Minimap update packet.
+    """
+
+    GAME_STOP_INTERNAL = 110
+    """
+    Internal packet to stop a game.
+    """
+
+    BATTLE_ROYALE_ACTION = 111
+    """
+    Battle Royale action packet.
+    """
+
+    BATTLE_ROYALE_LIST_REQUEST = 112
+    """
+    Request to list Battle Royale games.
+    """
+
+    BATTLE_ROYALE_LIST_RESULT = 113
+    """
+    Result of a Battle Royale list request.
+    """
+
+    BATTLE_ROYALE_STATUS_UPDATE = 114
+    """
+    Battle Royale status update packet.
+    """
+
+    BATTLE_ROYALE_RESULT_INTERNAL = 115
+    """
+    Internal packet for Battle Royale result.
+    """
+
+    ADMIN_INTERNAL8 = 116
+    """
+    Internal packet for administrative purposes.
+    """
+
+    PING_MESSAGE = 117
+    """
+    Ping message packet.
+    """
+
+    CONNECT_REQUEST_3 = 118
+    """
+    Third connect request packet.
+    """
+
+    ARENA_CD_INTERNAL = 119
+    """
+    Internal packet for arena cooldown.
+    """
 
 
 class GameMode(enum.Enum):
