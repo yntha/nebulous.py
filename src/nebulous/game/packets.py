@@ -779,3 +779,18 @@ class ConnectRequest3(Packet):
             raise ValueError("Packet header has been corrupted")
 
         return bytes(packet_bytes)
+
+
+__all__ = [
+    "Packet",
+    "PacketEncoder",
+    "PacketHandler",
+    "ConnectResult2",
+    "GameData",
+    "GameChatMessage",
+    "ClanChatMessage",
+    "Control",
+    "KeepAlive",
+    "Disconnect",
+    "ConnectRequest3",
+]
