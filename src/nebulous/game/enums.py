@@ -1,8 +1,6 @@
 import enum
 
 
-import enum
-
 class ConnectResult(enum.Enum):
     """
     Represents the result of a connection attempt to the game servers.
