@@ -303,3 +303,15 @@ class XPGained2Event(GameEvent):
     player_xp: int  # 3 bytes, encoded
     xp_chain_multiplier: float  # 2 bytes, encoded
     xp_gained: int  # 3 bytes, encoded
+
+
+@dataclass
+class EatCakeEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player eats a cake.
+
+    Attributes:
+        cake_id (int): The ID of the cake that was eaten.
+    """
+    plasma_amount: int  # 3 bytes, encoded
+    xp_amount: int  # 3 bytes, encoded
