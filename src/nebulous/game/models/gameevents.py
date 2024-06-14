@@ -223,3 +223,15 @@ class ShootEvent(GameEvent):
     player_id: int  # 1 byte
     blob_id: int  # 1 byte
     spell_id: int  # 1 byte
+
+
+@dataclass
+class ClanWarWonEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a clan war has concluded.
+
+    Attributes:
+        reward (int): The reward that was given to the player. It is doubled
+            for the winning clan.
+    """
+    reward: int  # 2 bytes
