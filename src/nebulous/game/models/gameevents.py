@@ -316,3 +316,16 @@ class EatCakeEvent(GameEvent):
     """
     plasma_amount: int  # 3 bytes, encoded
     xp_amount: int  # 3 bytes, encoded
+
+
+@dataclass
+class CoinCountEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player's coin count is updated.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+        coin_count (int): The new coin count of the player.
+    """
+    player_id: int  # 1 byte
+    coin_count: int  # 2 bytes
