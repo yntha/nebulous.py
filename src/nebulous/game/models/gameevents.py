@@ -235,3 +235,17 @@ class ClanWarWonEvent(GameEvent):
             for the winning clan.
     """
     reward: int  # 2 bytes
+
+
+@dataclass
+class PlasmaRewardEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player receives a plasma
+    reward.
+
+    Attributes:
+        reward (int): The amount of plasma that was rewarded.
+        multiplier (int): The plasma reward multiplier.
+    """
+    reward: int  # 3 bytes, encoded
+    multiplier: int  # 1 byte
