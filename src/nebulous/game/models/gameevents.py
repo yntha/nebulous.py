@@ -156,3 +156,14 @@ class SetSOEvent(GameEvent):
     """
     so_id: int  # 1 byte
     so_count: int  # 4 bytes
+
+
+@dataclass
+class LevelUpEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player levels up.
+
+    Attributes:
+        level (int): The new level of the player.
+    """
+    level: int  # 2 bytes
