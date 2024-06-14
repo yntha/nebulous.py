@@ -60,3 +60,14 @@ class RecombineEvent(GameEvent):
         player_id (int): The ID of the player that triggered the event.
     """
     player_id: int  # 1 byte
+
+
+@dataclass
+class AchievementEarnedEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player earns an achievement.
+
+    Attributes:
+        achievement_id (int): The ID of the achievement that was earned.
+    """
+    achievement_id: int  # 2 bytes
