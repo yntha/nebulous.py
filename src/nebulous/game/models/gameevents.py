@@ -379,3 +379,15 @@ class InvisibleEvent(GameEvent):
             expires. This is used to calculate the duration of the ghost ability.
     """
     ghost_time_ms_offset: int  # 2 bytes
+
+
+@dataclass
+class KilledByEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player is killed by another
+    player.
+
+    Attributes:
+        killer_id (int): The ID of the player that killed the player.
+    """
+    killer_id: int
