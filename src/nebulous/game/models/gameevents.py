@@ -142,3 +142,17 @@ class EatSOEvent(GameEvent):
     """
     so_count: int  # 1 byte
     so_id: int  # 1 byte
+
+
+@dataclass
+class SetSOEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player's special object count
+    is set.
+
+    Attributes:
+        so_id (int): The ID of the special object that was set.
+        so_count (int): The new special object count.
+    """
+    so_id: int  # 1 byte
+    so_count: int  # 4 bytes
