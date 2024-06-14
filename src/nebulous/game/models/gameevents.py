@@ -17,7 +17,7 @@ class GameEvent:
 @dataclass
 class BlobExplodeEvent(GameEvent):
     """
-    Represents an event when a player blob explodes.
+    Represents a triggered event that occurs when a player blob explodes.
 
     Attributes:
         player_id (int): The ID of the player that triggered the event.
@@ -30,7 +30,7 @@ class BlobExplodeEvent(GameEvent):
 @dataclass
 class EjectEvent(GameEvent):
     """
-    Represents an event when a player ejects mass.
+    Represents a triggered event that occurs when a player ejects mass.
 
     Attributes:
         player_id (int): The ID of the player that triggered the event.
