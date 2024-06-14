@@ -208,3 +208,18 @@ class TeleportEvent(GameEvent):
         player_id (int): The ID of the player that triggered the event.
     """
     player_id: int  # 1 byte
+
+
+@dataclass
+class ShootEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player blob shoots a spell.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+        blob_id (int): The ID of the player blob that shot the spell.
+        spell_id (int): The ID(type) of the spell that was shot.
+    """
+    player_id: int  # 1 byte
+    blob_id: int  # 1 byte
+    spell_id: int  # 1 byte
