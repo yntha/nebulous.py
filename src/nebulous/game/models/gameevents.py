@@ -49,3 +49,14 @@ class SplitEvent(GameEvent):
         player_id (int): The ID of the player that triggered the event.
     """
     player_id: int  # 1 byte
+
+
+@dataclass
+class RecombineEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player recombines.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+    """
+    player_id: int
