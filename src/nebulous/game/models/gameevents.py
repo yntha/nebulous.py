@@ -182,3 +182,18 @@ class ArenaRankAchievedEvent(GameEvent):
     """
     achieved_rank: bool  # 1 byte
     rank: int  # 1 byte
+
+
+@dataclass
+class BlobStatusEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player blob status is updated.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+        blob_id (int): The ID of the player blob that was updated.
+        status (int): The status of the player blob.
+    """
+    player_id: int  # 1 byte
+    blob_id: int  # 1 byte
+    status: int  # 2 bytes
