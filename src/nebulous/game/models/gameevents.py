@@ -249,3 +249,20 @@ class PlasmaRewardEvent(GameEvent):
     """
     reward: int  # 3 bytes, encoded
     multiplier: int  # 1 byte
+
+
+@dataclass
+class EmoteEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player blob sends an emote.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+        blob_id (int): The ID of the player blob that sent the emote.
+        emote_id (int): The ID of the emote that was sent.
+        custom_emote_id (int): The ID of the custom emote that was sent, if any.
+    """
+    player_id: int  # 1 byte
+    blob_id: int  # 1 byte
+    emote_id: int  # 1 byte
+    custom_emote_id: int  # 4 bytes
