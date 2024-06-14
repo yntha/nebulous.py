@@ -117,3 +117,15 @@ class DQCompletedEvent(GameEvent):
         dq_id (int): The ID of the daily quest that was completed.
     """
     dq_id: int
+
+
+@dataclass
+class DQProgressEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player's daily quest progress
+    is updated.
+
+    Attributes:
+        progress (int): The new progress value of the daily quest.
+    """
+    progress: int
