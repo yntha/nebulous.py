@@ -356,3 +356,14 @@ class TrickEvent(GameEvent):
     trick_id: int  # 1 byte
     trick_score: int  # 2 bytes
     trick_xp: int  # 3 bytes, encoded
+
+
+@dataclass
+class AccoladeEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player earns an accolade.
+
+    Attributes:
+        accolades_gained (int): The number of accolades that were gained.
+    """
+    accolades_gained: int  # 1 byte
