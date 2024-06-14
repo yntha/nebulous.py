@@ -23,5 +23,5 @@ class BlobExplodeEvent(GameEvent):
         player_id (int): The ID of the player that triggered the event.
         blob_id (int): The ID of the player blob that exploded.
     """
-    player_id: int
-    blob_id: int
+    player_id: int  # 1 byte
+    blob_id: int  # 1 byte
