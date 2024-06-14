@@ -391,3 +391,22 @@ class KilledByEvent(GameEvent):
         killer_id (int): The ID of the player that killed the player.
     """
     killer_id: int
+
+
+@dataclass
+class RadiationCloudEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a radiation cloud has spawned
+    in the game.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the rad cloud.
+        x_pos (float): The X position of the radiation cloud.
+        y_pos (float): The Y position of the radiation cloud.
+        time_remaining (float): The time remaining for the radiation cloud to
+            expire.
+    """
+    player_id: int  # 1 byte
+    x_pos: float  # 3 bytes, encoded, clamped to map size
+    y_pos: float  # 3 bytes, encoded, clamped to map size
+    time_remaining: float  # 1 byte, encoded, clamped to 16.0
