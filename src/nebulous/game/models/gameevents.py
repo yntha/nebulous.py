@@ -137,11 +137,11 @@ class EatSOEvent(GameEvent):
     Represents a triggered event that occurs when a player eats a special object.
 
     Attributes:
-        so_count (int): The number of special objects that were eaten.
         so_id (int): The ID of the special object that was eaten.
+        so_count (int): The number of special objects that were eaten.
     """
-    so_count: int  # 1 byte
     so_id: int  # 1 byte
+    so_count: int  # 1 byte
 
 
 @dataclass
