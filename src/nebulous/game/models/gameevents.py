@@ -329,3 +329,15 @@ class CoinCountEvent(GameEvent):
     """
     player_id: int  # 1 byte
     coin_count: int  # 2 bytes
+
+
+@dataclass
+class SpeedEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player uses the speed ability.
+
+    Attributes:
+        speed_time_ms_offset (int): The offset in milliseconds when the speed ability
+            expires. This is used to calculate the duration of the speed ability.
+    """
+    speed_time_ms_offset: int  # 2 bytes
