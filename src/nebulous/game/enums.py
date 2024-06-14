@@ -262,6 +262,64 @@ class SaleType(enum.Enum):
     INGAME_2 = 4
 
 
+class GameEvent(enum.Enum):
+    UNKNOWN = 0
+    EAT_DOTS = 1
+    EAT_BLOB = 2
+    EAT_SMBH = 3
+    BLOB_EXPLODE = 4
+    BLOB_LOST = 5
+    EJECT = 6
+    SPLIT = 7
+    RECOMBINE = 8
+    TIMER_WARNING = 9
+    CTF_SCORE = 10
+    CTF_FLAG_RETURNED = 11
+    CTF_FLAG_STOLEN = 12
+    CTF_FLAG_DROPPED = 13
+    ACHIEVEMENT_EARNED = 14
+    XP_GAINED = 15
+    UNUSED_2 = 16
+    XP_SET = 17
+    DQ_SET = 18
+    DQ_COMPLETED = 19
+    DQ_PROGRESS = 20
+    EAT_SERVER_BLOB = 21
+    EAT_SPECIAL_OBJECTS = 22
+    SO_SET = 23
+    LEVEL_UP = 24
+    ARENA_RANK_ACHIEVED = 25
+    DOM_CP_LOST = 26
+    DOM_CP_GAINED = 27
+    UNUSED_1 = 28
+    CTF_GAINED = 29
+    GAME_OVER = 30
+    BLOB_STATUS = 31
+    TELEPORT = 32
+    SHOOT = 33
+    CLAN_WAR_WON = 34
+    PLASMA_REWARD = 35
+    EMOTE = 36
+    END_MISSION = 37
+    XP_GAINED_2 = 38
+    EAT_CAKE = 39
+    COIN_COUNT = 40
+    CLEAR_EFFECTS = 41
+    SPEED = 42
+    TRICK = 43
+    DESTROY_ASTEROID = 44
+    ACCOLADE = 45
+    INVIS = 46
+    KILLED_BY = 47
+    RADIATION_CLOUD = 48
+    CHARGE = 49
+    LP_COUNT = 50
+    BR_BOUNDS = 51
+    MINIMAP = 52
+    RLGL_DEATH = 53
+    RLGL_STATE = 54
+
+
 class ChallengeStatus(enum.Enum):
     """
     Enumeration representing the status of a challenge.
