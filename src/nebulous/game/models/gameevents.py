@@ -367,3 +367,15 @@ class AccoladeEvent(GameEvent):
         accolades_gained (int): The number of accolades that were gained.
     """
     accolades_gained: int  # 1 byte
+
+
+@dataclass
+class InvisibleEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player uses the ghost ability.
+
+    Attributes:
+        ghost_time_ms_offset (int): The offset in milliseconds when the ghost ability
+            expires. This is used to calculate the duration of the ghost ability.
+    """
+    ghost_time_ms_offset: int  # 2 bytes
