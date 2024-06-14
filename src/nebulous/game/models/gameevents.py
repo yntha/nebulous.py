@@ -341,3 +341,18 @@ class SpeedEvent(GameEvent):
             expires. This is used to calculate the duration of the speed ability.
     """
     speed_time_ms_offset: int  # 2 bytes
+
+
+@dataclass
+class TrickEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player does a trick.
+
+    Attributes:
+        trick_id (int): The ID of the trick that was performed.
+        trick_score (int): The score that was earned from the trick.
+        trick_xp (int): The XP that was earned from the trick.
+    """
+    trick_id: int  # 1 byte
+    trick_score: int  # 2 bytes
+    trick_xp: int  # 3 bytes, encoded
