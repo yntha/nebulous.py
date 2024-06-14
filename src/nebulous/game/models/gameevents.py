@@ -167,3 +167,18 @@ class LevelUpEvent(GameEvent):
         level (int): The new level of the player.
     """
     level: int  # 2 bytes
+
+
+@dataclass
+class ArenaRankAchievedEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player achieves a new arena rank.
+
+    Attributes:
+        achieved_rank (bool): Whether the player achieved the rank. Unsure if this
+            is a correct title for this field. In the game, it's only checked to see
+            if it's equal to 1.
+        rank (int): The new arena rank of the player.
+    """
+    achieved_rank: bool  # 1 byte
+    rank: int  # 1 byte
