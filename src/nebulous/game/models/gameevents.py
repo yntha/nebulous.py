@@ -286,3 +286,20 @@ class EndMissionEvent(GameEvent):
     next_mission_id: int  # 1 byte
     xp_reward: int  # 3 bytes, encoded
     plasma_reward: int  # 2 bytes
+
+
+@dataclass
+class XPGained2Event(GameEvent):
+    """
+    Represents a triggered event that occurs when the current player gains XP,
+    either from eating mass, dots, or from other sources.
+
+    Attributes:
+        player_xp (int): The player's XP value for this session.
+        xp_chain_multiplier (float): The XP chain multiplier. This is the text
+            which appears under the XP gained text in-game. E.g. "x2.25".
+        xp_gained (int): The amount of XP that was gained.
+    """
+    player_xp: int  # 3 bytes, encoded
+    xp_chain_multiplier: float  # 2 bytes, encoded
+    xp_gained: int  # 3 bytes, encoded
