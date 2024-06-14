@@ -311,7 +311,8 @@ class EatCakeEvent(GameEvent):
     Represents a triggered event that occurs when a player eats a cake.
 
     Attributes:
-        cake_id (int): The ID of the cake that was eaten.
+        plasma_amount (int): The amount of plasma that was rewarded.
+        xp_amount (int): The amount of XP that was rewarded.
     """
     plasma_amount: int  # 3 bytes, encoded
     xp_amount: int  # 3 bytes, encoded
