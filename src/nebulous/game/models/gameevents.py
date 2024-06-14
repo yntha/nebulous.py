@@ -38,3 +38,14 @@ class EjectEvent(GameEvent):
     """
     player_id: int  # 1 byte
     blob_id: int  # 1 byte
+
+
+@dataclass
+class SplitEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player splits.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+    """
+    player_id: int  # 1 byte
