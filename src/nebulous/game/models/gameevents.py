@@ -91,7 +91,7 @@ class XPSetEvent(GameEvent):
     xp_mult_type: int  # 1 byte
     xp_duration_s: int  # 4 bytes
     plasma_boost_type: int  # 1 byte
-    click_type_duration_s: int  # 4 bytes
+    click_type_duration_s: int  # 3 bytes, encoded
 
 
 @dataclass
