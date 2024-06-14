@@ -262,7 +262,7 @@ class SaleType(enum.Enum):
     INGAME_2 = 4
 
 
-class GameEvent(enum.Enum):
+class GameEventType(enum.Enum):
     UNKNOWN = 0
     EAT_DOTS = 1
     EAT_BLOB = 2
