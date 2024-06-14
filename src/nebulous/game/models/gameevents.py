@@ -59,4 +59,4 @@ class RecombineEvent(GameEvent):
     Attributes:
         player_id (int): The ID of the player that triggered the event.
     """
-    player_id: int
+    player_id: int  # 1 byte
