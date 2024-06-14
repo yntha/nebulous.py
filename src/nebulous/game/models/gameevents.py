@@ -25,3 +25,16 @@ class BlobExplodeEvent(GameEvent):
     """
     player_id: int  # 1 byte
     blob_id: int  # 1 byte
+
+
+@dataclass
+class EjectEvent(GameEvent):
+    """
+    Represents an event when a player ejects mass.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+        blob_id (int): The ID of the player blob that ejected mass.
+    """
+    player_id: int  # 1 byte
+    blob_id: int  # 1 byte
