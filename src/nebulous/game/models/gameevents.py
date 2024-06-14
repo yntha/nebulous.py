@@ -106,3 +106,14 @@ class DQSetEvent(GameEvent):
     """
     dq_id: int
     completed: bool
+
+
+@dataclass
+class DQCompletedEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player completes a daily quest.
+
+    Attributes:
+        dq_id (int): The ID of the daily quest that was completed.
+    """
+    dq_id: int
