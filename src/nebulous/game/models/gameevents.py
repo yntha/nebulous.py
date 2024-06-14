@@ -92,3 +92,17 @@ class XPSetEvent(GameEvent):
     xp_duration_s: int  # 4 bytes
     plasma_boost_type: int  # 1 byte
     click_type_duration_s: int  # 4 bytes
+
+
+@dataclass
+class DQSetEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player's DQ(Daily Quest)
+    is set or updated.
+
+    Attributes:
+        dq_id (int): The ID of the daily quest that was set.
+        completed (bool): Whether the daily quest was completed.
+    """
+    dq_id: int
+    completed: bool
