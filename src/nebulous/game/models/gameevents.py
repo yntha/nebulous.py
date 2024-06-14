@@ -129,3 +129,16 @@ class DQProgressEvent(GameEvent):
         progress (int): The new progress value of the daily quest.
     """
     progress: int
+
+
+@dataclass
+class EatSOEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player eats a special object.
+
+    Attributes:
+        so_count (int): The number of special objects that were eaten.
+        so_id (int): The ID of the special object that was eaten.
+    """
+    so_count: int
+    so_id: int
