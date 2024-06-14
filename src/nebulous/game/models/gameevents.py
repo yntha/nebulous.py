@@ -266,3 +266,23 @@ class EmoteEvent(GameEvent):
     blob_id: int  # 1 byte
     emote_id: int  # 1 byte
     custom_emote_id: int  # 4 bytes
+
+
+@dataclass
+class EndMissionEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a campaign mission has
+    ended.
+
+    Attributes:
+        mission_id (int): The ID of the mission that ended.
+        passed (bool): Whether the mission was passed.
+        next_mission_id (int): The ID of the next mission.
+        xp_reward (int): The XP reward for completing the mission.
+        plasma_reward (int): The plasma reward for completing the mission.
+    """
+    mission_id: int  # 1 byte
+    passed: bool  # 1 byte
+    next_mission_id: int  # 1 byte
+    xp_reward: int  # 3 bytes, encoded
+    plasma_reward: int  # 2 bytes
