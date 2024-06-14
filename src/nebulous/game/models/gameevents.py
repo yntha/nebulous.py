@@ -197,3 +197,14 @@ class BlobStatusEvent(GameEvent):
     player_id: int  # 1 byte
     blob_id: int  # 1 byte
     status: int  # 2 bytes
+
+
+@dataclass
+class TeleportEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player teleports.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+    """
+    player_id: int  # 1 byte
