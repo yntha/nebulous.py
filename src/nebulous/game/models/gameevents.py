@@ -104,8 +104,8 @@ class DQSetEvent(GameEvent):
         dq_id (int): The ID of the daily quest that was set.
         completed (bool): Whether the daily quest was completed.
     """
-    dq_id: int
-    completed: bool
+    dq_id: int  # 1 byte
+    completed: bool  # 1 byte
 
 
 @dataclass
@@ -116,7 +116,7 @@ class DQCompletedEvent(GameEvent):
     Attributes:
         dq_id (int): The ID of the daily quest that was completed.
     """
-    dq_id: int
+    dq_id: int  # 1 byte
 
 
 @dataclass
@@ -128,7 +128,7 @@ class DQProgressEvent(GameEvent):
     Attributes:
         progress (int): The new progress value of the daily quest.
     """
-    progress: int
+    progress: int  # 2 bytes
 
 
 @dataclass
@@ -140,5 +140,5 @@ class EatSOEvent(GameEvent):
         so_count (int): The number of special objects that were eaten.
         so_id (int): The ID of the special object that was eaten.
     """
-    so_count: int
-    so_id: int
+    so_count: int  # 1 byte
+    so_id: int  # 1 byte
