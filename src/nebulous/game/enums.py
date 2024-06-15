@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import enum
+import math
 
 
 class ConnectResult(enum.Enum):
@@ -11,6 +14,7 @@ class ConnectResult(enum.Enum):
         UNKNOWN (int): An unknown error occurred during the connection attempt.
         ACCOUNT_ALREADY_SIGNED_IN (int): The account is already signed in.
     """
+
     SUCCESS = 0
     GAME_NOT_FOUND = 1
     UNKNOWN = 2
@@ -53,6 +57,7 @@ class JoinResultCode(enum.Enum):
         KICKED (int): The player was kicked.
         INCOMPATIBLE_VERSION (int): The game version is incompatible.
     """
+
     SUCCESS = 0
     NAME_TAKEN = 1
     NAME_INVALID = 2
@@ -98,6 +103,7 @@ class ControlFlags(enum.IntFlag):
         DISPOSE (int): Dispose of the item held by the primary blob.
         CHARGEUP (int): Charge up the primary blob. Only works in Charge mode.
     """
+
     NONE = 0x00
     SPLIT = 0x01
     SHOOT = 0x02
@@ -135,6 +141,7 @@ class SpinType(enum.Enum):
     """
     Enum representing the different types of spin rewards.
     """
+
     SKIN = 0
     EJECT_SKIN = 1
     HAT = 2
@@ -152,6 +159,7 @@ class PurchasableType(enum.Enum):
     """
     Enum representing the types of purchasable items in the game.
     """
+
     BUY_COMMUNITY_SKIN = 0x00
     BUY_COMMUNITY_PET = 0x01
     BUY_COMMUNITY_PARTICLE = 0x02
@@ -255,6 +263,7 @@ class SaleType(enum.Enum):
         INGAME (int): Sale within the game.
         INGAME_2 (int): Another type of sale within the game.
     """
+
     NONE = 0
     OFFERS = 1
     IAP = 2
@@ -324,6 +333,7 @@ class RLGLState(enum.Enum):
     """
     Represents the state of the Red Light, Green Light game.
     """
+
     GREEN = 0
     YELLOW = 1
     RED = 2
@@ -348,6 +358,7 @@ class ChallengeStatus(enum.Enum):
         DECLINED (int): The challenge has been declined.
         INCOMPATIBLE_VERSION (int): The challenger has an incompatible game version.
     """
+
     SENT = 0
     EXPIRED = 1
     NOT_FOUND = 2
@@ -367,6 +378,7 @@ class Relationship(enum.Enum):
         PENDING (int): A relationship is pending.
         MUTUAL (int): A mutual relationship exists.
     """
+
     NONE = 0
     REQUESTED = 1
     PENDING = 2
@@ -386,6 +398,7 @@ class CustomSkinType(enum.Enum):
         CLAN_PARTICLE (int): Represents a custom skin for a clan particle effect.
         ALL (int): Represents a custom skin that applies to all entities.
     """
+
     ACCOUNT = 0
     CLAN = 1
     PET = 2
@@ -406,6 +419,7 @@ class CustomSkinStatus(enum.Enum):
         REJECTED (int): The custom skin has been rejected.
         APPROVED (int): The custom skin has been approved.
     """
+
     UNUSED = 0
     IN_REVIEW = 1
     REFUNDED = 2
@@ -429,6 +443,7 @@ class XPMultiplier(enum.Enum):
         XP_TRIPLE (int): Represents a 3x XP multiplier.
         XP_QUADRUPLE (int): Represents a 4x XP multiplier.
     """
+
     XP = 0
     XP_DOUBLE = 1
     XP_TRIPLE = 2
@@ -448,6 +463,7 @@ class ReportType(enum.Enum):
         MAIL (int): Report type for reporting mail.
         CHAT (int): Report type for reporting chat.
     """
+
     HARASSMENT = 0
     THREATS = 1
     SPAM = 2
@@ -468,6 +484,7 @@ class MissionObjective(enum.Enum):
         SURVIVE (int): Survive as the objective.
         SCORE (int): Achieve a certain score as the objective.
     """
+
     UNKNOWN = 0
     WIN = 1
     KILL_ALL_BOTS = 2
@@ -484,6 +501,7 @@ class ProfileVisibility(enum.Enum):
         CLAN_AND_FRIENDS (int): The profile is visible to the user's clan members and friends.
         FRIENDS (int): The profile is visible to the user's friends only.
     """
+
     PUBLIC = 0
     CLAN_AND_FRIENDS = 1
     FRIENDS = 2
@@ -502,6 +520,7 @@ class ClanRole(enum.Enum):
         DIAMOND (int): Diamond role.
         INITIATE (int): Initiate role.
     """
+
     INVALID = 0
     MEMBER = 1
     ADMIN = 2
@@ -521,6 +540,7 @@ class HoleType(enum.Enum):
         TELEPORT (int): Represents a teleport hole.
         NEBU (int): Represents a nebula hole.
     """
+
     NORMAL = 0
     SUPERMASSIVE = 1
     TELEPORT = 2
@@ -537,6 +557,7 @@ class SplitMultiplier(enum.Enum):
         X32 (SplitMultiplier): Split multiplier of 32.
         X64 (SplitMultiplier): Split multiplier of 64.
     """
+
     (
         X8,
         X16,
@@ -571,13 +592,41 @@ class SplitMultiplier(enum.Enum):
                 raise ValueError(f"Invalid SplitMultiplier value: {value}")
 
 
-class WorldSize(enum.Enum):
-    (
-        TINY,
-        SMALL,
-        NORMAL,
-        LARGE,
-    ) = range(4)
+class GameSize(enum.Enum):
+    TINY = 0
+    SMALL = 1
+    NORMAL = 2
+    LARGE = 3
+
+    @classmethod
+    def from_map_size(cls, map_size: float) -> GameSize:
+        """
+        Convert a map size to the corresponding WorldSize enum value.
+
+        Args:
+            map_size (float): The map size to convert.
+
+        Returns:
+            GameSize: The corresponding WorldSize enum value.
+
+        Raises:
+            ValueError: If the provided map size is not a valid WorldSize value.
+        """
+
+        # match on the whole number part of the map size
+        map_whole = math.floor(map_size)
+
+        match map_whole:
+            case 351:
+                return cls.TINY
+            case 497:
+                return cls.SMALL
+            case 703:
+                return cls.NORMAL
+            case 844:
+                return cls.LARGE
+            case _:
+                raise ValueError(f"Invalid map size: {map_size}")
 
 
 class NameAnimation(enum.Enum):
@@ -633,8 +682,6 @@ class GameDifficulty(enum.Enum):
     ) = range(4)
 
 
-import enum
-
 class OnlineStatus(enum.Enum):
     """
     Enumeration representing the online status options for a user.
@@ -645,6 +692,7 @@ class OnlineStatus(enum.Enum):
         HIDDEN(int): The user is hidden from others.
         DND(int): The user is in "do not disturb" mode.
     """
+
     (
         ONLINE,
         APPEAR_OFFLINE,
