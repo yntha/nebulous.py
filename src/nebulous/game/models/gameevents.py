@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 
+from datastream import DeserializingStream
 from nebulous.game.enums import GameEventType, ChargeType, RLGLState
 
 
@@ -11,7 +14,25 @@ class GameEvent:
     Attributes:
         event_type (GameEventType): The type of event that was triggered.
     """
-    event_type: GameEventType
+    event_type: GameEventType  # 1 byte
+
+    @classmethod
+    def read(cls, stream: DeserializingStream) -> GameEvent:
+        """
+        Reads a game event from the given stream.
+
+        Args:
+            stream (DeserializingStream): The stream to read from.
+
+        Returns:
+            GameEvent: The game event that was read.
+        """
+        event_type = GameEventType(stream.read_uint8())
+
+        if event_type not in EventMap:
+            event_type = GameEventType.UNKNOWN
+
+        return cls(event_type=event_type)
 
 
 @dataclass
@@ -25,6 +46,18 @@ class BlobExplodeEvent(GameEvent):
     """
     player_id: int  # 1 byte
     blob_id: int  # 1 byte
+
+    @classmethod
+    def read(cls, stream: DeserializingStream) -> BlobExplodeEvent:
+        event_type = stream.read_uint8()
+
+        if event_type != GameEventType.BLOB_EXPLODE:
+            raise ValueError(f"Invalid event type: {event_type}")
+
+        player_id = stream.read_uint8()
+        blob_id = stream.read_uint8()
+
+        return cls(event_type=GameEventType.BLOB_EXPLODE, player_id=player_id, blob_id=blob_id)
 
 
 @dataclass
