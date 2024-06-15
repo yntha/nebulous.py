@@ -439,6 +439,32 @@ class LPCountEvent(GameEvent):
     lp_count: int  # 1 byte
 
 
+@dataclass
+class BRBoundsEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when the Battle Royale bounds are updated.
+    This event is only triggered in the Battle Royale game mode.
+
+    Attributes:
+        bounds_left (float): The left bound of the BR area.
+        bounds_top (float): The top bound of the BR area.
+        bounds_right (float): The right bound of the BR area.
+        bounds_bottom (float): The bottom bound of the BR area.
+        lim_bounds_left (float): The left bound of the limited BR area.
+        lim_bounds_top (float): The top bound of the limited BR area.
+        lim_bounds_right (float): The right bound of the limited BR area.
+        lim_bounds_bottom (float): The bottom bound of the limited BR area.
+    """
+    bounds_left: float  # 3 bytes, encoded, clamped to map size
+    bounds_top: float  # 3 bytes, encoded, clamped to map size
+    bounds_right: float  # 3 bytes, encoded, clamped to map size
+    bounds_bottom: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_left: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_top: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_right: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_bottom: float  # 3 bytes, encoded, clamped to map size
+
+
 EventMap = {
     GameEventType.UNKNOWN: GameEvent,
     GameEventType.EAT_DOTS: GameEvent,
