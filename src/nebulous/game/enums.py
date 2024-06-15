@@ -320,6 +320,12 @@ class GameEventType(enum.Enum):
     RLGL_STATE = 54
 
 
+class ChargeType(enum.Enum):
+    UNKNOWN = 0
+    SPLIT_START = 1
+    EJECT_START = 2
+
+
 class ChallengeStatus(enum.Enum):
     """
     Enumeration representing the status of a challenge.
