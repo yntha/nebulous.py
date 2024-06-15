@@ -457,7 +457,7 @@ EventMap = {
     GameEventType.CLEAR_EFFECTS: GameEvent,
     GameEventType.SPEED: SpeedEvent,
     GameEventType.TRICK: TrickEvent,
-    GameEventType.DESTROY_ASTEROID: GameEvent,  # Implement this event
+    GameEventType.DESTROY_ASTEROID: GameEvent,
     GameEventType.ACCOLADE: AccoladeEvent,
     GameEventType.INVIS: InvisibleEvent,
     GameEventType.KILLED_BY: KilledByEvent,
