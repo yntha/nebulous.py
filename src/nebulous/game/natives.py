@@ -68,6 +68,19 @@ class VariableLengthArray:
         return cls(size, values)
 
 
+class CompressedInteger:
+    @staticmethod
+    def decompress_from_stream3(stream: DeserializingStream):
+        """
+        Decompresses a 24 bit integer from a stream.
+        """
+        b24_16 = stream.read_uint8() << 16
+        b15_8 = stream.read_uint8() << 8
+        b7_0 = stream.read_uint8()
+
+        return b24_16 + b15_8 + b7_0
+
+
 @dataclass
 class CompressedFloat:
     value: float
