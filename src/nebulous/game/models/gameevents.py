@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from nebulous.game.enums import GameEventType, ChargeType
+from nebulous.game.enums import GameEventType, ChargeType, RLGLState
 
 
 @dataclass
@@ -463,6 +463,19 @@ class BRBoundsEvent(GameEvent):
     lim_bounds_top: float  # 3 bytes, encoded, clamped to map size
     lim_bounds_right: float  # 3 bytes, encoded, clamped to map size
     lim_bounds_bottom: float  # 3 bytes, encoded, clamped to map size
+
+
+@dataclass
+class RLGLStateEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when the state of the Red Light,
+    Green Light game mode is updated. This event is only triggered in the RLGL
+    game mode.
+
+    Attributes:
+        state (RLGLState): The state of the RLGL game mode.
+    """
+    state: RLGLState  # 1 byte
 
 
 EventMap = {

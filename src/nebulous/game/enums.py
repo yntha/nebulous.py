@@ -320,6 +320,15 @@ class GameEventType(enum.Enum):
     RLGL_STATE = 54
 
 
+class RLGLState(enum.Enum):
+    """
+    Represents the state of the Red Light, Green Light game.
+    """
+    GREEN = 0
+    YELLOW = 1
+    RED = 2
+
+
 class ChargeType(enum.Enum):
     UNKNOWN = 0
     SPLIT_START = 1
