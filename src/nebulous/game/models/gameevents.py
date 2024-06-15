@@ -528,12 +528,12 @@ EventMap = {
     GameEventType.INVIS: InvisibleEvent,
     GameEventType.KILLED_BY: KilledByEvent,
     GameEventType.RADIATION_CLOUD: RadiationCloudEvent,
-    GameEventType.CHARGE: GameEvent,  # Implement these events as well
-    GameEventType.LP_COUNT: GameEvent,
-    GameEventType.BR_BOUNDS: GameEvent,
+    GameEventType.CHARGE: ChargeEvent,
+    GameEventType.LP_COUNT: LPCountEvent,
+    GameEventType.BR_BOUNDS: BRBoundsEvent,
     GameEventType.MINIMAP: GameEvent,
     GameEventType.RLGL_DEATH: GameEvent,
-    GameEventType.RLGL_STATE: GameEvent,
+    GameEventType.RLGL_STATE: RLGLStateEvent,
 }
 
 
