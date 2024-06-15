@@ -582,608 +582,368 @@ class OnlineStatus(enum.Enum):
 
 class PacketType(enum.Enum):
     """
-    Enumeration representing the different types of packets used in the game.
+    Enum representing the different types of packets sent by the game servers.
     """
 
-    INVALID = 0
-    """
-    Invalid packet type.
-    """
+    """Invalid packet type."""
+    INVALID = 0x00
 
-    CONNECT_RESULT_2 = 1
-    """
-    Result of a connection attempt.
-    """
+    """Result of a connection attempt to the game servers."""
+    CONNECT_RESULT_2 = 0x01
 
-    CONTROL = 2
-    """
-    Control packet.
-    """
+    """Sends control flags, angle, and speed."""
+    CONTROL = 0x02
 
-    KEEP_ALIVE = 3
-    """
-    Keep-alive packet.
-    """
+    """Keep alive packet."""
+    KEEP_ALIVE = 0x03
 
-    INVALIDATE_CLIENT = 4
-    """
-    Invalidate client packet.
-    """
+    """Invalidates the client."""
+    INVALIDATE_CLIENT = 0x04
 
-    START_GAME_INTERNAL = 5
-    """
-    Internal packet to start a game.
-    """
+    """Starts a game. Internal use only."""
+    START_GAME_INTERNAL = 0x05
 
-    CONNECT_REQUEST = 6
-    """
-    Request to connect to the game server.
-    """
+    """Connect request. This is only used by single player hosts."""
+    CONNECT_REQUEST = 0x06
 
-    DISCONNECT = 7
-    """
-    Disconnect packet.
-    """
+    """Request a disconnect from the server."""
+    DISCONNECT = 0x07
 
-    GAME_CHAT_MESSAGE = 8
-    """
-    Chat message in the game.
-    """
+    """Game chat message."""
+    GAME_CHAT_MESSAGE = 0x08
 
-    CLAN_CHAT_MESSAGE = 9
-    """
-    Chat message in the clan.
-    """
+    """Clan chat message."""
+    CLAN_CHAT_MESSAGE = 0x09
 
-    JOIN_REQUEST = 10
-    """
-    Request to join a game.
-    """
+    """Join request to enter the game and actually start playing."""
+    JOIN_REQUEST = 0x0A
 
-    JOIN_RESULT = 11
-    """
-    Result of a join request.
-    """
+    """Result of a join request."""
+    JOIN_RESULT = 0x0B
 
-    TTL_REFRESH_RESPONSE_INTERNAL = 12
-    """
-    Internal packet for refreshing time-to-live (TTL) response.
-    """
+    """Internal use only."""
+    TTL_REFRESH_RESPONSE_INTERNAL = 0x0C
 
-    SHUTDOWN_NODE_INTERNAL = 13
-    """
-    Internal packet to shutdown a node.
-    """
+    """Internal use only."""
+    SHUTDOWN_NODE_INTERNAL = 0x0D
 
-    SET_GS_ADDR = 14
-    """
-    Set game server address packet.
-    """
+    """Sets the game server address."""
+    SET_GS_ADDR = 0x0E
 
-    CLIENT_PREFERENCES = 15
-    """
-    Client preferences packet.
-    """
+    """Client preferences. Not sure what this is for."""
+    CLIENT_PREFERENCES = 0x0F
 
-    SPECTATE_CHANGE = 16
-    """
-    Spectate change packet.
-    """
+    """Spectate a different player."""
+    SPECTATE_CHANGE = 0x10
 
-    CLAN_WAR_LIST_REQUEST = 17
-    """
-    Request to list clan wars.
-    """
+    """Request a list of clan wars."""
+    CLAN_WAR_LIST_REQUEST = 0x11
 
-    CLAN_WAR_LIST_RESULT = 18
-    """
-    Result of a clan war list request.
-    """
+    """Result of a clan war list request."""
+    CLAN_WAR_LIST_RESULT = 0x12
 
-    CLAN_WAR_NOTIFICATION = 19
-    """
-    Clan war notification packet.
-    """
+    """Notification of a clan war."""
+    CLAN_WAR_NOTIFICATION = 0x13
 
-    TOP_SCORES = 20
-    """
-    Top scores packet.
-    """
+    """Updates the leaderboard in the lobby. Updated periodically."""
+    TOP_SCORES = 0x14
 
-    SERVER_SHUTDOWN_WARNING = 21
-    """
-    Server shutdown warning packet.
-    """
+    """Warning that the server is shutting down or restarting."""
+    SERVER_SHUTDOWN_WARNING = 0x15
 
-    GAME_UPDATE = 22
-    """
-    Game update packet.
-    """
+    """Updates the game variables, state, and objects."""
+    GAME_UPDATE = 0x16
 
-    GROUP_LOBBY_LIST_REQUEST = 23
-    """
-    Request to list group lobbies.
-    """
+    """Request a list of group lobbies."""
+    GROUP_LOBBY_LIST_REQUEST = 0x17
 
-    GROUP_LOBBY_LIST_RESULT = 24
-    """
-    Result of a group lobby list request.
-    """
+    """Result of a group lobby list request."""
+    GROUP_LOBBY_LIST_RESULT = 0x18
 
-    PUBLIC_CHAT_MESSAGE = 25
-    """
-    Public chat message packet.
-    """
+    """Public chat message."""
+    PUBLIC_CHAT_MESSAGE = 0x19
 
-    ADMIN_INTERNAL = 26
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    ADMIN_INTERNAL = 0x1A
 
-    GROUP_LOBBY_CREATE_REQUEST = 27
-    """
-    Request to create a group lobby.
-    """
+    """Create a new group lobby."""
+    GROUP_LOBBY_CREATE_REQUEST = 0x1B
 
-    GROUP_LOBBY_CREATE_RESULT = 28
-    """
-    Result of a group lobby create request.
-    """
+    """Result of a group lobby creation request."""
+    GROUP_LOBBY_CREATE_RESULT = 0x1C
 
-    GROUP_LOBBY_JOIN_REQUEST = 29
-    """
-    Request to join a group lobby.
-    """
+    """Request to join a group lobby."""
+    GROUP_LOBBY_JOIN_REQUEST = 0x1D
 
-    GROUP_LOBBY_JOIN_RESULT = 30
-    """
-    Result of a group lobby join request.
-    """
+    """Result of a group lobby join request."""
+    GROUP_LOBBY_JOIN_RESULT = 0x1E
 
-    GROUP_LOBBY_UPDATE = 31
-    """
-    Group lobby update packet.
-    """
+    """Update the group lobby."""
+    GROUP_LOBBY_UPDATE = 0x1F
 
-    GROUP_LOBBY_LEAVE = 32
-    """
-    Leave group lobby packet.
-    """
+    """Leave the group lobby."""
+    GROUP_LOBBY_LEAVE = 0x20
 
-    ARENA_LIST_REQUEST = 33
-    """
-    Request to list arenas.
-    """
+    """Request a list of arenas."""
+    ARENA_LIST_REQUEST = 0x21
 
-    CLIENT_PREFERENCES_INTERNAL = 34
-    """
-    Internal packet for client preferences.
-    """
+    """Internal use only."""
+    CLIENT_PREFERENCES_INTERNAL = 0x22
 
-    GAME_CRASH_INTERNAL = 35
-    """
-    Internal packet for game crash.
-    """
+    """Internal use only."""
+    GAME_CRASH_INTERNAL = 0x23
 
-    PRIVATE_CHAT_MESSAGE = 36
-    """
-    Private chat message packet.
-    """
+    """Private chat message."""
+    PRIVATE_CHAT_MESSAGE = 0x24
 
-    ARENA_LEAVE_QUEUE_REQUEST = 37
-    """
-    Request to leave an arena queue.
-    """
+    """Request to leave the arena."""
+    ARENA_LEAVE_QUEUE_REQEUST = 0x25
 
-    REMOVE_GAME_INTERNAL = 38
-    """
-    Internal packet to remove a game.
-    """
+    """Internal use only."""
+    REMOVE_GAME_INTERNAL = 0x26
 
-    GROUP_LOBBY_WARN = 39
-    """
-    Group lobby warning packet.
-    """
+    """Group lobby warning. Unknown use."""
+    GROUP_LOBBY_WARN = 0x27
 
-    ENTER_GAME_REQUEST = 40
-    """
-    Request to enter a game.
-    """
+    """Request to enter a (custom?) game."""
+    ENTER_GAME_REQUEST = 0x28
 
-    ENTER_GAME_RESULT = 41
-    """
-    Result of an enter game request.
-    """
+    """Result of a request to enter a game."""
+    ENTER_GAME_RESULT = 0x29
 
-    PLAYER_SESSION_STATS_UPDATE_INTERNAL = 42
-    """
-    Internal packet for updating player session stats.
-    """
+    """Internal use only."""
+    PLAYER_SESSION_STATS_UPDATE_INTERNAL = 0x2A
 
-    PLAYER_WS_ACCOUNT_UPDATE_INTERNAL = 43
-    """
-    Internal packet for updating player WS account.
-    """
+    """Internal use only."""
+    PLAYER_WS_ACCOUNT_UPDATE_INTERNAL = 0x2B
 
-    ACCOUNT_STATUS_REQUEST = 44
-    """
-    Request for account status.
-    """
+    """Request to check the status of an account."""
+    ACCOUNT_STATUS_REQUEST = 0x2C
 
-    ACCOUNT_STATUS_RESULT = 45
-    """
-    Result of an account status request.
-    """
+    """Result of an account status request."""
+    ACCOUNT_STATUS_RESULT = 0x2D
 
-    FRIEND_CHAT_MESSAGE = 46
-    """
-    Chat message from a friend.
-    """
+    """Friend chat message."""
+    FRIEND_CHAT_MESAGE = 0x2E
 
-    CLIENT_STATUS_CHANGE_REQUEST = 47
-    """
-    Request to change client status.
-    """
+    """Request to change the status of a client."""
+    CLIENT_STATUS_CHANGE_REQUEST = 0x2F
 
-    CLIENT_STATUS_CHANGE_RESULT = 48
-    """
-    Result of a client status change request.
-    """
+    """Result of a request to change the status of a client."""
+    CLIENT_STATUS_CHANGE_RESULT = 0x30
 
-    CLAN_WAR_CONTROL = 49
-    """
-    Clan war control packet.
-    """
+    """Clan war control."""
+    CLAN_WAR_CONTROL = 0x31
 
-    CLAN_WAR_UPDATE = 50
-    """
-    Clan war update packet.
-    """
+    """Update of a clan war."""
+    CLAN_WAR_UPDATE = 0x32
 
-    ARENA_LIST_RESULT = 51
-    """
-    Result of an arena list request.
-    """
+    """Result of a clan war list request."""
+    ARENA_LIST_RESULT = 0x33
 
-    ADMIN_INTERNAL2 = 52
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    UNUSED1 = 0x34
 
-    NODE_RESET_REQUEST_INTERNAL = 53
-    """
-    Internal packet for resetting a node.
-    """
+    """Internal use only. Most likely used to reset the node the lobby is connected to."""
+    NODE_RESET_REQUEST_INTERNAL = 0x35
 
-    CLAN_WAR_RESULT_INTERNAL = 54
-    """
-    Internal packet for clan war result.
-    """
+    """Internal use only."""
+    CLAN_WAR_RESULT_INTERNAL = 0x36
 
-    CLAN_WAR_FORFEIT_INTERNAL = 55
-    """
-    Internal packet for clan war forfeit.
-    """
+    """Internal use only."""
+    CLAN_WAR_FORFEIT_INTERNAL = 0x37
 
-    SPECTATE_GAME_REQUEST = 56
-    """
-    Request to spectate a game.
-    """
+    """Request to spectate a game."""
+    SPECTATE_GAME_REQUEST = 0x38
 
-    GET_PLAYER_STATS_INTERNAL = 57
-    """
-    Internal packet for getting player stats.
-    """
+    """Internal use only."""
+    GET_PLAYER_STATS_INTERNAL = 0x39
 
-    ARENA_QUEUE_REQUEST = 58
-    """
-    Request to join an arena queue.
-    """
+    """Queue up for an arena."""
+    ARENA_QUEUE_REQUEST = 0x3A
 
-    ARENA_STATUS = 59
-    """
-    Arena status packet.
-    """
+    """Status of the arena."""
+    ARENA_STATUS = 0x3B
 
-    ADMIN_INTERNAL3 = 60
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    UNUSED2 = 0x3C
 
-    ARENA_RESULT_INTERNAL = 61
-    """
-    Internal packet for arena result.
-    """
+    """Internal use only."""
+    ARENA_RESULT_INTERNAL = 0x3D
 
-    ADMIN_INTERNAL4 = 62
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    UNUSED3 = 0x3E
 
-    TEAM_ARENA_RESULT_INTERNAL = 63
-    """
-    Internal packet for team arena result.
-    """
+    """Internal use only."""
+    TEAM_ARENA_RESULT_INTERNAL = 0x3F
 
-    TEAM_ARENA_STATUS_RESULT = 64
-    """
-    Result of a team arena status request.
-    """
+    """Team arena status result."""
+    TEAM_ARENA_STATUS_RESULT = 0x40
 
-    TEAM_ARENA_STATUS_REQUEST = 65
-    """
-    Request for team arena status.
-    """
+    """Request to check the status of a team arena."""
+    TEAM_ARENA_STATUS_REQUEST = 0x41
 
-    TEAM_ARENA_LIST_REQUEST = 66
-    """
-    Request to list team arenas.
-    """
+    """Request to list team arenas."""
+    TEAM_ARENA_LIST_REQUEST = 0x42
 
-    TEAM_ARENA_LIST_RESULT = 67
-    """
-    Result of a team arena list request.
-    """
+    """Result of a request to list team arenas."""
+    TEAM_ARENA_LIST_RESULT = 0x43
 
-    TEAM_ARENA_QUEUE_REQUEST = 68
-    """
-    Request to join a team arena queue.
-    """
+    """Request to queue up for a team arena."""
+    TEAM_ARENA_QUEUE_REQUEST = 0x44
 
-    TEAM_ARENA_LEAVE_QUEUE_REQEUST = 69
-    """
-    Request to leave a team arena queue.
-    """
+    """Request to leave the team arena queue."""
+    TEAM_ARENA_LEAVE_QUEUE_REQEUST = 0x45
 
-    TEAM_ARENA_UPDATE = 70
-    """
-    Team arena update packet.
-    """
+    """Update of a team arena."""
+    TEAM_ARENA_UPDATE = 0x46
 
-    CLAN_HOUSE_UPDATE_INTERNAL = 71
-    """
-    Internal packet for updating clan house.
-    """
+    """Internal use only."""
+    CLAN_HOUSE_UPDATE_INTERNAL = 0x47
 
-    ADMIN_INTERNAL5 = 72
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    UNUSED4 = 0x48
 
-    CLAN_HOUSE_UPDATE_INTERNAL2 = 73
-    """
-    Internal packet for updating clan house.
-    """
+    """Internal use only."""
+    UNUSED5 = 0x49
 
-    NODE_CONNECT_REQUEST_INTERNAL = 74
-    """
-    Internal packet for connecting a node.
-    """
+    """Internal use only."""
+    NODE_CONNECT_REQUEST_INTERNAL = 0x4A
 
-    GAME_DATA = 75
-    """
-    Game data packet.
-    """
+    """Sets the initial lobby variables and state."""
+    GAME_DATA = 0x4B
 
-    CHALLENGE = 76
-    """
-    Challenge packet.
-    """
+    """Challenge request."""
+    CHALLENGE = 0x4C
 
-    CHALLENGE_RESULT = 77
-    """
-    Result of a challenge.
-    """
+    """Result of a challenge request."""
+    CHALLENGE_RESULT = 0x4D
 
-    FWD_TO_CLIENT_INTERNAL = 78
-    """
-    Internal packet for forwarding to client.
-    """
+    """Internal use only."""
+    FWD_TO_CLIENT_INTERNAL = 0x4E
 
-    TTL_REFRESH_REQUEST_INTERNAL = 79
-    """
-    Internal packet for refreshing time-to-live (TTL) request.
-    """
+    """Internal use only."""
+    TTL_REFRESH_REQUEST_INTERNAL = 0x4F
 
-    CONNECT_REQUEST_2 = 80
-    """
-    Second connect request packet.
-    """
+    """Old connect request. No longer used and unrecongized by the server."""
+    CONNECT_REQUEST_2 = 0x50
 
-    CONNECT_RESULT = 81
-    """
-    Result of a connect request.
-    """
+    """Result of a connect request."""
+    CONNECT_RESULT = 0x51
 
-    ADMIN_INTERNAL6 = 82
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    UNUSED6 = 0x52
 
-    CLAN_HOUSE_UPDATE_INTERNAL3 = 83
-    """
-    Internal packet for updating clan house.
-    """
+    """Internal use only."""
+    UNUSED7 = 0x53
 
-    TOURNEY_LIST_REQUEST = 84
-    """
-    Request to list tournaments.
-    """
+    """Request to list tournaments."""
+    TOURNEY_LIST_REQUEST = 0x54
 
-    TOURNEY_LIST_RESULT = 85
-    """
-    Result of a tournament list request.
-    """
+    """Result of a request to list tournaments."""
+    TOURNEY_LIST_RESULT = 0x55
 
-    TOURNEY_ACTION = 86
-    """
-    Tournament action packet.
-    """
+    """Action in a tournament."""
+    TOURNEY_ACTION = 0x56
 
-    TOURNEY_MATCH_RESULT_INTERNAL = 87
-    """
-    Internal packet for tournament match result.
-    """
+    """Internal use only."""
+    TOURNEY_MATCH_RESULT_INTERNAL = 0x57
 
-    TOURNEY_START_INTERNAL = 88
-    """
-    Internal packet for starting a tournament.
-    """
+    """Internal use only."""
+    TOURNEY_START_INTERNAL = 0x58
 
-    TOURNEY_STATUS_UPDATE = 89
-    """
-    Tournament status update packet.
-    """
+    """Tournament status update."""
+    TOURNEY_STATUS_UPDATE = 0x59
 
-    ADMIN_INTERNAL7 = 90
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    UNUSED8 = 0x5A
 
-    MUTE_INTERNAL = 91
-    """
-    Internal packet for muting a player.
-    """
+    """Internal use only."""
+    MUTE_INTERNAL = 0x5B
 
-    JOINED_GAME_INTERNAL = 92
-    """
-    Internal packet for joining a game.
-    """
+    """Internal use only."""
+    JOINED_GAME_INTERNAL = 0x5C
 
-    CLAN_HOUSE_UPDATE_INTERNAL4 = 93
-    """
-    Internal packet for updating clan house.
-    """
+    """Internal use only."""
+    UNUSED9 = 0x5D
 
-    CLAN_HOUSE_CONFIG = 94
-    """
-    Clan house configuration packet.
-    """
+    """Configure a clan house."""
+    CLAN_HOUSE_CONFIG = 0x5E
 
-    INVITE = 95
-    """
-    Invite packet.
-    """
+    """Invite a player to a team(maybe?)."""
+    INVITE = 0x5F
 
-    DESIRED_DUO_PARTNER = 96
-    """
-    Desired duo partner packet.
-    """
+    """Desired duo partner."""
+    DESIRED_DUO_PARTNER = 0x60
 
-    EMOTE_REQUEST = 97
-    """
-    Request to perform an emote.
-    """
+    """Display an emote on your blob."""
+    EMOTE_REQUEST = 0x61
 
-    UDP_KEEPALIVE = 98
-    """
-    UDP keep-alive packet.
-    """
+    """Internal use only."""
+    UNUSED10 = 0x62
 
-    GROUP_CHAT_CREATE_REQUEST = 99
-    """
-    Request to create a group chat.
-    """
+    """Request to create a group chat."""
+    GROUP_CHAT_CREATE_REQUEST = 0x63
 
-    GROUP_CHAT_JOIN_REQUEST = 100
-    """
-    Request to join a group chat.
-    """
+    """Request to join a group chat."""
+    GROUP_CHAT_JOIN_REQUEST = 0x64
 
-    GROUP_CHAT_LEAVE_REQUEST = 101
-    """
-    Request to leave a group chat.
-    """
+    """Request to leave a group chat."""
+    GROUP_CHAT_LEAVE_REQUEST = 0x65
 
-    GROUP_CHAT_RESULT = 102
-    """
-    Result of a group chat request.
-    """
+    """Result of a group chat request."""
+    GROUP_CHAT_RESULT = 0x66
 
-    GROUP_CHAT_STATUS = 103
-    """
-    Group chat status packet.
-    """
+    """Status of a group chat."""
+    GROUP_CHAT_STATUS = 0x67
 
-    GROUP_CHAT_MESSAGE = 104
-    """
-    Group chat message packet.
-    """
+    """Message in a group chat."""
+    GROUP_CHAT_MESSAGE = 0x68
 
-    SESSION_STATS = 105
-    """
-    Session stats packet.
-    """
+    """Session stats."""
+    SESSION_STATS = 0x69
 
-    ACCOLADE = 106
-    """
-    Accolade packet.
-    """
+    """Received when a player is awarded an accolade(thumbs up)."""
+    ACCOLADE = 0x6A
 
-    VOICE_CONTROL = 107
-    """
-    Voice control packet.
-    """
+    """Enable/disable voice chat."""
+    VOICE_CONTROL = 0x6B
 
-    VOICE_DATA = 108
-    """
-    Voice data packet.
-    """
+    """Voice data."""
+    VOICE_DATA = 0x6C
 
-    MINIMAP_UPDATE = 109
-    """
-    Minimap update packet.
-    """
+    """Update the minimap."""
+    MINIMAP_UPDATE = 0x6D
 
-    GAME_STOP_INTERNAL = 110
-    """
-    Internal packet to stop a game.
-    """
+    """Internal use only."""
+    UNUSED11 = 0x6E
 
-    BATTLE_ROYALE_ACTION = 111
-    """
-    Battle Royale action packet.
-    """
+    """Action in a battle royale."""
+    BATTLE_ROYALE_ACTION = 0x6F
 
-    BATTLE_ROYALE_LIST_REQUEST = 112
-    """
-    Request to list Battle Royale games.
-    """
+    """Request to list battle royales."""
+    BATTLE_ROYALE_LIST_REQUEST = 0x70
 
-    BATTLE_ROYALE_LIST_RESULT = 113
-    """
-    Result of a Battle Royale list request.
-    """
+    """Result of a request to list battle royales."""
+    BATTLE_ROYALE_LIST_RESULT = 0x71
 
-    BATTLE_ROYALE_STATUS_UPDATE = 114
-    """
-    Battle Royale status update packet.
-    """
+    """Status update of a battle royale."""
+    BATTLE_ROYALE_STATUS_UPDATE = 0x72
 
-    BATTLE_ROYALE_RESULT_INTERNAL = 115
-    """
-    Internal packet for Battle Royale result.
-    """
+    """Internal use only."""
+    BATTLE_ROYALE_RESULT_INTERNAL = 0x73
 
-    ADMIN_INTERNAL8 = 116
-    """
-    Internal packet for administrative purposes.
-    """
+    """Internal use only."""
+    UNUSED12 = 0x74
 
-    PING_MESSAGE = 117
-    """
-    Ping message packet.
-    """
+    """Ping the servers to get their latency."""
+    PING_MESSAGE = 0x75
 
-    CONNECT_REQUEST_3 = 118
-    """
-    Third connect request packet.
-    """
+    """New connect request. It is composed of a header and a body of shuffled bytes."""
+    CONNECT_REQUEST_3 = 0x76
 
-    ARENA_CD_INTERNAL = 119
-    """
-    Internal packet for arena cooldown.
-    """
+    """Internal use only."""
+    ARENA_CD_INTERNAL = 0x77
 
 
 class GameMode(enum.Enum):
