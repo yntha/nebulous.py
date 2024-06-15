@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from nebulous.game.enums import GameEventType
+from nebulous.game.enums import GameEventType, ChargeType, RLGLState
 
 
 @dataclass
@@ -410,3 +410,162 @@ class RadiationCloudEvent(GameEvent):
     x_pos: float  # 3 bytes, encoded, clamped to map size
     y_pos: float  # 3 bytes, encoded, clamped to map size
     time_remaining: float  # 1 byte, encoded, clamped to 16.0
+
+
+@dataclass
+class ChargeEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player begins to charge up.
+    This event is only triggered in the Charge game mode.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+        charge_type (ChargeType): The type of the charge up.
+    """
+    player_id: int  # 1 byte
+    charge_type: ChargeType  # 1 byte
+
+
+@dataclass
+class LPCountEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when the LP count is updated or set.
+    The purpose of this event isn't so clear. It sets a variable in the game that
+    holds the current number of active(joined) players in the current session.
+
+    Attributes:
+        lp_count (int): The new LP count.
+    """
+    lp_count: int  # 1 byte
+
+
+@dataclass
+class BRBoundsEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when the Battle Royale bounds are updated.
+    This event is only triggered in the Battle Royale game mode.
+
+    Attributes:
+        bounds_left (float): The left bound of the BR area.
+        bounds_top (float): The top bound of the BR area.
+        bounds_right (float): The right bound of the BR area.
+        bounds_bottom (float): The bottom bound of the BR area.
+        lim_bounds_left (float): The left bound of the limited BR area.
+        lim_bounds_top (float): The top bound of the limited BR area.
+        lim_bounds_right (float): The right bound of the limited BR area.
+        lim_bounds_bottom (float): The bottom bound of the limited BR area.
+    """
+    bounds_left: float  # 3 bytes, encoded, clamped to map size
+    bounds_top: float  # 3 bytes, encoded, clamped to map size
+    bounds_right: float  # 3 bytes, encoded, clamped to map size
+    bounds_bottom: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_left: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_top: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_right: float  # 3 bytes, encoded, clamped to map size
+    lim_bounds_bottom: float  # 3 bytes, encoded, clamped to map size
+
+
+@dataclass
+class RLGLStateEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when the state of the Red Light,
+    Green Light game mode is updated. This event is only triggered in the RLGL
+    game mode.
+
+    Attributes:
+        state (RLGLState): The state of the RLGL game mode.
+    """
+    state: RLGLState  # 1 byte
+
+
+EventMap = {
+    GameEventType.UNKNOWN: GameEvent,
+    GameEventType.EAT_DOTS: GameEvent,
+    GameEventType.EAT_BLOB: GameEvent,
+    GameEventType.EAT_SMBH: GameEvent,
+    GameEventType.BLOB_EXPLODE: BlobExplodeEvent,
+    GameEventType.BLOB_LOST: GameEvent,
+    GameEventType.EJECT: EjectEvent,
+    GameEventType.SPLIT: SplitEvent,
+    GameEventType.RECOMBINE: RecombineEvent,
+    GameEventType.TIMER_WARNING: GameEvent,
+    GameEventType.CTF_SCORE: GameEvent,
+    GameEventType.CTF_FLAG_RETURNED: GameEvent,
+    GameEventType.CTF_FLAG_STOLEN: GameEvent,
+    GameEventType.CTF_FLAG_DROPPED: GameEvent,
+    GameEventType.ACHIEVEMENT_EARNED: AchievementEarnedEvent,
+    GameEventType.XP_GAINED: GameEvent,
+    GameEventType.UNUSED_2: GameEvent,
+    GameEventType.XP_SET: XPSetEvent,
+    GameEventType.DQ_SET: DQSetEvent,
+    GameEventType.DQ_COMPLETED: DQCompletedEvent,
+    GameEventType.DQ_PROGRESS: DQProgressEvent,
+    GameEventType.EAT_SERVER_BLOB: GameEvent,
+    GameEventType.EAT_SPECIAL_OBJECTS: EatSOEvent,
+    GameEventType.SO_SET: SetSOEvent,
+    GameEventType.LEVEL_UP: LevelUpEvent,
+    GameEventType.ARENA_RANK_ACHIEVED: ArenaRankAchievedEvent,
+    GameEventType.DOM_CP_LOST: GameEvent,
+    GameEventType.DOM_CP_GAINED: GameEvent,
+    GameEventType.UNUSED_1: GameEvent,
+    GameEventType.CTF_GAINED: GameEvent,
+    GameEventType.GAME_OVER: GameEvent,
+    GameEventType.BLOB_STATUS: BlobStatusEvent,
+    GameEventType.TELEPORT: TeleportEvent,
+    GameEventType.SHOOT: ShootEvent,
+    GameEventType.CLAN_WAR_WON: ClanWarWonEvent,
+    GameEventType.PLASMA_REWARD: PlasmaRewardEvent,
+    GameEventType.EMOTE: EmoteEvent,
+    GameEventType.END_MISSION: EndMissionEvent,
+    GameEventType.XP_GAINED_2: XPGained2Event,
+    GameEventType.EAT_CAKE: EatCakeEvent,
+    GameEventType.COIN_COUNT: CoinCountEvent,
+    GameEventType.CLEAR_EFFECTS: GameEvent,
+    GameEventType.SPEED: SpeedEvent,
+    GameEventType.TRICK: TrickEvent,
+    GameEventType.DESTROY_ASTEROID: GameEvent,
+    GameEventType.ACCOLADE: AccoladeEvent,
+    GameEventType.INVIS: InvisibleEvent,
+    GameEventType.KILLED_BY: KilledByEvent,
+    GameEventType.RADIATION_CLOUD: RadiationCloudEvent,
+    GameEventType.CHARGE: ChargeEvent,
+    GameEventType.LP_COUNT: LPCountEvent,
+    GameEventType.BR_BOUNDS: BRBoundsEvent,
+    GameEventType.MINIMAP: GameEvent,
+    GameEventType.RLGL_DEATH: GameEvent,
+    GameEventType.RLGL_STATE: RLGLStateEvent,
+}
+
+
+__all__ = [
+    "GameEvent",
+    "BlobExplodeEvent",
+    "EjectEvent",
+    "SplitEvent",
+    "RecombineEvent",
+    "AchievementEarnedEvent",
+    "XPSetEvent",
+    "DQSetEvent",
+    "DQCompletedEvent",
+    "DQProgressEvent",
+    "EatSOEvent",
+    "SetSOEvent",
+    "LevelUpEvent",
+    "ArenaRankAchievedEvent",
+    "BlobStatusEvent",
+    "TeleportEvent",
+    "ShootEvent",
+    "ClanWarWonEvent",
+    "PlasmaRewardEvent",
+    "EmoteEvent",
+    "EndMissionEvent",
+    "XPGained2Event",
+    "EatCakeEvent",
+    "CoinCountEvent",
+    "SpeedEvent",
+    "TrickEvent",
+    "AccoladeEvent",
+    "InvisibleEvent",
+    "KilledByEvent",
+    "RadiationCloudEvent",
+]
