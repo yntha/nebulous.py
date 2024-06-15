@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from datastream import DeserializingStream
 from nebulous.game.enums import GameEventType, ChargeType, RLGLState
+
+if TYPE_CHECKING:
+    from nebulous.game.models.client import Client
 
 
 @dataclass
@@ -17,11 +21,12 @@ class GameEvent:
     event_type: GameEventType  # 1 byte
 
     @classmethod
-    def read(cls, stream: DeserializingStream) -> GameEvent:
+    def read(cls, client: Client, stream: DeserializingStream) -> GameEvent:
         """
         Reads a game event from the given stream.
 
         Args:
+            client (Client): The current client instance.
             stream (DeserializingStream): The stream to read from.
 
         Returns:
@@ -48,7 +53,7 @@ class BlobExplodeEvent(GameEvent):
     blob_id: int  # 1 byte
 
     @classmethod
-    def read(cls, stream: DeserializingStream) -> BlobExplodeEvent:
+    def read(cls, client: Client, stream: DeserializingStream) -> BlobExplodeEvent:
         event_type = stream.read_uint8()
 
         if event_type != GameEventType.BLOB_EXPLODE:
