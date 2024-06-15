@@ -426,6 +426,19 @@ class ChargeEvent(GameEvent):
     charge_type: ChargeType  # 1 byte
 
 
+@dataclass
+class LPCountEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when the LP count is updated or set.
+    The purpose of this event isn't so clear. It sets a variable in the game that
+    holds the current number of active(joined) players in the current session.
+
+    Attributes:
+        lp_count (int): The new LP count.
+    """
+    lp_count: int  # 1 byte
+
+
 EventMap = {
     GameEventType.UNKNOWN: GameEvent,
     GameEventType.EAT_DOTS: GameEvent,
