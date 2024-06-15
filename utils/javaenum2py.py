@@ -47,7 +47,7 @@ def extract_enum_data():
     for idx, item in enumerate(enum_members):
         member, args = item
 
-        python_enum_class += f"    {member} = {idx}"
+        python_enum_class += f"    {member} = 0x{idx:02X}"
 
         if args:
             python_enum_class += f"  # {', '.join(args)}\n"
