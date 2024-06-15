@@ -35,7 +35,10 @@ class GameEvent:
         event_type = GameEventType(stream.read_uint8())
 
         if event_type not in EventMap:
+            client.logger.warning(f"Unknown GameUpdate event type: {event_type}")
             event_type = GameEventType.UNKNOWN
+        else:
+            client.logger.debug(f"Received GameUpdate event: {event_type}")
 
         return cls(event_type=event_type)
 
@@ -61,6 +64,8 @@ class BlobExplodeEvent(GameEvent):
 
         player_id = stream.read_uint8()
         blob_id = stream.read_uint8()
+
+        client.logger.debug(f"Received BlobExplode event: player_id={player_id}, blob_id={blob_id}")
 
         return cls(event_type=GameEventType.BLOB_EXPLODE, player_id=player_id, blob_id=blob_id)
 
