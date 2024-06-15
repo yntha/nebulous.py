@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from nebulous.game.enums import GameEventType
+from nebulous.game.enums import GameEventType, ChargeType
 
 
 @dataclass
@@ -410,6 +410,20 @@ class RadiationCloudEvent(GameEvent):
     x_pos: float  # 3 bytes, encoded, clamped to map size
     y_pos: float  # 3 bytes, encoded, clamped to map size
     time_remaining: float  # 1 byte, encoded, clamped to 16.0
+
+
+@dataclass
+class ChargeEvent(GameEvent):
+    """
+    Represents a triggered event that occurs when a player begins to charge up.
+    This event is only triggered in the Charge game mode.
+
+    Attributes:
+        player_id (int): The ID of the player that triggered the event.
+        charge_type (ChargeType): The type of the charge up.
+    """
+    player_id: int  # 1 byte
+    charge_type: ChargeType  # 1 byte
 
 
 EventMap = {
