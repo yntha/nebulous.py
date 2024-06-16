@@ -1171,4 +1171,8 @@ __all__ = [
     "InvisibleEvent",
     "KilledByEvent",
     "RadiationCloudEvent",
+    "ChargeEvent",
+    "LPCountEvent",
+    "BRBoundsEvent",
+    "RLGLStateEvent",
 ]
