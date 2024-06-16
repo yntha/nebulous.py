@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from nebulous.game.enums import GameSize
 from nebulous.game.models import PlayerName
 from nebulous.game.models.apiobjects import Clan, ClanMember
 from nebulous.game.models.gameobjects import GameDot, GameItem, GamePet, GamePlayer, GamePlayerMass
@@ -129,6 +130,8 @@ class InternalCallbacks:
             )
 
             client.game_world.items.append(game_item)
+
+        client.game_world.map_size = GameSize.from_map_size(packet.map_size)
 
         return await client.callbacks.on_game_data(client, packet)
 
