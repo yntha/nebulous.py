@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from nebulous.game.enums import GameSize
 from nebulous.game.models import PlayerName
 from nebulous.game.models.apiobjects import Clan, ClanMember
 from nebulous.game.models.gameobjects import GameDot, GameItem, GamePet, GamePlayer, GamePlayerMass
@@ -17,6 +18,42 @@ if TYPE_CHECKING:
         GameChatMessage,
         GameData,
         KeepAlive,
+    )
+    from nebulous.game.models.gameevents import (
+        GameEvent,
+        BlobExplodeEvent,
+        EjectEvent,
+        SplitEvent,
+        RecombineEvent,
+        AchievementEarnedEvent,
+        XPSetEvent,
+        DQSetEvent,
+        DQCompletedEvent,
+        DQProgressEvent,
+        EatSOEvent,
+        SetSOEvent,
+        LevelUpEvent,
+        ArenaRankAchievedEvent,
+        BlobStatusEvent,
+        TeleportEvent,
+        ShootEvent,
+        ClanWarWonEvent,
+        PlasmaRewardEvent,
+        EmoteEvent,
+        EndMissionEvent,
+        XPGained2Event,
+        EatCakeEvent,
+        CoinCountEvent,
+        SpeedEvent,
+        TrickEvent,
+        AccoladeEvent,
+        InvisibleEvent,
+        KilledByEvent,
+        RadiationCloudEvent,
+        ChargeEvent,
+        LPCountEvent,
+        BRBoundsEvent,
+        RLGLStateEvent,
     )
 
 
@@ -130,6 +167,8 @@ class InternalCallbacks:
 
             client.game_world.items.append(game_item)
 
+        client.game_world.map_size = GameSize.from_map_size(packet.map_size)
+
         return await client.callbacks.on_game_data(client, packet)
 
     @staticmethod
@@ -151,6 +190,142 @@ class InternalCallbacks:
     @staticmethod
     async def on_player_ready(client: Client, player: GamePlayer) -> GamePlayer:
         return await client.callbacks.on_player_ready(client, player)
+
+    @staticmethod
+    async def on_game_event(client: Client, event: GameEvent) -> GameEvent:
+        return await client.callbacks.on_game_event(client, event)
+
+    @staticmethod
+    async def on_blob_explode_event(client: Client, event: BlobExplodeEvent) -> BlobExplodeEvent:
+        return await client.callbacks.on_blob_explode_event(client, event)
+
+    @staticmethod
+    async def on_eject_event(client: Client, event: EjectEvent) -> EjectEvent:
+        return await client.callbacks.on_eject_event(client, event)
+
+    @staticmethod
+    async def on_split_event(client: Client, event: SplitEvent) -> SplitEvent:
+        return await client.callbacks.on_split_event(client, event)
+
+    @staticmethod
+    async def on_recombine_event(client: Client, event: RecombineEvent) -> RecombineEvent:
+        return await client.callbacks.on_recombine_event(client, event)
+
+    @staticmethod
+    async def on_achievement_earned_event(client: Client, event: AchievementEarnedEvent) -> AchievementEarnedEvent:
+        return await client.callbacks.on_achievement_earned_event(client, event)
+
+    @staticmethod
+    async def on_xp_set_event(client: Client, event: XPSetEvent) -> XPSetEvent:
+        return await client.callbacks.on_xp_set_event(client, event)
+
+    @staticmethod
+    async def on_dq_set_event(client: Client, event: DQSetEvent) -> DQSetEvent:
+        return await client.callbacks.on_dq_set_event(client, event)
+
+    @staticmethod
+    async def on_dq_completed_event(client: Client, event: DQCompletedEvent) -> DQCompletedEvent:
+        return await client.callbacks.on_dq_completed_event(client, event)
+
+    @staticmethod
+    async def on_dq_progress_event(client: Client, event: DQProgressEvent) -> DQProgressEvent:
+        return await client.callbacks.on_dq_progress_event(client, event)
+
+    @staticmethod
+    async def on_eat_so_event(client: Client, event: EatSOEvent) -> EatSOEvent:
+        return await client.callbacks.on_eat_so_event(client, event)
+
+    @staticmethod
+    async def on_set_so_event(client: Client, event: SetSOEvent) -> SetSOEvent:
+        return await client.callbacks.on_set_so_event(client, event)
+
+    @staticmethod
+    async def on_level_up_event(client: Client, event: LevelUpEvent) -> LevelUpEvent:
+        return await client.callbacks.on_level_up_event(client, event)
+
+    @staticmethod
+    async def on_arena_rank_achieved_event(client: Client, event: ArenaRankAchievedEvent) -> ArenaRankAchievedEvent:
+        return await client.callbacks.on_arena_rank_achieved_event(client, event)
+
+    @staticmethod
+    async def on_blob_status_event(client: Client, event: BlobStatusEvent) -> BlobStatusEvent:
+        return await client.callbacks.on_blob_status_event(client, event)
+
+    @staticmethod
+    async def on_teleport_event(client: Client, event: TeleportEvent) -> TeleportEvent:
+        return await client.callbacks.on_teleport_event(client, event)
+
+    @staticmethod
+    async def on_shoot_event(client: Client, event: ShootEvent) -> ShootEvent:
+        return await client.callbacks.on_shoot_event(client, event)
+
+    @staticmethod
+    async def on_clan_war_won_event(client: Client, event: ClanWarWonEvent) -> ClanWarWonEvent:
+        return await client.callbacks.on_clan_war_won_event(client, event)
+
+    @staticmethod
+    async def on_plasma_reward_event(client: Client, event: PlasmaRewardEvent) -> PlasmaRewardEvent:
+        return await client.callbacks.on_plasma_reward_event(client, event)
+
+    @staticmethod
+    async def on_emote_event(client: Client, event: EmoteEvent) -> EmoteEvent:
+        return await client.callbacks.on_emote_event(client, event)
+
+    @staticmethod
+    async def on_end_mission_event(client: Client, event: EndMissionEvent) -> EndMissionEvent:
+        return await client.callbacks.on_end_mission_event(client, event)
+
+    @staticmethod
+    async def on_xp_gained2_event(client: Client, event: XPGained2Event) -> XPGained2Event:
+        return await client.callbacks.on_xp_gained2_event(client, event)
+
+    @staticmethod
+    async def on_eat_cake_event(client: Client, event: EatCakeEvent) -> EatCakeEvent:
+        return await client.callbacks.on_eat_cake_event(client, event)
+
+    @staticmethod
+    async def on_coin_count_event(client: Client, event: CoinCountEvent) -> CoinCountEvent:
+        return await client.callbacks.on_coin_count_event(client, event)
+
+    @staticmethod
+    async def on_speed_event(client: Client, event: SpeedEvent) -> SpeedEvent:
+        return await client.callbacks.on_speed_event(client, event)
+
+    @staticmethod
+    async def on_trick_event(client: Client, event: TrickEvent) -> TrickEvent:
+        return await client.callbacks.on_trick_event(client, event)
+
+    @staticmethod
+    async def on_accolade_event(client: Client, event: AccoladeEvent) -> AccoladeEvent:
+        return await client.callbacks.on_accolade_event(client, event)
+
+    @staticmethod
+    async def on_invisible_event(client: Client, event: InvisibleEvent) -> InvisibleEvent:
+        return await client.callbacks.on_invisible_event(client, event)
+
+    @staticmethod
+    async def on_killed_by_event(client: Client, event: KilledByEvent) -> KilledByEvent:
+        return await client.callbacks.on_killed_by_event(client, event)
+
+    @staticmethod
+    async def on_radiation_cloud_event(client: Client, event: RadiationCloudEvent) -> RadiationCloudEvent:
+        return await client.callbacks.on_radiation_cloud_event(client, event)
+
+    @staticmethod
+    async def on_charge_event(client: Client, event: ChargeEvent) -> ChargeEvent:
+        return await client.callbacks.on_charge_event(client, event)
+
+    @staticmethod
+    async def on_lp_count_event(client: Client, event: LPCountEvent) -> LPCountEvent:
+        return await client.callbacks.on_lp_count_event(client, event)
+
+    @staticmethod
+    async def on_br_bounds_event(client: Client, event: BRBoundsEvent) -> BRBoundsEvent:
+        return await client.callbacks.on_br_bounds_event(client, event)
+
+    @staticmethod
+    async def on_rlgl_state_event(client: Client, event: RLGLStateEvent) -> RLGLStateEvent:
+        return await client.callbacks.on_rlgl_state_event(client, event)
 
 
 __all__ = [
