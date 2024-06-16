@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import ClassVar
 
 from nebulous.game.enums import (
     EjectSkinType,
@@ -8,6 +9,7 @@ from nebulous.game.enums import (
     ParitcleType,
     PetType,
     Skin,
+    GameSize,
 )
 from nebulous.game.models import PlayerName
 from nebulous.game.models.apiobjects import ClanMember
@@ -38,6 +40,7 @@ class GamePet(GameObject):
         name (str): The name of the pet.
         custom_skin (int): The custom skin ID of the pet.
     """
+
     pet_type: PetType
     level: int
     name: str
@@ -72,6 +75,7 @@ class GamePlayer(GameObject):
         click_type (int): The click type of the player.
         level_colors (list[int]): The level colors of the player. Default is [0x77] * 5.
     """
+
     name: PlayerName
     level: int
     account_id: int
@@ -105,6 +109,7 @@ class GamePlayerMass(GameObject):
         eject_id (int): The ID of the eject.
         mass (float): The mass of the eject.
     """
+
     eject_id: int
     mass: float
 
@@ -118,6 +123,7 @@ class GameDot(GameObject):
     Attributes:
         dot_id (int): The ID of the dot.
     """
+
     dot_id: int
 
 
@@ -131,6 +137,7 @@ class GameItem(GameObject):
         item_id (int): The unique identifier of the item.
         item_type (Item): The type of the item.
     """
+
     item_id: int
     item_type: Item
 
@@ -145,11 +152,14 @@ class GameWorld:
         ejects (list[GamePlayerMass]): A list of GamePlayerMass objects representing the ejected mass in the game.
         dots (list[GameDot]): A list of GameDot objects representing the dots in the game.
         items (list[GameItem]): A list of GameItem objects representing the items in the game.
+        map_size (GameSize): The size of the game map. Is set during the initial game data packet parsing.
     """
+
     players: list[GamePlayer]
     ejects: list[GamePlayerMass]
     dots: list[GameDot]
     items: list[GameItem]
+    map_size: GameSize = GameSize.NORMAL
 
 
 __all__ = [
