@@ -32,6 +32,42 @@ from nebulous.game.packets import (
     Packet,
     PacketHandler,
 )
+from nebulous.game.models.gameevents import (
+    GameEvent,
+    BlobExplodeEvent,
+    EjectEvent,
+    SplitEvent,
+    RecombineEvent,
+    AchievementEarnedEvent,
+    XPSetEvent,
+    DQSetEvent,
+    DQCompletedEvent,
+    DQProgressEvent,
+    EatSOEvent,
+    SetSOEvent,
+    LevelUpEvent,
+    ArenaRankAchievedEvent,
+    BlobStatusEvent,
+    TeleportEvent,
+    ShootEvent,
+    ClanWarWonEvent,
+    PlasmaRewardEvent,
+    EmoteEvent,
+    EndMissionEvent,
+    XPGained2Event,
+    EatCakeEvent,
+    CoinCountEvent,
+    SpeedEvent,
+    TrickEvent,
+    AccoladeEvent,
+    InvisibleEvent,
+    KilledByEvent,
+    RadiationCloudEvent,
+    ChargeEvent,
+    LPCountEvent,
+    BRBoundsEvent,
+    RLGLStateEvent,
+)
 
 
 class LobbyChatHandler(logging.handlers.BaseRotatingHandler):
@@ -736,3 +772,449 @@ class ClientCallbacks:
             GamePlayer: The player object.
         """
         return player
+
+    async def on_game_event(self, client: Client, event: GameEvent) -> GameEvent:
+        """
+        Called when an unhandled game event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (GameEvent): The game event packet.
+
+        Returns:
+            GameEvent: The game event.
+        """
+        return event
+
+    async def on_blob_explode_event(self, client: Client, event: BlobExplodeEvent) -> BlobExplodeEvent:
+        """
+        Called when a blob explode event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (BlobExplodeEvent): The blob explode event packet.
+
+        Returns:
+            BlobExplodeEvent: The blob explode event.
+        """
+        return event
+
+    async def on_eject_event(self, client: Client, event: EjectEvent) -> EjectEvent:
+        """
+        Called when an eject event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (EjectEvent): The eject event packet.
+
+        Returns:
+            EjectEvent: The eject event.
+        """
+        return event
+
+    async def on_split_event(self, client: Client, event: SplitEvent) -> SplitEvent:
+        """
+        Called when a split event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (SplitEvent): The split event packet.
+
+        Returns:
+            SplitEvent: The split event.
+        """
+        return event
+
+    async def on_recombine_event(self, client: Client, event: RecombineEvent) -> RecombineEvent:
+        """
+        Called when a recombine event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (RecombineEvent): The recombine event packet.
+
+        Returns:
+            RecombineEvent: The recombine event.
+        """
+        return event
+
+    async def on_achievement_earned_event(
+        self, client: Client, event: AchievementEarnedEvent
+    ) -> AchievementEarnedEvent:
+        """
+        Called when an achievement earned event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (AchievementEarnedEvent): The achievement earned event packet.
+
+        Returns:
+            AchievementEarnedEvent: The achievement earned event.
+        """
+        return event
+
+    async def on_xp_set_event(self, client: Client, event: XPSetEvent) -> XPSetEvent:
+        """
+        Called when an XP set event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (XPSetEvent): The XP set event packet.
+
+        Returns:
+            XPSetEvent: The XP set event.
+        """
+        return event
+
+    async def on_dq_set_event(self, client: Client, event: DQSetEvent) -> DQSetEvent:
+        """
+        Called when a DQ set event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (DQSetEvent): The DQ set event packet.
+
+        Returns:
+            DQSetEvent: The DQ set event.
+        """
+        return event
+
+    async def on_dq_completed_event(self, client: Client, event: DQCompletedEvent) -> DQCompletedEvent:
+        """
+        Called when a DQ completed event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (DQCompletedEvent): The DQ completed event packet.
+
+        Returns:
+            DQCompletedEvent: The DQ completed event.
+        """
+        return event
+
+    async def on_dq_progress_event(self, client: Client, event: DQProgressEvent) -> DQProgressEvent:
+        """
+        Called when a DQ progress event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (DQProgressEvent): The DQ progress event packet.
+
+        Returns:
+            DQProgressEvent: The DQ progress event.
+        """
+        return event
+
+    async def on_eat_so_event(self, client: Client, event: EatSOEvent) -> EatSOEvent:
+        """
+        Called when an EatSpecialObjects event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (EatSOEvent): The EatSO event packet.
+
+        Returns:
+            EatSOEvent: The EatSO event.
+        """
+        return event
+
+    async def on_set_so_event(self, client: Client, event: SetSOEvent) -> SetSOEvent:
+        """
+        Called when a SetSpecialObjects event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (SetSOEvent): The SetSO event packet.
+
+        Returns:
+            SetSOEvent: The SetSO event.
+        """
+        return event
+
+    async def on_level_up_event(self, client: Client, event: LevelUpEvent) -> LevelUpEvent:
+        """
+        Called when a LevelUp event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (LevelUpEvent): The LevelUp event packet.
+
+        Returns:
+            LevelUpEvent: The LevelUp event.
+        """
+        return event
+
+    async def on_arena_rank_achieved_event(
+        self, client: Client, event: ArenaRankAchievedEvent
+    ) -> ArenaRankAchievedEvent:
+        """
+        Called when an ArenaRankAchieved event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (ArenaRankAchievedEvent): The ArenaRankAchieved event packet.
+
+        Returns:
+            ArenaRankAchievedEvent: The ArenaRankAchieved event.
+        """
+        return event
+
+    async def on_blob_status_event(self, client: Client, event: BlobStatusEvent) -> BlobStatusEvent:
+        """
+        Called when a BlobStatus event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (BlobStatusEvent): The BlobStatus event packet.
+
+        Returns:
+            BlobStatusEvent: The BlobStatus event.
+        """
+        return event
+
+    async def on_teleport_event(self, client: Client, event: TeleportEvent) -> TeleportEvent:
+        """
+        Called when a Teleport event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (TeleportEvent): The Teleport event packet.
+
+        Returns:
+            TeleportEvent: The Teleport event.
+        """
+        return event
+
+    async def on_shoot_event(self, client: Client, event: ShootEvent) -> ShootEvent:
+        """
+        Called when a Shoot event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (ShootEvent): The Shoot event packet.
+
+        Returns:
+            ShootEvent: The Shoot event.
+        """
+        return event
+
+    async def on_clan_war_won_event(self, client: Client, event: ClanWarWonEvent) -> ClanWarWonEvent:
+        """
+        Called when a ClanWarWon event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (ClanWarWonEvent): The ClanWarWon event packet.
+
+        Returns:
+            ClanWarWonEvent: The ClanWarWon event.
+        """
+        return event
+
+    async def on_plasma_reward_event(self, client: Client, event: PlasmaRewardEvent) -> PlasmaRewardEvent:
+        """
+        Called when a PlasmaReward event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (PlasmaRewardEvent): The PlasmaReward event packet.
+
+        Returns:
+            PlasmaRewardEvent: The PlasmaReward event.
+        """
+        return event
+
+    async def on_emote_event(self, client: Client, event: EmoteEvent) -> EmoteEvent:
+        """
+        Called when an Emote event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (EmoteEvent): The Emote event packet.
+
+        Returns:
+            EmoteEvent: The Emote event.
+        """
+        return event
+
+    async def on_end_mission_event(self, client: Client, event: EndMissionEvent) -> EndMissionEvent:
+        """
+        Called when an EndMission event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (EndMissionEvent): The EndMission event packet.
+
+        Returns:
+            EndMissionEvent: The EndMission event.
+        """
+        return event
+
+    async def on_xp_gained2_event(self, client: Client, event: XPGained2Event) -> XPGained2Event:
+        """
+        Called when an XPGained2 event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (XPGained2Event): The XPGained2 event packet.
+
+        Returns:
+            XPGained2Event: The XPGained2 event.
+        """
+        return event
+
+    async def on_eat_cake_event(self, client: Client, event: EatCakeEvent) -> EatCakeEvent:
+        """
+        Called when an EatCake event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (EatCakeEvent): The EatCake event packet.
+
+        Returns:
+            EatCakeEvent: The EatCake event.
+        """
+        return event
+
+    async def on_coin_count_event(self, client: Client, event: CoinCountEvent) -> CoinCountEvent:
+        """
+        Called when a CoinCount event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (CoinCountEvent): The CoinCount event packet.
+
+        Returns:
+            CoinCountEvent: The CoinCount event.
+        """
+        return event
+
+    async def on_speed_event(self, client: Client, event: SpeedEvent) -> SpeedEvent:
+        """
+        Called when a Speed event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (SpeedEvent): The Speed event packet.
+
+        Returns:
+            SpeedEvent: The Speed event.
+        """
+        return event
+
+    async def on_trick_event(self, client: Client, event: TrickEvent) -> TrickEvent:
+        """
+        Called when a Trick event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (TrickEvent): The Trick event packet.
+
+        Returns:
+            TrickEvent: The Trick event.
+        """
+        return event
+
+    async def on_accolade_event(self, client: Client, event: AccoladeEvent) -> AccoladeEvent:
+        """
+        Called when an Accolade event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (AccoladeEvent): The Accolade event packet.
+
+        Returns:
+            AccoladeEvent: The Accolade event.
+        """
+        return event
+
+    async def on_invisible_event(self, client: Client, event: InvisibleEvent) -> InvisibleEvent:
+        """
+        Called when an Invisible event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (InvisibleEvent): The Invisible event packet.
+
+        Returns:
+            InvisibleEvent: The Invisible event.
+        """
+        return event
+
+    async def on_killed_by_event(self, client: Client, event: KilledByEvent) -> KilledByEvent:
+        """
+        Called when a KilledBy event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (KilledByEvent): The KilledBy event packet.
+
+        Returns:
+            KilledByEvent: The KilledBy event.
+        """
+        return event
+
+    async def on_radiation_cloud_event(self, client: Client, event: RadiationCloudEvent) -> RadiationCloudEvent:
+        """
+        Called when a RadiationCloud event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (RadiationCloudEvent): The RadiationCloud event packet.
+
+        Returns:
+            RadiationCloudEvent: The RadiationCloud event.
+        """
+        return event
+
+    async def on_charge_event(self, client: Client, event: ChargeEvent) -> ChargeEvent:
+        """
+        Called when a Charge event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (ChargeEvent): The Charge event packet.
+
+        Returns:
+            ChargeEvent: The Charge event.
+        """
+        return event
+
+    async def on_lp_count_event(self, client: Client, event: LPCountEvent) -> LPCountEvent:
+        """
+        Called when a LPCount event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (LPCountEvent): The LPCount event packet.
+
+        Returns:
+            LPCountEvent: The LPCount event.
+        """
+        return event
+
+    async def on_br_bounds_event(self, client: Client, event: BRBoundsEvent) -> BRBoundsEvent:
+        """
+        Called when a BattleRoyaleBounds event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (BRBoundsEvent): The BRBounds event packet.
+
+        Returns:
+            BRBoundsEvent: The BRBounds event.
+        """
+        return event
+
+    async def on_rlgl_state_event(self, client: Client, event: RLGLStateEvent) -> RLGLStateEvent:
+        """
+        Called when a RLGLState (Red Light, Green Light) event is received.
+
+        Args:
+            client (Client): The client instance.
+            event (RLGLStateEvent): The RLGLState event packet.
+
+        Returns:
+            RLGLStateEvent: The RLGLState event.
+        """
+        return event
