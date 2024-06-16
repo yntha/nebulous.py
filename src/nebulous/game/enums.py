@@ -628,6 +628,29 @@ class GameSize(enum.Enum):
             case _:
                 raise ValueError(f"Invalid map size: {map_size}")
 
+    def to_map_size(self) -> float:
+        """
+        Convert the GameSize enum value to the corresponding map size.
+
+        Returns:
+            float: The corresponding map size.
+        """
+        modifier = 1.0
+
+        match self:
+            case GameSize.TINY:
+                modifier = 0.5
+            case GameSize.SMALL:
+                modifier = 0.707
+            case GameSize.NORMAL:
+                modifier = 1.0
+            case GameSize.LARGE:
+                modifier = 1.2
+
+        base_size = math.sqrt(5.0) * 314.58
+
+        return base_size * modifier
+
 
 class NameAnimation(enum.Enum):
     NONE = 0
